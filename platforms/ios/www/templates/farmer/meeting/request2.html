@@ -1,0 +1,83 @@
+<ion-view hide-back-button="true" cache-view="false">
+  <ion-nav-buttons side="left">
+    <button  class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="color:white;font-weight: 400;"> Back</button>
+  </ion-nav-buttons>
+  <ion-nav-title> รายการขอนัด
+  </ion-nav-title>
+
+  <ion-nav-buttons side="right">
+  </ion-nav-buttons>
+  <style>
+    .dp-flex{
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+
+  <ion-content style=" background-color: #fafafa;" >
+    <div class="list">
+
+      <div class="item " ng-repeat="x in list.result track by $index" ng-click="openModalDetail(x)">
+        <h2 style="display: flex;justify-content: space-between;"><a>{{x.times}} น. </a> <a>{{x.subdatedesc}}</a></h2>
+
+        <p>{{x.meet_desc}}</p>
+        <div class="dp-flex"><a>ผู้ขอนัด</a><a>{{x.fromname}} </a></div>
+
+
+      </div>
+  
+
+  
+  </div>
+
+
+  
+  <div ng-if="list.status == false" style="text-align: center;
+  font-size: x-large;
+  color: gray;"> ไม่มีรายการ</div>
+
+     </ion-content>
+     <script id="my-detail.html" type="text/ng-template">
+      <ion-modal-view>
+                <ion-header-bar>
+                    <button type="button" class="button button-assertive button-clear" ng-click="closeModalDetail()">close</button>
+                  <h1 class="title" style="text-align:center">{{vm.detail.datedesc}}</h1>
+                  <!-- <button type="button" class="button button-positive button-clear" ng-click="closeModalItem()">เลือกทั้งหมด</button> -->
+  
+                </ion-header-bar>
+                <ion-content style="background-color: #fafafa">
+                  <style>
+                          .modal-open{
+                            pointer-events: all;
+                          }
+                  </style>
+  
+  <div class="list">
+  
+    <a class="item item-icon-left" >
+      <i class="icon ion-paper-airplane" style="color:green"></i>
+      ส่งจาก : {{vm.detail.fromname}} 
+    </a>
+    <a class="item item-icon-left" >
+      <i class="icon ion-clock" style="color:green"></i>
+      เวลานัด : {{vm.detail.times}} 
+    </a>
+    <a class="item item-icon-left" >
+      <i class="icon ion-pin" style="color:green"></i>
+      พื้นที่ : {{vm.detail.farm_name}} / ID : {{vm.detail.meet_wo_lot}} 
+    </a>
+  </div>
+  
+  <div class="item"> 
+    <div style="font-weight:bold">รายละเอียด</div>
+  
+    <label style="white-space: break-spaces;">{{vm.detail.meet_desc}}</label>
+  </div>
+  
+  
+  
+  
+                </ion-content>
+              </ion-modal-view>
+  </script>
+</ion-view>

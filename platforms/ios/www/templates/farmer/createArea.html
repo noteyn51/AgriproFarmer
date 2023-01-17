@@ -1,0 +1,299 @@
+<ion-view hide-back-button="true">
+  <ion-nav-buttons side="left">
+
+  </ion-nav-buttons>
+  <ion-nav-title> สร้างพื้นที่เกษตรกร
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+
+  </ion-nav-buttons>
+  <ion-content>
+
+
+
+    <div class="list " style="border-radius: 15px;">
+      <div class="item item-divider" style="text-align:center">
+        <h2 style="font-size: 18pt;overflow:initial">พื้นที่</h2>
+      </div>
+
+      <div class="item item-avatar item-icon-right" ng-click="vm.mapview()">
+        <img src="img/ServiceArea.png">
+        <h2 style="font-weight: bold">พิกัดพื้นที่</h2>
+        <p>{{area.position[0].lat}} , {{area.position[0].lng}}</p>
+        <i class="icon ion-chevron-right"></i>
+
+      </div>
+
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">หัวหน้ากลุ่ม (ส่งเสริม)</span>
+          <div><a style="color:red">* เลือกทีมส่งเสริมของพื้นที่คุณ</a></div>
+          <div class="row" style="text-align:center;margin-left:0px;margin-bottom: -10px;position:relative">
+            <div class="col">
+
+              <div class="form-group">
+
+                <select class="form-control" ng-options="item as item.vd_sort for item in vm.vd  track by item.vd_addr"
+                  ng-model="model.vd">
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">ชื่อพื้นที่ <a style="color:red">*</a> </span>
+          <input type="text" placeholder="ชื่อพื้นที่" ng-model="model.name">
+        </label>
+ 
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">รายละเอียด</span>
+          <input type="text" placeholder="รายละเอียดพื้นที่" ng-model="model.desc">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">ที่อยู่</span>
+          <input type="text" placeholder="รายละเอียดที่อยู่" ng-model="model.address">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">หมู่ที่</span>
+          <input type="number" placeholder="หมู่ที่" ng-model="model.vill_no">
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">จังหวัด <a style="color:red">*</a></span>
+          <div class="row" style="text-align:center;margin-left:0px;margin-bottom: -10px;position:relative">
+            <div class="col">
+
+              <div class="form-group">
+
+                <select class="form-control"
+                  ng-options="item as item.pro_province_desc for item in vm.province track by item.pro_province_code"
+                  ng-model="vm.provinceSelect" ng-change="vm.provinceChange(vm.provinceSelect)">
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">อำเภอ <a style="color:red">*</a></span>
+          <div class="row" style="text-align:center;margin-left:0px;margin-bottom: -10px;position:relative">
+            <div class="col">
+
+              <div class="form-group">
+
+                <select class="form-control"
+                  ng-options="item as item.pro_aumphur_desc for item in  vm.aumphur track by item.pro_aumphur_code"
+                  ng-model="vm.aumphurSelect" ng-change="vm.aumphurChange(vm.aumphurSelect)">
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">ตำบล <a style="color:red">*</a></span>
+          <div class="row" style="text-align:center;margin-left:0px;margin-bottom: -10px;position:relative">
+            <div class="col">
+
+              <div class="form-group">
+
+                <select class="form-control"
+                  ng-options="item as item.pro_tumbol_desc for item in  vm.tumbol track by item.pro_tumbol_code"
+                  ng-model="vm.tumbolSelect">
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <div></div>
+
+      </div>
+
+
+      <div class="container">
+        <table id="customers">
+          <tr>
+            <th width="33%" style="text-align:center">ไร่</th>
+            <th width="33%" style="text-align:center">งาน</th>
+            <th width="33%" style="text-align:center">ตารางวา</th>
+          </tr>
+          <tr>
+            <td><input type="text" ng-model="area.area.farm" id="inp001" class="form-control" /></td>
+            <td><input type="text" ng-model="area.area.work" id="inp002" class="form-control" /></td>
+            <td><input type="text" ng-model="area.area.wah" id="inp003" class="form-control" /></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- <div class="list" style="margin-top:20px">
+        <div class="item item-divider">
+          รายการมาตรฐาน
+        </div>
+
+        <div class="list card" ng-repeat="x in guarantee">
+
+          <div class="item item-avatar">
+            <img ng-src="{{x.icon}}">
+            <div>{{x.name}}</div>
+            <p>{{x.en}}</p>
+
+           
+           
+            <div style="position: absolute;
+            right: 10px;
+            top: 20px;
+        ">
+              <label class="toggle toggle-balanced">
+                <input type="checkbox" ng-model="x.value" ng-true-value="1" ng-false-value="0" ng-change="test(x.value)">
+                <div class="track">
+                  <div class="handle"></div>
+                </div>
+              </label>
+            </div>
+       
+          </div>
+        
+          <div class="item item-body" ng-if="x.value == 1" style="padding: 10px;">
+              <label class="item item-input">
+                <span class="input-label">เลขที่ใบรับรอง</span>
+                <input type="text">
+              </label>
+              <div  >
+
+                <div class="item item-input" >
+                  <span class="input-label">วันหมดอายุ</span>
+                  <div style="width: 100%;">{{x.date}}</div>
+                  <i class=" icon ion-calendar" ng-click="vm.pickdateSer(x)" style="margin-right: 20px;"></i>
+
+                </div>
+
+
+
+              </div>
+           
+
+          </div>
+        
+        </div>
+
+
+
+      </div> -->
+
+
+    </div>
+
+
+    <!-- <div class="list" style="margin-top:20px">
+      <div class="item item-divider">
+        รายการมาตรฐานที่ได้รับการรับรอง
+      </div>
+
+      <div class="list card" ng-repeat="x in guarantee">
+
+        <div class="item item-avatar">
+          <img ng-src="{{x.icon}}">
+          <div>{{x.name}}</div>
+          <p>{{x.en}}</p>
+
+
+
+          <div style="position: absolute;
+          right: 10px;
+          top: 20px;
+      ">
+            <label class="toggle toggle-balanced">
+              <input type="checkbox" ng-model="x.value" ng-true-value="1" ng-false-value="0" ng-change="test(x.value)">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="item item-body" ng-if="x.value == 1" style="padding: 10px;">
+          <label class="item item-input">
+            <span class="input-label">เลขที่ใบรับรอง</span>
+            <input type="text" ng-model="x.serNo">
+          </label>
+          <div>
+
+            <div class="item item-input">
+              <span class="input-label">วันหมดอายุ</span>
+              <div style="width: 100%;">{{x.date}}</div>
+              <i class=" icon ion-calendar" ng-click="vm.pickdateSer(x)" style="margin-right: 20px;"></i>
+
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div> -->
+
+
+    <div class="container" style="margin-top:20px">
+      <button type="button" class="button button-balanced button-block" ng-click="vm.confirm()"
+        ng-disabled="checkUpdate()" style="border-radius: 10px;">บันทึก</button>
+      <button type="button" class="button button-assertive button-block" ng-click="vm.cancel()"
+        ng-disabled="checkUpdate()" style="border-radius: 10px;">ยกเลิก</button>
+
+    </div>
+
+
+
+
+    <br>
+
+  </ion-content>
+</ion-view>
+
+
+<script id="standard.html" type="text/ng-template">
+  <ion-modal-view style="bottom:10%;border-raduius:10px;border-radius: 10px;">
+        <ion-header-bar>
+            <button type="button" class="button button-assertive button-clear" ng-click="closeModalStandard()">close</button>
+          <h1 class="title" style="text-align:center">รายการ</h1>
+          <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+        </ion-header-bar>
+        <ion-content >
+          <div class="list" >
+            <div
+              class="item"
+              style="margin-bottom: 10px;white-space: initial;"
+              ng-click="selectID(x)"
+              ng-repeat="x in vm.list.result track by $index"
+              
+            >
+              <div style="display: flex; justify-content: space-between;">
+                {{x.wo_nbr}} - {{x.pt_desc1}}  <a>เลขที่รายการ :&nbsp;{{x.wo_lot}}</a>
+              </div>
+      
+              <div style="display: flex; justify-content: space-between;">
+                <a>{{x.farm_name}}</a>
+                <a>
+                    <span ng-if="x.mim_status == 'CONFIRM'"><i style="color:green" class="icon ion-checkmark-circled"></i></span>
+                    {{x.ml_status_desc}}</a>
+              </div>
+              <!-- <h2>{{x.subdatedesc}}</h2> -->
+      
+              <!-- <div ng-style="x.ml_status_desc == 'ชำระเงินแล้ว' ?  {'background-color':'green'} : {'background-color': 'yellow'}" style="width:200px;height:100px;border:1px solid gray;"></div> -->
+              <div  class="dp-flex"> 
+                <a>วันที่เริ่ม : {{x.datedesc}}</a>
+                <a style="color:green;font-weight: bold;">{{x.mid_total | currency : value="฿ "}}</a>
+              </div>
+            </div>
+           
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>

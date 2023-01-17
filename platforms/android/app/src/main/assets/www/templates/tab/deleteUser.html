@@ -1,0 +1,73 @@
+<ion-view hide-back-button="false" hide-nav-bar="false">
+  <ion-nav-title><b style="font-size: 18px">ลบบัญชีผู้ใช้</b> </ion-nav-title>
+  <ion-nav-buttons side="right"> </ion-nav-buttons>
+ 
+  <style>
+    ul.a {
+      list-style-position: outside;
+      list-style: disc;
+      /* margin-top: 20px; */
+    }
+    
+    .li-list{
+        margin-top: 8px;
+    }
+    </style>
+  <ion-content style="background-color: rgba(245, 245, 246, 1)" scroll="false">
+    
+    <div style="display: flex; flex-direction: column; height: 100%">
+      <div
+        scroll_to_bottom="itemData"
+        style="
+          display: flex;
+          flex: 5;
+          overflow: scroll;
+          flex-direction: column;
+          padding: 10px;
+          background-color: white;
+        "
+      >
+     <div >
+        <h1>รายละเอียดและเงื่อนไขการลบบัญชี</h1>
+        <ul class="a" style="margin-top:10px;padding-left: 20px;margin-top:20px">
+          <li class="li-list">ข้อมูลและเนื้อหาทั้งหมดในบัญชีดังกล่าวจะหายไป เช่น ข้อมูลส่วนตัวผู้ใช้งาน ข้อมูลพื้นที่เพาะปลูก ข้อมูลรอบเพาะปลูก การแจ้งเตือน ไฟล์ ปฏิทิน และรูปภาพ</li>
+          <li class="li-list">คุณสามารถสมัครสมาชิกเข้าใช้งานใหม่ได้โดยจะไม่ถือว่าเป็นผู้ใช้ใหม่</li>
+          <li class="li-list">คุณจะไม่สามารถใช้บริการต่างๆในแอปพลิเคชัน Agripro Farmer ได้โดยคุณจะออกจากระบบอัตโนมัติหลังจากลบบัญชีและไม่สามารถเข้าใช้งานได้อีกต่อไป</li>
+          <li class="li-list">บริษัทขอสงวนสิทธิ์ในการเก็บข้อมูลบางส่วนเพื่อวัตถุประสงค์ในการปฏิบัติตามบทบัญญัติตามกฏหมาย</li>
+        </ul>
+        
+      
+
+     </div>
+    
+       
+    </div>
+
+      <div
+        style="
+          display: flex;
+          padding: 10px 10px 5px 10px;
+          background-color: white;
+        "
+      >
+        <div
+          style="
+            width: 100%;
+            position: relative;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+          "
+        >
+          <div
+            class="button button-balanced"
+            ng-click="confirmDelete()"
+            style="text-align: center; color: white"
+          >
+            <div style="font-size: 10pt; font-weight: bold">ลบบัญชี</div>
+          </div>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>

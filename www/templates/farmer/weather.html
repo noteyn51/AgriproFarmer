@@ -1,0 +1,345 @@
+<ion-view hide-back-button="false" hide-nav-bar="false">
+  <ion-nav-title><b style="font-size: 18px;"> Agripro</b> </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <!-- <button class="button ion-power btn-home" style="font-size: 20px;
+                 color: #4c4c4c;" ng-click="vm.goback()"></button> -->
+  </ion-nav-buttons>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Prompt&display=swap");
+
+    .bg-image {
+      /* The image used */
+      background-image: url("img/weather/bg-sky.jpg");
+      /* background-image: url("img/weather/2.jpg"); */
+
+
+      /* Add the blur effect */
+      filter: blur(5px);
+      -webkit-filter: blur(5px);
+
+      /* Full height */
+      height: 100%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+  </style>
+  <div class="bg-image"></div>
+
+  <ion-content style="height: 100%;">
+    <div ng-if="vm.temp">
+      <!-- <div class="card" style="
+          border: none;
+          padding: 20px;
+          /* height: 250px; */
+          margin: 5%;
+          border-radius: 25px;
+          background-color: rgba(255, 255, 255, 0.4);
+        "> -->
+        <div class="card" style="background: transparent;border:none;box-shadow: none;color: white;">
+
+        <div style="color: white;  position: relative;text-align: center;">
+          <label style="font-size: 24px;">
+            {{vm.temp.name}} 
+          </label>
+        </div>
+        <div style="margin-bottom: 20px;" ng-if="vm.temp">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <label style="text-align: center;font-size: small;">{{vm.temp.weather[0].description}}</label>
+          </div>
+        </div>
+        <div style="align-self: center;" ng-if="vm.temp.main.temp">
+          <label style="font-size: 64px;">
+            {{vm.temp.main.temps}}
+            <span style="font-size: 20pt; position: absolute;">°C</span>
+          </label>
+        </div>
+
+        <!-- <div style="display: contents;" ng-if="vm.temp">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img ng-src="http://openweathermap.org/img/w/{{vm.temp.weather[0].icon}}.png"
+              style="height: 50px; width: 50px;" />
+            <label style="text-align: center;font-size: small;">{{vm.temp.weather[0].description}}</label>
+          </div>
+        </div> -->
+
+        <!-- <div style="
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+          " ng-if="vm.temp">
+          <div class="card" style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              border: none;
+              box-shadow: none;
+              background: transparent;
+            ">
+            <label style="text-align: center; margin-bottom: 5px;">ความเร็วลม</label>
+            <img src="img/wind.png" style="height: 50px; width: 50px;" />
+            <label style="text-align: center; margin-top: 10px;">{{vm.temp.wind.speed}} m/s</label>
+          </div>
+
+          <div class="card" style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              border: none;
+              box-shadow: none;
+              background: transparent;
+            ">
+            <label style="text-align: center; margin-bottom: 5px;">ความชื้น</label>
+            <img src="img/humidityss.png" style="height: 50px; width: 50px;" />
+            <label style="text-align: center; margin-top: 10px;">{{vm.temp.main.humidity}} %</label>
+          </div>
+
+          <div class="card" style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              border: none;
+              box-shadow: none;
+              background: transparent;
+            ">
+            <label style="text-align: center; margin-bottom: 5px;">ความดัน</label>
+            <img src="img/pressure.png" style="height: 50px; width: 50px;" />
+            <label style="text-align: center; margin-top: 10px;">{{vm.temp.main.pressure | number}} hpa</label>
+          </div>
+        </div> -->
+
+      </div>
+
+
+    <div style="font-size: large;
+    margin: 25px;color: white;">{{vm.day}}</div>
+      <!-- <div style="padding: 10px 20px 10px 20px;">
+        <labe style="font-size: large;font-weight: bold;">พยากรอากาศ</label>
+      </div> -->
+
+      <ion-scroll direction="x" style="width: 100%;">
+        <style>
+          .house {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70px;
+          }
+
+          .houseActive {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70px;
+          }
+
+          .scroll-bar-h .scroll-bar-indicator {
+              opacity: 0%;
+          }
+        </style>
+        <div>
+          <div style="display: flex; display: flex;color: white;">
+            <div ng-if="vm.forcase" ng-repeat="x in  vm.forcase.list | limitTo:10">
+              <div ng-class="x.sys.pod == 'd' ? 'house' : 'houseActive'">
+                <label style="text-align: center;">{{x.main.temps}} °</label>
+                <img ng-src="http://openweathermap.org/img/w/{{x.weather[0].icon}}.png"
+                  style="height: 50px; width: 50px;" />
+                <label style="text-align: center;">{{x.time}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-scroll>
+
+<style>
+  .icon-weather{
+    height: 5vh;
+  }
+</style>
+      <div class="list" style="color: white;">
+        <div class="row" style="padding: 10px 0px 10px 0px;    align-items: center;">
+          <div class="col-4">
+            <i ><img class="icon-weather" src="img/weather/wind_1.png"></i>
+          </div>
+
+          <div class="col-4" style="font-size: medium;">
+            ความเร็วลม
+          </div>
+
+          <div class="col-4" style="text-align: right;    font-size: medium;">
+            {{vm.temp.wind.speed}} m/s
+          </div>
+        </div>
+
+        <div class="row" style="padding: 10px 0px 10px 0px;    align-items: center;">
+          <div class="col-4">
+            <i ><img class="icon-weather" src="img/weather/hum_1.png"></i>
+          </div>
+
+          <div class="col-4" style="font-size: medium;">
+            ความชื้น
+          </div>
+
+          <div class="col-4" style="text-align: right;font-size: medium;">
+            {{vm.temp.main.humidity}} %
+          </div>
+        </div>
+
+        <div class="row" style="padding: 10px 0px 10px 0px;    align-items: center;">
+          <div class="col-4">
+            <i ><img class="icon-weather" src="img/weather/pres_1.png"></i>
+          </div>
+
+          <div class="col-4" style="    font-size: medium;">
+            ตวามดัน
+          </div>
+
+          <div class="col-4" style="text-align: right;    font-size: medium;">
+            {{vm.temp.main.pressure | number}} hpa
+          </div>
+        </div>
+
+      
+
+      
+      </div>
+
+      <div class="list" >
+        <div class="item item-icon-right" style="background: transparent;color: white;"  ng-click="vm.DailyForecastgo('1','ข่าวเตือนภัยสภาพอากาศ')">
+          แจ้งเตือนสภาพอากาศ
+          <i class="icon ion-ios-arrow-right"></i>
+        </div>
+        <div class="item item-icon-right"  style="background: transparent;color: white;" ng-click="vm.DailyForecastgo('3','พยากรอากาศ 24 ชั่วโมง')">
+          พยากรอากาศ 24 ชั่วโมง
+          <i class="icon ion-ios-arrow-right"></i>
+        </div>
+      </div>
+
+      <!-- <div class="card" style="
+      border: none;
+      padding: 20px;
+      /* height: 250px; */
+      margin: 5%;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.4);
+    ">
+        <div style="padding: 10px 20px 10px 20px;">
+          <label style="font-size: large;font-weight: bold;">แจ้งเตือนสภาพอากาศ</label>
+          <br>
+          <div style="margin-top:10px;font-size: small; line-height: 2em;
+          height: 10em;      
+          overflow: hidden;  
+      ">{{vm.Warning.WarningNews.DescriptionThai}}</div>
+        </div>
+
+        <div class="container" style="margin-top: 20px;text-align: right;">
+          <button class="button button-small button-outline button-dark  icon-right ion-chevron-right"
+          ng-click="vm.DailyForecastgo('1','ข่าวเตือนภัยสภาพอากาศ')">
+              อ่านเพิ่มเติม
+          </button>
+      </div> 
+      </div> -->
+
+<!-- 
+      <div class="card" style="
+      border: none;
+      padding: 20px;
+      /* height: 250px; */
+      margin: 5%;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 100px;
+    ">
+        <div style="padding: 10px 20px 10px 20px;">
+          <label style="font-size: large;font-weight: bold;">พยากรอากาศ 24 ชั่วโมง</label>
+        
+          <div style="margin-top:10px;font-size: small; line-height: 2em;
+          height: 10em;      
+          overflow: hidden;  
+      ">{{vm.DailyForecast.DailyForecast.DescTh}}</div>
+        </div>
+
+        <div class="container" style="margin-top: 20px;text-align: right;">
+          <button class="button button-small button-outline button-dark  icon-right ion-chevron-right"
+          ng-click="vm.DailyForecastgo('3','พยากรอากาศ 24 ชั่วโมง')">
+              อ่านเพิ่มเติม
+          </button>
+      </div> 
+      </div> -->
+      
+      <br>
+      <br>
+      <br>
+
+
+
+
+
+
+
+<!-- 
+      <div class="container" style="margin-top: 20px;text-align: right;">
+        <button class="button button-outline button-dark  icon-right ion-chevron-right"
+          ng-click="vm.DailyForecastgo('3','ผลการพยากรณ์อากาศ 24 ชั่วโมง')">
+          พยากรอากาศ
+        </button>
+      </div>
+
+      <div class="list card" style="border-radius: 15px ;margin-top: 20px; height:auto">
+        <div class="item item-divider" style="text-align:center">
+          <h2 style="font-size: 18pt">รายงานสภาพอากาศ</h2>
+        </div>
+        <div class="item item-avatar" ng-click="vm.DailyForecastgo('1','ข่าวเตือนภัยสภาพอากาศ')">
+          <img src="img/temp/w4.png">
+          <h2>ข่าวเตือนภัยสภาพอากาศ </h2>
+          <p>แตะเพื่ออ่านเพิ่มเติม</p>
+
+        </div>
+
+        <div class="item item-body"
+          ng-if="vm.Warning.WarningNews.DescriptionThai.length <400 && vm.Warning.WarningNews.DescriptionThai.length >0">
+          <p>
+
+            {{vm.Warning.WarningNews.DescriptionThai}}
+          </p>
+        </div>
+
+        <div class="item item-avatar">
+
+          <img
+            src="data:image/jpeg;base64,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">
+          <h2>ผลการตรวจวัดลักษณะอากาศรายวัน</h2>
+          <p>แตะเพื่ออ่านเพิ่มเติม</p>
+        </div>
+        <div class="item item-avatar" ng-click="vm.DailyForecastgo('3','ผลการพยากรณ์อากาศ 24 ชั่วโมง')">
+          <img src="img/temp/w5.png">
+          <h2>ผลการพยากรณ์อากาศ 24 ชั่วโมง</h2>
+          <p>แตะเพื่ออ่านเพิ่มเติม</p>
+        </div>
+
+        <div class="item item-body"
+          ng-if="vm.DailyForecast.DailyForecast.DescTh.length <600 && vm.DailyForecast.DailyForecast.DescTh.length>0">
+          <p>
+
+            {{vm.DailyForecast.DailyForecast.DescTh}}
+          </p>
+          <p style="text-align:right">
+            <a ng-click="vm.DailyForecastgo('3')" class="subdued">อ่านเพิ่มเติม</a>
+          </p>
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <div ng-if="!vm.temp" style="margin-top: 20%;">
+      <ion-spinner icon="spiral" class="spinner-dark"
+        style="position: absolute; zoom: 2; display: inline-block; left: 45%;">
+      </ion-spinner>
+    </div> -->
+  </ion-content>
+</ion-view>

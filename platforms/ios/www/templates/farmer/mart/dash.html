@@ -1,0 +1,102 @@
+<ion-view hide-back-button="true" cache-view="false">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="font-weight: 400; color: white;">
+      Back
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-title><b style="font-size: 18px;">รายการ</b> </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear icon ion-gear-a" style="color: white;" ng-click="openModalSetting()"></button>
+  </ion-nav-buttons>
+  <!-- style="background:#f5f5f5" -->
+  <style>
+    .lis .card {
+      margin: 2px;
+    }
+
+       .kk .spinner svg {
+          width: 100px;
+          height: 50px;
+        }
+
+
+  </style>
+
+  <ion-content style="">
+    <div class="kk" style="text-align: center;" ng-if="!vm.list">
+  
+      <ion-spinner icon="spiral"></ion-spinner>
+
+    </div>
+    <div class="lis" >
+      <div class="row">
+        <div class="col-6 col-md-4" ng-repeat="x in vm.list.result" style="padding: 0px; margin-bottom: 5px;">
+          <div class="card" style="box-shadow: none; height: 100%;" ng-click="vm.edit(x)">
+            <img ng-if="x.pic[0].path" class="img-formart" ng-src="{{x.pic[0].path}}" />
+            <img ng-if="!x.pic[0].path" class="img-formart" src="img/noimage2.png" />
+
+            <div class="item item-body">
+              <div style="font-size: small;">{{x.ml_part_desc}}</div>
+              <!-- <div style="font-size: small;" ng-if="x.ml_price == '-'"><a style="font-size: larger;">{{x.ml_price}} </a></div> -->
+              <div style="font-size: small;" ng-if="x.ml_price != '-'">
+                <a style="color: green; font-size: larger;">{{x.ml_price_unit | number}} บาท
+                </a>
+                / {{x.ml_unit_price}}
+              </div>
+
+              <!-- <div style="    display: flex;
+                        justify-content: space-evenly;margin-top:20px;"> 
+                            <a href="" class="subdued" style="font-size: large;flex:1;    text-align: center;" ng-click="vm.edit(x)"><i class="icon ion-edit"> </i></a>
+                            <a class="subdued" style="font-size: large;flex:1;    text-align: center;color:gray" >|</a>
+
+                            <a href="" class="subdued" style="font-size: large;flex:1;    text-align: center;" ng-click="vm.del(x)"><i class="icon ion-trash-b"> </i></a>
+                        </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="align-items: center;justify-content: center; display: flex;min-height: 80%; ">
+      <div ng-if="vm.list.status == false" style="text-align: center;">
+        <h2 style="color: gray;">ไม่พบรายการที่ลงขาย</h2>
+      </div>
+    </div>
+
+    <script id="modalSetting.html" type="text/ng-template">
+      <ion-modal-view >
+        <ion-header-bar>
+            <button type="button" class="button button-assertive button-clear" ng-click="closeModalSetting()">close</button>
+          <h1 class="title" style="text-align:center">ตั้งค่า</h1>
+          <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+        </ion-header-bar>
+        <ion-content >
+            <div class="list">
+              <div class="item item-avatar item-icon-right" ng-click="vm.addItem()">
+                  <img src="img/mart/additem.png" style="border-radius: 0px;">
+                  <div style="margin-top: 10px;padding-bottom: 10px">เพิ่มสินค้า</div>
+
+
+                  <i class="icon ion-ios-arrow-right placeholder-icon">
+                  </i>
+
+                </div>
+
+                <div class="item item-avatar  item-icon-right" ng-click="vm.shippingSet()">
+                  <img src="img/mart/shipping.png" style="border-radius: 0px;">
+                  <div style="margin-top: 10px;padding-bottom: 10px">ตั้งค่าขนส่ง</div>
+
+
+
+
+                  <i class="icon ion-ios-arrow-right placeholder-icon">
+                  </i>
+                </div>
+            </div>
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  </ion-content>
+</ion-view>

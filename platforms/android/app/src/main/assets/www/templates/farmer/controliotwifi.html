@@ -1,0 +1,134 @@
+<ion-view hide-back-button="false">
+  <ion-nav-title>เชื่อมต่อ wifi
+  </ion-nav-title>
+  <style>
+
+  </style>
+  <ion-nav-buttons side="right">
+
+  </ion-nav-buttons>
+  <ion-content>
+
+
+
+    <div ng-if="LoadApConnectStatus == true">
+
+      <div class="list">
+
+        <div class="item item-divider" style="    align-items: center;
+      justify-content: space-between;
+      display: flex;">
+          <div>รายการ</div> <span> <a class="button button-icon icon ion-refresh" ng-click="scan()"></a></span>
+        </div>
+
+        <a class="item" href="" ng-repeat="x in wifiList" ng-click="getSsid(x)">
+          {{x.SSID}}
+        </a>
+
+
+      </div>
+    </div>
+
+
+    <div ng-if="LoadApConnectStatus == false">
+
+      <div class="list">
+
+     
+        
+        <!-- <button class="button button-positive button-block" ng-click="getCurrentSSID()">
+          getCurrentSSID
+        </button>
+
+        <button class="button button-positive button-block" ng-click="getConnectedSSID()">
+          getConnectedSSID
+        </button>
+
+       
+
+        <button class="button button-positive button-block" ng-click="isWifiEnabled()">
+          isWifiEnabled
+        </button>
+
+        <button class="button button-positive button-block" ng-click="setWifiEnabled()">
+          setWifiEnabled
+        </button> -->
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+  </ion-content>
+
+  <script id="my-modaladdiot.html" type="text/ng-template">
+    <ion-modal-view >
+      <ion-header-bar>
+          <button type="button" class="button button-assertive button-clear" ng-click="closeModalAdd()">close</button>
+        <h1 class="title" style="text-align:center">ระบุรหัสผ่าน</h1>
+        <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+      </ion-header-bar>
+      <ion-content >
+        <style>
+          /* .overflow-scroll .scroll {
+            height: 150%;
+          } */
+      
+          .scroll {
+            height: 100%;
+      
+          }
+          .modal-open{
+            pointer-events: all;
+          }
+          </style>
+
+
+<div class="alert alert-primary" role="alert">
+  <p>
+ - กรุณาตรวจสอบสัญญาณ wifi ต้องเป็น 2.4 เท่านั้น
+
+  </p>
+
+  <p>
+ - รหัสผ่าน wifi ต้องเป็น 8 ตัวอักษรขึ้นไปตัวพิมพ์เล็กหรือพิมพ์ใหญ่ต้องตรงกัน
+   
+     </p>
+
+     <p>
+ - กรณีที่ wifi ไม่มีรหัสผ่านสามารถยืนยันได้เลย
+     
+       </p>
+</div>
+
+<div class="list">
+  <label class="item item-input">
+    <span class="input-label">SSID</span>
+    <input type="text" ng-model="wificonfig.ssid" ng-disabled="true" style="background-color: white;">
+  </label>
+  <label class="item item-input">
+    <span class="input-label">Password</span>
+    <input type="text"ng-model="wificonfig.password" placeholder="ระบุรหัสผ่าน">
+  </label>
+
+</div>
+
+<button class="button button-positive button-block" ng-click="connect()">
+  ยืนยัน
+</button>
+
+
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+</ion-view>

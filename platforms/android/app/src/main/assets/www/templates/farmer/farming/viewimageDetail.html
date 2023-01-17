@@ -1,0 +1,142 @@
+<ion-view hide-back-button="false" cache-view="false">
+
+  <ion-nav-title>รายการบันทึก
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+
+  </ion-nav-buttons>
+
+  <style>
+    .short_img {
+      height: 200px;
+      width: 200px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .long_img {
+      height: 200px;
+      width: 300px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+  </style>
+  <ion-content style="background:white;">
+
+    <div style="background-color: #f9ea8f;
+    background-image: linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%);padding:20px;">
+
+      <div style="display: flex;
+    flex-direction: row;
+    justify-content: center;">
+        <img ng-if="vm.item.imgpath" src={{vm.item.imgpath}} style="height: 120px;width: 120px;border-radius: 120px;">
+        <img ng-if="!vm.item.imgpath"  src="img/noimage1.jpg"  style="height: 120px;width: 120px;border-radius: 120px;">
+
+     
+
+      </div>
+
+
+      <div style="display: flex;
+      flex-direction: row;
+      justify-content: center;margin-top: 10px;">
+        <div style="text-align: center;">
+          <h3>{{vm.item.farm_name}}</h3>
+        </div>
+      </div>
+
+      <div style="height:50px"></div>
+    </div>
+
+
+
+    <div style="margin-top: -50px;
+    border-radius: 10px;
+    background: white;
+    padding-top: 10px;">
+
+
+
+
+      <div ng-repeat="k in vm.list">
+
+        <div style="margin-top: 10px;">
+          <div style="padding-left: 10px;">
+
+            <div style="padding-left: 10px;display: flex;flex-direction: row;align-items: baseline;">
+              <h3>{{k.subdate}} </h3><span style="margin-left: 5px;">{{k.time}}</span>
+            </div>
+            <div style="margin-left: 10px;">{{k.pt_desc1}} </div>
+
+            <div style="margin-left: 10px;margin-top: 10px;">{{k.plant_desc1}} </div>
+          </div>
+
+
+          <div style="margin-left:10px">
+
+          <ion-scroll direction="x" style="width: 100%;margin-top: 10px;;">
+            <div >
+              <div style="display: flex; display: flex;color: white;">
+                <div ng-repeat="x in  k.img " style="margin-right: 10px;">
+
+                  <img ng-click="openModalMyImage(x)"
+                    ng-class="{short_img: ($parent.$index%2)  == 0 , long_img : ($parent.$index%2)  != 0}"
+                    ng-src="{{x.path}}" />
+         
+
+                </div>
+              </div>
+            </div>
+          </ion-scroll>
+        </div>
+
+        </div>
+
+      </div>
+
+
+
+    <div ng-if="!vm.list" style="text-align: center;margin-top: 10px;height: 200px;">ยังไม่มีรายการบันทึก</div>
+
+
+
+    </div>
+
+
+
+
+
+    <script id="my-img.html" type="text/ng-template">
+      <ion-modal-view   style="background-color:black;display: flex;
+        flex-direction: column;">
+   
+    
+            <div style="    display: flex;
+            flex-direction: row;
+            justify-content: end;
+            padding: 20px;">
+          <button class="button icon-left ion-close button-small  button-assertive" ng-click="closeModalMyImage()">ปิด</button>
+  
+            </div>
+  
+            <div style="text-align: center;flex:1">
+              <img  class="img-show" ng-src="{{vm.imgshow}}"/>
+            </div>
+  
+  
+  <style>
+    .img-show{
+      height: 100%;
+  width: 100%;
+  object-fit: cover;
+    }
+    </style>
+        </ion-modal-view>
+      </script>
+
+
+
+
+  </ion-content>
+</ion-view>

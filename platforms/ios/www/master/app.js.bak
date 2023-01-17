@@ -1,0 +1,402 @@
+// Ionic Starter App
+
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+angular
+  .module("app", [
+    "ionic",
+    "ngCordova",
+    "moment-picker",
+    "datatables",
+    "chart.js",
+    "mobiscroll-form",
+    "ngStorage",
+    "ngAnimate",
+    "ngMaterial"
+  ])
+
+  .run(function(
+    $ionicPlatform,
+    $rootScope,
+    $localStorage,
+    $location,
+    $ionicPlatform,
+    $ionicLoading,
+    $state,
+    $ionicPopup,
+    $ionicHistory,
+    $timeout
+  ) {
+    $ionicPlatform.ready(function() {
+       $rootScope.iplogin = "https://digimove.365supplychain.com/agripro/"; //365
+      // $rootScope.iplogin = "http://192.168.9.172/agriprophpNew/"; //365
+
+      let platform = ionic.Platform.platform();
+      if (platform == "android") {
+        document.addEventListener("deviceready", function() {
+          $ionicPlatform.registerBackButtonAction(function(event) {
+            if (
+              $state.current.name == "app.farmerMenu" ||
+              $state.current.name == "app.out"
+            ) {
+              var confirmPopup = $ionicPopup.confirm({
+                title: "<b>Exit !!</b>",
+                subTitle: "<center>ต้องการจากระบบ หรือไม่ ?</center>"
+              });
+
+              confirmPopup.then(function(res) {
+                if (res) {
+                  $ionicLoading.show();
+                  $rootScope.global = {};
+                  delete $localStorage.globalAGRI;
+                  // $ionicHistory.clearCache();
+
+                  $timeout(function() {
+                    window.location = "index.html";
+                    $ionicLoading.hide();
+                  }, 1000);
+                } else {
+                }
+              });
+            } else if ($state.current.name == "app.farmerlogin") {
+              var Popup = $ionicPopup.confirm({
+                title: "<b>แจ้งเตือน !!</b>",
+
+                subTitle:
+                  "<center>ต้องการออกจากแอปพลิเคชั่น<br>" +
+                  " หรือไม่ ?</center>"
+              });
+
+              Popup.then(function(res) {
+                if (res) {
+                  ionic.Platform.exitApp();
+                } else {
+                }
+              });
+            } else {
+              $ionicHistory.goBack();
+            }
+
+            return false;
+          }, 101);
+        });
+      }
+
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs).
+      // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
+      // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
+      // useful especially with forms, though we would prefer giving the user a little more room
+      // to interact with the app.
+      if (window.cordova && window.Keyboard) {
+        window.Keyboard.hideKeyboardAccessoryBar(true);
+      }
+
+      if (window.StatusBar) {
+        // Set the statusbar to use the default style, tweak this to
+        // remove the status bar on iOS or change it to use white instead of dark colors.
+        StatusBar.styleDefault();
+      }
+    });
+
+    $rootScope.$on("$stateChangeStart", function() {
+      if ($localStorage.globalAGRI) {
+        $rootScope.global = $localStorage.globalAGRI;
+        // $rootScope.ip = $rootScope.iproot + $rootScope.global.mob_config + "/";
+        console.log($rootScope.ip);
+
+        $location.path("/app/farmerMenu");
+        $rootScope.ip =
+          // "https://digimove.365supplychain.com/agripro/" +
+          // $rootScope.global.server_userdb +
+          // "/"; //365
+         $rootScope.ip = "http://192.168.9.172/agriprophpNew/"+$rootScope.global.server_userdb + "/"; //local
+
+        // Service.loopService();
+      } else {
+        // $location.path("/app/farmerlogin");
+      }
+    });
+  })
+
+  .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    //   }
+
+    // $ionicConfigProvider.views.forwardCache(false);
+    $stateProvider
+      .state("app", {
+        url: "/app",
+        abstract: true,
+        templateUrl: "templates/navbar.html",
+        controller: "nevCtrl as vm"
+      })
+
+      .state("app.farmerlogin", {
+        url: "/farmerlogin",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmerlogin.html",
+            controller: "farmerloginCtrl as vm"
+          }
+        }
+      })
+
+      //farmer
+
+      .state("app.farmerBase", {
+        url: "/farmerBase",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/farmerBase.html",
+            controller: "farmerBaseCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.farmerMenu", {
+        url: "/farmerMenu",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/farmerMenu.html",
+            controller: "farmerMenuCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.farmerCheck", {
+        url: "/farmerCheck",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/farmerCheck.html",
+            controller: "farmerCheckCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.farmerResult", {
+        url: "/farmerResult",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/farmerResult.html",
+            controller: "farmerResultCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.hist", {
+        url: "/hist",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/hist.html",
+            controller: "histCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.dashboard", {
+        url: "/dashboard",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/dashboard.html",
+            controller: "dashboardCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.detail", {
+        url: "/detail",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/detail.html",
+            controller: "detailCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.setting0", {
+        url: "/setting0",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/setting0.html",
+            controller: "setting0Ctrl as vm"
+          }
+        }
+      })
+      .state("app.setting", {
+        url: "/setting/:iotno",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/setting.html",
+            controller: "settingCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.dayssetting", {
+        url: "/dayssetting",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/dayssetting.html",
+            controller: "dayssettingCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.out", {
+        url: "/out/:mess",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/out.html",
+            controller: "outCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.weather", {
+        url: "/weather",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/weather.html",
+            controller: "weatherCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.weatherDetail", {
+        url: "/weather/Detail/:action:desc",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/weatherDetail.html",
+            controller: "weatherDetailCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.news", {
+        url: "/news",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/news.html",
+            controller: "newsCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.newsDetail", {
+        url: "/news/detail",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/newsDetail.html",
+            controller: "newsDetailCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.growth", {
+        url: "/growth",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/growth.html",
+            controller: "growthCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.area", {
+        url: "/area",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/area.html",
+            controller: "areaCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.area2", {
+        url: "/area2/:crop:sub",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/area2.html",
+            controller: "area2Ctrl as vm"
+          }
+        }
+      })
+      .state("app.add1", {
+        url: "/add1",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/add1.html",
+            controller: "addCtrl as vm"
+          }
+        }
+      })
+
+      .state("app.add2", {
+        url: "/add2/",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/add2.html",
+            controller: "add2Ctrl as vm"
+          }
+        }
+      })
+
+      .state("app.add3", {
+        url: "/add3",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/add3.html",
+            controller: "add3Ctrl as vm"
+          }
+        }
+      })
+
+      .state("app.add4", {
+        url: "/add4/:crop",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/add4.html",
+            controller: "add4Ctrl as vm"
+          }
+        }
+      })
+
+      .state("app.add5", {
+        url: "/add5/:crop:sub",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/add5.html",
+            controller: "add5Ctrl as vm"
+          }
+        }
+      })
+
+      .state("app.add6", {
+        url: "/add6/:cropMstr:areaMstr",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/add6.html",
+            controller: "add6Ctrl as vm"
+          }
+        }
+      })
+
+      .state("app.createArea", {
+        url: "/createArea",
+        views: {
+          menuContent: {
+            templateUrl: "templates/farmer/createArea.html",
+            controller: "createAreaCtrl as vm"
+          }
+        }
+      });
+
+    $urlRouterProvider.otherwise("/app/farmerlogin");
+  })
+
+  .config(function($mdGestureProvider) {
+    // For mobile devices without jQuery loaded, do not
+    // intercept click events during the capture phase.
+    $mdGestureProvider.skipClickHijack();
+  });

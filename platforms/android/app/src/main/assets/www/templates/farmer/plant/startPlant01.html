@@ -1,0 +1,63 @@
+<ion-view hide-back-button="false" cache-view="false">
+
+  <ion-nav-title> รายการปลูก
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button type="button" class="button button-clear ion-plus-round" ng-click="vm.add()"
+      style="color:white;font-weight: bold;"> เพิ่ม</button>
+  </ion-nav-buttons>
+
+  <ion-content style="background:#f5f5f5;">
+    <div class="list">
+      <div class="item" style="margin-bottom: 10px;white-space: initial;" ng-click="selectID(x)"
+        ng-repeat="x in vm.list.result track by $index">
+        <!-- <div style="display: flex; justify-content: space-between;">
+                {{x.wo_nbr}} - {{x.pt_desc1}}  <a>เลขที่รายการ :&nbsp;{{x.wo_lot}}</a>
+              </div> -->
+
+        <!-- <div style="display: flex; justify-content: space-between;">
+          รายการปลูก : {{x.pt_desc1}}
+        </div> -->
+
+
+        <div style="display: flex; justify-content:space-between;">
+          <div style="display: flex; justify-content:flex-start">
+
+            <div style="font-weight:bold">รายการปลูก </div> :<div style="margin-left: 5px;"> {{x.pt_desc1}} </div>
+          </div>
+
+          <div style="font-weight:bold">ID : {{x.wo_lot}} </div> 
+
+
+        </div>
+
+        <div style="display: flex; justify-content:flex-start;">
+          <div style="font-weight:bold">พื้นที่ </div> :<div style="margin-left: 5px;"> {{x.farm_name}} </div>
+        </div>
+
+        <!-- <h2>{{x.subdatedesc}}</h2> -->
+
+        <!-- <div ng-style="x.ml_status_desc == 'ชำระเงินแล้ว' ?  {'background-color':'green'} : {'background-color': 'yellow'}" style="width:200px;height:100px;border:1px solid gray;"></div> -->
+
+
+        <div style="display: flex; justify-content:flex-start;">
+          <div style="font-weight:bold">วันที่เริ่ม </div> :<div style="margin-left: 5px;"> {{x.rel_date}} -
+            {{x.due_date}} </div>
+        </div>
+        <div style="display: flex; justify-content:flex-start;">
+          <div style="font-weight:bold">จำนวน </div> : <div style="margin-left: 5px;"> {{x.wo_qty_ord}} {{x.pt_um}}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+  </ion-content>
+</ion-view>

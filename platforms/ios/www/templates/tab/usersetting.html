@@ -1,0 +1,192 @@
+<ion-view hide-back-button="false" hide-nav-bar="false">
+
+    <ion-nav-title><b style="font-size: 18px;">Setting</b> </ion-nav-title>
+    <ion-nav-buttons side="right">
+      
+    </ion-nav-buttons>
+  <ion-content  style="background: #f5f5f5;">
+  
+    <div class="card" style="margin: 0px 0px; ">
+
+      <!-- <div class="item item-divider" style="text-align:left">
+        <h2 style="font-size: 16pt"><i class="icon ion-person "></i> ข้อมูลเข้าใช้งาน</h2>
+      </div>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">รหัสเข้าใช้งาน</span>
+        <input type="text" placeholder="รหัสเข้าใช้งาน (username)" ng-model="model.user_username"
+          ng-pattern="/^[a-zA-Z0-9]*$/" uppercased>
+      </label>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">รหัสผ่าน</span>
+        <span ng-if="!checkPass()" style="position: absolute;right: 10px;color:red">รหัสผ่านไม่ตรงกัน</span>
+        <input type="password" placeholder="รหัสผ่าน" ng-model="model.user_pass" ng-pattern="/^[a-zA-Z0-9]*$/"
+          uppercased>
+
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">ยืนยันรหัสผ่าน</span>
+        <span ng-if="!checkPass()" style="position: absolute;right: 10px;color:red">รหัสผ่านไม่ตรงกัน</span>
+
+        <input type="password" placeholder="ยืนยันรหัสผ่าน" ng-model="model.user_repass" ng-pattern="/^[a-zA-Z0-9]*$/"
+          uppercased>
+      </label> -->
+
+
+      <div class="item item-divider" style="text-align:left">
+        <h2 style="font-size: 16pt"><i class="icon ion-person"></i> ข้อมูลผู้ใช้</h2>
+      </div>
+
+
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">ชื่อ</span>
+        <input type="text" placeholder="ชื่อ" ng-model="model.user_fname">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">นามสกุล</span>
+        <input type="text" placeholder="นามสกุล" ng-model="model.user_lname">
+      </label>
+
+      <!-- <div class="item  item-icon-right">
+
+        <h2>วันเดือนปีเกิด</h2>
+        <p ng-if="model.user_birth">{{model.user_birth}}</p>
+        <p ng-if="!model.user_birth">เลือกวันที่</p>
+
+        <i class="icon ion-edit" ng-click="vm.pickbirth()"></i>
+
+      </div> -->
+
+
+
+      <!-- <label class="item item-input item-stacked-label">
+        <span class="input-label">เลขที่บัตรประชาชน</span>
+        <span ng-if="!citizenId()" style="position: absolute;right: 10px;color:red">เลขบัตรประชาชนไม่ถูกต้อง</span>
+        <span ng-if="citizenId()"
+          style="position: absolute;right: 10px;color:green">สามารถใช้เลขบัตรประชาชนนี้ได้</span>
+
+        <input type="text" placeholder="รหัส 13 หลัก" ng-model="model.user_citizen_id"
+          oninput="this.value=this.value.replace(/[^0-9]/g,'');" minlength="13" maxlength="13" ng-change="citizenId()">
+      </label> -->
+
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">อีเมล์</span>
+        <input type="text" placeholder="Example@gmail.com" ng-model="model.user_email">
+      </label>
+
+      <div class="list">
+      
+
+        <div class="item item-divider" style="text-align:left">
+          <h2 style="font-size: 16pt"><i class="icon ion-map "></i> ข้อมูลการติดต่อ</h2>
+        </div>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">เบอร์ติดต่อ</span>
+          <input type="text" placeholder="เบอร์ที่สามารถติดต่อได้ 10 หลัก" ng-model="model.user_tel"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');" minlength="9" maxlength="10">
+        </label>
+ 
+        <label class="item item-input item-stacked-label">
+          <span class="input-label"> บ้านเลขที่
+          </span>
+
+          <input type="text" placeholder="บ้านเลขที,หมู่บ้าน" ng-model="model.user_address">
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label"> หมู่ที่
+          </span>
+
+          <input type="number" placeholder="หมู่ที่" ng-model="model.user_moo">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">จังหวัด</span>
+          <div class="row" style="text-align:center;margin-left:0px;margin-bottom: -10px;position:relative">
+            <div class="col">
+
+              <div class="form-group">
+
+                <select class="form-control"
+                  ng-options="item as item.pro_province_desc for item in vm.province track by item.pro_province_code"
+                  ng-model="vm.provinceSelect" ng-change="vm.provinceChange(vm.provinceSelect)">
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">อำเภอ</span>
+          <div class="row" style="text-align:center;margin-left:0px;margin-bottom: -10px;position:relative">
+            <div class="col">
+
+              <div class="form-group">
+
+                <select class="form-control"
+                  ng-options="item as item.pro_aumphur_desc for item in  vm.aumphur track by item.pro_aumphur_code"
+                  ng-model="vm.aumphurSelect" ng-change="vm.aumphurChange(vm.aumphurSelect)">
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">ตำบล</span>
+          <div class="row" style="text-align:center;margin-left:0px;margin-bottom: -10px;position:relative">
+            <div class="col">
+
+              <div class="form-group">
+
+                <select class="form-control"
+                  ng-options="item as item.pro_tumbol_desc for item in  vm.tumbol track by item.pro_tumbol_code"
+                  ng-model="vm.tumbolSelect">
+                </select>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">รหัสไปรษณีย์</span>
+          <input type="text" placeholder="zip code" ng-model="model.user_zip"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');" minlength="5" maxlength="5">
+        </label>
+
+    
+        <div></div>
+
+        <style>
+          .flex-div {
+            width: 30%;
+            margin-left: 5px;
+            margin-top: 5px;
+          }
+
+          .img-flex {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+
+   
+
+
+        <div class="row" style="margin-left:2px">
+          <div class="col">
+            <button type="button" class="button button-balanced button-block" style="font-size:18px;border-radius: 10px"
+              ng-click="vm.confirm()" >
+              ยืนยัน
+            </button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    </ion-content>
+  </ion-view>
+  

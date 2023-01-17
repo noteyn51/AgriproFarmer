@@ -1,0 +1,119 @@
+<ion-view hide-back-button="false" hide-nav-bar="false" cache-view="false">
+  <ion-nav-buttons side="left">
+    <button
+    class="button button-clear ion-chevron-left"
+    ng-click="vm.goBack()"
+    style="font-weight: 400; color: white;"
+  >
+    Back
+  </button>
+  </ion-nav-buttons>
+  <ion-nav-title
+    ><b style="font-size: 18px;">รายการขาย</b>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button
+    class="button  button-outline button-light"
+    style="font-weight: 400; color: white;"
+    ng-click="openModalMonth()"
+  >
+    เดือน
+  </button>
+    <button
+    class="button button-clear ion-plus"
+    ng-click="vm.add()"
+    style="font-weight: 400; color: white;"
+  >
+    เพิ่ม
+  </button>
+  </ion-nav-buttons>
+  <style>
+    .dp-flex{
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+
+
+
+  <ion-content style="background-color: #fafafa;">
+ 
+
+    
+    <div class="item item-avatar" ng-repeat="x in vm.list" style="margin-bottom: 10px;" ng-click="vm.goDetail(x)"> 
+      <img src="img/item.png">
+      
+      <div style="font-weight:bold;display: flex;justify-content: space-between;" >
+        <a>
+          {{x.wt_ref}}
+        </a>
+        <a>
+         {{x.subdatedesc}}
+        </a>
+      </div>
+      <div style="font-weight:bold;display: flex;justify-content: space-between;" >
+        <a>
+          {{x.lsad_name}}
+        </a>
+      
+      </div>
+      <div > <a>จำนวนรายการ {{x.count_wt_ref}} รายการ</a></div>
+      <div style="font-weight:bold;display: flex;justify-content: space-between;" >
+        <a>
+          ราคาสุทธิ
+        </a>
+        <a>
+           {{x.total_price | currency:"฿ ":2}}
+        </a>
+      </div>
+    
+    </div>
+    <div ng-if="vm.list.length == 0" style="text-align: center;font-size: large;color:gray;margin-top:20px">ไม่พบรายการขาย</div>
+    
+
+    <div style="height: 100px;"></div>
+  </ion-content>
+  <div style="position: absolute; bottom: 50px; width: 100%; background: white;">
+    <div class="item" >
+      <!-- <div class="dp-flex" style="font-weight: bold;">
+        <a>รายการสินค้า</a><a style="color:green">{{vm.item.count_wt_ref}} รายการ</a>
+        
+      </div> -->
+      <div class="dp-flex" style="font-weight: bold;">
+        <a>รวมรายรับ</a><a style="color:green"> {{  vm.totoalSale | currency : value="฿ " }}</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <script id="my-month.html" type="text/ng-template">
+    <ion-modal-view>
+  
+    
+  
+      <ion-header-bar>
+        <button type="button" class="button button-assertive button-clear" ng-click="closeModalMonth()">close</button>
+        <h1 class="title" style="text-align:center">สถานะ</h1>
+        <!-- <button type="button" class="button button-balanced button-clear" ng-click="saveStatusValue()">ยืนยัน</button> -->
+  
+      </ion-header-bar>
+  
+      <ion-content >
+        <div class="item"  ng-repeat="x in vm.month_mstr" ng-click="vm.choiceChange(x)">
+          {{x.fullname}}
+        </div>
+
+      </ion-content>
+  
+  
+  
+  
+    </ion-modal-view>
+  </script>
+
+</ion-view>
+
+
+  
+ 

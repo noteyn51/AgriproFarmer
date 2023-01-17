@@ -1,0 +1,152 @@
+<ion-view hide-back-button="false" cache-view="false">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="color:white;font-weight: 400;">
+      Back</button>
+  </ion-nav-buttons>
+  <ion-nav-title> ปฏิทิน </ion-nav-title>
+
+  <ion-content style="background: white;">
+
+      <flex-calendar options="options" events="list.result"></flex-calendar>
+
+
+      <div class="list">
+        <div class="item" ng-repeat="x in eventSelect.detail" style="margin-bottom:20px" ng-click="openModalDetail(x)">
+          <h2>
+            
+          <div>{{x.times}} น.</div>
+      
+            <p style="white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;">{{x.meet_desc}}</p>
+            <p>พื้นที่ :{{x.farm_name}}</p>
+            <p>ID : {{x.meet_wo_lot}}</p>
+            
+      
+            <a
+              style="position: absolute; right: 10px; color: green;"
+              ng-if="x.status == 'approve'"
+              >{{x.status}}</a
+            >
+            <a
+              style="position: absolute; right: 10px; color: red;"
+              ng-if="x.status == 'reject'"
+              >{{x.status}}</a
+            >
+            <a
+              style="position: absolute; right: 10px; color: black;"
+              ng-if="x.status == 'wait'"
+              >{{x.status}}</a
+            >
+            <a
+              style="position: absolute; right: 10px; color: blue;"
+              ng-if="x.status == 'finish'"
+              >{{x.status}}</a
+            >
+          </h2>
+          <!-- <p>ผู้ตรวจ : {{x.name}} (Promoter)</p> -->
+        </div>
+      </div>
+  </ion-content>
+
+
+  <!-- <div style="position: absolute; bottom: 0px; width: 100%; background: white;">
+    <div style="text-align: center; padding-left: 10px; padding-right: 10px;">
+      <button
+        type="button"
+        class="button button-balanced button-block"
+        ng-click="vm.meeting2()"
+      >
+      เพิ่มการนัดตรวจ
+      </button>
+    </div>
+  </div> -->
+
+  <script id="list_map.html" type="text/ng-template">
+    <ion-modal-view>
+            <ion-header-bar style="text-align:center;background:white">
+
+              <h1 class="title" >รายการแปลง</h1>
+              <button type="button" class="button button-assertive button-clear " ng-click="closeModalListmap()">Close</button>
+            </ion-header-bar>
+            <ion-content  style="background:#f5f5f5">
+
+              <div class="card" style="height:110px;display: flex;
+              flex-flow: row wrap;" ng-repeat="k in subfarm" ng-click="vm.selectSubBefore(k,$index)">
+
+            <div style="height: 100%;
+                      width: 30%;">
+              <!-- <img style="height: 100%;
+                              width: 100%;
+                              padding: 4px;
+                              max-width:200px;" src=""> -->
+                              <div id="{{$index}}" class="map_list"></div>
+            </div>
+
+            <div style="height: 100%; width: 70%;display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;" >
+
+              <div style="font-weight:bold;font-weight: bold;
+              font-size: 18px;">พื้นที่ {{k.farm_name}} แปลงที่ {{k.sup_sub_id}}</div>
+              <div> {{k.sub_area_farm}} ไร่ {{k.sub_area_work}} งาน {{k.sub_area_wah}} ตารางวา</div>
+              <div style="    text-align: center;
+              padding: 5px;">บ้านเลขที่ {{k.farm_village_no}} แขวง {{k.farm_district}} เขต {{k.farm_amphur}} จังหวัด {{k.farm_province}}</div>
+
+
+
+            </div>
+
+          </div>
+
+            </ion-content>
+          </ion-modal-view>
+  </script>
+
+
+
+<script id="my-detail.html" type="text/ng-template">
+    <ion-modal-view>
+              <ion-header-bar>
+                  <button type="button" class="button button-assertive button-clear" ng-click="closeModalDetail()">close</button>
+                <h1 class="title" style="text-align:center">{{eventSelect.datedesc}}</h1>
+                <!-- <button type="button" class="button button-positive button-clear" ng-click="closeModalItem()">เลือกทั้งหมด</button> -->
+
+              </ion-header-bar>
+              <ion-content style="background-color: #fafafa">
+                <style>
+                        .modal-open{
+                          pointer-events: all;
+                        }
+                </style>
+
+<div class="list">
+
+  <a class="item item-icon-left" >
+    <i class="icon ion-paper-airplane" style="color:green"></i>
+    ส่งจาก : {{vm.detail.fromname}} 
+  </a>
+  <a class="item item-icon-left" >
+    <i class="icon ion-clock" style="color:green"></i>
+    เวลานัด : {{vm.detail.times}} 
+  </a>
+  <a class="item item-icon-left" >
+    <i class="icon ion-pin" style="color:green"></i>
+    พื้นที่ : {{vm.detail.farm_name}} / ID : {{vm.detail.meet_wo_lot}} 
+  </a>
+</div>
+
+<div class="item"> 
+  <div style="font-weight:bold">รายละเอียด</div>
+
+  <label style="white-space: break-spaces;">{{vm.detail.meet_desc}}</label>
+</div>
+
+
+
+
+              </ion-content>
+            </ion-modal-view>
+</script>
+</ion-view>

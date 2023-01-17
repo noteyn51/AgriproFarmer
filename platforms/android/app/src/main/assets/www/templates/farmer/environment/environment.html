@@ -1,0 +1,301 @@
+<ion-view hide-back-button="true" cache-view="false">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="color:white;font-weight: 400;">
+        Back</button>
+    </ion-nav-buttons>
+    <ion-nav-title> บันทึกสภาพแวดล้อม</ion-nav-title>
+    <style>
+      .dp-flex {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+    </style>
+    <ion-content style=" background-color: #fafafa;">
+      <div class="list">
+  
+        <div class="item">
+          <div class="dp-flex">
+            <a style="font-weight: bold;">เลขที่ใบสั่งปลุก</a><a><span style="color:blue" ng-click="openModalMyId()"><i class="icon ion-edit"></i></span>  {{idSelected.wo_lot}}</a>
+          </div>
+          <div class="dp-flex">
+            <a style="font-weight: bold;">รายการเพาะปลูก</a><a>{{idSelected.pt_desc1 ? idSelected.pt_desc1 : '-'}}</a>
+          </div>
+  
+          <div class="dp-flex">
+            <a style="font-weight: bold;">รหัสรายการ</a><a>{{idSelected.wo_part ? idSelected.wo_part : '-'}}</a>
+          </div>
+  
+          <div class="dp-flex">
+            <a style="font-weight: bold;">พื้นที่</a><a>{{idSelected.farm_name ? idSelected.farm_name :'-'}}</a>
+          </div>
+  
+          <!-- <div class="dp-flex">
+            <a style="font-weight: bold;width: 40%;">กิจกรรม</a><a style="white-space: break-spaces;
+            text-align: right;">{{route.ro__chr01 ? route.ro__chr01 : '-'}}</a>
+          </div> -->
+  
+  
+        </div>
+  
+      </div>
+  
+  
+      <div class="list">
+        <div class="item item-icon-left  item-icon-right" ng-click="vm.pickdate() ">
+          <i class="icon ion-calendar"></i>
+          <div><a>วันที่บันทึก <span style='color:red'>*</span></a><a style="color:gray">
+              {{model.date ? "[ "+model.date+" ]":''}} </a>
+          </div>
+          <i class="icon ion-ios-arrow-right"> </i>
+        </div>
+  
+  
+  
+  
+        <div class="item item-icon-left  item-icon-right" ng-click="vm.picktime() ">
+          <i class="icon ion-clock"></i>
+          <div><a>เวลา <span style='color:red'>*</span></a><a style="color:gray"> {{model.time ? "[ "+model.time+" ]":''}}
+            </a>
+          </div>
+          <i class="icon ion-ios-arrow-right"></i>
+        </div>
+  
+  
+      </div>
+  
+      <div style="padding: 10px;color: gray;" ng-if="tempData">
+        <a>บันทึกข้อมูลสภาพอากาศ</a>
+      </div>
+  
+      <div class="list" ng-if="tempData">
+        <div class="item item-input item-icon-left" ng-repeat="q in tempData">
+          <i class="icon " style="position: unset;    margin-left: -5px;color:red;margin-top: -5px;">
+            <div ng-style="{{q.style}}"></div>
+          </i>
+          <span class="input-label" style="    margin-left: 10px;">
+            <a>{{q.desc}}</a>
+            <a style="color:gray"> [ {{q.um}} ]</a></span>
+          <input type="tel" style="text-align: right;" ng-model="q.val" maxlength="3" placeholder="-"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+        </div>
+  
+      </div>
+      
+      <div style="padding: 10px;color: gray;" ng-if="vm.opHist.result ">
+        <a>บันทึกข้อมูลตามกระบวนการป้อนเวลาการทำงานหน่วยเป็น นาที </a>
+      </div>
+  
+      <div class="list"  ng-if="vm.opHist.result ">
+        <div class="item item-input item-icon-left" ng-repeat='x in vm.opHist.result track by $index'
+          style="padding:5px 0px 5px 0px;">
+          <!-- <i class="icon ion-trash-a" style="position: unset;    margin-left: -5px;color:red;margin-top: -5px;" ng-click="vm.del($index)"></i> -->
+          <span class="input-label" style="margin-left: 10px;">
+            <a>{{x.rsn_desc}}</a>
+            <!-- <a style="color:gray"> [ นาที ]</a> -->
+          </span>
+          <input type="tel" style="text-align: right;" ng-model="x.val" maxlength="3" placeholder="-"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+        </div>
+  
+      </div>
+
+      <style type="text/css">
+        div.img-resize img {
+          width: 100%;
+          height: auto;
+        }
+  
+        div.img-resize {
+          width: 100%;
+          height: auto;
+          overflow: hidden;
+          text-align: center;
+        }
+  
+        .slider-pager {
+          position: absolute;
+          bottom: 20px;
+          z-index: 1;
+          width: 100%;
+          height: 15px;
+          text-align: center;
+          display: none;
+        }
+  
+      </style>
+  
+      <div style="padding: 10px;color: gray;">
+        <a>โรคและแมลงที่ตรวจพบ </a>
+      </div>
+  
+    
+      <div class="list">
+        
+        <label class="item item-input">
+          <textarea rows="10" type="text" placeholder="รายละเอียด" maxlength="300" ng-model="desc"></textarea>
+        </label>
+        <div class="item  item-button-right">
+          <i class="ion-images"></i>
+          แนบรูปภาพ
+          <button class="button button-positive" ng-click="vm.addPic(image)">
+            <i class="icon ion-camera"></i>
+          </button>
+          <button class="button button-positive" ng-click="vm.selectPic(image)" style="right: 70px;">
+            <i class="icon ion-image"></i>
+          </button>
+        </div>
+            
+      <a class="item item-list-detail" ng-if="image.length >0" >
+        <ion-scroll direction="x">
+          <img ng-repeat="imageItem in image" ng-src="{{imageItem.img}}" class="image-list-thumb" ng-click="vm.removeIcon($index,image)"/>
+        </ion-scroll>
+      </a>
+  
+      </div>
+
+
+
+      <div style="padding: 10px;color: gray;">
+        <a>อัตราการเจริญเติบโต </a>
+      </div>
+  
+     
+  
+  
+      <div class="list">
+        
+        <label class="item item-input">
+          <textarea rows="10" type="text" placeholder="รายละเอียด" maxlength="300" ng-model="desc2"></textarea>
+        </label>
+        <div class="item  item-button-right">
+          <i class="ion-images"></i>
+          แนบรูปภาพ
+          <button class="button button-positive" ng-click="vm.addPic(image2)">
+            <i class="icon ion-camera"></i>
+          </button>
+          <button class="button button-positive" ng-click="vm.selectPic(image2)" style="right: 70px;">
+            <i class="icon ion-image"></i>
+          </button>
+        </div>
+            
+      <a class="item item-list-detail" style="margin-bottom: 200px;" ng-if="image2.length >0">
+        <ion-scroll direction="x">
+          <img ng-repeat="imageItem in image2" ng-src="{{imageItem.img}}" class="image-list-thumb" ng-click="vm.removeIcon($index,image2)"/>
+        </ion-scroll>
+      </a>
+  
+      </div>
+  
+  
+  
+      
+  
+      
+  
+  
+  
+  
+  
+  
+  <!-- 
+      <div class="card" ng-if="image.length > 0">
+        <ion-slide-box show-pager="true" active-slide="activeSlide"
+          style="text-align:center;height:100%;width:100%;margin-top:20px">
+          <ion-slide ng-repeat="x in image track by $index">
+            <div style="    text-align: right;
+           margin-right: 5%;
+           position: absolute;
+           right: 0px;">
+              <button type="button" class="button button-assertive icon ion-trash-a" ng-click="vm.delete($index)"
+                style="margin-bottom: 20px;"></button>
+            </div>
+            <div class="img-resize">
+              <img ng-src="{{x.img}}" />
+  
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+  
+      </div> -->
+  
+      <br>
+      <br>
+      <br>
+      <br>
+  
+  
+    </ion-content>
+    <script id="myOp.html" type="text/ng-template">
+      <ion-modal-view style="bottom:10%;border-raduius:10px;border-radius: 10px;">
+          <ion-header-bar>
+              <button type="button" class="button button-assertive button-clear" ng-click="closeModalOp()">close</button>
+            <h1 class="title" style="text-align:center">รายการบันทึก</h1>
+            <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+          </ion-header-bar>
+          <ion-content >
+            <div class="list" >
+              <div
+                class="item item-button-right"
+                ng-repeat="x in ophistItem track by $index"
+              >
+              <div>{{x.desc}} <a ng-if="checkInclude(x.code)" style="color:red">(รายการนี้ถูกเพิ่มในการบันทึกแล้ว)</a></div>
+              <button type="button" class="button button-positive"   ng-click="vm.add(x)" ng-if="!checkInclude(x.code)">
+                <i class="icon ion-ios-plus-empty"></i>
+              </button>
+              </div>
+            </div>
+          </ion-content>
+        </ion-modal-view>
+      </script>
+  
+  
+  
+    <div style="position: absolute; bottom: 0px; width: 100%; background: white;">
+      <div style="text-align: center; padding-left: 10px; padding-right: 10px;">
+        <button type="button" class="button button-balanced button-block" ng-click="vm.confirm()">
+          บันทึกรายการ
+        </button>
+      </div>
+    </div>
+
+    <script id="my-wo-id.html" type="text/ng-template">
+      <ion-modal-view style="bottom:10%;border-raduius:10px;border-radius: 10px;">
+          <ion-header-bar>
+              <button type="button" class="button button-assertive button-clear" ng-click="closeModalMyId()">close</button>
+            <h1 class="title" style="text-align:center">รายการเพาะปลูก</h1>
+            <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+          </ion-header-bar>
+          <ion-content >
+            <div class="list" >
+              <div
+                class="item"
+                style="margin-bottom: 10px;"
+                ng-click="selectID(x)"
+                ng-repeat="x in vm.list.result track by $index"
+              >
+                <div style="display: flex; justify-content: space-between;">
+                  {{x.wo_nbr}} - {{x.pt_desc1}}  <a>เลขที่ใบสั่งปลูก :&nbsp;{{x.wo_lot}}</a>
+                </div>
+        
+                <div style="display: flex; justify-content: space-between;">
+                  <a>{{x.farm_name}}</a>
+                  <a>
+                      <span ng-if="x.mim_status == 'CONFIRM'"><i style="color:green" class="icon ion-checkmark-circled"></i></span>
+                      {{x.ml_status_desc}}</a>
+                </div>
+                <!-- <h2>{{x.subdatedesc}}</h2> -->
+        
+                <!-- <div ng-style="x.ml_status_desc == 'ชำระเงินแล้ว' ?  {'background-color':'green'} : {'background-color': 'yellow'}" style="width:200px;height:100px;border:1px solid gray;"></div> -->
+                <div  class="dp-flex"> 
+                  <a>วันที่เริ่มปลูก : {{x.datedesc}}</a>
+                  <a style="color:green;font-weight: bold;">{{x.mid_total | currency : value="฿ "}}</a>
+                </div>
+              </div>
+             
+            </div>
+          </ion-content>
+        </ion-modal-view>
+      </script>
+  </ion-view>
+  

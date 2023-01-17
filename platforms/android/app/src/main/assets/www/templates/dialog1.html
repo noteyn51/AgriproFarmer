@@ -1,0 +1,32 @@
+<md-dialog aria-label="Mango (Fruit)" style="min-height: 120px;">
+  <form ng-cloak>
+
+    <md-dialog-content>
+      <div class="container">
+
+        <div class="flex-container">
+          <div  ng-click="answer('camera')"
+            style="border-radius: 6px;height:100px;box-shadow:0 0px 6px rgba(235, 240, 239,0.3);border: none;">
+            <i class="icon">
+                <img style="    width: 40px;
+                height: 40px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAABYlBMVEVHcEwStqQavp0Av4AavJwavJwavJwVv5UavJwavZwavJwavJwavJsavZ4cv5wbvJorqqoavJsavJwavZ0aupwbvJsavJwZvpsavJwavJwbupoA//8Zup0avJwavJwUxJ0avJwau5wavJsavJwiu5kXuaIbupwavJwavZ0bvp0cup8avJwgv58bvJwau5wavJwZvZ0avJwau5sYvZ0avJwbvJoZvZwas5kgv58avJwavJwavZwbu5savJwau50zzJkavZsavJ0avJ0avZwavJ0ZvJ0cvJsbu5wavZwavJsbvJ0avJwbvZsavJwZvZwavJwavJwdup0Zu5wau50ZvJwavJ0avZsavJwcvaEbvJsavZwXvJ4ZvJ0avJwavJwZvJwavJwbvJ0auZkbu5wavZoavJwavJwZvJwavJwcvp4avJwavJwavZwYvpoavJ0ew5YZvZwavJwavJsavp0avJwavJzphe05AAAAdXRSTlMADicE8+XtDOO87uK7MiQmBuTY1zuF2TO6/TABNP6+Degx9p8PC0P0hy8lUBCGudZRnU9J5kyOCgjU+HSPdnUFkpG9d5R6LnyaRUGoe/WDwfcahDy/6amqG33qIqvsm5jxmShLOomISPs3lfmWK7MRPtWcTvJ8pJxsAAACKklEQVRIx+2WZXPbQBCG1xabmRIzxI7tONAwNMzMnCZlxvf/V3brWpWsS91P+ZB35mZ0u/fc7eq0OyJ6lEblJ9BJKLOJ8HsY9OYtixgNYURvG0FolIF8wPiY3jY2jnd/WzwvtdFPlIz7lCa0mRU99Eobtne43dnDgnZNlQS8MKyxLij+nh6/Y9ptcAUgEKC3ds+3tlTCeq+6Xo88XYxD/Pbdms9bBwdExGc5E+S5F/JQ/eFzAlvblqbfsp+BUmmPyGoQ9voZCdjTRGvXPjWX1YJ6tzIUjokswr5H7p1mKocu2pMx1xYZkmF/rWYe30rTFxtSS6V8PraZgnhAzkzUyUh/HtvktmFD+jVNHkN0URAOc8QK0UI72OhqGrpOkKCcDb2myAIGaA0pqWVJHqFAWcyYIg4M0jWWtNmu4Jb6ETFFQnCTD8taJAa/Gq/PFOEhNYZGEvjGMEN+GBELnjVGR4HVmIHV01/FphY5w42afp8pMq2+5AJSSU1c51hXX/Ik+yoPcdy6ykso7KskBfvkEnHy+xzLJa4uqKqNy4CE4xknHYg4WklLUvrsHFcB6t6NxlhVOQv5lFyJP3V8QacyppiFzCmQ1U+9cFvj+a8362o5yIhw7NqvKMgEc81ZrrqLSOW+dsHNRWHLlu8k6a4/a0N0iru3wxB9/NRqSg7nPzSlunpnIn6er/VNuow+E4Sl/0MEBDohAvBSER0qSJ6i0AngDXoefygepn4C0lftp0O96NYAAAAASUVORK5CYII=">
+              </i>
+            <h5 style="color: gray;    margin-top: -10px;">ถ่ายภาพ</h5>
+
+          </div>
+          <div  ng-click="answer('image')"
+            style="border-radius: 6px;height:100px;box-shadow:0 0px 6px rgba(235, 240, 239,0.3);border: none;">
+            <i class="icon">
+                <img style="    width: 40px;
+                height: 40px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAwFBMVEVHcEwau5wavJwVv58avZ0cxqoavJwXuZcbvZwgv58Ytp4avJsau5savJwavJwavJ4avJwavJwavZ0avJ0avJwavJsVv5Ubupwcvp4XuaIavZwZu5wavJwbvp0fuJkavJwavJwavJwau5was5kbvJoavJwavJwavJwavJ0avJwavJwavJwUxJ0avJwZvZ0avJwbvZsavJwavJwavJwbu5wAgIAZu5oA//8avp0ZvJsavJwau5wYvpozzJkZu5savJzsMgGmAAAAP3RSTlMA2/wY1wncFtMIFdKA4PlE1n5/xYhFDEM3C+qEty8ZicPaMQpM+NHGgoH6lQ3+Ud9C5uv1ogJHAU5mtLkrBVIVq7DYAAABEklEQVRIx+3VaW/CIBgHcNq1pWy9vG/rscPd023qptv/+38rEWvWWFqLL0wWfV6QQPiFB8gDhJx2QDkOI6pZncm+ScOR5VmOqUDMO3EbJTM/ucdrreG7KOYnFt5460PLTzxUefuEGwmhnZRVarytoJ8k1A6YjDhw/WrFRSFBqA2E0hMriRPrsV3ChabrdZlhRc3TCmz3Xi6vYFyEMMzct8/XsClhAcpi+Gc/2QhC6rp+/dJqN0Unk4isRL8c1arRzSbbNdY7DZrt1m/nbyCFxCew7fGlms0LE2UVC55qlOFASpIiZh6cT9leMmrl8RmLrmJVTseYzBULmX4DHw212p99vas/sMvb85v8P8gxfuTTjhUwsnQenN2hugAAAABJRU5ErkJggg==">
+            </i>
+            <h5 style="color: gray;    margin-top: -10px;">เลือกจากคลัง</h5>
+
+          </div>
+        </div>
+
+      </div>
+
+    </md-dialog-content>
+  </form>
+</md-dialog>

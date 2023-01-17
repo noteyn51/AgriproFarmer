@@ -1,0 +1,49 @@
+<ion-view hide-back-button="false" cache-view="false">
+    <!-- <ion-nav-buttons side="left">
+      <button class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="color:white;font-weight: 400;">
+        Back</button>
+    </ion-nav-buttons> -->
+    <ion-nav-title>การตอบกลับ</ion-nav-title>
+    <style>
+      .dp-flex {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+    </style>
+    
+    <ion-content>
+        <div class="list " style="border:none">
+    
+            <div class="item item-avatar" style="border: none;"  ng-repeat="x in vm.list.result">
+              <img src="img/icon-promoter.png">
+              <div style="background-color: #fafafa;
+              padding: 5px 10px 0px 10px;border-radius: 10px;">
+                <h2>{{x.frm_fname}} {{x.frm_lname}}</h2>
+              <p style="white-space: pre-wrap;"><span>{{x.dis_desc1}}</span></p>
+              </div>
+
+              <div style="margin-top: 10px;
+              color: gray;    font-size: smaller;">{{x.subdatedesc}}  {{x.times}}</div>
+              
+            </div>
+
+
+            
+          
+          
+          
+          </div>
+
+    <div ng-if=" vm.list.status == false"  style="text-align: center;font-size: large;color:gray;margin-top:20px">ไม่พบรายการตอบกลับ</div>
+
+
+
+    
+  
+    </ion-content>
+
+  
+  
+  </ion-view>
+  
