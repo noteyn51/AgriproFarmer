@@ -1,6 +1,8 @@
 # Agripro Farmer
 
 Agricultural extension applications for ERP systems and equipment control
+Smart Agriculture, smart agriculture that is ready to change the style of farming to be comfortable as well, which will have a difficult label here. What is more important is to create an ecosystem that will allow it to work together.
+
 
 
 [Available for download in Google Playstore.](https://play.google.com/store/apps/details?id=com.doublem.agriproiot)
