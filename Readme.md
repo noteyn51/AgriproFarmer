@@ -4,7 +4,7 @@ Digisales is an application designed for use by salespeople. that make the sales
 
 <!-- [Available for download in Google Playstore.](https://play.google.com/store/apps/details?id=com.doublem.gotaxi) -->
 
-![](https://github.com/noteyn51/AgriproFarmer/blob/main/screenshot/intro.gif)
+![](https://github.com/noteyn51/AgriproFarmer/blob/main/screenshot/farmer_gif.gif)
 
 ## Screen Shot 
 
