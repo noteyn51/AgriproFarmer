@@ -8,7 +8,7 @@ Smart Agriculture, smart agriculture that is ready to change the style of farmin
 [Available for download in Google Playstore.](https://play.google.com/store/apps/details?id=com.doublem.agriproiot)
 
 
-[Available for download in Apple Store.](https://apps.apple.com/th/app/agriprofarmer/id1547206844)
+[Available for download in Apple Stores.](https://apps.apple.com/th/app/agriprofarmer/id1547206844)
 
 
 
