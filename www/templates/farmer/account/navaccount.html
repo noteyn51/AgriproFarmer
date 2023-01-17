@@ -1,0 +1,46 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="hbar" align-title="center">
+      <ion-nav-back-button
+        class="button button-clear ion-chevron-left"
+        style="color: white;"
+      >
+        Back
+      </ion-nav-back-button>
+      <ion-nav-button> </ion-nav-button>
+    </ion-nav-bar>
+
+    <ion-tabs
+      class="tabs-icon-top tabs-color-active-hbar"
+      ng-class="{'tabs-item-hide': shouldHide()}"
+    >
+      <ion-tab
+        title="รายการขาย"
+        icon-off="ion-ios-paper-outline"
+        icon-on="ion-ios-paper"
+        ng-click="sale()"
+      >
+        <ion-nav-view name="account-sale"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab
+        title="รายการซื้อ"
+        icon-off="ion-ios-paper-outline"
+        icon-on="ion-ios-paper"
+        ng-click="buy()"
+      >
+        <ion-nav-view name="account-buy"> </ion-nav-view>
+      </ion-tab>
+
+      <ion-tab
+      title="สรุปยอดคงเหลือ"
+      icon-off="ion-ios-pulse"
+      icon-on="ion-ios-pulse-strong"
+      ng-click="total()"
+    >
+      <ion-nav-view name="account-total"> </ion-nav-view>
+    </ion-tab>
+   
+    </ion-tabs>
+  </ion-side-menu-content>
+</ion-side-menus>

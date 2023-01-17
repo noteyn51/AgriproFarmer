@@ -1,0 +1,379 @@
+<ion-view hide-back-button="false" cache-view="false">
+
+  <ion-nav-title>รายละเอียดพื้นที่
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <!-- <button class="button ion-plus-round" ng-click="vm.addcrop()"> สร้าง Farm</button> -->
+  </ion-nav-buttons>
+
+
+  <ion-content style="background:#f5f5f5" scroll="false">
+
+    <div class="row" style="position: absolute;">
+      <div class="col">
+        <center>
+          <div class="card" style="top:-25px;text-align: center;border-radius: 10px;max-width:250px">
+            <div class="item ">
+              <span class="icon ion-location"></span>
+              <b>{{crop.farm_name}}</b>
+
+            </div>
+          </div>
+        </center>
+      </div>
+    </div>
+
+    <div style="height:40%">
+
+
+      <div id="mapsdetail"></div>
+    </div>
+
+    <div>
+
+
+    </div>
+
+    <div class=" list" style="height:60%;border-radius: 10px;    box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4);">
+      <div class="item item-avatar item-icon-right" href="" ng-click="vm.createSubmap()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAclBMVEX///8AAADz8/MEBAT09PT+/v79/f319fX8/Pz29vb5+flLS0vPz89ISEgDAwHGxsaGhoaAgIDr6+tPT09WVlbS0tJDQ0MUFBSKiorf39/CwsJmZmaampqQkJBtbW1eXl6oqKgcHBwwMDA4ODgoKCixsbH5Z0jFAAARaklEQVR4nNVdi3bbKBAVtiVLAsex6zycpE26bf//F9fiJV4Dg41tonN2o6QjzVzxmAEuQ9OIq229mwa6OX69/10uXzavb2NSNue9WSIZsvzqe/Fra9yIf+nmm47/3B7IfH2sbNnOufFe58sqkRxZhJnze/k1juLP7TiKP3ejLJ5+7K2b8Rexrt9vsCzqvUqkUSJatgdl02Ya7xW/DeLP7TCIP3fDILUMoxLhN/sXjW25FD9/NkrLLKu0yNe10OsM2aRqy8wWlO0dWf7WcSV/W6+Eln61Fk+Oi0E+sBAAT8AcgIQ8NrbssJDq1vK93WolDXFeN8tq1Z1SHZBFm2nI8jqr4a5ST45/yPLBBvhw+vkPALjIAYiQ9c10vq0vy+usqrnzZ1xAn2YXADjd7GMA29notf06AyDmY7glCJo5yw5Te21l39OuFimARwAg+by0BF3VsRKcZZWIKzt/W/466TXmsoc/zTsJAyTkuC5TRREA8SWoVTtPwpV77/aiGiB5bIsALNsGlazUkqyizfgPAvhA/gAAcW1QqUa0wbSZAECj7KFPs+53AMDp5z4IsHgbRJjpflupBeFgFs0BKMHp5ulMgDififVmAdlu+tEOuCcpDJCweBWNlOCVAU6xW6tiq1TlpjDAE8Jbugk0wH4QHj/Z/wqjabANihvWn9eLpkO1DDfhq15P/9LKQUa6/6VgCRKyHc4CeF03IV8nPT6i7CkBAZJtZwO8VqiWVUWVavUk9GmUIc2GAFX0hJzZsncN1dxvq35LfppuAwJUCCsI1dwqqgBiKne7Aaro8hSPs2yAizMAZrVBKdtaWqJPCn8IdKesqStU06q5x++GZP/LjaZAFX0QHr+mUE2/rucDxHHAfRoKVVGOsC43oWSlx0eWPQ0ClB5/vFKoljOi9wFKj4/4NPzls8d3qij3+HcL1RDNHwlw9vg+QLJt8ADLuolYhTD9BWYkqTy+D1D5w7raYC7APuDx52kbJmVTbqK5mZtIAQxUbu0PfYDC41+rDZ7lJrRsm9JifBoKleAD94dVhWpals+V9gOu7CkM8IQwL1S7VRvkSzh6/Sb1JIUBnhDWMKL3AQqP3ztPQg6GAm1QePyrjehdozPcxLCeRFoXIKjF9PgOQLIdK3QTugPHPml4fBeg8vh3WHzJBhgZKs8e3wWoPH4NI/qMEnSf7DcgQInwjosvgTaYW0XH2eMHAHKEdbbBNuNJCgOcEFYVqmnV0uPjKjeFAZ4Q1jCi9wFyXz97fOk3mk6t2ujlKf4vP2CA5KnpLVnz6Vbd6PdGZMOqzRtEqKYBDnw+X3n8/b/dgU7XZrOh8oYaNz9egh5f/Hy2Zc0b4HX5sp+v2zGviq7X3fyFj+8keXm45om39MNlrt1+zAC40BWgGXcGDGk0PGXhIY3K5rzXEfFlCfkQlRjRBk2A+xBPBphVywWY/zEiAKefhz6/BCemU46W65ZgUva5b3Kr6AsM8EZG58kehnUyVNMuZfoUv/IA3q0NznG+aIuYNthO7mJL1FW8DeYDRMlK6gemBHnPqwmx36ENSpFHHMBuPQ1bjyDA21fRkGxYdY+pot2Kr8h8QS+/fRXNqDzbBlGC0me+VwMwR/Z1RANs/uJfXg9AcmjRAJtlJQCzKg+heIAc4Terog9LiRABsOual28IUCJEMK8nXtuGeESgOtpgVDXFlSDntb1KHbW1wbgsxQHkq9xvLsD6qyhHiOfOj4iXVwfwhBANsGk+viFAsunxAJvV73pH9JAs2TR4gLwlnqPljiWoPT6Cec1//SmVfY9Ohv+BYkuQz3l3zeO9AJ7dOigWoOC1jc2/EgBv1Aa5CMUBVLy20//2n0RfdVdR7fExG3QsXtvx8Q+p74JKm6JK0F5CXLfN/okxtt0yccE3KJGLZZ++ItX55PFzAeqmKbeXnKqw+iclpxbhOrXXth9aQLZVsv28L9eVHXxZW/VTpL1u+nMB3mxzFmIBlMGDHu3xbwTwOjwZPZEb6IeUx0eYafPaqtogOW6hKqo9PsJMm9dW1Sbl1chAgDJqQ5hp89rq2qS8ahhQRSdXSXFmim15apW7uk3KDCxBjhBjpuC1dUUAXoEnwyJxK8WZOS8hnt0Gr8mTYZG49eTx0WYCACvY+cIIHK5uOrSZ5wO8+iblkMdXa6TS458PsIZNygiPjwFo89oQRnfqy6guWN8UozSryVzX45sjKooE2IZ5bcCTH4+na7d7fDR/ipvd8UI3EVAtPX54rE2RACWvrUcBbJ4JfLG2PJ3S9fjmuJziAPLsLbqWJd0EjYzSt/COhrM3KTMSDmmEt0B5M5PXhmiD1GOlzDfb0dPitME8OuUkyyKzGjRn9wMW4LT/EAD4oJjsRXe+sMh816bFB1xogAaT3QWomOxlKc2mx3fnxjbtmQBjfrDbgAAlwsKUZhbZ/SA9fskqOiycvdz2JArDGZ1Dae62BAKoPD5i4sHO15bofykMcEJYmnWvPH5w+pYmAUpInAZt5GuL9r8Ok90EeEIYGdFnhGqG6h72+GIEjIkoZb42NZGU6J4oWIJm9pZyO18YWIIcIWbQszbztaVDBAoDnLO3FNykzGCAJ4SoyT8+Sauyt6Q9qO/x5xXLrZ4KKdIGuSyLLKHMq9yIiQelJTlUVv4wsKCisrcU3fnCImtEmw4/8WDDjZR963p8c/6S4YxGuQklywgIUM95IyYesACbtevxraCYQQBzQzVDdksggAavDa6iUnULfUb/0ySzt1w0ovdLuw94fKVa89rgiYe15rVNoyhcmB7O17ZUHr/wJuUh4PFn1RQ201JtZ29J9b/BfG1L5fFLb1JetAwGKHltoJvQAK3sLckYKJqvbSzoJqRq1+ObqinKTTj52pKLL4F8bTqkUtlbSm5SZjBAzmsDq6izwiC7VEQM5Odrm1cst7LjKrlJmcEAjVVuxPx0EqAaSabztZXdpMxggPMqN2KdFguwS+drK7xJmUWiRJfXFlkEc7XAZd9SEKDI3lJ6k7LerhSIEh1eW6SK2qvcUQfjZW8xx22sVKg2Axy3IECX1xYBKHhtgblOZZHZ/8bztZ0ZyYAA1wMDATq8tkgV1bw2sATNXoHCAHn2lhKhmrFG1DAYoMVri2UonHltAECr7CkMcMreUrQNTkYzGKDJa4stY0LZW4D+N56v7dIRvQdQevwgQIPXhqHzgAAdixD52grlshAfg0WiRO3xMVQCCKD7yTH52spV0cac8/Zbh/L4RqiWD9Ct3HP2lsD0HpOyjtH5oZohi+C1YagEEEC//43ka1PZW8q4CTyvDUPnsVe542v0FAbIs7eUbIPTZK6/yu14fAxAe5U70f9SGOCUr61oGzwZ7fLaLNUUNtNSHea1QU9SGOAJ4YUjel82xWsLjOj9bxvktYH9bzhfm/jJhrJV1OO1OaopjnEW5LXBPJlgvjbZG2yxiWxRAEWPyyJRoslrSxKyPIBQ2YfytRGF0DH6Ijchvy2LRIknj49mnLkA4ZFkIF8bkZ2BXuUu1Aa5bJzXhmZegwA9iwL52jRktcpdrA1KhBDAmdeWCTCadszP1zYDlKvc5drgdM0jYD9KpKCZrurO/HPCwbj52gyAYpX7khF9YJPyFgSoeG0I1qc8lSw0ovefTK1ylwjVcLw2InltaYDOqWQJRgYFSxDJa8tog5NqBgMUvLY0QMlr6xTARP97Jq/tXIByBBz2UBRHTLZOJUsPlbN4bZe4CSkb57VlMK8VwGQM5PHajH25GF5bJsA4r63DE5MlwGvz2jLchFId5LVJ1TFeGwAwHQNl8NouCNUM1SFeG1EIm0yAmJ0v0Co3zGu7oA1ON+Aqd5TX5gAUHn/AbStInEpWtA025/LaHNWK1waHauaTlABVlIR5bee1QZ/XFurAIV6bC9A6lSzpYHC8tstCNVN1eJVbe3zM5gBrlTu9MQR1KtmFoZqpmhH4ekYBFCIYXpt4EnMqWaE2yEWOO2dXh3HzEeK1QVwJoQUxVM7htRUAOL1GueJe36hBH6IN2seuIaLY1l3l9nltBUI1W7Uel6NH9P63TWtRT0ZOJYvw2soARHkzW7Wqoi32yXX6VLJSbgKcvs0BqFqd5LXhNikneG1lQjXMGlFGFU3z2swngVPJpMcv6CZsgJfspU7z2qwnM3ltpdvgOacIOrw2uA2KeoLitV0yXCpURTuvSWOfDPHanFXu4m6iyF5q7JOZvLYiAIts9089qemUOby2Ur3oWZ1MJsCZTtkkeW0VuAmfStBmfJrYqWTTyePnJCNqzktG1Dsi3utmPrxY5cZV7hiv7evpukmj8mSfjgrxCPHabDch60mM11bb9d/rURSy8PhgCdqblClURcWN+Fk4Z92ZstP/P/cwrw2IgWK8tgoA+hHllz45B9EGJcJ8LXdM4CfS70cAejukIry2+5dgSJaQn5gSxJ1KViPASeQNX0XHOK/tzgDBUd3vBQAwuPMlxmuLablPCcobXk97f64zuPMlxmurrorq3ma0eG3QUFnEQDFeW21VdBZ5awxeW2IcEuO1FXMT+R8j2joIeTV4bcFQbQYY47VV5QftVDbPyl8gBlowr60ygJbqlwhAh20Y47XdDSBCNdwGXTolyGurtQ0K2SXoJjy+aPN5E6NLy/7l1q+SbXAKCl5rA4iJMch705jZW6DpKh71bLFa6qmi5IF8NQavLbE5a6yrk0HJTke0qewtiE3Ku292iuAkcph5bYhNynsCvbwONxGSlYvT6TbIe9zx4zwtSZHrtMHpD780QOQm5QNaC8k2+hqyv9WsInqTcv98d6MtkVTr2OsSRO/h7fV5kN+gDf7Z61Vu/CblZvjI03IvgKf/dqPktbUzrw2x+2zd7OWZLTe64I8Rv96nSW93lRu7Sbnfvh4uO2IbJfsnCFAU3MuP2HsPuzc+A+Vkb8nYINnIj9Jcdkq6/qfwYe5PkRL8EVUtbxxeW9kNklk8GYD1Gcreom6C+dqirKj8DLFRgEUWQAPZW/QNfCqZz39QRmeU4I14MpjsLQjmtfit8CblMjyZbSSrr5+vDTKztbTcECBik7KbvcUoSj9fG2Qm9/gdvIf36nTK2CblLQjQzdeWPJVsuHkJYngyUPYWfuPkawO7CsvjF3cTl/JkGFiC9qlkETOtU8kqchPSaAYDNPO1IVxwAuDdKM2h7C0Ps8fHmwkAvKObkKoZWIJWvjbYzHgJ3itUM1TrnV0Rj4/ltZXepFyEq4bJ14aoonhe280pzYhTyWKb5BQHDstruwOdckTka0uvRljZW2oI1QzViHxtSW9mn0pWj5uQ3/aCU8mUmXheWxmAmZRm4FQy6fERbkKbeTnAvJ0vWMZvIl8b3kxby71DNcPoYL42OWRUp5JhzAxruXcblAiBEoyeSoYDWMPOF0y+NkQbbC8GmBeqZbDuA6eSOR4fY2b4VLI7hmqG0X6+NmNZBDqVzDXTPpWshlDNLJVUvraAmW4VHUbT41cRqpnrtIl8bRgzrVPJ6gjVTCpBPF8bypvpVYKE0bd2E9Jow+N7S5M0cCoZZGZcy81DtWaen34iUAkScuiSbuJygIVH9L7qo/SHAYBk12DN9LTcO1QzVI//QQCXkoOPqKL2qWSVuAk1fSuIdOEl7EXKTAXJPZXs7qGatUZ0BAAuOR0P0wY7O19bHW7CnID/hAgLR6SZyVPJiriJCzYp70n4yKcd1kzzVLKa3MSs+mvuTk2ezBgN1fxM5FcBeE6oFpgpewwAnJhOOWYKLTo1xlq9fD06N2JaZ7J+gGV79TpZRWHZISDbSFnjdT81LnXze58w01EttIxyha2bNxOrJ/WuYplOCiHbKtlOyfaBTco97nVvv4m+poL8NeaZKX7rVa4oNZDSN/18o550ZX0RtSKJku21LKB68XOGSA4s18xu/r9x0yoKj3HjiOTIhkRa9OtO5fL2+vxCln/fv/b5Zrb/A5u/8l6lYh+wAAAAAElFTkSuQmCC">
+        <i class="ion-plus-round" style="position: absolute;
+              right: 20px;
+              top: 30px;"></i>
+        <h2>เพิ่มโรงเรือน</h2>
+        <p>เพิ่มโรงเรือนเพาะปลูก</p>
+
+
+      </div>
+
+
+      <div class="list" style="border-radius: 10px;    box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4);"
+        ng-if="subfarm.length == 0">
+        <div class="item " style="text-align: center">
+          <h2 style="color:red">*ยังไม่มีการเพิ่มโรงเรือน</h2>
+        </div>
+      </div>
+
+
+
+
+      <ion-scroll class="scrollable" direction="y" style="height: calc(100% - 0px)">
+        <!-- <div style="height:50vh"> -->
+        <div class="item item-icon-right" ng-click="vm.allPolygon()" ng-if="subfarm.length >0">
+          <h2>ดูภาพรวม</h2>
+          <i class="icon ion-navigate"></i>
+        </div>
+        <div class="item item-icon-right" ng-repeat="x in subfarm" ng-click="vm.selectSub(x,$index)">
+          <h2>โรงเรือน {{$index+1}}
+
+            <span class="icon ion-checkmark-circled" style="position: absolute;
+              display: inline-flex;
+              left: 100px;
+              font-size: 18pt;
+              color: lawngreen;
+              " ng-if="x.iot_id != 'ยังไม่ได้เชื่อมต่ออุปกรณ์'"></span>
+          </h2>
+
+
+          <i class="icon ion-navigate"></i>
+        </div>
+        <!-- </div> -->
+      </ion-scroll>
+    </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <script id="my-modaledit.html" type="text/ng-template">
+              <ion-modal-view style="">
+                <ion-header-bar>
+                    <button type="button" class="button button-assertive button-clear" ng-click="closeModalEdit()">close</button>
+                  <h1 class="title" style="text-align:center">สร้างโรงเรือน</h1>
+                  <!-- <button type="submit" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+                </ion-header-bar>
+                <ion-content >
+                  <div class="list " style="border-radius: 15px;">
+                  
+                  
+                    <div class="item item-avatar item-icon-right" ng-click="vm.editmap()">
+                        <img src="img/ServiceArea.png">
+                        <h2 style="font-weight: bold">พิกัดโรงเรือน</h2>
+                        <p>{{PolygonPatch[0].lat}} , {{PolygonPatch[0].lng}}</p>
+                        <i class="icon ion-chevron-right"></i>
+                        
+                      </div>
+          
+                  <div class="list">
+                    <!-- <label class="item item-input item-stacked-label">
+                      <span class="input-label">ชื่อ Farm</span>
+                      <input type="text" placeholder="ชื่อ" ng-model="editdata.farm_name">
+                    </label> -->
+            
+        <!-- 
+                    <div class="row" style="margin-top:5px">
+                      <div class="col">
+            
+                        <span class="input-label bold" style="width:100%">ผู้ดูแลฟาร์ม </span>
+                        <select class="form-control sel inp" ng-options="item as item.mob_username+' '+'('+item.mob_fname+' '+item.mob_lname+')'  for item in data.select track by item.mob_fname"
+                        ng-model="editdata.createname" >
+                      </select>
+                        
+                      </select>
+                      </div>
+                    </div> -->
+                    <!-- <label class="item item-input item-stacked-label">
+                      <span class="input-label">รายละเอียด</span>
+                      <input type="text" placeholder="รายละเอียด" ng-model="model.farm_desc">
+                    </label>
+                    <div class="item item-avatar item-icon-right" >
+                      <img src="img/calendar.png">
+                      <h2 style="color:#036d8e">วันที่สร้าง</h2>
+                      <p>{{model.farm_startt}}</p>
+                      <i class="icon ion-edit"  ng-click="vm.updatepickdate()"></i>
+                 
+                    </div>
+                    <div class="item item-avatar item-icon-right" >
+                      <img src="img/calendar.png">
+                      <h2 style="color:#036d8e">วันที่สิ้นสุด</h2>
+                      <p>{{model.farm_endt}}</p>
+                      <i class="icon ion-edit"  ng-click="vm.updatepickdateto()"></i>
+                 
+                    </div> -->
+                 
+                    <div></div>
+            
+                  </div>
+            
+            
+                  <div class="container">
+                    <table id="customers">
+                      <tr>
+                        <th width="33%" style="text-align:center">ไร่</th>
+                        <th width="33%" style="text-align:center">งาน</th>
+                        <th width="33%" style="text-align:center">ตารางวา</th>
+                      </tr>
+                      <tr>
+                        <td><input type="text" ng-model="vm.area.farm" id="inp001" class="form-control" /></td>
+                        <td><input type="text" ng-model="vm.area.work" id="inp002" class="form-control" /></td>
+                        <td><input type="text" ng-model="vm.area.wah" id="inp003" class="form-control" /></td>
+                      </tr>
+                    </table>
+                  </div>
+        
+                  <div class="container" style="margin-top:20px">
+                    <button type="button" class="button button-balanced button-block" ng-click="vm.createSub()" ng-disabled="checkUpdate()" style="border-radius: 10px;">บันทึก</button>
+        
+                  </div>
+                </ion-content>
+              </ion-modal-view>
+            </script>
+
+
+    <script id="my-map.html" type="text/ng-template">
+              <ion-modal-view style="">
+                <ion-header-bar>
+                    <button type="button" class="button button-assertive button-clear" ng-click="closeModalMap()">close</button>
+                  <h1 class="title" style="text-align:center">map</h1>
+                  <!-- <button type="submit" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+                </ion-header-bar>
+                <ion-content  class="wrapper_all" scroll="false">
+                 
+        
+               
+        <style>
+            .top_float{
+        /* position:fixed; */
+        cursor: pointer;
+        width:68px;
+        height:68px;
+        bottom:120px;
+        right:40px;
+      
+        color:#FFF;
+        border-radius:50px;
+        border:none;
+        text-align:center;
+        font-size:34px;
+        box-shadow: 2px 2px 3px 1px #999;
+        z-index:100;
+        outline: 0 !important;
+      }
+            </style>
+            <button type="button" class="button button-balanced icon-left ion-checkmark-round" ng-click="vm.save()"
+              style="text-align: center;
+              position: absolute;
+              z-index: 2;
+              right: 10px;
+              margin-left: 0px;
+              border-radius: 10px;
+              bottom: 5%;
+              width: 40%;
+              left: 31%;">บันทึก</button>
+      
+
+      <div class="row" style="position: absolute;">
+        <div class="col">
+          <center>
+            <div class="card" style="top: -25px;
+                text-align: center;
+                border-radius: 10px;
+                max-width: 200px;
+                right: -60px;" ng-click="vm.draw()" ng-if="!vm.drawstatus">
+              <div class="item ">
+                <span class="icon ion-edit"></span>
+                <b> วาดพื้นที่</b>
+  
+              </div>
+            </div>
+  
+            <div class="card" style="top: -25px;
+            text-align: center;
+            border-radius: 10px;
+            max-width: 200px;
+            right: -60px; "ng-click="vm.delete()" ng-if="vm.newShape">
+          <div class="item " style="color:red">
+            <span class="icon ion-trash-b"></span>
+            <b >ลบ</b>
+  
+          </div>
+        </div>
+          </center>
+  
+        </div>
+  
+  
+      </div>
+              <!-- <button type="button" class="button  icon-left ion-edit" ng-click="vm.draw()"  ng-hide="drawCheck"
+              style="background: #fff;text-align: center;position:absolute;z-index:2;top:70px;right:10px;margin-left:10px;border-radius: 20px;box-shadow: 0 2px 6px rgba(0,0,0,.3);border:2px solid #fff">{{vm.draw}}วาดพื้นที่</button> -->
+              <!-- <button type="button" class="button icon ion-pinpoint top_float" ng-click="vm.here()"
+              style="text-align: center;position:absolute;z-index:2;bottom:5%;left:10px;margin-left:10px;color:black"></button> -->
+            <div id="maps"></div>
+        
+                </ion-content>
+              </ion-modal-view>
+            </script>
+
+
+    <script id="my-detail.html" type="text/ng-template">
+              <ion-modal-view style="top:44%;    border-radius: 15px;">
+                <ion-header-bar style="text-align:center">
+             
+                  <h1 class="title" >รายละเอียดโรงเรือน</h1>
+                  <button type="button" class="button button-assertive button-clear button-icon icon ion-close" ng-click="closeModalDetail()"></button>
+                </ion-header-bar>
+                <ion-content  style="background:#f5f5f5">
+                 
+        
+  
+  
+          <div class="card " style="border-radius: 10px;    box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4);">
+            <button type="button" class="button icon ion-trash-a button-assertive button-clear" ng-click="vm.deleteSub(subDetail)" style="    position: absolute;
+            z-index: 10;
+            right: 5px;
+            top: 5px;"></button>
+            <div class="item item-text-wrap">
+                <b>โรงเรือนที่ {{subDetail.sup_sub_id}}</b>
+                <p>   <img
+                  ng-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAACkwAAApMBv+Bu1wAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAM3SURBVFiF7ZRPaBxlGMZ/78SZrO5poZWSghcv9V8l9mKgl5I29dJAhaWpSLtWZ3YM5BB6KT0NqD1oacC97M4EOtBioxE8iNJWaKEqIvgHtAaR3izElhIKweruZOf1kEmZbnayI25P5r18M9/7fM/zfO/3fh9sxv895N8uKJfLVqlUeg14A3gymb4hIrOqetb3/eihGXBdd3scx58Cw13JRL5X1QO+7y/m5TTyAiuVSiGO488T8d+Ag8BWYKuqvgzcUNVdwGflctnKy/tIXqBlWW8CO4FfW63WSBiGd1PpTyqVylXLsr4Fhkulkgu8n4c3dwWAVwBE5EQiLrZtT1Sr1UOAhGF4V1VPpLH9NrADIIqiKwCO4xwWkQuqOmfb9qHE3JUE+9TDMNAEKBQKRQBVvd/AhmEIwMrKSjGN7beBHwHa7fY4QBAEH6jqYRGZaDQacwCmaY4DiMgPeUlzNyFwHtgLOEAAaBAEc6m8qKqdwuaK3BUoFosfAbdVdZdt2wc689VqdRx4Afij2Wx+3HcDMzMzfwGnAUTklOd599d6nmeo6jvJ7+kwDP/Oy5v5EjqOcxPYnrlw9ew/BLBte0JELmyg87vv+0/kNuA4znPATxsQAtyJouhpANM0F4AtG4FV9dkgCH7pnM9qwtFkPOf7/pF0wvM8Y3Fx8WtVfdE0zVPJddwCfDM0NLTb87y4YzPngFdFZBRYZyCrB8YS1190JjzPi0XEBlrA6yJyDGipqt0pDiAiaxxj3YTWGZienn4U2APowMDApW6L6vX6deBtVo9QROStbuUFaLfblwAF9kxNTQ32NLC8vDwCFICf6/X67W6kAIODg+8CC8CCZVnvZeFmZ2dvAdeBx6IoGulpwDCMfaxu63IWKUCtVmuKyNE4jo/UarVeT+9lAFVddwzdmvClZLzYg5RGo/FdL0wifFFEjqvqfuBkOvdABSYnJ7cBzwN/Li0tfZmHPE9EUfQVcA8Ydl338UwDURSNstpY1+bn51v9MpC8jNcAieN4b6YBEdmXfK67fv811q5jSgN4sAcE2J98n3Ec50w/Dajq2jiWaCmkKuC67jPAtn6KZsRQorUZmwHAPylaJT32wwBUAAAAAElFTkSuQmCC"
+                  style="
+                  top: 3px;
+                  position: relative;
+                  height: 20px;
+                  width: 20px;
+                  "> {{subDetail.sub_area_farm}} ไร่  {{subDetail.sub_area_work}} งาน {{subDetail.sub_area_wah}} ตารางวา</p>
+                 <p>ที่อยู่ : {{crop.farm_village}}  หมู่ที่ {{crop.farm_village_no}} จังหวัด {{crop.farm_province}}  
+                   อ. {{crop.farm_amphur}} ต. {{crop.farm_district}}</p>
+                <!-- <b>ข้อมูล Crop </b> -->
+  
+                <!-- <p>ที่อยู่ : {{crop.farm_village}}  หมู่ที่ {{crop.farm_village_no}}</p>
+                <p>จังหวัด : {{crop.farm_province}}  อำเภอ : {{crop.farm_amphur}}</p>
+                <p>ตำบล : {{crop.farm_district}}</p> -->
+  
+              </div>
+        </div>
+
+        
+        <div class="card " style="border-radius: 10px;    box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4);">
+            <div class="list" ng-click="vm.connect(subDetail)" ng-if="subDetail.iot_id == 'ยังไม่ได้เชื่อมต่ออุปกรณ์'">
+
+                <a class="item item-icon-right" >
+                  <b>เชื่อมต่ออุปกรณ์</b>
+                  <p>
+                      {{subDetail.iot_id}}
+                    </p>
+                  <i class="icon">
+<img style="height:40px"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAFJgAABSYBrL2e5wAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAA29SURBVHic7Zt7nFPlmce/z0lmEESuFVAQFiZBLHYVkoDoVkFUls9utWuXKfVaXSEZUNuluha0MFrXrV0/1FZgEhC5qLUCrWvXVtFV8EqdJGO3ylLmZEAFEXEVUK4zc95n/0hCT4bJbRi3fD7l908m7/X5PuecN8/7vGfghE7oL1ry5zagqGrVCp2+JYAxIQP9RfGK6C61rMaKfV3Wb5h1xsFjGf64dUAg1tQTNbMEwkD/PM0OAL/yYN3zZqTK7sg8x6UDgotTkzH6KNA3U7QdWK+wBbRFsAaCngecQ5qhReDeeNj3Q0S0nLmOOwcEYnaNKA8BHmCdijU3Ga56rb22oxZsGeKpMLNRvRGoEOXnB/o237CxemRzqfMdVw4IRe25CncDRtBZ8cjwn5bSb0zUHqfwHwr9gOcrDpz09VLXButYDO5MBWONt2fhgemlwgPUR/wbVGWiwC7gspaTDz6CakkX9wu9A8YusQcZh/mOYX7DDP/v8rULRO07BH5EBj4R8S/NaaAqwWjqIuBSETxG9A+V+7s+1fYqB+tSZ4voKwq9Ee5MhP33FbPxC3VAMGr/I7Ba4ZlkxP+19tqEovZshfvIAz92iT3IcfglMKZN14/E0mvi04f/l7twdF3qYkt0LeBYHues+mkjthaysdMegXHzt3UNRu1HgtHGb2XLxPG+BqjARYFYoqJtn2Bd6s5C8KMWbBniOLwCjAH5UNEHFO4BEkB/NfKb4CL7cnefhhrfS6IsB7oYx1NbzO5Oc0DzyYdOB74N8nAg1jQYID5z6E6UVwDLe7hnV3f7UDR1G6L3AkaFcHvwHq+zDhgKvF7hPXx2MjL89mTEP29oH995wINAJRarR9elLnb3Fa9zH6DAleOXbT2pkN2d5oBk2N+E6JNAN1FTmy0/2Lf5Mqu1dcibt/o/y5YFYqmvK3o/oCqEk2H/w+6xArGmwW74LhXO5A03jfw0W7+6WpxE2DdLYRFQaYmuGDd/2xEH108bsVWEBqD7582tFxayu8MOCMR2dAtF7bmjFzaelS2TVutfQDaL8lG2bGP1yOb6m8/6JPt95MKN3cXoQsBCuLs9eFGz3g3/+j+N+PwoA0QU2ftdhf8GBrV2PZSzxihsSP8hZxbi6LADxNl/icLdliUvB2JNXwGIz/RtS0R8I+I1/tn5+nX1Vt6KcDrwemK67x53XcnwGSXDwRYL+U8ATUeFbn2Y/tDTCnF02AEHv9T8nMIzCKeKmufH167zFu1UqxYwPW0Xd7nD1nF1mweKmpzbvhD8ESk9ANTSQznFShcAEQ4X6t5hB2ysHtl8qE/zN4ClwMvr5413ivUJnLZlJMoQhQ8SEd/LLmulRawngWEob5QK/9d1qX6ITgUQI6+66wTOSH/Kh4XGKH7V3ACxHd0s3X/lIVP5m7dnDNmdiblvAiBSygg6OmPUK+6rH4w2nY9wAdCqwsbDzZ4ng1G7WUWeSk6vWtneBufcZVt7eQ+1PKNIP0FejUeqXqYmp8lEAFFpKGRRWXeApfu/o/BoF6vZDsVS08vpCyCYfgCK+cBdrhbnZf70CkxDmAxcIarLA7HUL9qGtRn45xEJAY04nmq3k0KL7YuAwSg76sPDkgWZyiJw5DGBl4C+qhoLxOyqsvobqzI9qeQ8LoJ2d319QUX/XmAm8JlAdTBmT81WtoV3WpwJ8ZlDdx7prSrqkA2BlxTbHpf1CMRn+rYBE4OL7MsRqob18b1b0L1HST8EMDAoWzIm2hRUNd/JWLlGZe9VyXCwBSAUtVFYqDAFeMINr2CbFmfCW7eM2OGeIRRL/UCF84GPDprmB4pZVJYDskrM8P8a0vFoeTLvpH/+CQEE6zaPMZi1QC/awAMo1rtgELVOOXfZ1l7ew61rs/CVaiZsaAMfrLOvVZgHOEa5fuPMkfuKWVTSZigQaxpsGXOrsbTBVMgLb93o/7gc7KymrFLPu5+mPs7s1m5G+VegJ+3Aj69d593X/4xnEb0E4RGUs4ExR+BrzsxZR0JR+xqF5YAHlVsSNb4FpdhU4hpgrlLhe6LyuKeZD0PRxoLhZT6trhZHYRkAygLywE9ZpZ79/QetQPSSTNvrKRle7ygVHkp0QEvXAw+hzBJYC2xyHDp0BwAI+rrr65ruO7d/qy38lk9TK1S4ytXOg/Ky5XgvLASv8P1EzfAfl2fP/6PGRO1xJu3EUwRWn7xz+1Xraye0Zuuz8AJXC+xW4QHQFhHP+vj0qnjb8UJ19tUqrAA8KsxOhv0/KtemDi2COVKV0JLUl3HkfCPaR1QVsXYaw8aGXVVvUSsGIBBrHGuU5ygAv/XT1HKBq4E9gnVZPFyVd511wwvMSXQAHo7hDsjm7UGuE/Sv2m2kfCzCI47qa5bIo0CvQvDANcBesaxL27vi6TFVgotTs1F+SPonpaTUVz51yAHBRfblWMSAAQAKHwi8KJpeG1ToDwSBEW0mKwaPCjOSYX/dUZOqSii25WLF3A3psFnQ28pJnransh0QiNqzBP4dsEBfM2rNa4hUrWsv4gpF7RkKCzMTFYV3WbUJJZnNK6hwqsJEgYEAKDvEo9e3zQd2RGU5IFiXutOVxrqz0KITrNs8BrGeB3qWAL/HqF7rQcarcD3wpTzWpkAXV+zvuuBYzwT/NGSJCsbsOZnAxQG9NhEZ/kS+tqHFTSE15nmgl8KqU3Zuv7rQM4+ayxI1Z9YDpJOnvccK5hxVuotwWNFd4phkYsaIzR0mzaOSHOBKXbcPryqBxU3jBRPEWJUi+j2F3iXAf2bB39ZH/Bs6kaksFXVAIGZ/X5R/AxwVvS4ZHv7z3Pr/OU1MxRrSG5AjKgEeS+XK+hrfU51C0kEVjAMCUfuOQvDj6jYPbMFaj+ADHNIHmnnhs0FOtswRcz5wTA4I1qWmiuiVRlhnWjy/fevmYe+V0z9vKByINd6aOa7KC98s1joUH/AmsDJT9UIR+L2o3AIgyI1TVqmnHIOPll6nMEWURR6vsykQa+pZTu92HRBcnJosKvMBI8r1+eAF/EC9ijUJdHB6RPmJG3587Trvu5+kVh6J8Czr0kSNb4GCDfTZstsOlkmco8NaeTVwE6K/QGTlsN7Dim6B3TrqERj7M7uH4+gKBA8qd8VrfI+769uBvywZrtobjNr7ANSYIdm2gVii4nPt+ZhAtcBux8ilDZGqJIAgCVC/pXyZ9B3UIb09Y8hu0onZpVB+juIoB5gKuQ3RU0FfS0R897kTjfngAQTWKFwhyP2BmC2g74uxvntkSwsPNszw/SmBJGxDAWRAmTYDmdTYwdYL97SyNnWrv2Dqu5ByH4FatVTSWV4Vz+ycROPCrQPc8K1dvJOy8ADxsO9xYA3QQ5RFovKMCx4DbW5NrciUd8h472FnDhZP9+rCO6Go3e7JcynKcUCwf2Mwc5KyNee1FFVRT+saAT+q8dYu3km/v2HonpyRRDSx0/dNUb0B4dcoz4IuBloBPNmjqmxzTecFs/uHcqXpzdVGFJ/C019Z9F7vjozTZhGUURmjXnSXjo42TSC9AfnI6SJ/dxR8VrVi4jXDlyfC/is8LUxF5WzAK8irOcFO+oToojSJU98Rw5Phqre779x+LqoRFeZk1oKylbsGWDIABbXYnlNs6VfTzytPlJIPHPszu4dTwbOZ4GhLa0vrVHd9aMCWCQr9FOxkzZmNzCjN2ECsaTBq7kKsh5Lhqrczvzax0nq3r5w7IHuepm2eSzGclCn/jCK6YOkfT3HDq1i5qWtVAXMvgKg+XM5rbaLmUoFpomZdsM4eVWq/Qsp9BER3AlhGck5UVfQPAAJfK3QIesHSP55yuNnznBs+Ga56390mGE3NUzgP4T21upecvEzbsXclyK+AvlisKqdvPuU4wFKrEUAx43In7v40yg5g1OcDBv20vTewSoEP1aWmIcwFHFSnJcOnHyhkXPq1m9Qvg3WpmyF9HK6yZyrCAlVd0SHiNsoBGTd/W9eWboc+Bro5rZ6h7rg6FG2aqJjfApUIPxna23f76ur0EdeYBZv6Gq/3adILZbvwgZh9kygx0mmsf06E/Q8WM25c3eaBLWK9Bxjj6DkNM4dvOnbkXB11JYNR+1HSu7VliYj/xjZ1VwCrgEpU4yryLGg3Qa4hnR7bqmKNLwKfN4cXqrOrVVgsWN+IR6peBAjGUlFUw8CaRMQ/pTOg3TpqL6BCLdAMXDe6zp7krktE/E+jTALeRyQkMFeQ24ABAi85Lc7fFIJXYXahBKZanAr0VMy3j5Th3IXyBsI7xwKaT+3mAwKxxh+Iyj0Cu7H4any6f6O7fvyyrScdOORMVhillh4SkfXx6b43jh7HdeVV7yh2aBGIbR4ham1C2ZGo8Q88JrIS1X5CRFWCsdQTwDcFdqnKxESNr6wr4IYX5PZ4xFf0pBYgGGt8QlQ88Yi/upz5Oqq8GaEpq9Tz7ieplZkjqn3ADYmIf02xAQOxRIVojwUg0wEjKpF4jW9JJ9rcqSqYEhu5amNl190VK1CZSvptzsecVs/cfFmXQCw1QYy5P/PyQquityQjw6NfgN2dpuJJUVUJxFK1AnNIh84K/F6U3xnRHSAVQBUw/kjeHv7XKNc01PjXfmGWd5JKTouPWdw0XB0zT4V/ALrmabYTJeZpYb77zdDjWWWfDKWDpeYJguNXlX5Aiwi7BKu+PjwsWe6/rJzQCZ3QCZ3QCZ3Qn03/By0PsLCrW1MxAAAAAElFTkSuQmCC">
+
+                  </i>
+                </a>
+              </div>
+              <div class="list" ng-click="vm.disconnect(subDetail)" ng-if="subDetail.iot_id != 'ยังไม่ได้เชื่อมต่ออุปกรณ์'">
+
+                <a class="item item-icon-right" >
+                  <b>เชื่อมต่ออุปกรณ์
+                    <span class="icon ion-checkmark-circled" style="    position: relative;
+                    display: inline-block;color: lawngreen;font-size: 16pt;
+    left: 5px;
+    top: 2px;
+                    " ng-if="x.iot_id != 'ยังไม่ได้เชื่อมต่ออุปกรณ์'"></span>
+
+                  </b>
+                  <p>
+                      {{subDetail.iot_id}}
+                    </p>
+                  <i class="icon">
+<img src="data:image/png;base64,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" style="height:40px">
+
+                  </i>
+                </a>
+              </div>
+      
+      </div>
+      <br>
+      <br>
+
+
+        
+      
+                </ion-content>
+              </ion-modal-view>
+    </script>
+
+
+
+    <script id="modalconnect.html" type="text/ng-template">
+      <ion-modal-view style="top:44%;    border-radius: 15px;">
+        <ion-header-bar style="text-align:center">
+     
+          <h1 class="title" >อุปกรณ์ที่เชื่อมต่อ</h1>
+          <button type="button" class="button button-assertive button-clear button-icon icon ion-close" ng-click="closeModalConnect()"></button>
+        </ion-header-bar>
+        <ion-content  style="background:#f5f5f5">
+         
+          <ion-list>
+
+            <ion-checkbox  ng-model=x.check     ng-repeat="x in vm.iotlist" ng-click="vm.checkClick(x,$index)">
+              <div>{{x.iot_id}}</div>
+              <a>ssadasdas</a>
+            </ion-checkbox>
+       
+          
+          </ion-list>
+
+
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+
+  </ion-content>

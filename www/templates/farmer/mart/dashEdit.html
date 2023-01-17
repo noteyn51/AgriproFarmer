@@ -1,0 +1,269 @@
+<ion-view hide-back-button="true" cache-view="false">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="font-weight: 400; color: white;">
+      Back
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-title><b style="font-size: 18px;">แก้ไข</b> </ion-nav-title>
+  <!-- <ion-nav-buttons side="right">
+        <button class="button button-clear " style="color: white;" ng-click="vm.addItem()">เพิ่มรายการ</button>
+    </ion-nav-buttons> -->
+  <!-- style="background:#f5f5f5" -->
+  <style>
+    .inp-right {
+      text-align: right;
+    }
+
+    .bol-txt {
+      font-weight: bold;
+    }
+
+  </style>
+
+  <ion-content>
+    <div class="list">
+
+      <div class="item">
+        <div style="    height: 25pt;
+        font-size: 20pt">{{vm.item.ml_part_desc}}</div>
+        <div style="display:flex;justify-content: space-between;"><a style="font-size: medium;">เลขที่สินค้า : {{vm.item.ml_serial}}</a> 
+          <a  href="" style="font-size: medium;" ng-click="vm.clickDetail(vm.item)">ดูรายละเอียด <i class="icon ion-ios-arrow-right"></i></a> 
+        </div>
+  
+  
+    </div>
+   
+
+
+      <div class="item item-input item-stacked-label">
+        <span class="input-label">รายละเอียด</span>
+        <input type="text" placeholder="รายละเอียด" ng-model="vm.item.ml_desc" />
+      </div>
+
+      <div class="item item-icon-right" ng-click="openModalStatus()">
+        <div class="input-label">สถานะ ( 
+          <a style="color:green;font-weight: bold;" ng-if="vm.item.ml_status == 'SALE'">ขาย</a>
+          <a style="color:green;font-weight: bold;" ng-if="vm.item.ml_status == 'BOOK'">จอง </a>
+          )</div>
+        <i class="icon placeholder-icon  ion-ios-arrow-right"></i>
+      </div>
+
+
+
+
+      <div style="justify-content: space-between;">
+        <div class="item item-input item-stacked-label" style="border:none">
+
+          <span class="input-label">ราคา (บาท)</span>
+          <input  type="number" placeholder="ป้อนราคา > 0 บาท" ng-model="vm.item.ml_price_unit" />
+        </div>
+        <div class="item item-icon-right" ng-click="openModalUm()" style="border-left: none;
+        border-right: none;
+        border-bottom: none;">
+          <div class="input-label">ต่อหน่วย ( <a style="color:green;font-weight: bold;">{{vm.item.ml_unit_price}} </a>)
+          </div>
+          <i class="icon placeholder-icon  ion-ios-arrow-right"></i>
+        </div>
+      </div>
+
+
+      <div class="item item-input item-stacked-label">
+        <span class="input-label">น้ำหนัก</span>
+        <input type="number" placeholder="" ng-model="vm.item.ml_wt" style="padding:15px" />
+        <div style="position: absolute;
+        top: 38px;
+        right: 4%;
+        color: gray;">กิโลกรัม </div>
+      </div>
+
+      <div style="font-size: small;
+      color: red;
+      padding: 15px;">
+        น้ำหนักต่อชิ้นมีผลในการคิดคำนวนค่าขนส่ง กรุณากรองข้อมูลตามน้ำหนักจริง</div>
+
+        <div class="item ">
+          <div style="   display: flex;
+          justify-content: space-between;">
+          <a style="font-size: larger;font-weight: bold;">ราคาสินค้า</a>
+          <a style="font-size: larger;">{{total() | currency : "฿" : 2}}</a>
+
+        </div>
+
+        </div>
+
+
+    
+    </div>
+
+
+    <div class="list" style="border-radius: 15px;margin-top:20px">
+      <a class="item " ng-click="vm.delitem()" style="text-align:center;color:red">
+        ลบรายการนี้
+      </a>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <style>
+      /* The container */
+      .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin: auto;
+      }
+
+      /* Hide the browser's default radio button */
+      .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      /* Create a custom radio button */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+      }
+
+      /* On mouse-over, add a grey background color */
+      .container:hover input ~ .checkmark {
+        background-color: #ccc;
+      }
+
+      /* When the radio button is checked, add a blue background */
+      .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+      }
+
+      /* Create the indicator (the dot/circle - hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the indicator (dot/circle) when checked */
+      .container input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      /* Style the indicator (dot/circle) */
+      .container .checkmark:after {
+         top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+      }
+    </style>
+
+
+    <script id="my-picstatus.html" type="text/ng-template">
+      <ion-modal-view>
+                <ion-header-bar>
+                    <button type="button" class="button button-assertive button-clear" ng-click="closeModalStatus()">close</button>
+                  <h1 class="title" style="text-align:center">สถานะการขาย</h1>
+                  <!-- <button type="button" class="button button-positive button-clear" ng-click="closeModalItem()">เลือกทั้งหมด</button> -->
+
+                </ion-header-bar>
+                <ion-content>
+                  <style>
+                          .modal-open{
+                            pointer-events: all;
+                          }
+                  </style>
+
+
+        <!-- <ion-radio ng-repeat="item in clientSideList track by $index" ng-value="item.value" ng-model="vm.item.ml_status">
+      {{ item.text }}
+      </ion-radio> -->
+
+      <div class="item"  ng-repeat="item in clientSideList track by $index">
+        <label  class="container">
+          <div ng-if="item.value == 'SALE'">ขาย</div>
+          <div ng-if="item.value == 'BOOK'">จอง</div>
+
+
+          <input type="radio" checked="checked" name="radio"  ng-model="vm.item.ml_status" ng-value="item.value">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+
+
+
+
+
+
+                </ion-content>
+              </ion-modal-view>
+    </script>
+
+
+    <script id="my-um.html" type="text/ng-template">
+      <ion-modal-view>
+          <ion-header-bar>
+              <button type="button" class="button button-assertive button-clear" ng-click="closeModalUm()">close</button>
+            <h1 class="title" style="text-align:center">หน่วย</h1>
+            <!-- <button type="button" class="button button-positive button-clear" ng-click="closeModalItem()">เลือกทั้งหมด</button> -->
+
+          </ion-header-bar>
+          <ion-content>
+            <style>
+                    .modal-open{
+                      pointer-events: all;
+                    }
+            </style>
+
+
+      
+
+        <div class="item"  ng-repeat="item in um_mstr track by $index">
+          <label  class="container">{{ item.value }}
+            <input type="radio" checked="checked" name="radio" ng-model="vm.item.ml_unit_price" ng-value="item.value">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+
+
+
+
+
+          </ion-content>
+        </ion-modal-view>
+    </script>
+  </ion-content>
+
+  <div style="
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background: white;
+  ">
+    <div style="text-align: center;    padding-left: 10px;
+  padding-right: 10px;">
+      <button type="button" class="button button-balanced button-block" ng-click="vm.confirm()">
+        ยืนยัน
+      </button>
+    </div>
+  </div>
+</ion-view>

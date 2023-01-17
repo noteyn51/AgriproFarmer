@@ -1,0 +1,561 @@
+<ion-view hide-back-button="false">
+  <ion-nav-title>ควบคุมอุปกรณ์
+  </ion-nav-title>
+  <style>
+    /* .overflow-scroll .scroll {
+      height: 150%;
+    } */
+
+    .scroll {
+      height: 150%;
+
+    }
+
+    .toggle .track {
+      border: solid 2px #ef473a;
+      background-color: #ef473a;
+    }
+
+  </style>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear ion-plus" ng-click="vm.addIOT()" style="color:white">
+      เพิ่มอุปกรณ์
+
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+
+
+    <div ng-if="vm.lsStatus == true">
+      <div ng-if="model.sub.iot_version != 'ไม่มีอุปกรณ์'">
+        <!-- <div class="item" style="padding: 0;">
+          <div layout="column" layout-align="center center">
+
+            <md-select placeholder="เลือก" ng-model="model.sub" ng-change="vm.subChange(model.sub)" style="width: 95%;">
+              <md-option ng-value="k" ng-repeat="k in datass.result">
+                {{k.iot_id}} <a ng-if="k.farm_name != 0">
+                  - {{k.farm_name}} -
+                  โรงเรือนที่ {{k.iot_sub_idd}} </a> </md-option>
+            </md-select>
+
+
+
+          </div>
+
+        </div> -->
+
+
+        <div class="list">
+
+          <div class="item "
+            style="display:flex;flex-direction:row;justify-content: space-between;align-items: center;">
+
+            <div style="flex:1;width: 50%;margin-right:10px;  text-overflow: ellipsis;
+            overflow: hidden; 
+            white-space: nowrap;"><a style="font-weight: bold;font-size: large;">อุปกรณ์ :</a>
+              {{ vm.iotselect.iot_name}}</div>
+
+
+
+
+          </div>
+
+          <div class="item " style="display:flex;flex-direction:row;justify-content: flex-end;align-items: center;">
+
+            <button class="button button-balanced" ng-click="openModalShuffle()" style="margin:5px;flex:1">
+              <i class="icon ion-shuffle"></i>
+              สลับอุปกรณ์
+            </button>
+            <button class="button button-positive" ng-click="openModalEdit()" style="margin:5px;flex:1">
+              <i class="icon ion-compose"></i>
+              แก้ไข
+            </button>
+
+
+
+
+          </div>
+
+          <!-- <div class="item " style="display:flex;flex-direction:row;justify-content: flex-end;align-items: center;">
+
+            <button class="button button-balanced" ng-click="testTimer()" style="margin:5px;flex:1">
+              <i class="icon ion-shuffle"></i>
+              testtimer
+            </button>
+            <button class="button button-positive" ng-click="testTimer()" style="margin:5px;flex:1">
+              <i class="icon ion-compose"></i>
+              testtimer
+            </button>
+
+
+
+
+          </div> -->
+
+
+
+        </div>
+
+        <!-- <div class="item" style="text-align: center;">
+          {{model.sub}}
+
+        </div> -->
+
+        <div class="item" style="text-align: center;" ng-if="vm.iotvolt">
+          <div ng-if="vm.iotvolt" style="font-size: 18pt;"><i class="icon ion-battery-half"></i> {{vm.iotvolt}} Volt
+          </div>
+
+        </div>
+
+
+
+
+        <div class="row" style="align-items: center;text-align: center;">
+          <div class="col" ng-if="dataDash.result.onlinestatus">
+            <div style="font-weight: bold;color:green">อุปกรณ์ Online</div>
+
+            <div>อัพเดทล่าสุด</div>
+            <div> {{dataDash.result.subdatedescstart}}</div>
+            <!-- <div ng-if="vm.iotvolt" style="color:gray"><i class="icon ion-battery-half"></i> {{vm.iotvolt}} Volt</div> -->
+            <!-- <button type="button" class="button button-assertive button-small"
+              ng-click="vm.disconnect()">Disconnect</button> -->
+          </div>
+
+          <div class="col" ng-if="!dataDash.result.onlinestatus">
+            <div style="font-weight: bold;color:red">อุปกรณ์ Offline</div>
+            <div>อัพเดทล่าสุด</div>
+
+            <div> {{dataDash.result.subdatedescstart}}</div>
+            <!-- <div ng-if="vm.iotvolt" style="color:gray"><i class="icon ion-battery-half"></i> {{vm.iotvolt}} Volt</div> -->
+            <!-- <button type="button" class="button button-assertive button-small"
+              ng-click="vm.disconnect()">Disconnect</button> -->
+          </div>
+
+          <div class="col">
+            <div style="right: 5%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end">
+              <span ng-style="{ 'color' : (mode.sw1 == false) ? 'green' : 'back' }">
+                Manual
+              </span>
+              <!-- <md-switch class="md-primary" ng-model="mode.sw1" ng-change="check()">
+                </md-switch> -->
+
+              <label class="toggle" style="margin: 2px;">
+                <input type="checkbox" ng-model="mode.sw1" ng-change="check()">
+                <div class="track">
+                  <div class="handle"></div>
+                </div>
+              </label>
+              <span ng-style="{ 'color' : (mode.sw1 == true) ? 'green' : 'back' }">
+                Auto
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="fle">
+
+
+            <div class="angular" style="display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;">
+
+
+              <div style="margin: 10px;width: 100%;">
+                <div class="list" style=" 
+                width: 100%;
+                left: 0px;
+                text-align: left;
+                font-weight: bold;">
+                  <div class="item item-toggle">
+                    ความชื้นในดิน | AC1
+                    <span style="position: fixed;
+                    right: 90px;color:green" ng-if="ac.ac1 == true">เปิด</span>
+                    <span style="position: fixed;
+                    right: 90px;color:darkgray" ng-if="ac.ac1 == false">ปิด</span>
+
+                    <label class="toggle toggle-suscess">
+                      <input type="checkbox" ng-model="ac.ac1" ng-change="vm.ac1Change()"
+                        ng-disabled="mode.sw1 == true">
+                      <div class="track">
+                        <div class="handle"></div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <!-- <h5 class="card-header" style="background-color: transparent;"></h5> -->
+                <div class="card-body">
+                  <span class="chart" easypiechart percent="dataDash.result.data_arduino_soilmoisture"
+                    options="chartOption[2].options" ng-click="vm.dayChart()">
+                    <span class="percent" ng-bind="dataDash.result.data_arduino_soilmoisture"></span>
+                  </span>
+
+                  <!-- <div style="margin-top:10px" ng-hide="mode.sw1 == true">
+                    <span>AC1</span>
+                    <div style="display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: auto;">
+                      <span ng-style="{ 'color' : (ac.ac1 == false) ? 'green' : 'back' }">
+                        Off
+                      </span>
+                      <md-switch class="md-primary" ng-model="ac.ac1" aria-label="Switch 1" ng-change="vm.ac1Change()">
+                      </md-switch>
+                      <span ng-style="{ 'color' : (ac.ac1 == true) ? 'green' : 'back' }">
+                        On
+                      </span>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+
+              <div style="margin: 10px;width: 100%;">
+
+                <div class="list" style="
+                width: 100%;
+                left: 0px;
+                text-align: left;
+                font-weight: bold;">
+                  <div class="item item-toggle">
+                    อุณหภูมิ/ความชื้นอากาศ | AC2
+                    <span style="position: fixed;
+                    right: 90px;color:green" ng-if="ac.ac2 == true">เปิด</span>
+                    <span style="position: fixed;
+                    right: 90px;color:darkgray" ng-if="ac.ac2 == false">ปิด</span>
+
+                    <label class="toggle toggle-suscess">
+                      <input type="checkbox" ng-model="ac.ac2" ng-change="vm.ac2Change()"
+                        ng-disabled="mode.sw1 == true">
+                      <div class="track">
+                        <div class="handle"></div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <div style="display: flex;
+            justify-content: center;" ng-click="vm.dayChart()">
+                  <div style="margin: 10px;">
+                    <h5 class="card-header" style="background-color: transparent;">อุณหภูมิ</h5>
+                    <div class="card-body">
+                      <span class="chart" easypiechart percent="dataDash.result.data_arduino_temperature"
+                        options="chartOption[0].options">
+                        <span class="temp" ng-bind="dataDash.result.data_arduino_temperature"></span>
+                      </span>
+
+
+                    </div>
+                  </div>
+
+                  <div style="margin: 10px;">
+                    <h5 class="card-header" style="background-color: transparent;">ความชื้นอากาศ</h5>
+                    <div class="card-body">
+                      <span class="chart" easypiechart percent="dataDash.result.data_arduino_airmoisture"
+                        options="chartOption[1].options">
+                        <span class="percent" ng-bind="dataDash.result.data_arduino_airmoisture"></span>
+                      </span>
+
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="container" style="margin-top: 20px;text-align: right;">
+                  <button class="button button-small button-outline button-dark  icon-right ion-chevron-right"
+                    ui-sref="app.hist">
+                    ดูข้อมูลย้อนหลัง
+                  </button>
+
+
+                  <!-- <div style="margin-top:-19px" ng-hide="mode.sw1 == true">
+                  <span>AC2</span>
+                  <div style="display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;">
+                    <span ng-style="{ 'color' : (ac.ac2 == false) ? 'green' : 'back' }">
+                      Off
+                    </span>
+                    <md-switch class="md-primary" ng-model="ac.ac2" aria-label="Switch 1" ng-change="vm.ac2Change()">
+                    </md-switch>
+                    <span ng-style="{ 'color' : (ac.ac2 == true) ? 'green' : 'back' }">
+                      On
+                    </span>
+                  </div>
+                </div> -->
+
+                </div>
+
+
+
+
+                <div style="margin: 10px;" ng-if="model.sub.iot_version == 'V2'">
+                  <h5 class="card-header" style="background-color: transparent;">ควาเข้มแสง</h5>
+                  <div class="card-body">
+                    <span class="chart" easypiechart percent="dataDash.result.data_arduino_intensity"
+                      options="chartOption[3].options">
+                      <span class="percent" ng-bind="dataDash.result.data_arduino_intensity"></span>
+                    </span>
+
+
+                  </div>
+                </div>
+
+                <div style="margin: 10px;" ng-if="model.sub.iot_version == 'V2'">
+                  <h5 class="card-header" style="background-color: transparent;">ค่าPH</h5>
+                  <div class="card-body">
+                    <span class="chart" easypiechart percent="dataDash.result.data_arduino_ph"
+                      options="chartOption[4].options">
+                      <span class="percent" ng-bind="dataDash.result.data_arduino_ph"></span>
+                    </span>
+
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+
+
+            </div>
+
+
+            <div style="height: 100px;"></div>
+
+            <!-- <div class="card" style="margin: 0px 0px;">
+                <a style="position:absolute;right:3%">อัพเดทล่าสุด {{dataDash.result.now}}</a>
+                <ion-slide-box class="btn2" style="width: 100%;height: auto;margin-top:10px;" show-pager="false">
+                  <ion-slide>
+      
+                    <h5 style="text-align:center"></h5>
+      
+                    <br>
+                    <canvas height="10" width="10" id="line" class="chart chart-line" chart-data="data" chart-labels="labels"
+                      chart-series="series" chart-options="options" chart-dataset-override="datasetOverride"
+                      chart-click="onClick" chart-colors="colors">
+                    </canvas>
+                  </ion-slide>
+      
+      
+                </ion-slide-box>
+      
+      
+      
+      
+              </div> -->
+          </div>
+        </div>
+
+        <div ng-if="model.sub.iot_version == 'ไม่มีอุปกรณ์'" style="text-align: center;font-size: large;
+          margin-top: 20px;">
+          ไม่ได้เชื่อมต่ออุปกรณ์กับพื้นที่นี้
+        </div>
+
+      </div>
+
+      <div ng-if="vm.lsStatus == false" style="padding:10px;">
+
+        <h4 style="text-align:center;">
+          ยังไม่มีการเชื่อมต่ออุปกรณ์ ไปที่หน้าพื้นที่เพาะปลูกเพื่อสร้างพื้นที่ และเชื่อมต่ออุปกรณ์
+        </h4>
+
+      </div>
+    </div>
+
+    <div ng-if="vm.lsStatus != true" style="    font-size: x-large;
+      margin-top: 20px;
+      text-align: center;
+      color: gray;">
+      ไม่พบอุปกรณ์
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </ion-content>
+
+
+  <div style="position: absolute; bottom: 0px; width: 100%; background: white;">
+    <div style="text-align: center; padding-left: 10px; padding-right: 10px;">
+      <button class="button button-block button-balanced" ng-click="vm.setting()" ng-disabled="vm.lsStatus == false">
+        ตั้งค่า
+      </button>
+    </div>
+  </div>
+
+
+
+  <script id="my-modaledit.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar>
+          <button type="button" class="button button-assertive button-clear" ng-click="closeModalEdit()">close</button>
+        <h1 class="title" style="text-align:center">แก้ไข</h1>
+        <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+      </ion-header-bar>
+      <ion-content >
+        <style>
+          .modal-open{
+            pointer-events: all;
+          }
+       </style>
+
+        <div class="list">
+
+          <div class="item "
+          style="display:flex;flex-direction:row;justify-content: space-between;align-items: center;">
+          <div>รหัสอุปกรณ์</div>
+          <div>{{vm.iotno}}</div>
+      
+
+        </div>
+        
+
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">ชื่อ</span>
+            <input type="text"  placeholder="ตั้งชื่อแทนรหัส เช่น ฟาร์ม 1 , โรงเรือน 1" ng-model="vm.iotselect.iot_names" maxlength="30">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">รายละเอียด</span>
+            <input type="text" placeholder="ป้อนรายละเอียดเพื่อการจดจำที่ง่ายขึ้น" ng-model="vm.iotselect.iot_desc1" maxlength="100">
+          </label>
+        
+        </div>
+
+
+        <div style="padding:20px">
+          <button class="button button-block button-outline button-assertive"   ng-click="vm.disconnect()">
+            ลบอุปกรณ์นี้
+          </button>
+  
+       
+        </div>
+    
+
+
+        
+       
+      </ion-content>
+
+      <div style="position: absolute; bottom: 0px; width: 100%; background: white;">
+        <div style="text-align: center; padding-left: 10px; padding-right: 10px;">
+          <button class="button button-block button-positive" ng-click="confirmEdit()">
+            บันทึก
+          </button>
+        </div>
+      </div>
+    </ion-modal-view>
+  </script>
+
+
+
+  <script id="my-shuffle.html" type="text/ng-template">
+    <ion-modal-view >
+      <ion-header-bar>
+          <button type="button" class="button button-assertive button-clear" ng-click="closeModalShuffle()">close</button>
+        <h1 class="title" style="text-align:center">อุปกรณ์ของคุณ</h1>
+        <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+      </ion-header-bar>
+      <ion-content >
+
+
+        <a class="item " style="display:flex;flex-direction:row;justify-content:space-between;align-items:center" ng-repeat="k in datass.result" ng-click="selectIOT(k)">
+          <!-- <i class="icon ion-chatbubble-working"></i> -->
+          <div> 
+            <div> 
+              {{k.iot_name}}
+            </div>
+
+            <div style="color:gray"> 
+              {{k.iot_id}}
+            </div>
+
+            <div style="color:gray;font-size:medium"> 
+              {{k.iot_desc1}}
+            </div>
+
+          </div>
+         
+
+         
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+
+       
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+
+  <script id="my-modaladdiot.html" type="text/ng-template">
+    <ion-modal-view >
+      <ion-header-bar>
+          <button type="button" class="button button-assertive button-clear" ng-click="closeModalAdd()">close</button>
+        <h1 class="title" style="text-align:center">เพิ่มอุปกรณ์</h1>
+        <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+      </ion-header-bar>
+      <ion-content >
+        <style>
+          /* .overflow-scroll .scroll {
+            height: 150%;
+          } */
+      
+          .scroll {
+            height: 100%;
+      
+          }
+          .modal-open{
+            pointer-events: all;
+          }
+          </style>
+
+<div class="list card">
+
+  <div class="item item-avatar"  ng-click="vm.key()">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp7ezln0rhVEmlW-AsFPupTMq33MCb-sDKvg&usqp=CAU">
+    <h2>กรอกรหัสอุปกรณ์</h2>
+    <p>เพิ่มโดยกรอกรหัสอุปกรณ์ โดยระบุรหัสอุปกรณ์</p>
+  </div>
+
+  <div class="item item-avatar"  ng-click="vm.qr()">
+    <img src="https://cdn0.iconfinder.com/data/icons/mobile-device/512/qr-code-barcode-blue-round-512.png">
+    <h2>สแกน QrCode</h2>
+    <p>เพิ่มโดยสแกน QrCode</p>
+  </div>
+  </div>
+
+
+  
+<!-- <div class="list card">
+
+  <div class="item item-avatar"  ng-click="vm.wifi()">
+    <img src=" https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-12/512/wifi-circle-icon.png">
+    <h2> Wifi</h2>
+    <p>เชื่อมต่อสัญญาณ Wifi กับอุปกรณ์</p>
+  </div>
+
+
+  </div> -->
+
+
+
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>

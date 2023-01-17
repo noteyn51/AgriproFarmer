@@ -1,0 +1,86 @@
+<ion-view hide-back-button="false" cache-view="true">
+    <ion-nav-buttons side="left">
+      <!-- <button  class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="font-weight: 400;"> Back</button> -->
+    </ion-nav-buttons>
+    <ion-nav-title> เลือกรายการที่ต้องการรับ </ion-nav-title>
+    <ion-nav-buttons side="right">
+      <!-- <button class="button button-positive" ng-click="vm.button()">Scan</button> -->
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list">
+          <div class="list list-inset">
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" placeholder="ค้นหา" ng-model="searchText">
+            </label>
+          </div>
+
+            <div class="item item-button-right"  ng-repeat="x in vm.pt_mstr | filter:searchText"  ng-click='vm.enterSelect(x)'>
+             <div>
+                <a style="font-weight: bold;">รหัส : </a> <a>{{x.pt_part}} </a>
+
+             </div>
+             <div>
+                <a style="font-weight: bold;">รายละเอียด : </a><a>{{x.pt_desc1}} </a>
+
+             </div>
+             <div>
+
+                <a style="font-weight: bold;">หน่วย :</a>  <a>{{x.pt_um}}</a>
+
+            </div>
+            </div>
+
+        </div>
+
+
+
+
+
+      <script id="my-doc.html" type="text/ng-template">
+        <ion-modal-view>
+          <ion-header-bar>
+              <button type="button" class="button button-assertive button-clear" ng-click="closeModalDoc()">close</button>
+            <h1 class="title" style="text-align:center">เลือกรายการ</h1>
+  
+          </ion-header-bar>
+          <ion-content>
+  
+              <style>
+                  .modal-open{
+                    pointer-events: all;
+                  }
+              </style>
+  
+            <div class="list">
+  
+                <div class="item item-button-right"  ng-repeat="x in vm.dataDoc" ng-click='vm.enterSelect(x)'>
+                 <div>
+                    <a>{{x.pt_desc1}}</a>
+  
+                 </div>
+                 <div>
+  
+                    <a>{{x.pt_um}}ที่</a>  <a>{{x.ld_rmks}}</a>
+  
+                </div>
+                </div>
+  
+            </div>
+            
+      <div
+      
+      style="    text-align: center;
+    font-size: large;margin-top:10px"
+      ng-click="showMore()"
+    >
+      แสดงเพิ่มเติม
+    </div>
+  
+  
+          </ion-content>
+        </ion-modal-view>
+      </script>
+    </ion-content>
+  </ion-view>
+  

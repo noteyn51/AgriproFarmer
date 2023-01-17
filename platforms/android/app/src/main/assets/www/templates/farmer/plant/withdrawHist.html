@@ -1,0 +1,232 @@
+<ion-view hide-back-button="false" cache-view="true">
+  <ion-nav-title>ประวัติใบขอเบิกวัตถุดิบ</ion-nav-title>
+  <ion-nav-buttons side="right">
+    <!-- <button type="button" class="button button-clear" ng-click="vm.withdrawHist()"
+      style="color:white;font-weight: bold;">
+      <i class="icon">
+        <img src="img/iconOP/hist.png" style="width: 35px;
+          height: 35px;">
+      </i>
+    </button> -->
+  </ion-nav-buttons>
+  <!-- <button class="button button-balanced icon ion-plus" style="position: absolute;
+  z-index: 999;
+  bottom: 10%;
+  right: 5%;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;" ng-click="vm.addDoc()"></button> -->
+  <ion-content>
+    <style>
+      .scroll {
+        height: 100%;
+      }
+
+      .list {
+        margin-bottom: 0px;
+      }
+
+
+      .dp-flex {
+                      display: flex;
+                      justify-content: space-between;
+                    }
+
+    </style>
+
+
+
+
+    <div class="list">
+
+      <!-- <div class="item item-divider">
+        ใบขอเบิกวัตถุดิบ
+      </div> -->
+
+      <div class="item item-icon-left" href="" ng-repeat="x in vm.list.result" ng-click="vm.modalDetail(x)">
+        <i class="icon ion-clipboard"></i>
+     
+        <div style="display:flex;justify-content: space-between;">
+          <a >
+            <span style="font-weight: bold;">เลชที่ใบขอเบิก : </span><span>{{x.pick_nbr}}</span>
+          </a>
+          <a style="font-weight: bold;">     <span style="font-weight: bold;">ID : </span><span>{{x.id}}</span> </a>
+
+        </div>
+
+       
+        <div style="display:flex;justify-content: space-between;">
+          <a >
+            <span style="font-weight: bold;">พื้นที่ : </span><span>{{x.farm_name}}</span>
+          </a>
+          <a >
+            <span style="font-weight: bold;"></span>
+            <span ng-if="x.pick_load_comp == 'APPROVE'" style="color:green">   
+              <i  class="ion-checkmark-circled"></i> {{x.pick_load_comp ? x.pick_load_comp : 'รออนุมัติ'}} 
+            </span>
+            <span ng-if="x.pick_load_comp != 'APPROVE'">  
+             {{x.pick_load_comp ? x.pick_load_comp : 'รออนุมัติ'}} 
+            </span>
+          </a>
+        </div>
+        <div style="display:flex;justify-content: space-between;">
+          <a >
+            <span style="font-weight: bold;">วันทที่ขอเบิก : </span><span>{{x.datedesc}}</span>
+          </a>
+        </div>
+        <div>
+          <!-- <a style="font-weight: bold;">จำนวนรายการที่เบิก</a> {{x.counts}} รายการ -->
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </ion-content>
+
+
+  <script id="my-detail.html" type="text/ng-template">
+    <ion-modal-view>
+                <ion-header-bar>
+                    <button type="button" class="button button-assertive button-clear" ng-click="closeModalList()">close</button>
+                  <h1 class="title" style="text-align:center"><i class="icon ion-clipboard"></i> {{vm.item.pick_nbr}}</h1>
+
+                </ion-header-bar>
+                <ion-content style="background-color: #fafafa">
+                  <style>
+                    .modal-open {
+                      pointer-events: all;
+                    }
+              
+                    .dp-flex {
+                      display: flex;
+                      justify-content: space-between;
+                    }
+              
+                  </style>
+              
+                  <div class="item">
+                    <div class="dp-flex">
+                      <a style="font-weight:bold">สถานะ</a>
+                      <a  ng-if="vm.item.pick_load_comp == 'APPROVE'" style="color:green"><span>
+                          <i style="color:green" class="icon ion-checkmark-circled"></i> {{vm.item.pick_load_comp}}</span> 
+                      </a>
+                      <a  ng-if="vm.item.pick_load_comp != 'APPROVE'"><span >
+                        {{vm.item.pick_load_comp ? vm.item.pick_load_comp : 'รออนุมัติ'}}</span> 
+                    </a>
+                      <!-- <a><span ng-if="vm.item.pick_load_comp != 'CONFIRM'">
+                        รออนุมัติ</span> 
+                    </a> -->
+                    </div>
+                    <div class="dp-flex"><a style="font-weight:bold">เลขที่ใบขอเบิก</a><a>{{vm.item.pick_nbr}}</a></div>
+                    <div class="dp-flex">
+                      <a style="font-weight:bold">ID </a><a>{{vm.item.id}}</a>
+                    </div>
+                    <div class="dp-flex">
+                      <a style="font-weight:bold">ชื้่อผู้ขอเบิก</a><a>{{vm.item.frm_fname}} {{vm.item.frm_lname}}</a>
+                    </div>
+                    <div class="dp-flex">
+                      <a style="font-weight:bold">วันที่</a><a>{{vm.item.datedesc}}</a>
+                    </div>
+                  
+                    <!-- <div class="dp-flex">
+                      <a style="font-weight:bold">เบอร์โทรศัพท์</a><a>{{vm.item.frm_tel}} </a>
+                    </div> -->
+              
+                  </div>
+              
+                  <div class="item" style="margin-top: 10px;">
+                    <div class="dp-flex">
+                      <a style="font-weight: bold; font-size: larger;">รายการขอเบิก</a><a></a>
+                    </div>
+              
+                    <div class="dp-flex"
+                      style="margin-bottom: 10px;padding-bottom: 10px; border-bottom: solid 1.5pt #fafafa;align-items: center;"
+                      ng-repeat="k in vm.item.detail">
+              
+                      <a style="flex:6">
+                        <div style="font-weight: bold;">
+                          {{k.pickd_part}}
+              
+                        </div>
+                        <div style="font-size:smaller">
+                          {{k.pt_desc1}}
+              
+                        </div>
+              
+                      </a>
+              
+                      <a style="flex:6">
+              
+                        <div style="text-align:right">{{k.pick_qty}}</div>
+                      </a>
+              
+                      <a style="flex:6">
+              
+                        <div style="text-align:right">{{k.pick_um}}</div>
+                      </a>
+              
+              
+                    </div>
+              
+              
+                  </div>
+
+                  <div class="item" style="margin-top: 10px;margin-bottom:10px">
+                    <div class="dp-flex">
+                      <a style="font-weight: bold; font-size: larger;">ประวัติการเบิกจากใบขอเบิก</a><a></a>
+                    </div>
+              
+                    <div class="dp-flex"
+                      style="margin-bottom: 0px;padding-bottom: 10px; border-bottom: solid 1.5pt #fafafa;align-items: center;"
+                      ng-repeat="k in vm.item.tr_hist">
+              
+                      <a style="flex:6">
+                        <div style="font-weight: bold;">
+                          {{k.pt_part}}
+              
+                        </div>
+                        <div style="font-size:smaller">
+                          {{k.pt_desc1}}
+              
+                        </div>
+              
+                      </a>
+              
+                      <a style="flex:6">
+              
+                        <div style="text-align:right">{{k.qty}}</div>
+                      </a>
+              
+                      <a style="flex:6">
+              
+                        <div style="text-align:right">{{k.pt_um}}</div>
+                      </a>
+              
+              
+                    </div>
+              
+              
+                  </div>
+
+
+                </ion-content>
+              </ion-modal-view>
+    </script>
+</ion-view>

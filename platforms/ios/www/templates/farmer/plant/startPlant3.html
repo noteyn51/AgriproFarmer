@@ -1,0 +1,191 @@
+<ion-view hide-back-button="false" cache-view="false">
+  <ion-nav-title>เลือกแปลง (4/4) </ion-nav-title>
+
+  <ion-content style="background: #f5f5f5;">
+    <style>
+      .scroll {
+        height: 100%;
+      }
+      .dp-flex {
+        display: flex;
+        justify-content: space-between;
+      }
+
+
+    </style>
+
+       <div class="item">
+      <div class="dp-flex">
+        <a style="font-weight: bold;">รหัสรุ่นเพาะปลูก</a><a>{{vm.crop.crop_code}}</a>
+      </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">ชื่อรุ่นเพาะปลูก</a>
+        <a  style="
+        width: 60%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+      ">{{vm.crop.crop_desc}}</a>
+      </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">หมวด</a><a>{{vm.type.description}}</a>
+      </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">กลุ่ม</a><a>{{vm.type.pt_group_desc}}</a>
+      </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">ประเภท</a><a>{{vm.type.comments}}</a>
+      </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">รายการ</a><a>{{vm.type.pt_desc1}}</a>
+      </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">รหัส</a><a>{{vm.type.pt_part}}</a>
+      </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">วันที่เริ่ม</a><a>{{vm.crop.datedescstart}}</a>
+      </div>
+ 
+      <div class="dp-flex">
+        <a style="font-weight: bold;">วันที่สิ้นสุด</a><a>{{vm.crop.datedescstop}}</a>
+      </div>
+ 
+ 
+      <div class="dp-flex">
+          <a style="font-weight: bold;">ขนาดพื้นที่</a><a> {{vm.sub.farm_area_farm |number}} ไร่ {{vm.sub.farm_area_work |number}} งาน  {{vm.sub.farm_area_wah |number}} ตารางวา </a>
+        </div>
+      <div class="dp-flex">
+        <a style="font-weight: bold;">ที่อยู่</a
+        ><a
+          style="
+            width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: right;
+          "
+          >  หมู่ที่ {{vm.sub.farm_village_no}}  {{vm.sub.farm_village}} ต.{{vm.sub.farm_district}} อ.{{vm.sub.farm_amphur}} 
+          {{vm.sub.farm_province}}</a
+        >
+      </div>
+    </div>
+
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label" style="font-weight: bold;">จำนวนที่ต้องการ <a style="color:gray">[ {{vm.type.pt_um}} ]</a></span>
+        <input type="tel" style="text-align: right;" ng-model="vm.qty">
+      </label>
+    </div>
+
+    <div class="list" style="height: 100%; box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4);" ng-hide="!subDetail">
+      <div class="card" style="
+          height: 110px;
+          display: flex;
+          /* margin:20px 5px; */
+          flex-flow: row wrap;
+        " ng-click="vm.listmap()">
+        <div style="height: 100%; width: 30%;">
+          <!-- <img style="height: 100%;
+               width: 100%;
+               padding: 4px;
+               max-width:200px;" src=""> -->
+          <div id="mapbbb" class="map_list"></div>
+        </div>
+
+        <div style="
+            height: 100%;
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          ">
+          <div style="font-weight: bold; font-weight: bold; font-size: 18px;">
+            <div style="text-align: center;">
+            พื้นที่ {{subDetail.farm_name}} 
+           </div> 
+           <div style="text-align: center;">
+            แปลงที่ {{subDetail.sup_sub_id}}
+           </div>
+          </div>
+          <div>
+            {{subDetail.sub_area_farm}} ไร่ {{subDetail.sub_area_work}} งาน
+            {{subDetail.sub_area_wah}} ตารางวา
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div style="font-size:large;color:gray; text-align: center;margin-top:30px;padding: 20px;" ng-if="!subDetail">
+      ยังไม่ได้สร้างแปลง คลิกที่ปุ่มนี้เพื่อสร้างแปลง
+    <div>
+      <button class="button  button-positive" ng-click="vm.create()" style="margin-top:10px"> 
+        ไปหน้าสร้างแปลง
+      </button>
+    </div>
+    </div> -->
+
+    <!-- <div
+      class="card"
+      style="
+        height: 10%;
+        position: relative;
+        padding: 0px 5px 0px 5px;
+        margin: 0px;
+      "
+    >
+      <button class="button button-block button-positive" ng-click="vm.save()">
+        เริ่มเพาะปลูก
+      </button>
+    </div> -->
+  </ion-content>
+
+  <script id="list_map.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar style="text-align:center;background:white">
+
+        <h1 class="title" >รายการแปลง</h1>
+        <button type="button" class="button button-assertive button-clear " ng-click="closeModalListmap()">Close</button>
+      </ion-header-bar>
+      <ion-content  style="background:#f5f5f5">
+
+        <div class="card" style="height:110px;display: flex;
+        flex-flow: row wrap;" ng-repeat="k in subfarm" ng-click="vm.selectSubBefore(k,$index)">
+
+      <div style="height: 100%;
+                width: 30%;">
+        <!-- <img style="height: 100%;
+                        width: 100%;
+                        padding: 4px;
+                        max-width:200px;" src=""> -->
+                        <div id="{{$index}}" class="map_list"></div>
+      </div>
+
+      <div style="height: 100%; width: 70%;display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;" >
+
+        <div style="font-weight:bold;font-weight: bold;
+        font-size: 18px;">พื้นที่ {{k.farm_name}} แปลงที่ {{k.sup_sub_id}}</div>
+        <div> {{k.sub_area_farm}} ไร่ {{k.sub_area_work}} งาน {{k.sub_area_wah}} ตารางวา</div>
+
+
+
+      </div>
+
+    </div>
+
+      </ion-content>
+    </ion-modal-view>
+  </script>
+  <div style="position: absolute; bottom: 0px; width: 100%; background: white;">
+    <div style="text-align: center; padding-left: 10px; padding-right: 10px;">
+      <button class="button button-block button-balanced" ng-click="vm.save()" >
+        เริ่มต้นกระบวนการ
+      </button>
+    </div>
+  </div>
+</ion-view>

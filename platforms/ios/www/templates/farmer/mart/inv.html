@@ -1,0 +1,217 @@
+<ion-view hide-back-button="true" cache-view="false">
+    <ion-nav-buttons side="left">
+      <button
+        class="button button-clear ion-chevron-left"
+        ng-click="vm.goBack()"
+        style="font-weight: 400; color: white;"
+      >
+        Back
+      </button>
+    </ion-nav-buttons>
+  
+    <ion-nav-title><b style="font-size: 18px;">รายการสั่งซื้อ</b> </ion-nav-title>
+    <!-- <ion-nav-buttons side="right">
+      <button
+        class="button button-clear icon ion-clipboard"
+        style="color: white;"
+        ng-click="vm.hist()"
+      ></button>
+    </ion-nav-buttons> -->
+    <!-- style="background:#f5f5f5" -->
+    <style>
+      .lis .card {
+        margin: 2px;
+      }
+  
+      .dp-flex {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .scroll {
+        height: 100%;
+      }
+
+      .kk .spinner svg {
+          width: 100px;
+          height: 50px;
+        }
+
+    </style>
+    <ion-content style="background-color: #fafafa;">
+      <div class="kk" style="text-align: center;" ng-if="!vm.list">
+  
+        <ion-spinner icon="spiral"></ion-spinner>
+  
+      </div>
+      <div class="list" >
+        <div
+          class="item"
+          style="margin-bottom: 10px;"
+          ng-click="openModalDetail(x)"
+          ng-repeat="x in vm.list.result track by $index"
+          ng-style="x.mim_status == 'CONFIRM' ?  {'border-left': 'solid 3pt green'} : {'border-left': 'solid 3pt yellow'}"
+        >
+          <div style="display: flex; justify-content: space-between;">
+            {{x.mim_name}} <a>{{x.subdatedesc}} &nbsp;{{x.time}}</a>
+          </div>
+  
+          <div style="display: flex; justify-content: space-between;">
+            <a>{{x.detail.length}} รายการ</a><a>
+                <span ng-if="x.mim_status == 'CONFIRM'"><i style="color:green" class="icon ion-checkmark-circled"></i></span>
+                {{x.ml_status_desc}}</a>
+          </div>
+          <!-- <h2>{{x.subdatedesc}}</h2> -->
+  
+          <!-- <div ng-style="x.ml_status_desc == 'ชำระเงินแล้ว' ?  {'background-color':'green'} : {'background-color': 'yellow'}" style="width:200px;height:100px;border:1px solid gray;"></div> -->
+          <div  class="dp-flex"> 
+            <a>รวมรายการสั่งซื้อ</a>
+            <a style="color:green;font-weight: bold;">{{x.mid_total | currency : value="฿ "}}</a>
+          </div>
+        </div>
+       
+      </div>
+  
+      <div
+        style="
+          align-items: center;
+          justify-content: center;
+          display: flex;
+          min-height: 80%;
+        "
+      >
+        <div
+          ng-if="vm.list.status == false"
+          style="text-align: center; height: 100%;"
+        >
+          <h2 style="color: gray;">ไม่พบรายการที่ลงขาย</h2>
+        </div>
+      </div>
+  
+      <script id="my-detail.html" type="text/ng-template">
+              <ion-modal-view>
+                        <ion-header-bar>
+                            <button type="button" class="button button-assertive button-clear" ng-click="closeModalDetail()">close</button>
+                          <h1 class="title" style="text-align:center">{{vm.detail.datedesc}} {{vm.detail.time}}</h1>
+                          <!-- <button type="button" class="button button-positive button-clear" ng-click="closeModalItem()">เลือกทั้งหมด</button> -->
+  
+                        </ion-header-bar>
+                        <ion-content style="background-color: #fafafa">
+                          <style>
+                                  .modal-open{
+                                    pointer-events: all;
+                                  }
+                          </style>
+  
+        <div class="item">
+          <div class="dp-flex">
+            <a>สถานะ</a><a><span ng-if="vm.detail.mim_status == 'CONFIRM'"> <i style="color:green" class="icon ion-checkmark-circled"></i></span> {{vm.detail.ml_status_desc}}</a>
+          </div>
+          <div class="dp-flex"><a>เลขที่ใบสั่งซื้อ</a><a>{{vm.detail.mim_ref}}</a></div>
+          <div class="dp-flex">
+            <a>ชื้่อผู้ซื้อ</a
+            ><a>{{vm.detail.muname}}</a>
+          </div>
+          <div class="dp-flex">
+            <a>เบอร์โทรศัพท์</a><a>{{vm.detail.mu_tel}} </a>
+          </div>
+
+        </div>
+
+        <div class="item" style="margin-top: 10px;">
+          <div class="dp-flex">
+            <a style="font-weight: bold; font-size: larger;">ข้อมูลการจัดส่ง</a><a></a>
+          </div>
+          <div class="dp-flex">
+            <a>ชื่อผู้รับ</a
+            ><a>{{vm.detail.mim_name}}</a>
+          </div>
+          <div class="dp-flex">
+            <a>เบอร์โทรศัพท์</a><a>{{vm.detail.mim_tel}} </a>
+          </div>
+          <div class="dp-flex">
+            <a>ที่อยู่</a
+            ><a
+              style="
+                width: 80%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: right;
+              "
+              >{{vm.detail.mim_address}}</a
+            >
+          </div>
+
+          <div class="dp-flex">
+            <a>จัดส่งโดย</a><a>{{vm.detail.logis_name}} </a>
+          </div>
+        </div>
+  
+        <div class="item" style="margin-top: 10px;">
+          <div class="dp-flex">
+            <a style="font-weight: bold; font-size: larger;">รายการ</a><a></a>
+          </div>
+  
+          <div   class="dp-flex" style="margin-bottom: 10px;padding-bottom: 10px; border-bottom: solid 1.5pt #fafafa;" ng-repeat="k in vm.detail.detail" ng-click="vm.clickDetail(k)">
+  
+            <a style="flex:6"  href="">
+              <div>{{k.ml_part_desc}}
+  
+              </div>
+              <div style="color: gray;">{{k.ml_serial}}</div>
+       
+            </a>
+  
+       
+            <a >{{k.ml_price | number}} </a>
+          </div>
+  
+  
+        </div>
+  
+  
+        <div class="item" style="margin-top: 10px;">
+          <div class="dp-flex"><a>ค่าสินค้า</a><a>{{ getTotal().totalitem | number}}</a></div>
+          <div class="dp-flex"><a>ค่าจัดส่ง</a>
+            <a ng-if="vm.detail.mid_delivery == 'FREE'">{{vm.detail.mid_delivery}}</a>
+            <a ng-if="vm.detail.mid_delivery != 'FREE'">{{vm.detail.mid_ship_prc | number}}</a>
+
+        
+        </div>
+        </div>
+        <div class="item">
+          <div class="dp-flex" style="font-weight: bold;">
+            <a>รวมทั้งหมด</a><a style="color:green">{{ getTotal().totalall | currency : value="฿ " }}</a>
+          </div>
+        </div>
+  
+      <div style="height:100px"></div>
+  
+                        </ion-content>
+                        <!-- <div style="position: absolute; bottom: 0px; width: 100%; background: white;">
+                          <div style="text-align: center; padding-left: 10px; padding-right: 10px;display: flex;">
+                            <button
+                              type="button"
+                              class="button button-balanced button-block "
+                              ng-click="vm.approve()" style="margin: 5px;"
+                              ng-hide="vm.detail.mim_status != 'CONFIRM'"
+                            >
+                              <i class="icon ion-paper-airplane"></i>&nbsp;&nbsp;จัดส่ง
+                            </button>
+  
+                            <button
+                            type="button"
+                            class="button button-assertive button-block"
+                            ng-click="vm.reject()" style="margin: 5px;"
+                          ng-hide="vm.detail.mim_status == 'CONFIRM'">
+                              ยกเลิกคำสั่งซื้อ
+                          </button>
+                        </div>
+                          </div>
+                        </div> -->
+                      </ion-modal-view>
+      </script>
+    </ion-content>
+  </ion-view>
+  

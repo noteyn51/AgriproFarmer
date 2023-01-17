@@ -1,0 +1,26 @@
+<ion-modal-view style="bottom:10%;border-raduius:10px;border-radius: 10px;">
+    <ion-header-bar>
+        <button type="button" class="button button-assertive button-clear" ng-click="closeModal()">close</button>
+      <h1 class="title" style="text-align:center" >กำหนดพื้นที่และอุปกรณ์</h1>
+
+    </ion-header-bar>
+    <ion-content >
+      <div class="list " style="border-radius: 15px;">
+
+
+        <a class="item ">
+          <div>หมายเลขอุปกรณ์ </div>
+          <p>{{vm.edit.iot_id}}</p>
+        </a>
+        <a class="item ">
+          <div>พื้นที่ </div>
+          <p>{{vm.edit.iot_farm}}</p>
+        </a>
+        <a class="item ">
+          <div>โรงเรือน</div>
+          <p>{{vm.edit.iot_sub_idd}}</p>
+        </a>
+
+  
+    </ion-content>
+  </ion-modal-view>

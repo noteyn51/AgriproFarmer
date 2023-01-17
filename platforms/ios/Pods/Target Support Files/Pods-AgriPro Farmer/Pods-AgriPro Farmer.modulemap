@@ -1,0 +1,6 @@
+framework module Pods_AgriPro_Farmer {
+  umbrella header "Pods-AgriPro Farmer-umbrella.h"
+
+  export *
+  module * { export * }
+}

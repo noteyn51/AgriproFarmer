@@ -1,0 +1,141 @@
+<ion-view hide-back-button="false" cache-view="false">
+
+  <ion-nav-title> รูปภาพ
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+
+  </ion-nav-buttons>
+  <style>
+    .short_img {
+      position: relative;
+      height: 200px;
+      width: 200px;
+      border-radius: 10px;
+      object-fit: cover;
+
+    }
+
+    .long_img {
+      position: relative;
+
+      height: 200px;
+      width: 300px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+  </style>
+
+  <ion-content>
+
+    <div style="
+    border-radius: 10px;
+    background: white;
+    padding-top: 10px;">
+
+
+
+
+      <div ng-repeat="k in vm.list">
+
+        <div style="margin-top: 20px;">
+          <div style="padding-left: 10px;display: flex;flex-direction: row;align-items: baseline;">
+            <h3>{{k.subdate}} </h3><span style="margin-left: 5px;">{{k.time}}</span>
+          </div>
+
+          <div style="margin-left: 10px;">{{k.plant_desc1}} </div>
+          <ion-scroll direction="x" style="width: 100%;margin-top: 10px;">
+            <div style="padding-left: 10px;">
+              <div style="display: flex; display: flex;color: white;">
+                <div ng-repeat="x in  k.img" style="margin-right: 10px;">
+                  <div  ng-class="{short_img: ($parent.$index%2)  != 0 , long_img : ($parent.$index%2)  == 0}">
+                    <div style="position: absolute;top:0;color: red;right: 0;">
+                      <button type="button" class="button button icon ion-trash-a button-assertive" ng-click="vm.deleteImage(k,x)" ></button>
+                    </div>
+
+
+                  <img ng-click="openModalMyImage(x)"
+                   style="height:100%;width:100%;object-fit: cover;"
+                    ng-src="{{x.path}}" />
+                  </div>
+
+
+                  <!-- <div style="
+                  position: absolute;
+                  bottom: 5px;
+                  height: 40px;
+                  width: 200px;
+                  border-radius: 10px;
+                  padding:10px;
+                  background-color: rgba(0,0,0,0.5)">
+
+                  </div> -->
+
+                </div>
+              </div>
+            </div>
+          </ion-scroll>
+
+
+        </div>
+
+      </div>
+
+      <div ng-if="!vm.list" style="text-align: center;">ยังไม่มีรายการบันทึก</div>
+
+
+
+
+
+
+    </div>
+
+
+    <!-- <div style="flex-direction: row;
+    display: flex;flex-wrap:wrap;">
+
+      <div ng-repeat="x in vm.list | limitTo:100" style="width:20%;" ng-click="openModalMyImage(x)">
+        <img src={{x.thumbnailUrl}} style="height: 100%;
+  width: 100%;
+  object-fit: cover;" />
+
+      </div>
+
+    </div> -->
+  
+
+
+    <script id="my-img.html" type="text/ng-template">
+      <ion-modal-view   style="background-color:black;display: flex;
+      flex-direction: column;">
+  
+          <div style="display: flex;
+          flex-direction: row;
+          justify-content: end;
+          padding: 20px;
+          bottom:0px">
+        <button class="button icon-left ion-close button-small  button-assertive" ng-click="closeModalMyImage()">ปิด</button>
+
+          </div>
+
+          <div style="text-align: center;flex:1">
+            <img  class="img-show" ng-src="{{vm.imgshow}}" />
+          </div>
+
+
+<style>
+  .img-show{
+    height: 100%;
+width: 100%;
+object-fit: cover;
+  }
+  </style>
+      </ion-modal-view>
+    </script>
+
+
+  </ion-content>
+
+
+
+</ion-view>
