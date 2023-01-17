@@ -9,13 +9,13 @@ Agricultural extension applications for ERP systems and equipment control
 [Available for download in Apple Store.](https://apps.apple.com/th/app/agriprofarmer/id1547206844)
 
 
-![](https://github.com/noteyn51/AgriproFarmer/blob/main/screenshot/farmer_gif.gif)
 
 
 ![](https://github.com/noteyn51/AgriproFarmer/blob/main/screenshot/1.png)
 
 
 
+![](https://github.com/noteyn51/AgriproFarmer/blob/main/screenshot/farmer_gif.gif)
 
 
 ## Screen Shot 
