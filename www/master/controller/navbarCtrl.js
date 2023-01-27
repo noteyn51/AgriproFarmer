@@ -60,13 +60,10 @@ angular
       $scope.shouldHide = function () {
         // //console.log($state.current.name);
         switch ($state.current.name) {
-<<<<<<< HEAD
           case "app.receivelot":
             return true; 
           case "app.farming":
             return true; 
-=======
->>>>>>> a0092cd (Initial commit)
           case "app.area":
             return true; 
           case "app.receive":
