@@ -15,10 +15,7 @@ angular
     $mdDialog
   ) {
     let vm = this;
-<<<<<<< HEAD
     console.log('1234')
-=======
->>>>>>> a0092cd (Initial commit)
 
     $scope.chart = [
       {
