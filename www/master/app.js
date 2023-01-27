@@ -34,11 +34,7 @@ angular
     $mdDialog
   ) {
     $ionicPlatform.ready(function () {
-<<<<<<< HEAD
       // console.log = function () {};
-=======
-      console.log = function () {};
->>>>>>> a0092cd (Initial commit)
       $rootScope.global = $localStorage.globalAGRI;
 
       if ($rootScope.global) {
@@ -93,14 +89,6 @@ angular
       $rootScope.iplogin =
         "https://digimove.365supplychain.com/agripro/agri_ociv2/"; //365
 
-<<<<<<< HEAD
-
-=======
-      //   $rootScope.ipregister =
-      //   "http://localhost/agri_oci/";
-      // $rootScope.iplogin =
-      //   "http://localhost/agri_oci/"; //365
->>>>>>> a0092cd (Initial commit)
 
       let platform = ionic.Platform.platform();
       if (platform == "android") {
@@ -164,42 +152,7 @@ angular
               $state.current.name == "app.farmerMenu" ||
               $state.current.name == "app.out"
             ) {
-<<<<<<< HEAD
             
-=======
-              // var confirmPopup = $ionicPopup.confirm({
-              //   title: "<b>Exit !!</b>",
-              //   subTitle: "<center>ต้องการจากระบบ หรือไม่ ?</center>",
-              // });
-              // confirmPopup.then(function (res) {
-              //   if (res) {
-              //     $ionicLoading.show();
-              //     document.addEventListener("deviceready", function () {
-              //       for (let i = 0; i < $rootScope.global.iot.length; i++) {
-              //         FirebasePlugin.unsubscribe(
-              //           $rootScope.global.iot[i],
-              //           function () {
-              //             console.log("Unsubscribed from topic");
-              //           },
-              //           function (error) {
-              //             console.error(
-              //               "Error unsubscribing from topic: " + error
-              //             );
-              //           }
-              //         );
-              //       }
-              //     });
-              //     delete $localStorage.globalAGRI;
-              //     // $ionicHistory.clearCache();
-              //     $timeout(function () {
-              //       $rootScope.global = {};
-              //       window.location = "index.html";
-              //       $ionicLoading.hide();
-              //     }, 5000);
-              //   } else {
-              //   }
-              // });
->>>>>>> a0092cd (Initial commit)
             } else if ($state.current.name == "app.farmerlogin") {
               var Popup = $ionicPopup.confirm({
                 title: "<b>แจ้งเตือน !!</b>",
@@ -749,7 +702,6 @@ angular
         },
       })
 
-<<<<<<< HEAD
       .state("app.receivelot", {
         url: "/receivelot",
         views: {
@@ -760,8 +712,6 @@ angular
         },
       })
 
-=======
->>>>>>> a0092cd (Initial commit)
       .state("app.recordPlant", {
         url: "/recordPlant",
         views: {
@@ -1203,19 +1153,6 @@ angular
         },
       })
 
-<<<<<<< HEAD
-=======
-      // .state("app.area", {
-      //   url: "/area",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/area.html",
-      //       controller: "areaCtrl as vm",
-      //     },
-      //   },
-      // })
-
->>>>>>> a0092cd (Initial commit)
       .state("app.farmerCheck", {
         url: "/farmerCheck",
         views: {
@@ -1246,8 +1183,6 @@ angular
         },
       })
 
-<<<<<<< HEAD
-=======
       // .state("app.area", {
       //   url: "/area",
       //   views: {
@@ -1390,7 +1325,6 @@ angular
       //   },
       // })
 
->>>>>>> a0092cd (Initial commit)
       .state("app.buysale", {
         url: "/buysale",
         views: {
@@ -1565,12 +1499,7 @@ angular
         return $http.post(
           // "http://localhost/agri_ociv2/model/"+file,
           // "http://192.168.9.48/agri_ociv3/model/" + file,
-<<<<<<< HEAD
-          "https://digimove.365supplychain.com/agripro/agri_ociv3/model/" +
-            file,
-=======
           "https://digimove.365supplychain.com/agripro/agri_ociv3/model/" +file,
->>>>>>> a0092cd (Initial commit)
           req,
           pms
         );
