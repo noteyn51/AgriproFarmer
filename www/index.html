@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Farmer</title>
+  <link rel="shortcut icon" href="#" />
+  <!-- <link rel="manifest" href="manifest.json"> -->
+
+  <!-- <link rel="icon" href="icon.png" sizes="25x25">  -->
+  <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+  <!-- <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+
+  <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+
+
+  <link href="lib/mobiscroll/css/mobiscroll.angularjs.lite.min.css" rel="stylesheet" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="css/util.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="lib/weather-icons-master/css/weather-icons.min.css">
+
+  <link rel="stylesheet" href="lib/angular-material.css">
+
+
+
+
+
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPF1KCVMbM2NJwisLGjrMYO7c6Jn1dUWM&libraries=geometry,drawing,places">
+  </script>
+
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/angular.easypiechart.min.js"></script>
+
+  <script src='lib/ionic-image-lazy-load.js'></script>
+
+
+
+  <link rel="stylesheet" href="lib/calendar/flex-calendar.css">
+  <script src="lib/angular-translate.min.js"></script>
+  <script type="text/javascript" src="lib/calendar/flex-calendar.js"></script>
+
+
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script> -->
+  <script src="lib/angular-aria.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script> -->
+
+  <!-- Angular Material Library -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script> -->
+  <script src="lib/mat.js"></script>
+
+
+
+  <!-- ionic/angularjs js -->
+  <link rel="stylesheet" href="lib/angular-datatables/dist/css/jquery-datatables.min.css" />
+  <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+  <script src="lib/jquery.dataTables.min.js"></script>
+  <script src="lib/angular-datatables/dist/angular-datatables.min.js"></script>
+
+  <script src="lib/mobiscroll/js/mobiscroll.angularjs.lite.min.js"></script>
+
+
+
+  <script src="lib/chart.js/Chart.min.js"></script>
+  <script src="lib/angular-chart.js/dist/angular-chart.min.js"></script>
+  <!--Date pick-->
+  <script src="lib/angular-moment-picker-master/dist/moment-locales.js"></script>
+  <script src="lib/angular-moment-picker-master/dist/angular-moment-picker.min.js"></script>
+  <link href="lib/angular-moment-picker-master/dist/angular-moment-picker.min.css" rel="stylesheet">
+
+  <!--data table-->
+
+
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ng-cordova/ng-cordova.min.js"></script>
+  <script src="cordova.js"></script>
+  <script type="text/javascript" src="lib/ngstorage.js"></script>
+
+  <!-- your app's js -->
+  <!-- <script src="js/app.js"></script> -->
+
+  <script src="master/app.js"></script>
+  <script src="master/service.js"></script>
+  <script src="master/ds.js"></script>
+  <script src="master/controller/navbarCtrl.js"></script>
+  <script src="master/controller/farmerloginCtrl.js"></script>
+  <script src="master/controller/appsetting.js"></script>
+
+
+
+
+  <script src="master/controller/farmer/farmerMenu.js"> </script>
+  <script src="master/controller/farmer/area.js"> </script>
+  <script src="master/controller/farmer/add.js"> </script>
+  <script src="master/controller/farmer/createArea.js"> </script>
+  <script src="master/controller/farmer/weather.js"> </script>
+  <script src="master/controller/farmer/news.js"> </script>
+  <script src="master/controller/farmer/environment.js"> </script>
+
+
+
+  <script src="master/controller/farmer/dashboard.js"> </script>
+  <script src="master/controller/farmer/detail.js"> </script>
+  <script src="master/controller/farmer/hist.js"> </script>
+  <!-- <script src="master/controller/farmer/setting.js">  </script>
+    <script src="master/controller/farmer/newsetting.js">  </script> -->
+  <script src="master/controller/farmer/out.js"> </script>
+  <script src="master/controller/farmer/farming.js"> </script>
+  <script src="master/controller/farmer/plant/startPlant.js"> </script>
+  <script src="master/controller/farmer/plant/recordPlant.js"> </script>
+  <script src="master/controller/farmer/plant/predictPlant.js"> </script>
+  <script src="master/controller/farmer/plant/recordResult.js"> </script>
+  <script src="master/controller/farmer/plant/recordEtc.js"> </script>
+  <script src="master/controller/farmer/plant/receive.js"> </script>
+
+
+  <script src="master/controller/farmer/mart/mart.js"> </script>
+
+
+
+
+  <script src="master/controller/farmer/meeting/meeting.js"> </script>
+  <script src="master/controller/farmer/plant/withdraw.js"> </script>
+  <script src="master/controller/farmer/controliot.js"> </script>
+  <script src="master/controller/farmer/account.js"> </script>
+
+  <script src="master/controller/farmer/farming/addimg.js"> </script>
+  <script src="master/controller/farmer/farming/viewimage.js"> </script>
+<<<<<<< HEAD
+  <script src="master/controller/farmer/receivelot.js"> </script>
+=======
+>>>>>>> a0092cd (Initial commit)
+
+
+
+
+
+
+<<<<<<< HEAD
+  
+=======
+
+>>>>>>> a0092cd (Initial commit)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Google map -->
+
+
+</head>
+
+<body ng-app="app">
+  <ion-nav-view>
+
+  </ion-nav-view>
+</body>
+
+</html>

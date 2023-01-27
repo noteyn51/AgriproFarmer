@@ -1,0 +1,123 @@
+<ion-view hide-back-button="false" cache-view="false">
+
+  <ion-nav-title> รายการพื้นที่
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+
+  </ion-nav-buttons>
+
+  <style>
+    .box {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    .box-radius {
+      border-radius: 10px;
+    }
+
+  </style>
+  <ion-content style="background:white;">
+
+    <div   ng-repeat="x in data.result" ng-if="status == true">
+      <li class="item">
+
+      <div style="display:flex;flex-direction:row">
+
+        <div style="flex:2">
+
+      <img ng-if="x.imgpath" ng-src="{{x.imgpath}}" style="height: 50px;
+      width: 50px;">
+      <img ng-if="!x.imgpath" src="img/noimage1.jpg"  style="height: 50px;
+      width: 50px;">
+    </div>
+
+
+      <div style="flex:8;white-space: initial;
+      overflow: hidden;
+      text-overflow: ellipsis;">
+
+        <div style="display: flex;
+        justify-content: space-between;">
+          <a style="    font-weight: bold;
+          font-size: large;">
+            {{x.farm_name}}
+
+          </a>
+
+
+          <a ng-if="x.farm_status == 'APPROVE'" style="color:green"><i class="icon ion-checkmark-circled"></i>
+            อนุมัติ</a>
+          <a ng-if="x.farm_status == 'REJECT'" style="color:red"><i class="icon ion-close-circled"></i> ไม่อนุมัติ</a>
+          <a ng-if="x.farm_status == 'INACTIVE'" style="color:red">ยกเลิกใช้งาน</a>
+
+
+          <a ng-if="!x.farm_status"> รออนุมัติ</a>
+
+
+        </div>
+        <p style="white-space: break-spaces;">{{x.address}}</p>
+
+        <p><b>{{x.createname.mob_fname}} {{x.createname.mob_lname}}</b></p>
+        <div style="margin-top: -3px;display: flex;
+        align-items: baseline;
+        justify-content: space-between;">
+          <a>
+            <img
+              ng-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAACkwAAApMBv+Bu1wAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAM3SURBVFiF7ZRPaBxlGMZ/78SZrO5poZWSghcv9V8l9mKgl5I29dJAhaWpSLtWZ3YM5BB6KT0NqD1oacC97M4EOtBioxE8iNJWaKEqIvgHtAaR3izElhIKweruZOf1kEmZbnayI25P5r18M9/7fM/zfO/3fh9sxv895N8uKJfLVqlUeg14A3gymb4hIrOqetb3/eihGXBdd3scx58Cw13JRL5X1QO+7y/m5TTyAiuVSiGO488T8d+Ag8BWYKuqvgzcUNVdwGflctnKy/tIXqBlWW8CO4FfW63WSBiGd1PpTyqVylXLsr4Fhkulkgu8n4c3dwWAVwBE5EQiLrZtT1Sr1UOAhGF4V1VPpLH9NrADIIqiKwCO4xwWkQuqOmfb9qHE3JUE+9TDMNAEKBQKRQBVvd/AhmEIwMrKSjGN7beBHwHa7fY4QBAEH6jqYRGZaDQacwCmaY4DiMgPeUlzNyFwHtgLOEAAaBAEc6m8qKqdwuaK3BUoFosfAbdVdZdt2wc689VqdRx4Afij2Wx+3HcDMzMzfwGnAUTklOd599d6nmeo6jvJ7+kwDP/Oy5v5EjqOcxPYnrlw9ew/BLBte0JELmyg87vv+0/kNuA4znPATxsQAtyJouhpANM0F4AtG4FV9dkgCH7pnM9qwtFkPOf7/pF0wvM8Y3Fx8WtVfdE0zVPJddwCfDM0NLTb87y4YzPngFdFZBRYZyCrB8YS1190JjzPi0XEBlrA6yJyDGipqt0pDiAiaxxj3YTWGZienn4U2APowMDApW6L6vX6deBtVo9QROStbuUFaLfblwAF9kxNTQ32NLC8vDwCFICf6/X67W6kAIODg+8CC8CCZVnvZeFmZ2dvAdeBx6IoGulpwDCMfaxu63IWKUCtVmuKyNE4jo/UarVeT+9lAFVddwzdmvClZLzYg5RGo/FdL0wifFFEjqvqfuBkOvdABSYnJ7cBzwN/Li0tfZmHPE9EUfQVcA8Ydl338UwDURSNstpY1+bn51v9MpC8jNcAieN4b6YBEdmXfK67fv811q5jSgN4sAcE2J98n3Ec50w/Dajq2jiWaCmkKuC67jPAtn6KZsRQorUZmwHAPylaJT32wwBUAAAAAElFTkSuQmCC"
+              style="
+            top: 3px;
+            position: relative;
+            height: 20px;
+            width: 20px;
+            ">
+            <span ng-if="x.farm_area_farm">{{x.farm_area_farm |number}} ไร่</span>
+            <span ng-if="x.farm_area_work">{{x.farm_area_work |number}} งาน</span>
+            <span ng-if="x.farm_area_wah">{{x.farm_area_wah |number}} ตารางวา</span>
+          </a>
+
+
+        </div>
+    
+
+
+      </div>
+
+      </div>
+
+      <button class="button button-balanced button-block" ng-click="vm.viewimage(x)">
+        ดูรูปภาพการเพาะปลูกของพื้นที่่
+      </button>
+      </li>
+
+
+      
+
+  
+
+    </div>
+
+
+    <h3 style="text-align: center;color:gray;margin-top:20%" ng-if="data.status == false && status == true">
+      ยังไม่ได้สร้างพื้นที่ </h3>
+    <h3 ng-click="vm.refresh()" style="text-align: center;color:gray;margin-top:20%" ng-if="status == false">
+      เกิดข้อผิดพลาดในการเชื่อมต่อลองใหม่อีกครั้ง
+      <i class="icon ion-refresh"></i>
+    </h3>
+
+    <div ng-if="!data" style="margin-top:20% ">
+      <ion-spinner icon="spiral" class="spinner-dark"
+        style="position: absolute; zoom:2;display: inline-block;left:45%"></ion-spinner>
+    </div>
+
+
+
+
+
+
+
+
+
+  </ion-content>
+</ion-view>

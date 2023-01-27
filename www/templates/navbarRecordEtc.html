@@ -1,0 +1,66 @@
+<ion-side-menus enable-menu-with-back-views="true">
+
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable" align-title="center">
+      <ion-nav-back-button class="button button-clear ion-chevron-left">
+        Back
+      </ion-nav-back-button>
+      <ion-nav-button>
+      </ion-nav-button>
+    </ion-nav-bar>
+
+
+    <style>
+      .kkk .tab-item {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+      }
+
+    </style>
+
+<div class="kkk">
+
+    <ion-tabs class="tabs-striped tabs-color-positive ">
+
+      <!-- Dashboard Tab -->
+      <ion-tab title="รายการต้น" ui-sref="apps.recordEtc" style="display: flex;
+        align-items: center;">
+        <ion-nav-view name="tab-1"></ion-nav-view>
+      </ion-tab>
+
+      <!-- Chats Tab -->
+      <ion-tab title="รายการลูก" ui-sref="apps.recordEtcs" style="display: flex;
+        align-items: center;">
+        <ion-nav-view name="tab-2"></ion-nav-view>
+      </ion-tab>
+
+
+
+    </ion-tabs>
+
+  </div>
+
+
+  </ion-side-menu-content>
+
+
+</ion-side-menus>
+
+
+
+
+
+<div class="alert alert-success" role="alert" ng-show="ww == true" style="z-index: 1000;
+    position: relative;
+    bottom: -92.5vh;
+    overflow-y: scroll;" ng-click="vm.hidePage()">
+  <div ng-repeat="x in vm.activeMat">{{x}}
+    <ion-spinner icon="ripple" class="spinner-positive">
+  </div>
+  <i class="icon ion-arrow-right-c" style="position: absolute;
+  top: 10px;
+  zoom: 1.5;
+  right: 15px;"></i>
+
+</div>

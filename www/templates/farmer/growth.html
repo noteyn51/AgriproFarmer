@@ -1,0 +1,62 @@
+<ion-view hide-back-button="false">
+    <ion-nav-title> อัตราการเจริญเติบโต </ion-nav-title>
+    <ion-content class="container-login101">
+
+        <div class="row" style="text-align:center;margin-left:0px; margin-top:10px;">
+            <div class="col" style="text-align:left">
+                <select class="form-control" id="exampleFormControlSelect1" style="border:solid 1 pt">
+                    <option>Crop.01 ทุเรียน</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="text-align:center;margin-left:0px">
+            <div class="col" style="text-align:left">
+                <select class="form-control" id="exampleFormControlSelect1" style="border:solid 1 pt">
+                    <option>ไร่/ฟาร์ม/สวน</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="text-align:center;margin-left:0px">
+            <div class="col" style="text-align:left">
+                <select class="form-control" id="exampleFormControlSelect1" style="border:solid 1 pt">
+                    <option>แปลง</option>
+                </select>
+            </div>
+        </div>
+        <div class="list card" style="    border-radius: 15px;">
+            <div class="list">
+                <div class="item item-avatar item-icon-right">
+                    <img src="img/calendar.png">
+                    <h2>วันที่</h2>
+                    <p ng-if="vm.date">{{vm.date}}</p>
+                    <p ng-if="!vm.date">เลือกวันที่</p>
+                    <i class="icon ion-edit" ng-click="vm.pickdate()"></i>
+
+                </div>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">อัตราการเจริญเติบโต
+                    </span>
+                    <input type="text" placeholder="อัตราการเจริญเติบโต">
+                </label>
+                <label class="item item-input">
+                    <textarea placeholder="รายละเอียด" style="height:10em"></textarea>
+                  </label>
+                <div></div>
+            </div>
+
+
+
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" class="button rd button-block " ng-click="vm.farmerCheck()" style="height:80px">
+                        บันทึก
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

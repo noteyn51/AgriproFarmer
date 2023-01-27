@@ -1,0 +1,73 @@
+<ion-view hide-back-button="false">
+  <ion-nav-title> Crop 01
+  </ion-nav-title>
+
+  <ion-content class="container-login101">
+
+
+
+
+    <div class="card">
+      
+      
+        <h2 style="text-align:center;margin-top:10px;margin-top:20px">Farm-01</h2>
+
+        <div style="margin-top:3%">
+          <h2 style="text-align:left;margin-top:10px;margin-left:12px;font-size:16pt" >ชื่อผลิตภัณฑ์ : ทุเรียน</h2>
+          <h2 style="text-align:left;margin-top:10px;margin-left:12px;font-size:14pt" >วันที่ปลูก : 20/12/62</h2>
+          <h2 style="text-align:left;margin-top:10px;margin-left:12px;font-size:14pt" >ผลผลิตที่คาดหวัง : 100 ก.ก.</h5>
+        </div>
+
+  
+
+
+
+
+      <div class="list" style="margin-top:10px">
+        <div class="item item-avatar item-icon-right">
+          <img src="img/calendar.png">
+          <h2 style="font-size:20pt">วันที่เก็บเกี่ยว</h2>
+          <p ng-if="vm.date" style="font-size:18pt">{{vm.date}}</p>
+          <p ng-if="!vm.date">เลือกวันที่</p>
+          <i class="icon ion-edit" ng-click="vm.pickdate()"></i>
+
+        </div>
+        <div class="item item-avatar item-icon-right">
+          <img src="img/calendar.png">
+          <h2 style="font-size:20pt">เวลาที่เก็บเกี่ยว</h2>
+          <p ng-if="vm.time" style="font-size:18pt">{{vm.time}}</p>
+          <p ng-if="!vm.time">เลือกเวลา</p>
+          <i class="icon ion-edit" ng-click="vm.picktime()"></i>
+
+        </div>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label" style="font-size:20pt">ผลลัพธ์ที่ได้
+          </span>
+          <input type="text" placeholder="ผลลัพท์ที่ได้" style="font-size:18pt">
+        </label>
+        <div></div>
+
+
+      </div>
+
+
+
+
+
+
+      <div class="row" style="margin-left:2px ;margin-top:5%">
+        <div class="col-12">
+          <button type="button" class="button rd button-block " ng-click="" style="height: 50pt">
+            ตกลง
+          </button>
+        </div>
+
+        <div class="col-12">
+          <button type="button" class="button rd button-block " ng-click="" style="height: 50pt">
+            ยกเลิก
+          </button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

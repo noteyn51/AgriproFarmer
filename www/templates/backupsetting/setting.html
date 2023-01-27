@@ -1,0 +1,362 @@
+<ion-view hide-back-button="false">
+  <ion-nav-title> ควบคุมอุปกรณ์
+  </ion-nav-title>
+
+  <ion-content style="background:#f5f5f5">
+ 
+
+
+
+    <div class="list " style="border-radius:10px;margin:0px 0px">
+      <div class="item" style="text-align: center">
+        <b>อุปกรณ์ {{vm.iotno}}</b>
+      </div>
+
+      <div class=" card" style="border-radius: 15px;margin:10px 0px"
+        ng-if="vm.model.soil.sss != false || vm.model.air.sss != false " ng-hide="vm.statusfinal == false">
+        <div class="row">
+          <div class="col" style="text-align: center">
+            <div ng-show="vm.model.soil.setting_status == 2">
+              <p>AC1</p>
+              <img src="img/pump.png" style="height:50px" ng-click="manualSoil(0)">
+              <p>แตะเพื่อเปิด</p>
+
+            </div>
+            <div ng-show="vm.model.soil.setting_status == 3 ">
+              <p>AC1</p>
+              <img src="img/pumpOn.png" style="height:50px" ng-click="manualSoil(1)">
+              <p>แตะเพื่อปิด</p>
+
+            </div>
+
+            <div ng-show="vm.model.soil.setting_status == 1 ">
+              <p>AC1</p>
+              <img src="img/pumpA.png" style="height:50px">
+              <p>ทำงานอัตโนมัติ</p>
+
+            </div>
+
+
+          </div>
+          <div class="col"
+            style="text-align:center;border-right: solid 1pt  rgba(22, 199, 255, 0.8);;border-left: solid 1pt  rgba(22, 199, 255, 0.8) ;">
+            <div ng-show="vm.model.air.setting_status == 2">
+              <p>AC2</p>
+              <img src="img/smoke.png" style="height:50px" ng-click="manualAir(1)">
+              <p>แตะเพื่อเปิด</p>
+
+
+            </div>
+            <div ng-show="vm.model.air.setting_status == 3">
+              <p>AC2</p>
+              <img src="img/smokeOn.png" style="height:50px" ng-click="manualAir(1)">
+              <p>แตะเพื่อปิด</p>
+
+
+
+            </div>
+
+            <div ng-show="vm.model.air.setting_status == 1">
+              <p>AC2</p>
+              <img src="img/smokeA.png" style="height:50px">
+              <p>ทำงานอัตโนมัติ</p>
+            </div>
+          </div>
+          <div class="col" style="text-align: center">
+            <div ng-show="vm.model.air.setting_status == 1">
+              <p>การตั้งค่า</p>
+              <img src="img/settingA.png" style="height:50px" ng-click="auto(2)">
+              <p>ทำงานอัตโนมัติ</p>
+
+
+            </div>
+            <div ng-show="vm.model.air.setting_status == 2 || vm.model.air.setting_status == 3">
+              <p>การตั้งค่า</p>
+              <img src="img/settingM.png" style="height:50px" ng-click="auto(1)">
+              <p>ทำงานเมื่อสั่ง</p>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-radius: 15px;margin:5px 0px" ng-if="vm.statusfinal != false">
+        <div class="item item-avatar item-icon-right">
+          <img src="img/dash/icon8-HH.png">
+          <h2>ความชื้นในดิน (AC1)</h2>
+          <p>อัพเดทล่าสุด {{vm.model.soil.setting_set_date}}</p>
+          <label class="toggle" style="z-index: 5;
+                  top: 25%;
+                  position: absolute;
+                  right: 10px;
+                  display: inline;">
+
+
+            <input type="checkbox" ng-model="toggle.meter3" ng-change="vm.toggleChange()">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+
+        </div>
+        <div class="list" ng-show="toggle.meter3 == true">
+          <div class="item item-avatar item-icon-right">
+            <img src="img/calendar.png">
+            <h2 style="overflow:initial">วันที่เริ่ม</h2>
+            <p ng-if=" vm.model.soil.setting_date_start">{{ vm.model.soil.setting_date_start}}</p>
+            <p ng-if="! vm.model.soil.setting_date_start">เลือกวันที่</p>
+            <i class="icon ion-edit" ng-click="vm.pickdate('soil')"></i>
+
+          </div>
+
+          <div class="item item-avatar item-icon-right">
+            <img src="img/calendar.png">
+            <h2 style="overflow:initial">วันที่สิ้นสุด</h2>
+            <p ng-if="vm.model.soil.setting_date_end">{{vm.model.soil.setting_date_end}}</p>
+            <p ng-if="!vm.model.soil.setting_date_end">เลือกวันที่</p>
+            <i class="icon ion-edit" ng-click="vm.pickdateto('soil')"></i>
+
+          </div>
+
+
+
+          <div class="item item-divider" style="text-align:center">
+            <h2 style="font-size: 18pt;overflow: initial;">การตั้งค่า</h2>
+          </div>
+          <li class="item item-toggle " style="background: #f5f5f5;">
+            <b>ทำงานตามเวลา</b>
+            <label class="toggle toggle-balanced">
+              <input type="checkbox" ng-model="vm.model.soil.setting_time_status" ng-true-value="1" ng-false-value="0"
+                ng-change="vm.soilmodeChange(vm.model.soil.setting_time_status)">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+
+
+          <a class="item  item-icon-right" ng-disabled="vm.model.soil.setting_time_status == 0"
+            ng-if="vm.model.soil.setting_time_status == 1 || vm.model.soil.setting_temp_status == 0 "
+            ng-hide="vm.model.soil.setting_time_status == 0 || vm.model.soil.setting_temp_status == 1"
+            ng-click="vm.picktime('soil')">
+            <h2>เวลาที่ทำงาน</h2>
+            <p ng-if="!vm.model.soil.setting_time_value">เลือกเวลา</p>
+            <p ng-if="vm.model.soil.setting_time_value">{{vm.model.soil.setting_time_value}}</p>
+            {{ vm.model.soil.setting_time.value}}
+            <i class="icon ion-clock"></i>
+          </a>
+
+          <li class="item item-toggle" style="background: #f5f5f5;">
+            <b>ทำงานตามความชื้น</b>
+            <label class="toggle toggle-balanced">
+              <input type="checkbox" ng-model="vm.model.soil.setting_temp_status" ng-true-value="1" ng-false-value="0"
+                ng-change="vm.soilmode2Change(vm.model.soil.setting_temp_status)">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+
+          <label class="item item-input item-stacked-label" ng-disabled="vm.model.soil.setting_temp_status == 0"
+            ng-if="vm.model.soil.setting_temp_status == 1 || vm.model.soil.setting_time_status == 0"
+            ng-hide="vm.model.soil.setting_temp_status == 0 || vm.model.soil.setting_time_status == 1 ">
+            <span class="input-label">ความชื้นที่ทำงาน(%)
+            </span>
+            <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2"
+              placeholder="Ex. -1 , 20 " ng-disabled="vm.model.soil.setting_temp_status == 0"
+              ng-model="vm.model.soil.setting_temp_value">
+          </label>
+
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">เวลาในการทำงาน (นาที)</span>
+            <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="3" placeholder="1,5,10"
+              ng-model="vm.model.soil.setting_active">
+          </label>
+          <div></div>
+          <a class="item  item-icon-right" ng-click="vm.daysetting('soil')">
+            กำหนดวันทำงาน
+            <i class="icon ion-navicon-round"></i>
+          </a>
+
+          <div class="container">
+
+            <button type="button" class="button button-balanced button-block" ng-disabled="vm.check[2]()"
+              style="border-radius: 10px" ng-click="vm.save3()"> บันทึก</button>
+          </div>
+
+        </div>
+
+
+      </div>
+      
+      <div class=" card" style="border-radius: 15px;margin:10px 0px" ng-if="vm.statusfinal != false">
+        <div class="item item-avatar item-icon-right">
+          <img src="img/dash/icon8-H.png" style="border-radius:0%">
+          <h2>อุณหภูมิ (AC2)</h2>
+          <p>อัพเดทล่าสุด {{vm.model.air.setting_set_date}}</p>
+          <label class="toggle" style="z-index: 5;
+                top: 25%;
+                position: absolute;
+                right: 10px;
+                display: inline;">
+
+
+            <input type="checkbox" ng-model="toggle.meter2" ng-change="vm.toggleChange()">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+
+        </div>
+        <div class="list" ng-show="toggle.meter2 == true">
+          <div class="item item-avatar item-icon-right">
+            <img src="img/calendar.png">
+            <h2 style="overflow:initial">วันที่เริ่ม</h2>
+            <p ng-if=" vm.model.air.setting_date_start">{{ vm.model.air.setting_date_start}}</p>
+            <p ng-if="! vm.model.air.setting_date_start">เลือกวันที่</p>
+            <i class="icon ion-edit" ng-click="vm.pickdate('air')"></i>
+
+          </div>
+
+          <div class="item item-avatar item-icon-right">
+            <img src="img/calendar.png">
+            <h2 style="overflow:initial">วันที่สิ้นสุด</h2>
+            <p ng-if="vm.model.air.setting_date_end">{{vm.model.air.setting_date_end}}</p>
+            <p ng-if="!vm.model.air.setting_date_end">เลือกวันที่</p>
+            <i class="icon ion-edit" ng-click="vm.pickdateto('air')"></i>
+
+          </div>
+
+
+
+          <div class="item item-divider" style="text-align:center">
+            <h2 style="font-size: 18pt;overflow: initial;">การตั้งค่า</h2>
+          </div>
+          <li class="item item-toggle " style="background: #f5f5f5;">
+            <b>ทำงานตามเวลา</b>
+            <label class="toggle toggle-balanced">
+              <input type="checkbox" ng-model="vm.model.air.setting_time_status" ng-true-value="1" ng-false-value="0"
+                ng-change="vm.airlmodeChange(vm.model.air.setting_time_status)">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+
+
+          <a class="item  item-icon-right" ng-disabled="vm.model.air.setting_time_status == 0"
+            ng-if="vm.model.air.setting_time_status == 1 || vm.model.air.setting_temp_status == 0 "
+            ng-hide="vm.model.air.setting_time_status == 0 || vm.model.air.setting_temp_status == 1"
+            ng-click="vm.picktime('air')">
+            <h2>เวลาที่ทำงาน</h2>
+            <p ng-if="!vm.model.air.setting_time_value">เลือกเวลา</p>
+            <p ng-if="vm.model.air.setting_time_value">{{vm.model.air.setting_time_value}}</p>
+            {{ vm.model.air.setting_time.value}}
+            <i class="icon ion-clock"></i>
+          </a>
+
+
+          <li class="item item-toggle" style="background: #f5f5f5;">
+            <b>ทำงานตามความชื้น</b>
+            <label class="toggle toggle-balanced">
+              <input type="checkbox" ng-model="vm.model.air.setting_temp_status" ng-true-value="1" ng-false-value="0"
+                ng-change="vm.airmode2Change(vm.model.air.setting_temp_status)">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+
+
+
+          <label class="item item-input item-stacked-label" ng-disabled="vm.model.air.setting_temp_status == 0"
+            ng-if="vm.model.air.setting_temp_status == 1 || vm.model.air.setting_time_status == 0"
+            ng-hide="vm.model.air.setting_temp_status == 0 || vm.model.air.setting_time_status == 1 ">
+            <span class="input-label">ความชื้นที่ทำงาน(%)
+            </span>
+            <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="3"
+              placeholder="Ex. -1 , 20 " ng-disabled="vm.model.air.setting_temp_status == 0"
+              ng-model="vm.model.air.setting_temp_value">
+          </label>
+
+          <label class="item item-input item-stacked-label" ng-disabled="vm.model.air.setting_temp_status == 0"
+            ng-if="vm.model.air.setting_temp_status == 1 || vm.model.air.setting_time_status == 0"
+            ng-hide="vm.model.air.setting_temp_status == 0 || vm.model.air.setting_time_status == 1 ">
+            <span class="input-label">หรือ อุณหภูมิที่ทำงาน(°C)
+            </span>
+            <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2"
+              placeholder="ใส่ตัวเลขอุณหภูมิ 0 - 99" ng-disabled="vm.model.air.setting_temp_status == 0"
+              ng-model="vm.model.air.setting_temp_value2">
+          </label>
+
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">เวลาในการทำงาน (นาที)</span>
+            <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="3" placeholder="1,5,10"
+              ng-model="vm.model.air.setting_active">
+          </label>
+          <div></div>
+          <a class="item  item-icon-right" ng-click="vm.daysetting('air')">
+            กำหนดวันทำงาน
+            <i class="icon ion-navicon-round"></i>
+          </a>
+
+          <div class="container">
+
+            <button type="button" class="button button-balanced button-block" ng-disabled="vm.check[1]()"
+              style="border-radius: 10px" ng-click="vm.save2()"> บันทึก</button>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+    <div class="container">
+      <h3 ng-if="vm.statusfinal == false" style="text-align: center;color:gray" ng-click="vm.refresh()">
+        เกิดข้อผิดพลาดในการโหลดข้อมูลแตะเพื่อโหลดใหม่
+        <i class="icon ion-refresh"></i>
+      </h3>
+    </div>
+
+
+
+    <script id="my-day.html" type="text/ng-template">
+      <ion-modal-view style="bottom:10%;border-raduius:10px;border-radius: 10px;">
+        <ion-header-bar>
+            <button type="button" class="button button-assertive button-clear" ng-click="closeModal()">close</button>
+          <h1 class="title" style="text-align:center" >daysetting</h1>
+          <!-- <button type="submit" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
+        </ion-header-bar>
+        <ion-content  class="wrapper_all" scroll="false">
+                 
+          <ul class="list">
+
+            <li class="item item-toggle" ng-repeat="x in vm.days" >
+                {{x.day}}
+               <label class="toggle toggle-balanced">
+                 <input type="checkbox"  ng-model="vm.dayvalue[$index]" ng-true-value="1" ng-false-value="0" ng-change="test(x.value)">
+                 <div class="track">
+                   <div class="handle"></div>
+                 </div>
+               </label>
+            </li>
+
+         
+             
+            
+          
+
+          
+          </ul>
+
+
+      
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  </ion-content>
+</ion-view>

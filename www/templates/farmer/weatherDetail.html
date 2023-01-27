@@ -1,0 +1,70 @@
+<ion-view hide-back-button="false" hide-nav-bar="false">
+    <ion-nav-title><b style="font-size:18px;">{{vm.header}}</b>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <!-- <button class="button ion-power btn-home" style="font-size: 20px;
+                     color: #4c4c4c;" ng-click="vm.goback()"></button> -->
+    </ion-nav-buttons>
+    <ion-content >
+        <div ng-if="vm.action == 1" ng-hide="!vm.Warning.WarningNews.WarningTypeThai" class="list card" style="margin: 10px 10px; height:auto">
+
+            <div class="item " style="border-left: solid 3pt green;">
+
+                <h2>{{vm.Warning.WarningNews.WarningTypeThai}}</h2>
+                <p>ประกาศเมื่อ {{vm.Warning.WarningNews.AnnounceDateTime}}</p>
+            </div>
+
+            <div class="item item-body">
+
+                <p>
+                    <b>{{vm.Warning.WarningNews.TitleThai}}</b>
+                </p>
+                <p style="white-space: break-spaces;">
+                    {{vm.Warning.WarningNews.DescriptionThai}}
+
+                    {{x.Description}}
+                </p>
+            </div>
+
+        </div>
+
+        <div ng-if="vm.action == 2" class="list card " style="margin: 10px 10px; height:auto"
+            ng-repeat="x in vm.DailyForecast.DailyForecast.RegionsForecast">
+
+            <div class="item "  style="border-left: solid 3pt green;">
+
+                <h2>{{x.RegionName}},{{x.RegionNameEng}}</h2>
+                <p>{{vm.DailyForecas.DailyForecast.Date}}</p>
+            </div>
+
+            <div class="item item-body">
+
+                <p >
+                    {{x.Description}}
+                </p>
+            </div>
+
+        </div>
+
+
+<div ng-hide="!vm.DailyForecast" >
+        <div ng-if="vm.action == 3"  class="list card " style="margin: 10px 10px; height:auto"
+            ng-repeat="x in vm.DailyForecast.DailyForecast.RegionsForecast">
+
+            <div class="item "  style="border-left: solid 3pt green;">
+
+                <h2>{{x.RegionName}},{{x.RegionNameEng}}</h2>
+                <p>อัพเดทล่าสุด {{vm.DailyForecast.DailyForecast.Date}}</p>
+            </div>
+
+            <div class="item item-body">
+
+                <p>
+                    {{x.Description}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+    </ion-content>
+</ion-view>

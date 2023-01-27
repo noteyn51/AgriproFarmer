@@ -1,0 +1,41 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="hbar" align-title="center">
+      <ion-nav-back-button
+        class="button button-clear ion-chevron-left"
+        style="color: white;"
+      >
+        Back
+      </ion-nav-back-button>
+      <ion-nav-button> </ion-nav-button>
+    </ion-nav-bar>
+
+    <ion-tabs
+      class="tabs-icon-top tabs-color-active-hbar"
+      ng-class="{'tabs-item-hide': shouldHide()}"
+    >
+      <ion-tab
+        title="ข่าวสาร"
+        icon-off="ion-ios-paper-outline"
+        icon-on="ion-ios-paper"
+        ng-click="news()"
+      >
+        <ion-nav-view name="new-news"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab
+        title="แจ้งเตือน"
+        icon-off="ion-ios-bell-outline"
+        icon-on="ion-ios-bell"
+        ng-click="notifi()"
+      >
+        <ion-nav-view name="new-notifi"> </ion-nav-view>
+      </ion-tab>
+      <span
+        class="badge badge-assertive"
+        style="position: fixed;margin-left: 100px;
+        top: 5px;"
+        ng-if="vm.badge.notifi.length > 0">{{vm.badge.notifi.length}}</a >
+    </ion-tabs>
+  </ion-side-menu-content>
+</ion-side-menus>

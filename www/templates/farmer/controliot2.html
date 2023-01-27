@@ -1,0 +1,43 @@
+<ion-view hide-back-button="false">
+  <ion-nav-title>กราฟแสดงข้อมูลระหว่างวัน</ion-nav-title>
+  <style>
+    .overflow-scroll .scroll {
+      height: 150%;
+    }
+
+    .scroll {
+      height: 150%;
+
+    }
+  </style>
+  <ion-content >
+
+  
+
+
+    <!-- <div class="card" style="margin: 0px 0px;"> -->
+        <!-- <a style="position:absolute;right:3%">อัพเดทล่าสุด {{dataDash.result.now}}</a> -->
+        <ion-slide-box class="btn2" style="width: 100%;height: auto;margin-top:10px;" show-pager="false">
+          <ion-slide>
+
+            <h5 style="text-align:center"></h5>
+
+            <br>
+            <canvas height="10" width="10" id="line" class="chart chart-line" chart-data="data" chart-labels="labels"
+              chart-series="series" chart-options="options" chart-dataset-override="datasetOverride"
+              chart-click="onClick" chart-colors="colors">
+            </canvas>
+          </ion-slide>
+
+
+        </ion-slide-box>
+
+
+
+
+      <!-- </div> -->
+
+
+
+  </ion-content>
+</ion-view>

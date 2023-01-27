@@ -1,0 +1,126 @@
+<ion-view hide-back-button="false" cache-view="true">
+    <ion-nav-title> บันทึกการเจริญเติบโต
+    </ion-nav-title>
+  
+    <ion-content style="background:#f5f5f5" scroll="false">
+      <style>
+        .scroll {
+          height: 100%;
+        }
+      </style>
+  
+  
+      <ion-scroll class="scrollable" direction="y" style="height: calc(100% - 0%);position: relative;" ng-if=" vm.status">
+        <div class=" list" style="height:100%;  box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4);">
+  
+  
+            <div class="card" style="height:110px;display: flex;margin:20px 5px;
+          flex-flow: row wrap;" ng-click="vm.listmap()">
+              <div style="height: 100%;
+         width: 30%;">
+                <!-- <img style="height: 100%;
+                 width: 100%;
+                 padding: 4px;
+                 max-width:200px;" src=""> -->
+                <div id="mapbbb" class="map_list"></div>
+              </div>
+  
+              <div style="height: 100%; width: 70%;display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;">
+  
+                <div style="font-weight:bold;font-weight: bold;
+    font-size: 18px;">พื้นที่ {{subDetail.farm_name}} แปลงที่ {{subDetail.sup_sub_id}}</div>
+                <div> {{subDetail.sub_area_farm}} ไร่ {{subDetail.sub_area_work}} งาน {{subDetail.sub_area_wah}} ตารางวา
+                </div>
+  
+  
+  
+              </div>
+  
+  
+  
+  
+            </div>
+  
+            <div class="list">
+  
+              <div class="item item-divider ">
+                <div style="font-weight: bold;">
+                  รายการ
+                  </div>
+              </div>
+            
+              <a class="item  item-button-right" ng-repeat="x in list">
+                <div>
+                  {{$index+1}}.  {{x.name}}
+
+                </div>
+                <div>
+                  บันทึกล่าสุด  {{x.lastupdate}}
+
+                </div>
+                <button class="button button-positive" style="position: absolute;top:25%;" ng-click="vm.save(x)">
+                   <i class="icon ion-edit"></i>
+                </button>
+              </a>
+  
+            </div>
+
+        </div>
+      </ion-scroll>
+
+      <div style="text-align: center;font-size: large;    margin-top: 20px;"  ng-if="!vm.status">ไม่มีรายการพื้นที่ </div>
+
+  
+  
+    </ion-content>
+  
+  
+  
+  
+    <script id="list_map.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar style="text-align:center;background:white">
+   
+        <h1 class="title" >รายการแปลง</h1>
+        <button type="button" class="button button-assertive button-clear " ng-click="closeModalListmap()">Close</button>
+      </ion-header-bar>
+      <ion-content  style="background:#f5f5f5">
+       
+        <div class="card" style="height:110px;display: flex;
+        flex-flow: row wrap;" ng-repeat="k in subfarm" ng-click="vm.selectSubBefore(k,$index)">
+  
+      <div style="height: 100%;
+                width: 30%;">
+        <!-- <img style="height: 100%;
+                        width: 100%;
+                        padding: 4px;
+                        max-width:200px;" src=""> -->
+                        <div id="{{$index}}" class="map_list"></div>
+      </div>
+  
+      <div style="height: 100%; width: 70%;display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;" >
+  
+        <div style="font-weight:bold;font-weight: bold;
+        font-size: 18px;">พื้นที่ {{k.farm_name}} แปลงที่ {{k.sup_sub_id}}</div>
+        <div> {{k.sub_area_farm}} ไร่ {{k.sub_area_work}} งาน {{k.sub_area_wah}} ตารางวา</div>
+     
+  
+  
+      </div>
+  
+    </div>
+  
+      </ion-content>
+    </ion-modal-view>
+  </script>
+  
+  
+  
+  
+  </ion-view>
