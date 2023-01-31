@@ -48,6 +48,35 @@
       </div>
 
       <div ng-if="woSelected">
+
+        <a class="item item-button-right">
+          <div>วันติดดอก</div>
+
+          <div ng-if="!model.daterep" style="color: red; font-size: medium">
+            เลือกวันที่ติดดอก <i class="icon ion-information-circled"></i>
+          </div>
+          <div ng-if="model.daterep" style="color: gray; font-size: medium">
+            {{showDateRep}}
+          </div>
+
+          <button
+            class="button button-positive"
+            style="margin-top: 4%"
+            ng-click="ctrl.isOpens = true"
+          >
+            <i class="icon ion-calendar"></i>
+          </button>
+
+          <md-datepicker
+            ng-model="raw.daterep"
+            ng-change="mdDateRepChange(raw.daterep)"
+            md-placeholder="Enter date"
+            md-is-open="ctrl.isOpens"
+            style="position: fixed; display: flex; margin-top: 20px; right: 0"
+          >
+          </md-datepicker>
+        </a>
+
         <a class="item item-button-right">
           <div>คาดการณ์วันเก็บจริง</div>
 
@@ -68,7 +97,7 @@
 
           <md-datepicker
             ng-model="raw.dateStart"
-            ng-change="mdDateChange(raw.dateStart,model.date)"
+            ng-change="mdDateChange(raw.dateStart)"
             md-placeholder="Enter date"
             md-is-open="ctrl.isOpen"
             style="position: fixed; display: flex; margin-top: 20px; right: 0"
@@ -110,7 +139,7 @@
         </div>
         <div class="list">
           <label class="item item-input item-stacked-label">
-            <span class="input-label">จำนวนไร่</span>
+            <span class="input-label">จำนวนไร่<a style="color: red;" ng-if="!modelpredict.rai">*</a></span>
             <input
             ng-change="raiChange(modelpredict.rai)"
               type="number"
@@ -119,7 +148,7 @@
             />
           </label>
           <label class="item item-input item-stacked-label">
-            <span class="input-label">ผลผลิต</span>
+            <span class="input-label">ผลผลิต<a style="color: red;" ng-if="!modelpredict.result">*</a></span>
             <input
             ng-change="valueChange(modelpredict.result)"
               type="number"

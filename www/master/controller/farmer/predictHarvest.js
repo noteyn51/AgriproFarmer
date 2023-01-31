@@ -23,6 +23,28 @@ angular
       let vm = this;
       $scope.myDate = new Date();
 
+      $scope.model = {
+        date1: null,
+        date2: null,
+        daterep: null,
+        sendMeetQ: false,
+        sendMeetF: false,
+        time: null,
+        startdate: { AD: null, BE: null },
+        repdate: { AD: null, BE: null },
+      };
+
+      vm.pic_desc;
+      $scope.modelpredict = {
+        rai: null,
+        result: null,
+        remark: null,
+        diffdays: null,
+      };
+
+      $scope.isOpen = false;
+      $scope.isOpens = false;
+
       $scope.resultChange = function (val) {
         if (val <= 0) {
           $scope.modelpredict.result = null;
@@ -39,19 +61,10 @@ angular
         }
       };
 
-      $scope.isOpen = false;
-
       $scope.dChange = function () {
         console.log($scope.myDate);
       };
 
-      vm.pic_desc;
-      $scope.modelpredict = {
-        rai: null,
-        result: null,
-        remark: null,
-        diffdays: null,
-      };
       //modal
       $ionicModal
         .fromTemplateUrl("list_wo.html", {
@@ -98,79 +111,39 @@ angular
             (1000 * 60 * 60 * 24)
         );
       };
-      //console.log(date_diff_indays('2020-02-01', '2020-01-01'));
-      // //console.log(date_diff_indays('12/02/2014', '11/04/2014'));
-
-      vm.save = function (e) {
-        if (
-          $scope.model.date1 &&
-          $scope.model.date2 &&
-          $scope.subDetail &&
-          $scope.datapredict.length > 0
-        ) {
-          //console.log($scope.model);
-          //console.log($scope.datapredict);
-          //console.log($scope.subDetail);
-        }
-      };
-
-      $scope.model = {
-        date1: null,
-        date2: null,
-        sendMeetQ: false,
-        sendMeetF: false,
-        time: null,
-        startdate: { AD: null, BE: null },
-      };
 
       let platform = ionic.Platform.platform();
 
-      vm.pickdate1 = function (e) {
-        if (platform == "android" || platform == "ios") {
-          document.addEventListener("deviceready", function () {
-            let k = Service.pickdate();
-            k.then(function suss(data) {
-              $scope.model.date1 = data;
-              return;
-            });
-          });
-        } else {
-          $scope.data = {};
+      $scope.$watch(
+        function () {
+          return $scope.model.daterep;
+        },
+        function (newData, oldData) {
+          if ($scope.model.daterep) {
+            let split = $scope.model.daterep.split("-");
+            //console.log(split)
+            let month = [
+              "มกราคม",
+              "กุมภาพันธ์",
+              "มีนาคม",
+              "เมษายน",
+              "พฤษภาคม",
+              "มิถุนายน",
+              "กรกฎาคม",
+              "สิงหาคม",
+              "กันยายน",
+              "ตุลาคม",
+              "พฤศจิกายน",
+              "ธันวาคม",
+            ];
 
-          // An elaborate, custom popup
-          var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="data.date">',
-            title: "Enter Date Ex 25-04-2562",
-            subTitle: "ป้อนข้อูลตามรูปแบบ",
-            scope: $scope,
-            buttons: [
-              {
-                text: "Cancel",
-              },
-              {
-                text: "<b>Save</b>",
-                type: "button-positive",
-                onTap: function (e) {
-                  if (!$scope.data.date) {
-                    //don't allow the user to close unless he enters wifi password
-                    e.preventDefault();
-                  } else {
-                    return $scope.data.date;
-                  }
-                },
-              },
-            ],
-          });
-
-          myPopup.then(function (data) {
-            $scope.model.date1 = data;
-            //console.log($scope.model.date1);
-            return;
-          });
+            let y = parseInt(split[0]) + 543;
+            let m = month[parseInt(split[1]) - 1];
+            let d = parseInt(split[2]);
+            $scope.showDateRep = d + " " + m + " " + y;
+          }
         }
-      };
-
-      //  $scope.model.date2
+      );
 
       $scope.$watch(
         function () {
@@ -208,20 +181,21 @@ angular
           }
         }
       );
-
-      var monthArr = new Array();
-      monthArr[0] = "มกราคม";
-      monthArr[1] = "กุมภาพันธ์";
-      monthArr[2] = "มีนาคม";
-      monthArr[3] = "เมษายน";
-      monthArr[4] = "พฤษภาคม";
-      monthArr[5] = "มิถุนายน";
-      monthArr[6] = "กรกฎาคม";
-      monthArr[7] = "สิงหาคม";
-      monthArr[8] = "กันยายน";
-      monthArr[9] = "ตุลาคม";
-      monthArr[10] = "พฤศจิกายน";
-      monthArr[11] = "ธันวาคม";
+      {
+        var monthArr = new Array();
+        monthArr[0] = "มกราคม";
+        monthArr[1] = "กุมภาพันธ์";
+        monthArr[2] = "มีนาคม";
+        monthArr[3] = "เมษายน";
+        monthArr[4] = "พฤษภาคม";
+        monthArr[5] = "มิถุนายน";
+        monthArr[6] = "กรกฎาคม";
+        monthArr[7] = "สิงหาคม";
+        monthArr[8] = "กันยายน";
+        monthArr[9] = "ตุลาคม";
+        monthArr[10] = "พฤศจิกายน";
+        monthArr[11] = "ธันวาคม";
+      }
 
       function startDate() {
         var d = new Date(),
@@ -242,7 +216,7 @@ angular
 
       startDate();
 
-      $scope.mdDateChange = function (date, e) {
+      $scope.mdDateChange = function (date) {
         var d = new Date(date),
           month = "" + (d.getMonth() + 1),
           day = "" + d.getDate(),
@@ -257,49 +231,19 @@ angular
         $scope.model.startdate.BE = [day, monthBE, year + 543].join(" ");
       };
 
-      vm.pickdate2 = function (e) {
-        if (platform == "android" || platform == "ios") {
-          document.addEventListener("deviceready", function () {
-            let k = Service.pickdate();
-            k.then(function suss(data) {
-              $scope.model.date2 = data;
-              return;
-            });
-          });
-        } else {
-          $scope.data = {};
+      $scope.mdDateRepChange = function (date) {
+        var d = new Date(date),
+          month = "" + (d.getMonth() + 1),
+          day = "" + d.getDate(),
+          year = d.getFullYear();
 
-          // An elaborate, custom popup
-          var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="data.date">',
-            title: "Enter Date Ex 25-04-2562",
-            subTitle: "ป้อนข้อูลตามรูปแบบ",
-            scope: $scope,
-            buttons: [
-              {
-                text: "Cancel",
-              },
-              {
-                text: "<b>Save</b>",
-                type: "button-positive",
-                onTap: function (e) {
-                  if (!$scope.data.date) {
-                    //don't allow the user to close unless he enters wifi password
-                    e.preventDefault();
-                  } else {
-                    return $scope.data.date;
-                  }
-                },
-              },
-            ],
-          });
+        monthAD = month;
+        if (month.length < 2) monthAD = "0" + month;
+        if (day.length < 2) day = "0" + day;
 
-          myPopup.then(function (data) {
-            $scope.model.date2 = data;
-            //console.log($scope.model.date1);
-            return;
-          });
-        }
+        $scope.model.daterep = [year, monthAD, day].join("-");
+        monthBE = monthArr[month - 1];
+        $scope.model.repdate.BE = [day, monthBE, year + 543].join(" ");
       };
 
       vm.picktime = function () {
@@ -346,12 +290,7 @@ angular
         }
       };
 
-      $scope.datapredict = [];
-
       vm.confirm = function () {
-        //console.log($scope.woSelected)
-        //console.log($scope.model);
-        //console.log($scope.modelpredict)
         if (
           $scope.model.date2 &&
           $scope.modelpredict.rai &&
@@ -368,63 +307,61 @@ angular
 
           $mdDialog.show(confirm).then(
             function () {
-              // $ionicLoading.show();
-
               let req = {
                 mode: "confirm",
                 wo: $scope.woSelected,
                 model: $scope.model,
                 predict: $scope.modelpredict,
               };
+              $ionicLoading.show();
 
               console.log(req);
 
-              // fachttp.model("predictPlant.php", req).then(
-              //   function suscess(response) {
-              //     $ionicLoading.hide();
+              fachttp.model("predictPlant.php", req).then(
+                function suscess(response) {
+                  $ionicLoading.hide();
 
-              //     delete $scope.woSelected;
-              //     $scope.model = {
-              //       date1: null,
-              //       date2: null,
-              //       sendMeetQ: false,
-              //       sendMeetF: false,
-              //       time: null,
-              //     };
-              //     $scope.modelpredict = {
-              //       rai: null,
-              //       result: null,
-              //       remark: null,
-              //       diffdays: null,
-              //     };
-              //     $ionicScrollDelegate.resize();
-              //     //console.log(response.data)
-              //     $mdDialog
-              //       .show(
-              //         $mdDialog
-              //           .alert()
-              //           .parent(
-              //             angular.element(
-              //               document.querySelector("#popupContainer")
-              //             )
-              //           )
-              //           .clickOutsideToClose(true)
-              //           .title("แจ้งเตือน")
-              //           .textContent("บันทึกข้อมูลสำเร็จ")
-              //           .ariaLabel("Alert Dialog Demo")
-              //           .ok("OK")
-              //           .targetEvent()
-              //       )
-              //       .then(
-              //         function (answer) {},
-              //         function () {}
-              //       );
-              //   },
-              //   function err(err) {
-              //     $ionicLoading.hide();
-              //     //console.log(err)
-              //   }
-              // );
+                  delete $scope.woSelected;
+                  $scope.model = {
+                    date1: null,
+                    date2: null,
+                    sendMeetQ: false,
+                    sendMeetF: false,
+                    time: null,
+                  };
+                  $scope.modelpredict = {
+                    rai: null,
+                    result: null,
+                    remark: null,
+                    diffdays: null,
+                  };
+                  $ionicScrollDelegate.resize();
+                  $mdDialog
+                    .show(
+                      $mdDialog
+                        .alert()
+                        .parent(
+                          angular.element(
+                            document.querySelector("#popupContainer")
+                          )
+                        )
+                        .clickOutsideToClose(true)
+                        .title("แจ้งเตือน")
+                        .textContent("บันทึกข้อมูลสำเร็จ")
+                        .ariaLabel("Alert Dialog Demo")
+                        .ok("OK")
+                        .targetEvent()
+                    )
+                    .then(
+                      function (answer) {},
+                      function () {}
+                    );
+                },
+                function err(err) {
+                  $ionicLoading.hide();
+                  //console.log(err)
+                }
+              );
             },
             function () {}
           );
