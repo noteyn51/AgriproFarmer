@@ -22,6 +22,23 @@ angular
     ) {
       let vm = this;
       $scope.myDate = new Date();
+
+      $scope.resultChange = function (val) {
+        if (val <= 0) {
+          $scope.modelpredict.result = null;
+        } else {
+          $scope.modelpredict.result = val;
+        }
+      };
+
+      $scope.raiChange = function (val) {
+        if (val <= 0) {
+          $scope.modelpredict.rai = null;
+        } else {
+          $scope.modelpredict.rai = val;
+        }
+      };
+
       $scope.isOpen = false;
 
       $scope.dChange = function () {
@@ -36,35 +53,35 @@ angular
         diffdays: null,
       };
       //modal
-        $ionicModal
-          .fromTemplateUrl("list_wo.html", {
-            scope: $scope,
-            animation: "slide-in-up",
-          })
-          .then(function (modal) {
-            $scope.modalListWo = modal;
-          });
-
-        $scope.openModalListWo = function () {
-          let req = {
-            mode: "womstr",
-          };
-          fachttp.model("detail.php", req).then(
-            function suscess(response) {
-              console.log(response);
-              $scope.datawo = response.data.result;
-            },
-            function err(err) {}
-          );
-          $scope.modalListWo.show();
-        };
-        $scope.closeModalListWo = function () {
-          $scope.modalListWo.hide();
-        };
-        // Cleanup the modal when we're done with it!
-        $scope.$on("$destroy", function () {
-          $scope.modalListWo.remove();
+      $ionicModal
+        .fromTemplateUrl("list_wo.html", {
+          scope: $scope,
+          animation: "slide-in-up",
+        })
+        .then(function (modal) {
+          $scope.modalListWo = modal;
         });
+
+      $scope.openModalListWo = function () {
+        let req = {
+          mode: "womstr",
+        };
+        fachttp.model("detail.php", req).then(
+          function suscess(response) {
+            console.log(response);
+            $scope.datawo = response.data.result;
+          },
+          function err(err) {}
+        );
+        $scope.modalListWo.show();
+      };
+      $scope.closeModalListWo = function () {
+        $scope.modalListWo.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on("$destroy", function () {
+        $scope.modalListWo.remove();
+      });
 
       $scope.selectID = function (e) {
         $scope.woSelected = e;
@@ -331,39 +348,6 @@ angular
 
       $scope.datapredict = [];
 
-      vm.add = function () {
-        if (
-          $scope.modelpredict.rai &&
-          $scope.modelpredict.result &&
-          $scope.modelpredict.datestart &&
-          $scope.modelpredict.countdate
-        ) {
-          $scope.datapredict.push($scope.modelpredict);
-          //console.log($scope.modelpredict);
-          $scope.closeModaldataPredict();
-          $ionicScrollDelegate.resize();
-        } else {
-          $mdDialog
-            .show(
-              $mdDialog
-                .alert()
-                .parent(
-                  angular.element(document.querySelector("#popupContainer"))
-                )
-                .clickOutsideToClose(true)
-                .title("แจ้งเตือน")
-                .textContent("กรอกข้อมูลให้ครบถ้วน")
-                .ariaLabel("Alert Dialog Demo")
-                .ok("OK")
-                .targetEvent()
-            )
-            .then(
-              function (answer) {},
-              function () {}
-            );
-        }
-      };
-
       vm.confirm = function () {
         //console.log($scope.woSelected)
         //console.log($scope.model);
@@ -384,7 +368,7 @@ angular
 
           $mdDialog.show(confirm).then(
             function () {
-              $ionicLoading.show();
+              // $ionicLoading.show();
 
               let req = {
                 mode: "confirm",
@@ -393,52 +377,54 @@ angular
                 predict: $scope.modelpredict,
               };
 
-              fachttp.model("predictPlant.php", req).then(
-                function suscess(response) {
-                  $ionicLoading.hide();
+              console.log(req);
 
-                  delete $scope.woSelected;
-                  $scope.model = {
-                    date1: null,
-                    date2: null,
-                    sendMeetQ: false,
-                    sendMeetF: false,
-                    time: null,
-                  };
-                  $scope.modelpredict = {
-                    rai: null,
-                    result: null,
-                    remark: null,
-                    diffdays: null,
-                  };
-                  $ionicScrollDelegate.resize();
-                  //console.log(response.data)
-                  $mdDialog
-                    .show(
-                      $mdDialog
-                        .alert()
-                        .parent(
-                          angular.element(
-                            document.querySelector("#popupContainer")
-                          )
-                        )
-                        .clickOutsideToClose(true)
-                        .title("แจ้งเตือน")
-                        .textContent("บันทึกข้อมูลสำเร็จ")
-                        .ariaLabel("Alert Dialog Demo")
-                        .ok("OK")
-                        .targetEvent()
-                    )
-                    .then(
-                      function (answer) {},
-                      function () {}
-                    );
-                },
-                function err(err) {
-                  $ionicLoading.hide();
-                  //console.log(err)
-                }
-              );
+              // fachttp.model("predictPlant.php", req).then(
+              //   function suscess(response) {
+              //     $ionicLoading.hide();
+
+              //     delete $scope.woSelected;
+              //     $scope.model = {
+              //       date1: null,
+              //       date2: null,
+              //       sendMeetQ: false,
+              //       sendMeetF: false,
+              //       time: null,
+              //     };
+              //     $scope.modelpredict = {
+              //       rai: null,
+              //       result: null,
+              //       remark: null,
+              //       diffdays: null,
+              //     };
+              //     $ionicScrollDelegate.resize();
+              //     //console.log(response.data)
+              //     $mdDialog
+              //       .show(
+              //         $mdDialog
+              //           .alert()
+              //           .parent(
+              //             angular.element(
+              //               document.querySelector("#popupContainer")
+              //             )
+              //           )
+              //           .clickOutsideToClose(true)
+              //           .title("แจ้งเตือน")
+              //           .textContent("บันทึกข้อมูลสำเร็จ")
+              //           .ariaLabel("Alert Dialog Demo")
+              //           .ok("OK")
+              //           .targetEvent()
+              //       )
+              //       .then(
+              //         function (answer) {},
+              //         function () {}
+              //       );
+              //   },
+              //   function err(err) {
+              //     $ionicLoading.hide();
+              //     //console.log(err)
+              //   }
+              // );
             },
             function () {}
           );

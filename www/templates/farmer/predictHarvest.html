@@ -1,17 +1,19 @@
-<ion-view hide-back-button="false" cache-view="true">
+<ion-view hide-back-button="false" >
   <ion-nav-title> คาดการณ์เก็บเกี่ยว </ion-nav-title>
 
   <ion-content>
     <div class="list" style="box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4)">
       <div class="item item-button-right">
         <div ng-if="!woSelected" style="color: black">เลือกรหัสสั่งปลูก</div>
-        <div ng-if="woSelected" style="color: black">
-          รหัสสั่งปลูก : <a>{{woSelected.wo_lot}}</a>
-        </div>
-
         <div ng-if="!woSelected" style="color: red; font-size: medium">
           เลือก ID เพาะปลูก <i class="icon ion-information-circled"></i>
         </div>
+
+        <div ng-if="woSelected" style="color: black">
+          <a>รหัสสั่งปลูก : {{woSelected.wo_lot}}</a>
+        </div>
+
+      
         <div
           ng-if="woSelected"
           style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
@@ -110,6 +112,7 @@
           <label class="item item-input item-stacked-label">
             <span class="input-label">จำนวนไร่</span>
             <input
+            ng-change="raiChange(modelpredict.rai)"
               type="number"
               placeholder="จำนวนไร่"
               ng-model="modelpredict.rai"
@@ -118,6 +121,7 @@
           <label class="item item-input item-stacked-label">
             <span class="input-label">ผลผลิต</span>
             <input
+            ng-change="valueChange(modelpredict.result)"
               type="number"
               placeholder="ผลผลิต"
               ng-model="modelpredict.result"
@@ -135,31 +139,33 @@
           </label>
 
           <div></div>
+
+          <div class="item item-toggle">
+            ส่งการนัดนี้ไปยัง QC
+            <label class="toggle toggle-positive">
+              <input type="checkbox" ng-model="model.sendMeetQ" />
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
+  
+          <div class="item item-toggle">
+            ส่งการนัดนี้ไปยัง Farmer
+            <label class="toggle toggle-positive">
+              <input type="checkbox" ng-model="model.sendMeetF" />
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
         </div>
 
-        <div class="item item-toggle">
-          ส่งการนัดนี้ไปยัง QC
-          <label class="toggle toggle-positive">
-            <input type="checkbox" ng-model="model.sendMeetQ" />
-            <div class="track">
-              <div class="handle"></div>
-            </div>
-          </label>
-        </div>
-
-        <div class="item item-toggle">
-          ส่งการนัดนี้ไปยัง Farmer
-          <label class="toggle toggle-positive">
-            <input type="checkbox" ng-model="model.sendMeetF" />
-            <div class="track">
-              <div class="handle"></div>
-            </div>
-          </label>
-        </div>
+     
       </div>
     </div>
 
-    <div style="text-align: center; padding:10px">
+    <div style="text-align: center">
       <button
         ng-if="woSelected"
         type="button"
@@ -171,20 +177,7 @@
     </div>
   </ion-content>
 
-  <!-- <div
-    style="position: absolute; bottom: 0px; width: 100%; background: white"
-    ng-if="woSelected"
-  >
-    <div style="text-align: center; padding-left: 10px; padding-right: 10px">
-      <button
-        type="button"
-        class="button button-balanced button-block"
-        ng-click="vm.confirm()"
-      >
-        บันทึก
-      </button>
-    </div>
-  </div> -->
+  
 
   <script id="list_wo.html" type="text/ng-template">
     <ion-modal-view>
