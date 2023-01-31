@@ -732,25 +732,25 @@ angular
         },
       })
 
-      .state("app.predictPlant", {
-        url: "/predictPlant",
-        views: {
-          "tab-menu": {
-            templateUrl: "templates/farmer/plant/predictPlant.html",
-            controller: "predictPlantCtrl as vm",
-          },
-        },
-      })
+      // .state("app.predictPlant", {
+      //   url: "/predictPlant",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/predictPlant.html",
+      //       controller: "predictPlantCtrl as vm",
+      //     },
+      //   },
+      // })
 
-      .state("app.predictPlant2", {
-        url: "/predictPlant2/:list",
-        views: {
-          "tab-menu": {
-            templateUrl: "templates/farmer/plant/predictPlant2.html",
-            controller: "predictPlant2Ctrl as vm",
-          },
-        },
-      })
+      // .state("app.predictPlant2", {
+      //   url: "/predictPlant2/:list",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/predictPlant2.html",
+      //       controller: "predictPlant2Ctrl as vm",
+      //     },
+      //   },
+      // })
 
       .state("app.recordResult", {
         url: "/recordResult/:list",
