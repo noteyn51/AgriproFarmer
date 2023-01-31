@@ -22,6 +22,9 @@
   </style>
   <ion-content class="">
     <div class="list" style="border-radius: 15px">
+      <div class="item item-divider">
+        บันทึกข้อมูลการเพาะปลูก
+      </div>
       <div class="item item-avatar" ng-click="vm.addimg()">
         <img src="img/farming/image-add.png" />
         <div style="font-weight: bold">เพิ่มรูปภาพ</div>
@@ -40,7 +43,9 @@
         <div style="font-weight: bold">บันทึกกิจกรรม</div>
         <p>บันทึกกระบวนการเพาะปลูก</p>
       </div>
-
+      <div class="item item-divider">
+        รายการ Lot , รับเข้า
+      </div>
       <div ng-if="global.mob_config != 'INET027'">
         <div class="item item-avatar" ng-click="vm.recordEtc()">
           <img src="img/farming/qr.png" />
