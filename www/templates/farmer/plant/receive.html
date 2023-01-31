@@ -8,11 +8,10 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
-     
       <div class="item item-divider">
         รับเข้าแบบเป็น ต้น,ลูก สำหรับกระบวนการแยกต้น,ลูก
       </div>
-      <div class="item item-avatar" ng-click="vm.byDoc()">
+      <div class="item item-avatar" ng-click="vm.singleReceive()">
         <img src="img/farming/tree.png" />
         <div style="font-weight: bold">รับเข้าต้น</div>
 
@@ -26,18 +25,14 @@
         <p>รับลูกใหม่จากต้น ทุเรียน,มะพร้าว อื่นๆ</p>
       </div>
 
-      <div class="item item-divider">
-        รับเข้าแบบรวม สำหรับรับรวมกอง
-      </div>
+      <div class="item item-divider">รับเข้าแบบรวม สำหรับรับรวมกอง</div>
 
-      <div class="item item-avatar" ng-click="vm.byDoc()">
+      <div class="item item-avatar" ng-click="vm.multiReceive()">
         <img src="img/farming/allfruit.png" />
         <div style="font-weight: bold">รับเข้าแบบเป็นกอง</div>
 
-        <p>รับผลผลิตแบบรวมแยกเกรด A-F </p>
+        <p>รับผลผลิตแบบรวมแยกเกรด A-F</p>
       </div>
-     
-     
     </div>
 
     <script id="my-doc.html" type="text/ng-template">

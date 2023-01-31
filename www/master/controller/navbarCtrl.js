@@ -30,7 +30,9 @@ angular
         switch ($state.current.name) {
           case "app.predict":
             return true; 
-          case "app.receivelot":
+            case "app.singleReceive":
+              return true; 
+          case "app.multiReceive":
             return true; 
           case "app.farming":
             return true; 

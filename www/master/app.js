@@ -89,7 +89,6 @@ angular
       $rootScope.iplogin =
         "https://digimove.365supplychain.com/agripro/agri_ociv2/"; //365
 
-
       let platform = ionic.Platform.platform();
       if (platform == "android") {
         document.addEventListener(
@@ -152,7 +151,6 @@ angular
               $state.current.name == "app.farmerMenu" ||
               $state.current.name == "app.out"
             ) {
-            
             } else if ($state.current.name == "app.farmerlogin") {
               var Popup = $ionicPopup.confirm({
                 title: "<b>แจ้งเตือน !!</b>",
@@ -702,12 +700,22 @@ angular
         },
       })
 
-      .state("app.receivelot", {
-        url: "/receivelot",
+      .state("app.singleReceive", {
+        url: "/singlereceive",
         views: {
           "tab-menu": {
-            templateUrl: "templates/farmer/receivelot/receivelotList.html",
-            controller: "receivelotCtrl as vm",
+            templateUrl: "templates/farmer/receivelot/singleReceive.html",
+            controller: "singleReceiveCtrl as vm",
+          },
+        },
+      })
+
+      .state("app.multiReceive", {
+        url: "/multiReceive",
+        views: {
+          "tab-menu": {
+            templateUrl: "templates/farmer/receivelot/multiReceive.html",
+            controller: "multiReceiveCtrl as vm",
           },
         },
       })
@@ -1023,7 +1031,6 @@ angular
         },
       })
 
-
       .state("app.detail2-2", {
         url: "/detail2-2/:crop:detail:job", //:sub
         views: {
@@ -1124,7 +1131,6 @@ angular
         },
       })
 
-
       .state("app.predict", {
         url: "/predict",
         views: {
@@ -1134,7 +1140,6 @@ angular
           },
         },
       })
-
 
       ////EndMenu
 
@@ -1187,8 +1192,6 @@ angular
           },
         },
       })
-
-    
 
       .state("app.buysale", {
         url: "/buysale",
