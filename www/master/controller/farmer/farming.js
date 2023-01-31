@@ -99,10 +99,7 @@ angular
       $state.go("app.recordPlant");
     };
 
-    vm.predictPlant = function () {
-      $state.go("app.predictPlant");
-    };
-
+ 
     vm.recordResult = function() {
       $state.go("app.recordResult");
     };

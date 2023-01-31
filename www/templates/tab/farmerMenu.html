@@ -28,7 +28,6 @@
       }
 
       .txticon {
-        /* margin-top: -10%; */
         font-weight: bold;
       }
       .flexicon-text {
@@ -39,61 +38,7 @@
       }
     </style>
 
-    
-<!-- <div class="item " ng-hide="hideModel.todayAction " style="border-bottom: none;" ng-if="vm.route.resultToday">
-  <div style="font-size: larger;font-weight: bold;margin-bottom: 10px;    display: flex;
-  justify-content: space-between;">
-    <a>กิจกรรมที่ต้องทำวันนี้</a>
-    <i style="color:red" class="icon ion-close" ng-init="hideModel.todayAction = false" ng-click="hideModel.todayAction = !hideModel.todayAction"></i>
-  </div>
-
-  <div class="item "  style="
-  margin: 10px 0px 10px 0px;
-  border-radius: 20px;
-  display: flex;
-  padding: 0px;
-  height: 80px;"
-  ng-repeat="k in  vm.route.resultToday track by $index">
-       <div class="button" href="" style="width: 20%;
-       background-color: rgb(56,128,255);
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       flex-direction: column;
-       color: white;" ng-style="k.between == false && {'background-color': 'rgba(56,128,255,0.4)'} " ng-click="openModalMyId()">
-           <div>
-             {{k.subdatedesc}} 
-           </div>
-       
-         </div>
-    <div style="width: 60%;
-  padding: 5px;align-self: center;" ng-click="openModalMyId()">
-      <div class="dp-flex" style="justify-content: center;">
-        <a style="width: 100%;" ng-style="k.between == false && {'color': 'rgba(000,000,000, 0.4)'} "> 
-        <div style="font-weight: bold;font-size: larger;">
-         ID : {{idSelected.wo_lot}} | {{idSelected.pt_desc1}}  </div> 
-        <div style="text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;">
-          {{k.ro_desc}} </div> 
-      </a>
-     </div>
-     
-    </div>
-
-    <div class="button " href="" style="width: 20%;
-    background-color: rgb(56, 255, 99);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;font-weight: bold;"ng-style="k.between == false && {'background-color': 'rgba(56, 255, 99,0.4)'} " ng-click="vm.detail2(k)">
-        <div>
-          บันทึก
-        </div>
-      </div>
-
-  </div>
-</div> -->
+  
 
 
     <div style="padding: 15px;">
@@ -119,46 +64,45 @@
       </div>
 
       <div class="row">
-        <!-- <div class="col button bgmenuicon flexicon-text" ng-click="vm.environment()">
-          <img class="menuimg" src="img/menuicon/4.png" />
-          <div class="txticon">บันทึกสภาพแวดล้อม</div>
-        </div> -->
+
+        <div class="col button bgmenuicon flexicon-text" ng-click="vm.predict()">
+          <img class="menuimg" src="img/menuicon/12.png" />
+          <div class="txticon">คาดการเก็บเกี่ยว</div>
+        </div>
+   
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.meeting()">
           <img class="menuimg" src="img/menuicon/5.png" />
           <div class="txticon">ตารางนัด</div>
         </div>
 
+      
+      </div>
+
+      <div class="row">
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.accounting()">
           <img class="menuimg" src="img/menuicon/6.png" />
           <div class="txticon">บัญชีซื้อ-ขาย</div>
         </div>
-      </div>
-
-      <div class="row">
-        <!-- <div class="col button bgmenuicon flexicon-text" >
-          <img class="menuimg" src="img/menuicon/6.png" />
-          <div class="txticon">บัญชีซื้อ-ขาย</div>
-        </div> -->
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.news()">
           <img class="menuimg" src="img/menuicon/7.png" />
           <div class="txticon">ข่าวสารองค์กร</div>
         </div>
 
+      </div>
+
+      <div class="row">
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.weather()">
           <img class="menuimg" src="img/menuicon/8.png" />
           <div class="txticon">กรมอุตุนิยมวิทยา</div>
         </div>
-      </div>
-
-      <div class="row">
-        <!-- <div class="col button bgmenuicon flexicon-text" ng-click="vm.weather()">
-          <img class="menuimg" src="img/menuicon/8.png" />
-          <div class="txticon">กรมอุตินิยมวิทยา</div>
-        </div> -->
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.controliot()">
           <img class="menuimg" src="img/menuicon/9.png" />
           <div class="txticon">ควบคุมอุปกรณ์</div>
         </div>
+      
+      </div>
+      <div class="row">
+
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.martDash()" 
         ng-if="global.agripro_mart">
           <img class="menuimg" src="img/mart/1.png" />
@@ -166,74 +110,10 @@
         </div>
       </div>
 
-      <!-- <div class="row">
-
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.martDash()">
-          <img class="menuimg" src="img/mart/1.png" />
-          <div class="txticon">AgriPro Mart</div>
-        </div>
-      </div> -->
  
     </div>
-    </div>
 
-    <!-- <div class="list card" style="border-radius: 15px;">
-      <div class="item item-divider" style="text-align: center;">
-        <p>{{global.mob_id}}</p>
-        <p>{{global.mob_fname}} {{global.mob_lname}}</p>
-      </div>
-
-      <div class="item item-avatar" ng-click="vm.weather()">
-        <img src="img/menuicon/2.png" />
-        <h2>สภาพอากาศกรมอุตุนิยมวิทยา</h2>
-        <p>พยากรณ์อากาศ - สภาพอากาศ</p>
-      </div>
-
-      <div class="item item-avatar" ng-click="vm.news()">
-        <img
-          src="https://i.pinimg.com/originals/3c/a7/23/3ca723f4575d119b3d311138e9d3e7aa.png"
-        />
-        <h2>ข่าวสารองค์กร</h2>
-        <p>ข่าวจากองค์กร - ประกาศ</p>
-      </div>
-      <div class="item item-avatar" ng-click="vm.area()">
-        <img src="img/menuicon/area.png" />
-        <h2>พื้นที่เพาะปลูก</h2>
-        <p>ดูข้อมูล - กำหนดพื้นที่เพาะปลูก</p>
-      </div>
-
-      <div class="item item-avatar" ng-click="vm.farming()">
-        <img src="img/agri.png" />
-        <h2>จัดการการเพาะปลูก <a style="color: red;"></a></h2>
-        <p>เพิ่มรายการ - แก้ไขรายการ</p>
-      </div>
-
-      <div class="item item-avatar" ng-click="vm.buysale()">
-        <img
-          src="data:image/png;base64,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"
-        />
-        <h2>บัญชีซื้อ - ขาย<a style="color: red;"></a></h2>
-        <p>รายการบัญชีซื้อ - ขาย</p>
-      </div>
-
-      <div class="item item-avatar" ng-click="vm.blackup()">
-        <img src="img/menuicon/6.png" />
-        <h2>ดูข้อมูลย้อนหลัง</h2>
-        <p>ดูข้อมูลย้อนหลัง อุณหภูมิ,ความชื้น</p>
-      </div>
-
-      <div class="item item-avatar" ng-click="vm.controliot()">
-        <img src="img/menuicon/7.png" />
-        <h2>ควบคุมอุปกรณ์ IOT</h2>
-        <p>Dashboard ตั้งค่าการทำงาน ควบคุมอุปกรณ์</p>
-      </div>
-
-      <div class="item item-avatar" ng-click="vm.logout()">
-        <img src="img/menuicon/8.png" />
-        <h2 style="margin-top: 10px; padding-bottom: 10px;">Logout</h2>
-      </div>
-    </div> -->
-    <!-- <button class="button button-assertive" ng-click="share()">share</button> -->
+  
   </ion-content>
 
 
@@ -242,7 +122,6 @@
         <ion-header-bar>
             <button type="button" class="button button-assertive button-clear" ng-click="closeModalMyId()">close</button>
           <h1 class="title" style="text-align:center">รายการเพาะปลูก</h1>
-          <!-- <button type="button" class="button icon ion-trash-a button-assertive button-outline" ng-click="vm.deleteCrop()" ></button> -->
         </ion-header-bar>
         <ion-content >
           <div class="list" >
@@ -262,9 +141,7 @@
                     <span ng-if="x.mim_status == 'CONFIRM'"><i style="color:green" class="icon ion-checkmark-circled"></i></span>
                     {{x.ml_status_desc}}</a>
               </div>
-              <!-- <h2>{{x.subdatedesc}}</h2> -->
       
-              <!-- <div ng-style="x.ml_status_desc == 'ชำระเงินแล้ว' ?  {'background-color':'green'} : {'background-color': 'yellow'}" style="width:200px;height:100px;border:1px solid gray;"></div> -->
               <div  class="dp-flex"> 
                 <a>วันที่เริ่มปลูก : {{x.datedesc}}</a>
                 <a style="color:green;font-weight: bold;">{{x.mid_total | currency : value="฿ "}}</a>

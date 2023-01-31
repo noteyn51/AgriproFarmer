@@ -732,25 +732,25 @@ angular
         },
       })
 
-      .state("app.predictPlant", {
-        url: "/predictPlant",
-        views: {
-          "tab-menu": {
-            templateUrl: "templates/farmer/plant/predictPlant.html",
-            controller: "predictPlantCtrl as vm",
-          },
-        },
-      })
+      // .state("app.predictPlant", {
+      //   url: "/predictPlant",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/predictPlant.html",
+      //       controller: "predictPlantCtrl as vm",
+      //     },
+      //   },
+      // })
 
-      .state("app.predictPlant2", {
-        url: "/predictPlant2/:list",
-        views: {
-          "tab-menu": {
-            templateUrl: "templates/farmer/plant/predictPlant2.html",
-            controller: "predictPlant2Ctrl as vm",
-          },
-        },
-      })
+      // .state("app.predictPlant2", {
+      //   url: "/predictPlant2/:list",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/predictPlant2.html",
+      //       controller: "predictPlant2Ctrl as vm",
+      //     },
+      //   },
+      // })
 
       .state("app.recordResult", {
         url: "/recordResult/:list",
@@ -1023,15 +1023,6 @@ angular
         },
       })
 
-      // .state("app.detail2", {
-      //   url: "/detail2/:crop:sub",
-      //   views: {
-      //     "tab-detail": {
-      //       templateUrl: "templates/farmer/detail/detail2.html",
-      //       controller: "detail2Ctrl as vm",
-      //     },
-      //   },
-      // })
 
       .state("app.detail2-2", {
         url: "/detail2-2/:crop:detail:job", //:sub
@@ -1133,6 +1124,20 @@ angular
         },
       })
 
+
+      .state("app.predict", {
+        url: "/predict",
+        views: {
+          "tab-menu": {
+            templateUrl: "templates/farmer/predictHarvest.html",
+            controller: "predictHarvestCtrl as vm",
+          },
+        },
+      })
+
+
+      ////EndMenu
+
       .state("app.editpassword", {
         url: "/appsetting/editpassword",
         views: {
@@ -1183,147 +1188,7 @@ angular
         },
       })
 
-      // .state("app.area", {
-      //   url: "/area",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/area.html",
-      //       controller: "areaCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.add1", {
-      //   url: "/add1",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/add1.html",
-      //       controller: "addCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.add2", {
-      //   url: "/add2",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/add2.html",
-      //       controller: "add2Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.add3", {
-      //   url: "/add3",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/add3.html",
-      //       controller: "add3Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.add4", {
-      //   url: "/add4/:crop",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/add4.html",
-      //       controller: "add4Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.add5", {
-      //   url: "/add5/:crop:sub",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/add5.html",
-      //       controller: "add5Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.add6", {
-      //   url: "/add6/:cropMstr:areaMstr",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/add6.html",
-      //       controller: "add6Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.createArea", {
-      //   url: "/createArea",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/createArea.html",
-      //       controller: "createAreaCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      //farmer
-
-      // .state("app.dashboard", {
-      //   url: "/dashboard",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/dashboard.html",
-      //       controller: "dashboardCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.newsetting", {
-      //   url: "/newsetting",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/newsetting.html",
-      //       controller: "newsettingCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.startPlant", {
-      //   url: "/startPlant",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/plant/startPlant.html",
-      //       controller: "startPlantCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.startPlant2", {
-      //   url: "/startPlant2/:list",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/plant/startPlant2.html",
-      //       controller: "startPlant2Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.startPlant3", {
-      //   url: "/startPlant3/:list/:sub/:crop",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/plant/startPlant3.html",
-      //       controller: "startPlant3Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.withdraw", {
-      //   url: "/withdraw",
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: "templates/farmer/plant/withdraw.html",
-      //       controller: "withdrawCtrl as vm",
-      //     },
-      //   },
-      // })
+    
 
       .state("app.buysale", {
         url: "/buysale",
@@ -1498,8 +1363,8 @@ angular
         angular.merge(req, e);
         return $http.post(
           // "http://localhost/agri_ociv2/model/"+file,
-          // "http://192.168.9.48/agri_ociv3/model/" + file,
-          "https://digimove.365supplychain.com/agripro/agri_ociv3/model/" +file,
+          "http://192.168.9.54/agri_ociv3/model/" + file,
+          // "https://digimove.365supplychain.com/agripro/agri_ociv3/model/" +file,
           req,
           pms
         );

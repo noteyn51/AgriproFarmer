@@ -24,42 +24,12 @@ angular
         height: "calc(100%)",
       };
 
-      function active() {
-        let url = $rootScope.ip + "onesig.php"; //'http://192.168.9.172/agriprophp/login.php'
-
-        let req = {
-          mode: "checkActive",
-          value: $rootScope.global,
-        };
-        if ($rootScope.ip) {
-          $http.post(url, req).then(function suscess(response) {
-            // //console.log(response.data)
-            if (
-              response.data.status == true &&
-              response.data.result.length > 0
-            ) {
-              vm.activeMat = response.data.result;
-              $scope.ww = true;
-              $scope.myScroll = {
-                height: "calc(100% - 50px)",
-                "margin-top": "-16px",
-              };
-            } else {
-              $scope.ww = false;
-              $scope.myScroll = {
-                height: "calc(100%)",
-              };
-            }
-          });
-        }
-      }
-
-      // active();
-      // let loopActive = setInterval(active, 10000);
 
       $scope.shouldHide = function () {
         // //console.log($state.current.name);
         switch ($state.current.name) {
+          case "app.predict":
+            return true; 
           case "app.receivelot":
             return true; 
           case "app.farming":

@@ -1,280 +1,218 @@
-<ion-view hide-back-button="false" cache-view="true">
+<ion-view hide-back-button="false" >
   <ion-nav-title> คาดการณ์เก็บเกี่ยว </ion-nav-title>
 
-  <ion-content s>
-    <style>
-      .scroll {
-        height: 100%;
-      }
-
-    </style>
-
-    <div class="list" style=" box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4);">
-
-
+  <ion-content>
+    <div class="list" style="box-shadow: 0 0.1px 3px rgba(0, 0, 0, 0.4)">
       <div class="item item-button-right">
-        <div ng-if="!woSelected" style="color:black">เลือกรหัสสั่งปลูก</div>
-        <div ng-if="woSelected" style="color:black">รหัสสั่งปลูก : <a>{{woSelected.wo_lot}}</a></div>
+        <div ng-if="!woSelected" style="color: black">เลือกรหัสสั่งปลูก</div>
+        <div ng-if="!woSelected" style="color: red; font-size: medium">
+          เลือก ID เพาะปลูก <i class="icon ion-information-circled"></i>
+        </div>
 
-        <div ng-if="!woSelected" style="color:red;font-size: medium;">Please select ID <i
-            class="icon ion-information-circled"></i></div>
-        <div ng-if="woSelected" style="overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;"><a style="color:black">รายละเอียด :</a> <a>{{woSelected.pt_desc1}}</a></div>
+        <div ng-if="woSelected" style="color: black">
+          <a>รหัสสั่งปลูก : {{woSelected.wo_lot}}</a>
+        </div>
 
-        <div ng-if="woSelected" style="overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;"><a style="color:black">เกษตรกร :</a> <a>{{woSelected.frm_fname}}
-            {{woSelected.frm_lname}}</a></div>
+      
+        <div
+          ng-if="woSelected"
+          style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
+        >
+          <a style="color: black">รายละเอียด :</a>
+          <a>{{woSelected.pt_desc1}}</a>
+        </div>
 
-        <div ng-if="woSelected" style="overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;"><a style="color:black">วันที่ปลูก :</a> <a>{{woSelected.datedesc}}</a></div>
+        <div
+          ng-if="woSelected"
+          style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
+        >
+          <a style="color: black">วันที่ปลูก :</a>
+          <a>{{woSelected.datedesc}}</a>
+        </div>
 
-<div ng-if="woSelected" style="overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;"><a style="color:black">จำนวนวัน ณ ตอนนี้ :</a> <a>{{woSelected.difdate}} วัน</a></div>
+        <div
+          ng-if="woSelected"
+          style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
+        >
+          <a style="color: black">จำนวนวัน ณ ตอนนี้ :</a>
+          <a>{{woSelected.difdate}} วัน</a>
+        </div>
 
-
-        <button class="button button-positive" style="margin-top: 4%;" ng-click="openModalListWo()">
+        <button
+          class="button button-positive"
+          style="margin-top: 4%"
+          ng-click="openModalListWo()"
+        >
           <i class="icon ion-compose"></i>
         </button>
       </div>
 
-
-
-
-
-
-
       <div ng-if="woSelected">
+
         <a class="item item-button-right">
-          <div>คาดการณ์วันเก็บจริง</div>
+          <div>วันติดดอก</div>
 
-          <div ng-if="!model.date2" style="color:red;font-size: medium;">เลือกวันที่คาดการณ์ <i
-              class="icon ion-information-circled"></i></div>
-          <div ng-if="model.date2" style="color:gray;font-size: medium;">{{showDate}}</div>
+          <div ng-if="!model.daterep" style="color: red; font-size: medium">
+            เลือกวันที่ติดดอก <i class="icon ion-information-circled"></i>
+          </div>
+          <div ng-if="model.daterep" style="color: gray; font-size: medium">
+            {{showDateRep}}
+          </div>
 
-
-
-          <button class="button button-positive" style="margin-top: 4%;" ng-click="ctrl.isOpen = true">
+          <button
+            class="button button-positive"
+            style="margin-top: 4%"
+            ng-click="ctrl.isOpens = true"
+          >
             <i class="icon ion-calendar"></i>
           </button>
 
-          <md-datepicker ng-model="raw.dateStart"  ng-change="mdDateChange(raw.dateStart,model.date)" md-placeholder="Enter date" md-is-open="ctrl.isOpen" 
-          style="position: fixed;
-          display: flex;
-          margin-top: 20px;
-          right: 0;">
-        </md-datepicker>
+          <md-datepicker
+            ng-model="raw.daterep"
+            ng-change="mdDateRepChange(raw.daterep)"
+            md-placeholder="Enter date"
+            md-is-open="ctrl.isOpens"
+            style="position: fixed; display: flex; margin-top: 20px; right: 0"
+          >
+          </md-datepicker>
         </a>
 
         <a class="item item-button-right">
-            <div>เวลาวันเก็บจริง</div>
-  
-            <div ng-if="!model.time" style="color:red;font-size: medium;">เลือกเวลา <i
-                class="icon ion-information-circled"></i></div>
-            <div ng-if="model.time" style="color:gray;font-size: medium;">{{model.time}}</div>
-  
-  
-  
-            <button class="button button-positive" style="margin-top: 4%;" ng-click="vm.picktime()">
-              <i class="icon ion-clock"></i>
-            </button>
-          </a>
+          <div>คาดการณ์วันเก็บจริง</div>
 
-        <a class="item" >
-          <div style="display: flex;justify-content: space-between;">
+          <div ng-if="!model.date2" style="color: red; font-size: medium">
+            เลือกวันที่คาดการณ์ <i class="icon ion-information-circled"></i>
+          </div>
+          <div ng-if="model.date2" style="color: gray; font-size: medium">
+            {{showDate}}
+          </div>
+
+          <button
+            class="button button-positive"
+            style="margin-top: 4%"
+            ng-click="ctrl.isOpen = true"
+          >
+            <i class="icon ion-calendar"></i>
+          </button>
+
+          <md-datepicker
+            ng-model="raw.dateStart"
+            ng-change="mdDateChange(raw.dateStart)"
+            md-placeholder="Enter date"
+            md-is-open="ctrl.isOpen"
+            style="position: fixed; display: flex; margin-top: 20px; right: 0"
+          >
+          </md-datepicker>
+        </a>
+
+        <a class="item item-button-right">
+          <div>เวลาวันเก็บจริง</div>
+
+          <div ng-if="!model.time" style="color: red; font-size: medium">
+            เลือกเวลา <i class="icon ion-information-circled"></i>
+          </div>
+          <div ng-if="model.time" style="color: gray; font-size: medium">
+            {{model.time}}
+          </div>
+
+          <button
+            class="button button-positive"
+            style="margin-top: 4%"
+            ng-click="vm.picktime()"
+          >
+            <i class="icon ion-clock"></i>
+          </button>
+        </a>
+
+        <a class="item">
+          <div style="display: flex; justify-content: space-between">
             <div>จำนวนวันที่ปลูก</div>
             <div>{{modelpredict.diffdays}}</div>
           </div>
         </a>
 
+        <div
+          class="item item-divider item-button-right"
+          style="height: 50px; display: flex; align-items: center"
+        >
+          <div>คาดการณ์เก็บเกี่ยว</div>
+        </div>
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">จำนวนไร่<a style="color: red;" ng-if="!modelpredict.rai">*</a></span>
+            <input
+            ng-change="raiChange(modelpredict.rai)"
+              type="number"
+              placeholder="จำนวนไร่"
+              ng-model="modelpredict.rai"
+            />
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">ผลผลิตที่คาดการณ์ (KG)<a style="color: red;" ng-if="!modelpredict.result">*</a></span>
+            <input
+            ng-change="valueChange(modelpredict.result)"
+              type="number"
+              placeholder="ผลผลิต"
+              ng-model="modelpredict.result"
+            />
+          </label>
 
-     
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">หมายเหตุ</span>
+            <input
+              type="text"
+              placeholder="หมายเหตุ"
+              maxlength="100"
+              ng-model="modelpredict.remark"
+            />
+          </label>
 
+          <div></div>
 
-
-
-      <div class="item item-divider item-button-right" style="height: 50px;
-      display: flex;
-      align-items: center;" >
-        <div>คาดการณ์เก็บเกี่ยว</div>
-
-      </div>
-      <div class="list">
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">จำนวนไร่</span>
-          <input type="number" placeholder="จำนวนไร่" ng-model="modelpredict.rai">
-        </label>
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">ผลผลิต</span>
-          <input type="number" placeholder="ผลผลิต" ng-model="modelpredict.result">
-        </label>
-
-
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">หมายเหตุ</span>
-          <input type="text" placeholder="หมายเหตุ" maxlength="100" ng-model="modelpredict.remark">
-        </label>
-
-        <div>
-
+          <!-- <div class="item item-toggle">
+            ส่งการนัดนี้ไปยัง QC
+            <label class="toggle toggle-positive">
+              <input type="checkbox" ng-model="model.sendMeetQ" />
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div>
+  
+          <div class="item item-toggle">
+            ส่งการนัดนี้ไปยัง Farmer
+            <label class="toggle toggle-positive">
+              <input type="checkbox" ng-model="model.sendMeetF" />
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </div> -->
         </div>
 
-
-      </div>
-
-
-
-      <div class="item item-toggle">
-        ส่งการนัดนี้ไปยัง QC
-        <label class="toggle toggle-positive">
-          <input type="checkbox" ng-model="model.sendMeetQ">
-          <div class="track">
-            <div class="handle"></div>
-          </div>
-        </label>
-      </div>
-
-      <div class="item item-toggle">
-        ส่งการนัดนี้ไปยัง Farmer
-        <label class="toggle toggle-positive">
-          <input type="checkbox" ng-model="model.sendMeetF">
-          <div class="track">
-            <div class="handle"></div>
-          </div>
-        </label>
+     
       </div>
     </div>
 
-</div>
-
-
-
-
-
-    <br>
-    <br>
-    <br>
-
-
-      <!-- <div flex-gt-xs>
-        <h4>Standard date-picker</h4>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date"  ng-change="dChange()"></md-datepicker>
-      </div> -->
-
-
-  
-
-
-  </ion-content>
-
-
-  <div style="position: absolute; bottom: 0px; width: 100%; background: white;" ng-if="woSelected">
-    <div style="text-align: center; padding-left: 10px; padding-right: 10px;">
-      <button type="button" class="button button-balanced button-block" ng-click="vm.confirm()">
+    <div style="text-align: center">
+      <button
+        ng-if="woSelected"
+        type="button"
+        class="button button-balanced button-block"
+        ng-click="vm.confirm()"
+      >
         บันทึก
       </button>
     </div>
-  </div>
+  </ion-content>
 
-  <script id="list_map.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar style="text-align:center;background:white">
   
-          <h1 class="title" >รายการแปลง</h1>
-          <button type="button" class="button button-assertive button-clear " ng-click="closeModalListmap()">Close</button>
-        </ion-header-bar>
-        <ion-content  style="background:#f5f5f5">
-  
-          <div class="card" style="height:110px;display: flex;
-          flex-flow: row wrap;" ng-repeat="k in subfarm" ng-click="vm.selectSubBefore(k,$index)">
-  
-        <div style="height: 100%;
-                  width: 30%;">
-          <!-- <img style="height: 100%;
-                          width: 100%;
-                          padding: 4px;
-                          max-width:200px;" src=""> -->
-                          <div id="{{$index}}" class="map_list"></div>
-        </div>
-  
-        <div style="height: 100%; width: 70%;display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;" >
-  
-          <div style="font-weight:bold;font-weight: bold;
-          font-size: 18px;">พื้นที่ {{k.farm_name}} แปลงที่ {{k.sup_sub_id}}</div>
-          <div> {{k.sub_area_farm}} ไร่ {{k.sub_area_work}} งาน {{k.sub_area_wah}} ตารางวา</div>
-          <div style="    text-align: center;
-          padding: 5px;">บ้านเลขที่ {{k.farm_village_no}} แขวง {{k.farm_district}} เขต {{k.farm_amphur}} จังหวัด {{k.farm_province}}</div>
-  
-  
-  
-        </div>
-  
-      </div>
-  
-        </ion-content>
-      </ion-modal-view>
-    </script>
-
-  <script id="list_Crop.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar style="text-align:center;background:white">
-  
-          <h1 class="title" >รายการแปลง</h1>
-          <button type="button" class="button button-assertive button-clear " ng-click="closeModalListcrop()">Close</button>
-        </ion-header-bar>
-        <ion-content  style="">
-          <div class="list">
-  
-            <div class="item item-button-right"  ng-repeat="k in dataCropwo"> 
-              <div>
-                <a style="color:black">
-                  รุ่นการเพาะปลูก : 
-                </a>
-                <a>
-                {{k.crop_code}}
-  
-                </a>
-              </div>
-  
-              <div>
-             
-                <a style="color:black">
-                  รายละเอียด :
-                </a>
-                <a>
-                  {{k.crop_desc}}
-  
-                </a>
-  
-  
-              </div>
-  
-  
-              <button class="button button-positive" ng-click="vm.selectCrop(k,$index)">
-                <i class="icon ion-chevron-right"></i>
-              </button>
-            </div>
-          
-          
-          </div>
-  
-  
-  
-        </ion-content>
-      </ion-modal-view>
-    </script>
 
   <script id="list_wo.html" type="text/ng-template">
     <ion-modal-view>
           <ion-header-bar style="text-align:center;background:white">
-    
-            <h1 class="title" >รายการแปลง</h1>
+
+            <h1 class="title" >รายการปลูก</h1>
             <button type="button" class="button button-assertive button-clear " ng-click="closeModalListWo()">Close</button>
           </ion-header-bar>
           <ion-content  style="">
@@ -285,10 +223,12 @@ text-overflow: ellipsis;"><a style="color:black">จำนวนวัน ณ �
                   ng-click="selectID(x)"
                   ng-repeat="x in datawo track by $index"
                 >
-                  <div style="display: flex; justify-content: space-between;">
-                    {{x.wo_nbr}} - {{x.pt_desc1}}  <a>เลขที่ใบสั่งปลูก :&nbsp;{{x.wo_lot}}</a>
+                  <div style="display: flex;flex-direction:row; justify-content: space-between;">
+                    <div style="flex:1;    white-space: nowrap;
+                    overflow: hidden;text-overflow:ellipsis;padding-right:10px">{{x.wo_nbr}} - {{x.pt_desc1}}  </div>
+                    <a >เลขที่ใบสั่งปลูก : {{x.wo_lot}}</a>
                   </div>
-          
+
                   <div style="display: flex; justify-content: space-between;">
                     <a><span style="color:black">พื้นที่ </span>: {{x.farm_name}}</a>
                     <a>
@@ -296,142 +236,26 @@ text-overflow: ellipsis;"><a style="color:black">จำนวนวัน ณ �
                         {{x.ml_status_desc}}</a>
                   </div>
                   <!-- <h2>{{x.subdatedesc}}</h2> -->
-          
+
                   <!-- <div ng-style="x.ml_status_desc == 'ชำระเงินแล้ว' ?  {'background-color':'green'} : {'background-color': 'yellow'}" style="width:200px;height:100px;border:1px solid gray;"></div> -->
-                  <div  class="dp-flex"> 
+                  <div  class="dp-flex">
                     <a>วันที่เริ่มปลูก : {{x.datedesc}}</a>
                     <a><span style="color:black">ผู้ดูแล</span> : {{x.frm_fname}} {{x.frm_lname}}</a>
 
 
                   </div>
 
-                  <div  class="dp-flex"> 
+                  <div  class="dp-flex">
                     <a><span style="color:black">จำนวนวัน</span> : {{x.difdate}}</a>
 
 
                   </div>
                 </div>
-               
+
               </div>
-    
-    
+
+
           </ion-content>
         </ion-modal-view>
-      </script>
-
-
-  <script id="data_predict.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar style="text-align:center;background:white">
-  
-          <h1 class="title" >คาดการ์เก็บเกี่ยว</h1>
-          <button type="button" class="button button-assertive button-clear " ng-click="closeModaldataPredict()">Close</button>
-        </ion-header-bar>
-        <ion-content  style="">
-          <style>
-              .modal-open{
-                    pointer-events: all;
-                  }
-          </style>
-          <div class="list">
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">จำนวนไร่</span>
-              <input type="tel" placeholder="จำนวนไร่" ng-model="modelpredict.rai">
-            </label>
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">ผลผลิต</span>
-              <input type="tel" placeholder="ผลผลิต" ng-model="modelpredict.result">
-            </label>
-        
-            <a class="item item-button-right">
-              <div>วันที่เพาะปลูก</div>
-    
-              <div ng-if="!modelpredict.datestart" style="color:gray;font-size: medium;">เลือกวันที่เพาะปลูก</div>
-              <div ng-if="modelpredict.datestart" style="color:gray;font-size: medium;">{{modelpredict.datestart}}</div>
-    
-              
-    
-              <button class="button button-positive" style="margin-top: 4%;" ng-click="vm.pickdate3(modelpredict)">
-                <i class="icon ion-calendar"></i>
-              </button>
-            </a>
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">จำนวนวันที่เพาะปลูก</span>
-              <input type="number" placeholder="วันที่ปลูก" ng-model="modelpredict.countdate">
-            </label>
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">หมายเหตุ</span>
-              <input type="text" placeholder="หมายเหตุ" maxlength="100" ng-model="modelpredict.remark">
-            </label>
-  
-            <div>
-            <button class="button button-positive button-block" ng-click="vm.add()">
-              <i class="icon ion-plus-round"></i>
-              Add
-            </button>
-          </div>
-          </div>
-  
-  
-  
-        </ion-content>
-      </ion-modal-view>
-    </script>
-
-  <script id="edit_predict.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar style="text-align:center;background:white">
-  
-          <h1 class="title" >คาดการ์เก็บเกี่ยว</h1>
-          <button type="button" class="button button-assertive button-clear " ng-click="closeModalEditPredict()">Close</button>
-        </ion-header-bar>
-        <ion-content  style="">
-          <style>
-              .modal-open{
-                    pointer-events: all;
-                  }
-          </style>
-          <div class="list">
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">จำนวนไร่</span>
-              <input type="number" placeholder="จำนวนไร่" ng-model="modelEditpredict.rai">
-            </label>
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">ผลผลิต</span>
-              <input type="number" placeholder="ผลผลิต" ng-model="modelEditpredict.result">
-            </label>
-            <a class="item item-button-right">
-              <div>วันที่เพาะปลูก</div>
-    
-              <div ng-if="!modelEditpredict.datestart" style="color:gray;font-size: medium;">เลือกวันที่เพาะปลูก</div>
-              <div ng-if="modelEditpredict.datestart" style="color:gray;font-size: medium;">{{modelEditpredict.datestart}}</div>
-    
-              
-    
-              <button class="button button-positive" style="margin-top: 4%;" ng-click="vm.pickdate3(modelEditpredict)">
-                <i class="icon ion-calendar"></i>
-              </button>
-            </a>
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">จำนวนวันที่เพาะปลูก</span>
-              <input type="number" placeholder="วันที่ปลูก" ng-model="modelEditpredict.countdate">
-            </label>
-            <label class="item item-input item-stacked-label">
-              <span class="input-label">หมายเหตุ</span>
-              <input type="text" placeholder="หมายเหตุ" maxlength="100" ng-model="modelEditpredict.remark">
-            </label>
-  
-            <div>
-            <button class="button button-positive button-block" ng-click="vm.update()">
-              <i class="icon ion-edit"></i>
-              Update
-            </button>
-          </div>
-          </div>
-  
-  
-  
-        </ion-content>
-      </ion-modal-view>
-    </script>
+  </script>
 </ion-view>
