@@ -21,6 +21,8 @@ angular
     ) {
       let vm = this;
 
+    
+
       vm.multiReceive = function () {
         $state.go("app.multiReceive");
       };
