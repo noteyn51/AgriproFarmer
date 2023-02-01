@@ -1,50 +1,63 @@
 angular
   .module("app")
-  .controller("singleReceiveCtrl", function ($scope, fachttp, $ionicModal) {
-    let vm = this;
+  .controller(
+    "singleReceiveCtrl",
+    function ($scope, fachttp, $ionicModal, $ionicLoading, Service) {
+      let vm = this;
 
-    $scope.modelItem;
-    $ionicModal
-      .fromTemplateUrl("item-list.html", {
-        scope: $scope,
-        animation: "slide-in-up",
-      })
-      .then(function (modal) {
-        $scope.modelItem = modal;
-      });
+      $scope.modelItem;
+      $ionicModal
+        .fromTemplateUrl("item-list.html", {
+          scope: $scope,
+          animation: "slide-in-up",
+        })
+        .then(function (modal) {
+          $scope.modelItem = modal;
+        });
 
-    $scope.showModalItem = function () {
-      let req = {
-        mode: "getReceiveItem",
+      $scope.showModalItem = function () {
+        $ionicLoading.show();
+        let req = {
+          mode: "getReceiveItem",
+        };
+
+        fachttp.model("controller/receiveLot.php", req).then(
+          function (response) {
+            try {
+              $scope.item = response.data.result;
+            } catch (error) {
+              $scope.item = [];
+            }
+
+            $ionicLoading.hide();
+            $scope.modelItem.show();
+          },
+          function err(err) {
+            Service.timeout();
+            $ionicLoading.hide();
+          }
+        );
       };
 
-      fachttp.model("controller/receiveLot.php", req).then(
-        function (response) {
-          console.log(response);
-        },
-        function err(err) {
-          vm.list = [];
+      $scope.showModalItem();
+
+      $scope.hideModalItem = function () {
+        $scope.modelItem.hide();
+      };
+
+      // Cleanup the modal when we're done with it!
+      $scope.$on("$destroy", function () {
+        if ($scope.modelItem) {
+          $scope.modelItem.remove();
+        } else {
         }
-      );
-      $scope.modelItem.show();
-    };
+      });
 
-    $scope.hideModalItem = function () {
-      $scope.modelItem.hide();
-    };
-
-    // Cleanup the modal when we're done with it!
-    $scope.$on("$destroy", function () {
-      if ($scope.modelItem) {
-        $scope.modelItem.remove();
-      } else {
-      }
-    });
-
-    $scope.selectId = function (e) {
-      console.log(e);
-    };
-  })
+      $scope.selectId = function (e) {
+        console.log(e);
+      };
+    }
+  )
   .controller("multiReceiveCtrl", function ($scope, fachttp) {
     let vm = this;
 
