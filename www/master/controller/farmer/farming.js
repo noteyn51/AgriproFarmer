@@ -77,7 +77,7 @@ angular
     };
 
     vm.receiveLot  = function () {
-      $state.go("app.receivelot")
+      $state.go("app.multiReceive")
 
     };
     vm.addimg = function(){
