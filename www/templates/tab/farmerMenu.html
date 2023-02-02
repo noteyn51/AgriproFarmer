@@ -3,7 +3,7 @@
     <i class="icon"> <img style="width:100%" src="img/farmer.png"></i>
 
   </ion-nav-buttons> -->
-  <ion-nav-title><b style="font-size: 18px;">AgriPro Farmer</b> </ion-nav-title>
+  <ion-nav-title><b style="font-size: 18px">AgriPro Farmer</b> </ion-nav-title>
   <ion-nav-buttons side="right"> </ion-nav-buttons>
 
   <style>
@@ -17,7 +17,6 @@
   </style>
 
   <ion-content>
-
     <style>
       .menuimg {
         width: 100px;
@@ -38,16 +37,16 @@
       }
     </style>
 
-  
-
-
-    <div style="padding: 15px;">
+    <div style="padding: 15px">
       <div class="row">
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.area()">
           <img class="menuimg" src="img/menuicon/area.png" />
           <div class="txticon">กำหนดพื้นที่</div>
         </div>
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.cropPlant()">
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.cropPlant()"
+        >
           <img class="menuimg" src="img/menuicon/1.png" />
           <div class="txticon">รอบปลูก - เลี้ยง</div>
         </div>
@@ -55,46 +54,59 @@
       <div class="row">
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.detail()">
           <img class="menuimg" src="img/menuicon/2.png" />
-          <div class="txticon">กิจกรรมปลูก - เลี้ยง</div>
+          <div class="txticon">บันทึกกิจกรรม</div>
         </div>
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.receive()">
-          <img class="menuimg" src="img/menuicon/receive.png" style="max-width: 90px;" />
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.receive()"
+        >
+          <img
+            class="menuimg"
+            src="img/menuicon/receive.png"
+            style="max-width: 90px"
+          />
           <div class="txticon">รับเข้ารายการ</div>
         </div>
       </div>
-  
 
       <div class="row">
-            <div class="col button bgmenuicon flexicon-text" ng-click="vm.withdraw ()">
-        <img class="menuimg" src="img/menuicon/3.png" />
-        <div class="txticon">เบิกวัตถุดิบ</div>
-      </div>
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.withdraw ()"
+        >
+          <img class="menuimg" src="img/menuicon/3.png" />
+          <div class="txticon">เบิกวัตถุดิบ</div>
+        </div>
 
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.predict()">
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.predict()"
+        >
           <img class="menuimg" src="img/menuicon/12.png" />
           <div class="txticon">คาดการเก็บเกี่ยว</div>
         </div>
-   
+
         <!-- <div class="col button bgmenuicon flexicon-text" ng-click="vm.meeting()">
           <img class="menuimg" src="img/menuicon/5.png" />
           <div class="txticon">ตารางนัด</div>
         </div> -->
-
-        
-
-      
       </div>
 
       <div class="row">
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.meeting()">
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.meeting()"
+        >
           <img class="menuimg" src="img/menuicon/5.png" />
           <div class="txticon">ตารางนัด</div>
         </div>
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.accounting()">
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.accounting()"
+        >
           <img class="menuimg" src="img/menuicon/6.png" />
           <div class="txticon">บัญชีซื้อ-ขาย</div>
         </div>
-        
       </div>
 
       <div class="row">
@@ -103,32 +115,33 @@
           <div class="txticon">ข่าวสารองค์กร</div>
         </div>
 
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.weather()">
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.weather()"
+        >
           <img class="menuimg" src="img/menuicon/8.png" />
           <div class="txticon">กรมอุตุนิยมวิทยา</div>
         </div>
-       
-      
       </div>
       <div class="row">
-
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.controliot()">
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.controliot()"
+        >
           <img class="menuimg" src="img/menuicon/9.png" />
           <div class="txticon">ควบคุมอุปกรณ์</div>
         </div>
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.martDash()" 
-        ng-if="global.agripro_mart">
+        <div
+          class="col button bgmenuicon flexicon-text"
+          ng-click="vm.martDash()"
+          ng-if="global.agripro_mart"
+        >
           <img class="menuimg" src="img/mart/1.png" />
           <div class="txticon">AgriPro Mart</div>
         </div>
       </div>
-
- 
     </div>
-
-  
   </ion-content>
-
 
   <script id="my-wo-id.html" type="text/ng-template">
     <ion-modal-view style="bottom:10%;border-raduius:10px;border-radius: 10px;">
@@ -147,22 +160,22 @@
               <div style="display: flex; justify-content: space-between;">
                 {{x.wo_nbr}} - {{x.pt_desc1}}  <a>ID :&nbsp;{{x.wo_lot}}</a>
               </div>
-      
+
               <div style="display: flex; justify-content: space-between;">
                 <a>{{x.farm_name}}</a>
                 <a>
                     <span ng-if="x.mim_status == 'CONFIRM'"><i style="color:green" class="icon ion-checkmark-circled"></i></span>
                     {{x.ml_status_desc}}</a>
               </div>
-      
-              <div  class="dp-flex"> 
+
+              <div  class="dp-flex">
                 <a>วันที่เริ่มปลูก : {{x.datedesc}}</a>
                 <a style="color:green;font-weight: bold;">{{x.mid_total | currency : value="฿ "}}</a>
               </div>
             </div>
-           
+
           </div>
         </ion-content>
       </ion-modal-view>
-    </script>
+  </script>
 </ion-view>
