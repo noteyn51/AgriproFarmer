@@ -299,6 +299,10 @@ angular
         $state.go('app.predict');
       }
 
+      vm.receive =function(){
+        $state.go('app.receive')
+      }
+
      
     }
   );

@@ -41,7 +41,6 @@
         <div style="font-weight: bold">บันทึกกิจกรรม</div>
         <p>บันทึกกระบวนการเพาะปลูก</p>
       </div>
-      <div class="item item-divider">รายการ Lot , รับเข้า</div>
       <div ng-if="global.mob_config != 'INET027'">
         <div class="item item-avatar" ng-click="vm.recordEtc()">
           <img src="img/farming/qr.png" />
@@ -50,13 +49,15 @@
           <p>แสกนรายการ,เพิ่มรูปภาพ,พิกัด</p>
         </div>
 
+      <!-- <div class="item item-divider">รายการ Lot , รับเข้า</div>
+ 
         <div class="item item-avatar" ng-click="vm.receive()">
           <img src="img/farming/receive.png" />
 
           <div style="font-weight: bold">รับเข้า (สำหรับต้น,ลูกทุเรียน)</div>
 
           <p>รับเข้ารายการ</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </ion-content>

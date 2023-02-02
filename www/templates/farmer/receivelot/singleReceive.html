@@ -66,11 +66,11 @@
           <div class="list" >
             <div
               class="item item-icon-right"
-              ng-repeat="x in item | filter:searchText"
+              ng-repeat="x in item | filter:searchText |  limitTo:300"
               ng-click="enterSelect(x)"
             >
               <div>
-                <div>{{x.pt_desc1}}</div>
+                <div>{{x.pt_desc1}} ({{x.pt_um}})</div>
                 <div style="color: grey">
                   <a> {{x.pt_part}}</a>
                 </div>

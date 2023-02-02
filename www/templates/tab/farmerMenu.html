@@ -57,52 +57,65 @@
           <img class="menuimg" src="img/menuicon/2.png" />
           <div class="txticon">กิจกรรมปลูก - เลี้ยง</div>
         </div>
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.withdraw ()">
-          <img class="menuimg" src="img/menuicon/3.png" />
-          <div class="txticon">เบิกวัตถุดิบ</div>
+        <div class="col button bgmenuicon flexicon-text" ng-click="vm.receive()">
+          <img class="menuimg" src="img/menuicon/receive.png" style="max-width: 90px;" />
+          <div class="txticon">รับเข้ารายการ</div>
         </div>
       </div>
+  
 
       <div class="row">
+            <div class="col button bgmenuicon flexicon-text" ng-click="vm.withdraw ()">
+        <img class="menuimg" src="img/menuicon/3.png" />
+        <div class="txticon">เบิกวัตถุดิบ</div>
+      </div>
 
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.predict()">
           <img class="menuimg" src="img/menuicon/12.png" />
           <div class="txticon">คาดการเก็บเกี่ยว</div>
         </div>
    
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.meeting()">
+        <!-- <div class="col button bgmenuicon flexicon-text" ng-click="vm.meeting()">
           <img class="menuimg" src="img/menuicon/5.png" />
           <div class="txticon">ตารางนัด</div>
-        </div>
+        </div> -->
+
+        
 
       
       </div>
 
       <div class="row">
+        <div class="col button bgmenuicon flexicon-text" ng-click="vm.meeting()">
+          <img class="menuimg" src="img/menuicon/5.png" />
+          <div class="txticon">ตารางนัด</div>
+        </div>
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.accounting()">
           <img class="menuimg" src="img/menuicon/6.png" />
           <div class="txticon">บัญชีซื้อ-ขาย</div>
         </div>
+        
+      </div>
+
+      <div class="row">
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.news()">
           <img class="menuimg" src="img/menuicon/7.png" />
           <div class="txticon">ข่าวสารองค์กร</div>
         </div>
 
-      </div>
-
-      <div class="row">
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.weather()">
           <img class="menuimg" src="img/menuicon/8.png" />
           <div class="txticon">กรมอุตุนิยมวิทยา</div>
         </div>
-        <div class="col button bgmenuicon flexicon-text" ng-click="vm.controliot()">
-          <img class="menuimg" src="img/menuicon/9.png" />
-          <div class="txticon">ควบคุมอุปกรณ์</div>
-        </div>
+       
       
       </div>
       <div class="row">
 
+        <div class="col button bgmenuicon flexicon-text" ng-click="vm.controliot()">
+          <img class="menuimg" src="img/menuicon/9.png" />
+          <div class="txticon">ควบคุมอุปกรณ์</div>
+        </div>
         <div class="col button bgmenuicon flexicon-text" ng-click="vm.martDash()" 
         ng-if="global.agripro_mart">
           <img class="menuimg" src="img/mart/1.png" />
