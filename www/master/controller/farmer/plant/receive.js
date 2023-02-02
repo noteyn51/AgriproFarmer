@@ -82,6 +82,25 @@ angular
               vm.dataDoc = response.data.result;
               $scope.openModalDoc();
             } else {
+
+              $mdDialog
+              .show(
+                $mdDialog
+                  .alert()
+                  .parent(
+                    angular.element(document.querySelector("#popupContainer"))
+                  )
+                  .clickOutsideToClose(true)
+                  .title("แจ้งเตือน")
+                  .textContent("ไม่พบรายการต้นที่ปลูก โปรดตรวจสอบรายการต้น")
+                  .ariaLabel("Alert Dialog Demo")
+                  .ok("OK")
+                  .targetEvent()
+              )
+              .then(
+                function (answer) {},
+                function () {}
+              );
             }
             //console.log(response.data);
           },

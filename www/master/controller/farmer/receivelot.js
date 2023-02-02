@@ -2,7 +2,7 @@ angular
   .module("app")
   .controller(
     "singleReceiveCtrl",
-    function ($scope, fachttp, $ionicModal, $ionicLoading, Service, $mdDialog) {
+    function ($scope, fachttp, $ionicModal, $ionicLoading, Service, $mdDialog,$state,$ionicHistory) {
       let vm = this;
 
       $scope.model = { itemSelect: null, lotGenCount: null };
@@ -113,9 +113,27 @@ angular
         fachttp.model("controller/receiveLot.php", req).then(
           function (response) {
             try {
-              $scope.item = response.data.result;
+              if(response.data.status){
+              $ionicHistory.goBack();
+
+                $mdDialog.show(
+                  $mdDialog
+                    .alert()
+                    .parent(
+                      angular.element(document.querySelector("#popupContainer"))
+                    )
+                    .clickOutsideToClose(false)
+                    .title("แจ้งเตือน")
+                    .textContent("สร้างต้นสำเร็จ")
+                    .ariaLabel("Alert Dialog Demo")
+                    .ok("OK")
+                    .targetEvent()
+                );
+
+              }else{
+
+              }
             } catch (error) {
-              $scope.item = [];
             }
 
             $ionicLoading.hide();
