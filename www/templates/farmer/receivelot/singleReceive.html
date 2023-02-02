@@ -1,0 +1,88 @@
+<ion-view hide-back-button="false" cache-view="true">
+  <ion-nav-buttons side="left">
+    <!-- <button  class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="font-weight: 400;"> Back</button> -->
+  </ion-nav-buttons>
+  <ion-nav-title> รับเข้าต้น </ion-nav-title>
+  <ion-nav-buttons side="right"> </ion-nav-buttons>
+
+  <ion-content>
+    <div class="list" style="border-radius: 15px">
+      <div class="item item-avatar" ng-click="showModalItem()">
+        <img src="img/farming/tree.png" />
+        <div style="font-weight: bold">รายการที่ต้องการรับ</div>
+        <p
+          ng-if="!model.itemSelect"
+          ng-style="!model.item ? {'color':'red'} : {}"
+        >
+          เลือกรายการที่ต้องการ
+        </p>
+        <p ng-if="model.itemSelect">{{model.itemSelect.pt_desc1}}</p>
+        <p ng-if="model.itemSelect">{{model.itemSelect.pt_part}}</p>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">จำนวนต้น</span>
+          <input
+            type="text"
+            placeholder="ระบุจำนวนต้น"
+            style="text-align: right"
+            oninput="this.value = this.value.replace(/[^/^0+/0-9.]/g, '').replace(/^(?!0$)0+/, '')"
+            class="text-right"
+            ng-model="model.lotGenCount"
+            ng-change="valueChange()"
+            required
+          />
+        </label>
+      </div>
+    </div>
+    <div style="padding: 10px">
+      <button
+        class="button button-full button-balanced"
+        ng-click="confirmGenSingleLot()"
+      >
+        ยืนยันสร้างต้น
+      </button>
+    </div>
+  </ion-content>
+
+  <script id="item-list.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar>
+          <button type="button" class="button button-assertive button-clear" ng-click="hideModalItem()">ปิด</button>
+        <h1 class="title" style="text-align:center">เลือกประเภทต้นที่ต้องการรับ</h1>
+
+
+      </ion-header-bar>
+      <ion-content >
+        <div >
+          <div>
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" placeholder="ค้นหา" ng-model="searchText" />
+            </label>
+          </div>
+
+          <div class="list" >
+            <div
+              class="item item-icon-right"
+              ng-repeat="x in item | filter:searchText"
+              ng-click="enterSelect(x)"
+            >
+              <div>
+                <div>{{x.pt_desc1}}</div>
+                <div style="color: grey">
+                  <a> {{x.pt_part}}</a>
+                </div>
+              </div>
+              <i class="icon ion-ios-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+
+
+
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>
