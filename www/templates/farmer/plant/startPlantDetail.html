@@ -1,38 +1,63 @@
-<ion-view hide-back-button="false" cache-view="true">
+<ion-view hide-back-button="false">
   <ion-nav-title>รายละเอียดการเพาะปลูก </ion-nav-title>
 
-  <ion-content >
+  <ion-content>
+    <div style="padding: 15px; border-radius: 10px">
+      <div style="display: flex; justify-content: space-between">
+        <div style="display: flex; justify-content: flex-start">
+          <div style="font-weight: bold">รายการปลูก</div>
+          :
+          <div style="margin-left: 5px">{{wo.pt_desc1}}</div>
+        </div>
 
-        <div
-          class="card"
-          style=" white-space: initial;padding: 15px;border-radius: 10px;"
-        >
-          <div style="display: flex; justify-content: space-between">
-            <div style="display: flex; justify-content: flex-start">
-              <div style="font-weight: bold">รายการปลูก</div>
-              :
-              <div style="margin-left: 5px">{{wo.pt_desc1}}</div>
-            </div>
-  
-            <div style="font-weight: bold">ID : {{wo.wo_lot}}</div>
-          </div>
-  
-          <div style="display: flex; justify-content: flex-start">
-            <div style="font-weight: bold">พื้นที่</div>
-            :
-            <div style="margin-left: 5px">{{wo.farm_name}}</div>
-          </div>
-  
-          <div style="display: flex; justify-content: flex-start">
-            <div style="font-weight: bold">วันที่เริ่ม</div>
-            :
-            <div style="margin-left: 5px">{{wo.rel_date}} - {{wo.due_date}}</div>
-          </div>
-          <div style="display: flex; justify-content: flex-start">
-            <div style="font-weight: bold">จำนวน</div>
-            :
-            <div style="margin-left: 5px">{{wo.wo_qty_ord}} {{wo.pt_um}}</div>
-          </div>
+        <div style="font-weight: bold">ID : {{wo.wo_lot}}</div>
       </div>
-    </ion-content>
+
+      <div style="display: flex; justify-content: flex-start">
+        <div style="font-weight: bold">พื้นที่</div>
+        :
+        <div style="margin-left: 5px">{{wo.farm_name}}</div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-start">
+        <div style="font-weight: bold">วันที่เริ่ม</div>
+        :
+        <div style="margin-left: 5px">{{wo.rel_date}} - {{wo.due_date}}</div>
+      </div>
+      <div style="display: flex; justify-content: flex-start">
+        <div style="font-weight: bold">จำนวน</div>
+        :
+        <div style="margin-left: 5px">{{wo.wo_qty_ord}} {{wo.pt_um}}</div>
+      </div>
+
+      <div style="text-align: center; margin-top: 10px">
+        <button class="button button-balanced button-block">
+          สิ้นสุดการเพาะปลูก
+        </button>
+      </div>
+
+      <div
+        style="
+          margin-top: 20px;
+          font-size: large;
+          font-weight: bold;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        "
+      >
+        <div>รายการต้น</div>
+        <div style="color: #387ef5" ng-click="vm.add()">เพิ่ม</div>
+      </div>
+    </div>
+
+    <div class="list">
+      <a class="item item-icon-right" ng-repeat="x in [1,2,3,4,5,6,7,8]">
+        <i class="icon ion-edit"></i>
+        <div>ต้นทึเรียนหมอนทอง</div>
+        <div>120ต้น</div>
+      </a>
+      
+    </div>
+  </ion-content>
 </ion-view>
