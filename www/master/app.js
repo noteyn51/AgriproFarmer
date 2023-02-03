@@ -641,7 +641,7 @@ angular
       })
 
       .state("app.startPlantDetail", {
-        url: "/farmerMenu/startPlantDetail",
+        url: "/farmerMenu/startPlantDetail/:wo",
         views: {
           "tab-menu": {
             templateUrl: "templates/farmer/plant/startPlantDetail.html",

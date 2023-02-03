@@ -67,10 +67,10 @@ angular
         $state.go("app.startPlant");
       };
 
-      vm.woDetail = function(e){
-        console.log(e)
-        $state.go("app.startPlantDetail",{wo:JSON.stringify(e)});
-      }
+      vm.woDetail = function (e) {
+        console.log(e);
+        $state.go("app.startPlantDetail", { wo: JSON.stringify(e) });
+      };
     }
   )
 
@@ -102,7 +102,6 @@ angular
       $scope.model = {};
       // vm.farmSelect = {};
 
- 
       function onStart() {
         $ionicLoading.show();
         let cancellerLoadpic = $q.defer();
@@ -433,14 +432,14 @@ angular
       $ionicScrollDelegate
     ) {
       let vm = this;
-      console.log($stateParams.wo);
-    
+      try {
+        $scope.wo = JSON.parse($stateParams.wo);
+      } catch (error) {
+        console.log(error);
+      }
     }
   )
 
-
-
-  
   .controller(
     "startPlant1Ctrl",
     function (
