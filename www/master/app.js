@@ -640,35 +640,45 @@ angular
         },
       })
 
-      .state("app.startPlant1", {
-        url: "/farmerMenu/startPlant1/:crop",
+      .state("app.startPlantDetail", {
+        url: "/farmerMenu/startPlantDetail",
         views: {
           "tab-menu": {
-            templateUrl: "templates/farmer/plant/startPlant1.html",
-            controller: "startPlant1Ctrl as vm",
+            templateUrl: "templates/farmer/plant/startPlantDetail.html",
+            controller: "startPlantDetailCtrl as vm",
           },
         },
       })
 
-      .state("app.startPlant2", {
-        url: "/farmerMenu/startPlant2/:crop/:type",
-        views: {
-          "tab-menu": {
-            templateUrl: "templates/farmer/plant/startPlant2.html",
-            controller: "startPlant2Ctrl as vm",
-          },
-        },
-      })
+      // .state("app.startPlant1", {
+      //   url: "/farmerMenu/startPlant1/:crop",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlant1.html",
+      //       controller: "startPlant1Ctrl as vm",
+      //     },
+      //   },
+      // })
 
-      .state("app.startPlant3", {
-        url: "/farmerMenu/startPlant3/:crop/:type/:sub",
-        views: {
-          "tab-menu": {
-            templateUrl: "templates/farmer/plant/startPlant3.html",
-            controller: "startPlant3Ctrl as vm",
-          },
-        },
-      })
+      // .state("app.startPlant2", {
+      //   url: "/farmerMenu/startPlant2/:crop/:type",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlant2.html",
+      //       controller: "startPlant2Ctrl as vm",
+      //     },
+      //   },
+      // })
+
+      // .state("app.startPlant3", {
+      //   url: "/farmerMenu/startPlant3/:crop/:type/:sub",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlant3.html",
+      //       controller: "startPlant3Ctrl as vm",
+      //     },
+      //   },
+      // })
 
       .state("app.recordEtc1", {
         url: "/recordEtc1/:data",
