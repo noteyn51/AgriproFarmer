@@ -437,30 +437,6 @@ angular
       } catch (error) {
         console.log(error);
       }
-
-      vm.endCrop = function(){
-        var confirm = $mdDialog
-        .confirm()
-        .title("แจ้งเตือน")
-        .textContent("ต้องการปิดการเพาะปลูกนี้หรือไม่ ?")
-        .ariaLabel("Lucky day")
-        .targetEvent()
-        .ok("ยืนยัน")
-        .cancel("ยกเลิก");
-
-      $mdDialog.show(confirm).then(
-        function () {
-         
-        },
-        function () {
-          //console.log("2");
-        }
-      );
-      }
-
-      vm.add = function(){
-        
-      }
     }
   )
 
