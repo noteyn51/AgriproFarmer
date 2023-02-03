@@ -69,7 +69,7 @@ angular
 
       vm.woDetail = function(e){
         console.log(e)
-        $state.go("app.startPlantDetail");
+        $state.go("app.startPlantDetail",{wo:JSON.stringify(e)});
       }
     }
   )
@@ -414,6 +414,7 @@ angular
   .controller(
     "startPlantDetailCtrl",
     function (
+      $ionicHistory,
       $state,
       $scope,
       $stateParams,
@@ -432,55 +433,8 @@ angular
       $ionicScrollDelegate
     ) {
       let vm = this;
-      // $scope.cropSelect = {};
-      vm.cropSelect = {};
-      // vm.pt_select = {};
-      $scope.model = {};
-      // vm.farmSelect = {};
-
-      function onStartwoMstr() {
-        let cancellerLoadpic = $q.defer();
-        let req = {
-          mode: "womstr",
-        };
-
-        $timeout(function () {
-          cancellerLoadpic.resolve("user cancelled");
-        }, 8000);
-
-        fachttp
-          .model("detail.php", req, {
-            timeout: cancellerLoadpic.promise,
-          })
-          .then(
-            function (response) {
-              $scope.status = true;
-              //console.log(response);
-              if (response.data.status == true) {
-                vm.list = response.data;
-              } else {
-                vm.list = response.data;
-              }
-              //console.log(response);
-            },
-            function err(err) {
-              //console.log(err);
-              vm.list = [];
-              $scope.status = false;
-            }
-          );
-      }
-
-      onStartwoMstr();
-
-      vm.add = function () {
-        $state.go("app.startPlant");
-      };
-
-      vm.woDetail = function(e){
-        console.log(e)
-        $state.go("app.startPlantDetail");
-      }
+      console.log($stateParams.wo);
+    
     }
   )
 
@@ -576,6 +530,67 @@ angular
     ) {
       let vm = this;
       vm.crop = JSON.parse($stateParams.crop);
+
+      $scope.doRefresh = function () {
+        // here refresh data code
+        $scope.$broadcast("scroll.refreshComplete");
+        $scope.$apply();
+        onStart();
+      };
+
+      function onStart() {
+        let cancellerLoadpic = $q.defer();
+        let req = {
+          mode: "selectFarm",
+          config: {
+            frm_code: $rootScope.global.mob_farm_code,
+          },
+        };
+
+        $timeout(function () {
+          cancellerLoadpic.resolve("user cancelled");
+        }, 8000);
+
+        fachttp
+          .model("area.php", req, {
+            timeout: cancellerLoadpic.promise,
+          })
+          .then(
+            function (response) {
+              $scope.status = true;
+
+              //console.log(response);
+              if (response.data.status == true) {
+                $scope.data = response.data;
+              } else {
+                $scope.data = response.data;
+              }
+              //console.log(response);
+            },
+            function err(err) {
+              //console.log(err);
+              $scope.data = [];
+              $scope.status = false;
+            }
+          );
+      }
+
+      vm.refresh = function () {
+        delete $scope.data;
+        delete $scope.status;
+        onStart();
+      };
+
+      onStart();
+
+      vm.go = function (e) {
+        let k = JSON.stringify(e);
+        $state.go("app.startPlant3", {
+          crop: $stateParams.crop,
+          type: $stateParams.type,
+          sub: k,
+        });
+      };
     }
   )
 
