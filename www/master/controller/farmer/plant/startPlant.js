@@ -427,38 +427,7 @@ angular
         console.log(error);
       }
 
-      $rootScope.treeAdd = [
-        {
-          ld_loc: "RM",
-          ld_part: "400300200001279",
-          pt_desc1: "ต้นทุเรียนพันธุ์หมอนทอง",
-          pt_um: "ต้น",
-          ld_date: "06-FEB-23",
-          ld_lot: "TH-AGRIPROONE-TH10001230600001",
-          ld_site: "TH10001",
-          ld_qty_all: "1",
-          ld_qty_oh: "1",
-          ld_rmks: "1",
-          ld_ref: " ",
-          "u##ld__chr09": "FRM202200000134",
-          $$hashKey: "object:44",
-        },
-        {
-          ld_loc: "RM",
-          ld_part: "400300200001279",
-          pt_desc1: "ต้นทุเรียนพันธุ์หมอนทอง",
-          pt_um: "ต้น",
-          ld_date: "06-FEB-23",
-          ld_lot: "TH-AGRIPROONE-TH10001230600074",
-          ld_site: "TH10001",
-          ld_qty_all: "1",
-          ld_qty_oh: "1",
-          ld_rmks: "74",
-          ld_ref: " ",
-          "u##ld__chr09": "FRM202200000134",
-          $$hashKey: "object:117",
-        },
-      ];
+      $rootScope.treeAdd = [];
 
       vm.endCrop = function () {
         var confirm = $mdDialog
@@ -521,14 +490,6 @@ angular
 
       async function init() {
         let a = await getData();
-        console.log(a);
-        try {
-          if ($rootScope.treeAdd.length > 0) {
-            $rootScope.treeAdd.forEach((element) => {
-              $scope.selected.push(element);
-            });
-          }
-        } catch (error) {}
       }
 
       async function getData() {
@@ -561,12 +522,29 @@ angular
             a.ld_lot > b.ld_lot ? 1 : b.ld_lot > a.ld_lot ? -1 : 0
           );
 
-          console.log($scope.selected);
-          $scope.selected.forEach((element) => {
-            $rootScope.treeAdd.push(element);
-          });
+          let req = {
+            mode: "addTreeToWo",
+            selected: $scope.selected,
+          };
+          $ionicLoading.show();
+
+          fachttp.model("startPlant.php", req).then(
+            function (response) {
+              $ionicLoading.hide();
+              $ionicHistory.goBack();
+
+              console.log(response);
+            },
+            function err(err) {
+              $ionicLoading.hide();
+            }
+          );
+        } else {
+          Service.customAlertDialog(
+            "แจ้งเตือน",
+            "โปรดเลือกรายการอย่างน้อย 1 รายการ"
+          );
         }
-        $ionicHistory.goBack();
       };
 
       $scope.toggle = function (item, list) {

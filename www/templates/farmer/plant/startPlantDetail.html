@@ -50,16 +50,14 @@
         "
       >
         <div>รายการต้น</div>
-        <div style="color: #387ef5" ng-click="vm.add()">เพิ่ม / แก้ไข</div>
+        <div style="color: #387ef5" ng-click="vm.add()">เพิ่ม</div>
       </div>
     </div>
 
     <div class="list">
-      <a class="item " ng-repeat="x in treeAdd track by $index">
-        <div> {{x.pt_desc1}} {{x.pt_um}} {{x.ld_rmks}}</div>
-        <p> {{x.ld_lot}}</p>
-
-
+      <a class="item" ng-repeat="x in treeAdd track by $index">
+        <div>{{x.pt_desc1}} {{x.pt_um}} {{x.ld_rmks}}</div>
+        <p>{{x.ld_lot}}</p>
       </a>
     </div>
   </ion-content>
