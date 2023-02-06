@@ -650,6 +650,26 @@ angular
         },
       })
 
+      .state("app.startPlantSelectItem", {
+        url: "/farmerMenu/startPlantSelectItem/:wo",
+        views: {
+          "tab-menu": {
+            templateUrl: "templates/farmer/plant/startPlantSelectItem.html",
+            controller: "startPlantSelectItemCtrl as vm",
+          },
+        },
+      })
+
+      // .state("app.startPlantDetail", {
+      //   url: "/farmerMenu/startPlantDetail/:wo",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlantDetail.html",
+      //       controller: "startPlantDetailCtrl as vm",
+      //     },
+      //   },
+      // })
+
       // .state("app.startPlant1", {
       //   url: "/farmerMenu/startPlant1/:crop",
       //   views: {

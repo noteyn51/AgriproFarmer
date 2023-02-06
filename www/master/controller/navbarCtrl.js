@@ -28,6 +28,8 @@ angular
       $scope.shouldHide = function () {
         // //console.log($state.current.name);
         switch ($state.current.name) {
+          case "app.startPlantSelectItem":
+            return true; 
           case "app.startPlantDetail":
             return true; 
           case "app.predict":

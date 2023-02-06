@@ -31,7 +31,10 @@
       </div>
 
       <div style="text-align: center; margin-top: 10px">
-        <button class="button button-balanced button-block" ng-click="vm.endCrop()">
+        <button
+          class="button button-balanced button-block"
+          ng-click="vm.endCrop()"
+        >
           สิ้นสุดการเพาะปลูก
         </button>
       </div>
@@ -47,15 +50,15 @@
         "
       >
         <div>รายการต้น</div>
-        <div style="color: #387ef5" ng-click="vm.add()">เพิ่ม</div>
+        <div style="color: #387ef5" ng-click="vm.add()">เพิ่ม / แก้ไข</div>
       </div>
     </div>
 
     <div class="list">
-      <a class="item item-icon-right" ng-repeat="x in [1,2,3,4,5,6,7,8]">
-        <i class="icon ion-edit"></i>
-        <div>ต้นทึเรียนหมอนทอง</div>
-        <div>120ต้น</div>
+      <a class="item " ng-repeat="x in treeAdd track by $index">
+        <div>ต้นทึเรียนหมอนทอง {{x}}</div>
+        <p>330123102312838218312321</p>
+
       </a>
     </div>
   </ion-content>
