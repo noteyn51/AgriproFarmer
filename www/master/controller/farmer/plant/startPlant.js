@@ -484,10 +484,52 @@ angular
       $ionicScrollDelegate
     ) {
       let vm = this;
-      console.log($rootScope.treeAdd);
+
+      $scope.items = [];
+      $scope.selected = [];
+
+      async function init() {
+        let a = await getData();
+        console.log(a);
+        let b = await getData2();
+        console.log(b);
+      }
+
+      async function getData() {
+        let req = {
+          mode: "getemptytree",
+        };
+
+        fachttp.model("startPlant.php", req).then(
+          function (response) {
+            console.log(response);
+            //console.log(response);
+            if (response.data.status == true) {
+              $scope.items = response.data.data;
+            } else {
+              $scope.items = [];
+            }
+
+            try {
+              if ($rootScope.treeAdd.length > 0) {
+                $rootScope.treeAdd.forEach((element) => {
+                  $scope.selected.push(element);
+                });
+              }
+            } catch (error) {}
+          },
+          function err(err) {
+            $scope.status = false;
+          }
+        );
+      }
+
+      init();
 
       $scope.save = function () {
         $rootScope.treeAdd = [];
+
+        console.log($scope.selected);
 
         if ($scope.selected.length > 0) {
           $scope.selected.forEach((element) => {
@@ -497,29 +539,24 @@ angular
         $ionicHistory.goBack();
       };
 
-      $scope.items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      $scope.selected = [];
-
-      if ($rootScope.treeAdd.length > 0) {
-        $rootScope.treeAdd.forEach((element) => {
-          $scope.selected.push(element);
-        });
-      }
       $scope.toggle = function (item, list) {
-        // console.log(list)
-        var idx = list.indexOf(item);
+        var idx = list.findIndex((element) => {
+          return element.ld_lot === item.ld_lot;
+        });
+
         if (idx > -1) {
           list.splice(idx, 1);
         } else {
           list.push(item);
         }
-
-        console.log(idx);
-        // console.log(list);
       };
 
       $scope.exists = function (item, list) {
-        return list.indexOf(item) > -1;
+        const index = list.findIndex((element) => {
+          return element.ld_lot === item.ld_lot;
+        });
+
+        return index > -1;
       };
 
       $scope.isIndeterminate = function () {
@@ -534,7 +571,6 @@ angular
       };
 
       $scope.toggleAll = function () {
-        console.log("all");
         if ($scope.selected.length === $scope.items.length) {
           $scope.selected = [];
         } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
