@@ -482,6 +482,11 @@ angular
         $state.go("app.startPlantSelectItem",{wo:JSON.stringify($scope.wo)});
       };
 
+      
+      vm.clickList = function (e) {
+        $state.go("app.recordEtc1", { data: e.ld_lot });
+      };
+
       // $scope.$watch("treeAdd", function (a, b) {
       //   console.log("new");
       //   console.log(a);

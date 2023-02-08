@@ -122,7 +122,7 @@ angular
         });
 
         $rootScope.global = {};
-        Service.toast('ออกจากระบบ','danger');
+        Service.toast("ออกจากระบบ", "danger");
         delete $localStorage.globalAGRI;
         $state.go("farmerlogin", null, {
           location: "replace",
@@ -230,8 +230,6 @@ angular
 
       vm.test1();
 
-    
-
       vm.area = function () {
         $state.go("app.area");
       };
@@ -251,8 +249,6 @@ angular
       vm.blackup = function () {
         $state.go("app.hist");
       };
-
-
 
       vm.weather = function () {
         $state.go("app.weather");
@@ -295,14 +291,23 @@ angular
       vm.meeting = function () {
         $state.go("meeting.meetingViewNow");
       };
-      vm.predict = function(){
-        $state.go('app.predict');
-      }
+      vm.predict = function () {
+        $state.go("app.predict");
+      };
 
-      vm.receive =function(){
-        $state.go('app.receive')
-      }
+      vm.receive = function () {
+        $state.go("app.receive");
+      };
+      document.addEventListener("deviceready", function () {
+        FirebasePlugin.setCrashlyticsUserId($rootScope.global.mob_id);
+        FirebasePlugin.setCrashlyticsCustomKey(
+          "config",
+          $rootScope.global.mob_config
+        );
+        FirebasePlugin.setCrashlyticsCustomKey("time", new Date());
+        FirebasePlugin.setCrashlyticsCustomKey("device", 'TEST');
 
-     
+        FirebasePlugin.sendCrash();
+      });
     }
   );

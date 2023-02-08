@@ -47,12 +47,43 @@ angular
         // console.log("receive");
         // Example #1: WITHOUT API URL
 
-        cordova.plugins.inappupdate.update(
-          "immediate",
-          function () {},
-          function () {}
+        var shouldSetEnabled = true;
+        FirebasePlugin.setCrashlyticsCollectionEnabled(
+          shouldSetEnabled,
+          function () {
+            console.log("Crashlytics data collection is enabled");
+          },
+          function (error) {
+            console.error(
+              "Crashlytics data collection couldn't be enabled: " + error
+            );
+          }
         );
 
+        FirebasePlugin.didCrashOnPreviousExecution(
+          function (didCrashOnPreviousExecution) {
+            console.log(
+              `Did crash on previous execution: ` + didCrashOnPreviousExecution
+            );
+          },
+          function (error) {
+            console.error(
+              `Error getting Crashlytics did crash on previous execution: ${error}`
+            );
+          }
+        );
+
+        try {
+          cordova.plugins.inappupdate.update(
+            "immediate",
+            function () {},
+            function () {}
+          );
+  
+        } catch (error) {
+          console.log(error)
+        }
+     
         FirebasePlugin.getToken(
           function (fcmToken) {
             console.log(fcmToken);
