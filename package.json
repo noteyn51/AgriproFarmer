@@ -21,7 +21,6 @@
     "wifiwizard": "^0.2.11"
   },
   "dependencies": {
-    "cordova-android": "10.1.2",
     "cordova-ios": "6.2.0",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-fcm-ng": "^8.3.0",
@@ -84,8 +83,8 @@
       "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
