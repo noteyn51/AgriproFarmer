@@ -1,0 +1,32 @@
+<ion-view hide-back-button="false">
+  <ion-nav-title>เลือกรายการต้นที่ต้องการ </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button
+      type="button"
+      class="button button-clear"
+      ng-click="save()"
+      style="color: white; font-weight: bold"
+    >
+      เพิ่ม
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <ion-checkbox
+      aria-label="Select All"
+      ng-checked="isChecked()"
+      md-indeterminate="isIndeterminate()"
+      ng-click="toggleAll()"
+      >{{item}} เลือกทั้งหมด</ion-checkbox
+    >
+
+    <ion-list>
+      <ion-checkbox
+        ng-repeat="item in items"
+        ng-click="toggle(item, selected)"
+        ng-checked="exists(item, selected)"
+        >{{item.pt_desc1}} {{item.ld_rmks}}
+      </ion-checkbox>
+    </ion-list>
+  </ion-content>
+</ion-view>

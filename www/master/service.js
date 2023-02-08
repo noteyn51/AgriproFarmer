@@ -8,7 +8,8 @@ angular
     $http,
     $rootScope,
     $state,
-    $timeout
+    $timeout,
+    $mdDialog
   ) {
     this.toast = function(mes, col, dis) {
       mobiscroll.toast({
@@ -22,6 +23,26 @@ angular
       mobiscroll.snackbar({
         message: "เกิดข้อผิดพลาดหมดเวลาในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง"
       });
+    };
+
+    this.customAlertDialog = function(title,message) {
+      $mdDialog.show(
+        $mdDialog
+          .alert()
+          .parent(
+            angular.element(
+              document.querySelector("#popupContainer")
+            )
+          )
+          .clickOutsideToClose(true)
+          .title(title)
+          .textContent(
+            message
+          )
+          .ariaLabel("Alert Dialog Demo")
+          .ok("ยืนยัน")
+          .targetEvent()
+      );
     };
 
     // console.log($rootScope.global)

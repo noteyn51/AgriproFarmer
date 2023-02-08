@@ -24,24 +24,29 @@ angular
         height: "calc(100%)",
       };
 
-
       $scope.shouldHide = function () {
         // //console.log($state.current.name);
         switch ($state.current.name) {
+          case "app.startPlantSelectItem":
+            return true;
+          case "app.startPlantDetail":
+            return true;
           case "app.predict":
-            return true; 
-            case "app.singleReceive":
-              return true; 
+            return true;
+          case "app.singleReceive":
+            return true;
           case "app.multiReceive":
-            return true; 
+            return true;
           case "app.farming":
-            return true; 
+            return true;
           case "app.area":
-            return true; 
+            return true;
           case "app.receive":
-            return true;     
-            case "app.recordEtc1":
-              return true; 
+            return true;
+          case "app.recordEtc1":
+            return true;
+          case "app.recordEtc2":
+            return true;
           case "app.receive2":
             return true;
           case "app.deleteuser":
@@ -138,8 +143,8 @@ angular
             return true;
           case "app.viewimgDetail":
             return true;
-            case "app.addimgadd":
-              return true;
+          case "app.addimgadd":
+            return true;
 
           default:
             return false;

@@ -47,12 +47,43 @@ angular
         // console.log("receive");
         // Example #1: WITHOUT API URL
 
-        cordova.plugins.inappupdate.update(
-          "immediate",
-          function () {},
-          function () {}
+        var shouldSetEnabled = true;
+        FirebasePlugin.setCrashlyticsCollectionEnabled(
+          shouldSetEnabled,
+          function () {
+            console.log("Crashlytics data collection is enabled");
+          },
+          function (error) {
+            console.error(
+              "Crashlytics data collection couldn't be enabled: " + error
+            );
+          }
         );
 
+        FirebasePlugin.didCrashOnPreviousExecution(
+          function (didCrashOnPreviousExecution) {
+            console.log(
+              `Did crash on previous execution: ` + didCrashOnPreviousExecution
+            );
+          },
+          function (error) {
+            console.error(
+              `Error getting Crashlytics did crash on previous execution: ${error}`
+            );
+          }
+        );
+
+        try {
+          cordova.plugins.inappupdate.update(
+            "immediate",
+            function () {},
+            function () {}
+          );
+  
+        } catch (error) {
+          console.log(error)
+        }
+     
         FirebasePlugin.getToken(
           function (fcmToken) {
             console.log(fcmToken);
@@ -640,35 +671,65 @@ angular
         },
       })
 
-      .state("app.startPlant1", {
-        url: "/farmerMenu/startPlant1/:crop",
+      .state("app.startPlantDetail", {
+        url: "/farmerMenu/startPlantDetail/:wo",
         views: {
           "tab-menu": {
-            templateUrl: "templates/farmer/plant/startPlant1.html",
-            controller: "startPlant1Ctrl as vm",
+            templateUrl: "templates/farmer/plant/startPlantDetail.html",
+            controller: "startPlantDetailCtrl as vm",
           },
         },
       })
 
-      .state("app.startPlant2", {
-        url: "/farmerMenu/startPlant2/:crop/:type",
+      .state("app.startPlantSelectItem", {
+        url: "/farmerMenu/startPlantSelectItem/:wo",
         views: {
           "tab-menu": {
-            templateUrl: "templates/farmer/plant/startPlant2.html",
-            controller: "startPlant2Ctrl as vm",
+            templateUrl: "templates/farmer/plant/startPlantSelectItem.html",
+            controller: "startPlantSelectItemCtrl as vm",
           },
         },
       })
 
-      .state("app.startPlant3", {
-        url: "/farmerMenu/startPlant3/:crop/:type/:sub",
-        views: {
-          "tab-menu": {
-            templateUrl: "templates/farmer/plant/startPlant3.html",
-            controller: "startPlant3Ctrl as vm",
-          },
-        },
-      })
+      // .state("app.startPlantDetail", {
+      //   url: "/farmerMenu/startPlantDetail/:wo",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlantDetail.html",
+      //       controller: "startPlantDetailCtrl as vm",
+      //     },
+      //   },
+      // })
+
+      // .state("app.startPlant1", {
+      //   url: "/farmerMenu/startPlant1/:crop",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlant1.html",
+      //       controller: "startPlant1Ctrl as vm",
+      //     },
+      //   },
+      // })
+
+      // .state("app.startPlant2", {
+      //   url: "/farmerMenu/startPlant2/:crop/:type",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlant2.html",
+      //       controller: "startPlant2Ctrl as vm",
+      //     },
+      //   },
+      // })
+
+      // .state("app.startPlant3", {
+      //   url: "/farmerMenu/startPlant3/:crop/:type/:sub",
+      //   views: {
+      //     "tab-menu": {
+      //       templateUrl: "templates/farmer/plant/startPlant3.html",
+      //       controller: "startPlant3Ctrl as vm",
+      //     },
+      //   },
+      // })
 
       .state("app.recordEtc1", {
         url: "/recordEtc1/:data",
