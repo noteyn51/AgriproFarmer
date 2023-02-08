@@ -304,10 +304,7 @@ angular
           "config",
           $rootScope.global.mob_config
         );
-        FirebasePlugin.setCrashlyticsCustomKey("time", new Date());
-        FirebasePlugin.setCrashlyticsCustomKey("device", 'TEST');
 
-        FirebasePlugin.sendCrash();
       });
     }
   );
