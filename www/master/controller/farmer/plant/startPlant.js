@@ -418,7 +418,8 @@ angular
       $scope,
       $stateParams,
       $mdDialog,
-      $rootScope
+      $rootScope,
+      fachttp
     ) {
       let vm = this;
       try {
@@ -426,6 +427,36 @@ angular
       } catch (error) {
         console.log(error);
       }
+
+      console.log($scope.wo);
+
+      async function init() {
+        console.log("inits");
+        let a = await getData();
+      }
+
+      async function getData() {
+        let req = {
+          mode: "getwotree",
+          wo_lot:$scope.wo.wo_lot
+        };
+
+        fachttp.model("startPlant.php", req).then(
+          function (response) {
+            console.log(response);
+            if (response.data.status == true) {
+              $scope.items = response.data.data;
+            } else {
+              $scope.items = [];
+            }
+          },
+          function err(err) {
+            $scope.status = false;
+          }
+        );
+      }
+
+      init();
 
       $rootScope.treeAdd = [];
 
@@ -448,15 +479,13 @@ angular
       };
 
       vm.add = function () {
-        $state.go("app.startPlantSelectItem");
+        $state.go("app.startPlantSelectItem",{wo:JSON.stringify($scope.wo)});
       };
 
       // $scope.$watch("treeAdd", function (a, b) {
       //   console.log("new");
-
       //   console.log(a);
       //   console.log("old");
-
       //   console.log(b);
       // });
     }
@@ -484,6 +513,8 @@ angular
       $ionicScrollDelegate
     ) {
       let vm = this;
+      // console.log($stateParams.wo)
+      $scope.wo = JSON.parse($stateParams.wo)
 
       $scope.items = [];
       $scope.selected = [];
@@ -525,6 +556,7 @@ angular
           let req = {
             mode: "addTreeToWo",
             selected: $scope.selected,
+            wo:$scope.wo
           };
           $ionicLoading.show();
 

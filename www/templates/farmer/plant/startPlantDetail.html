@@ -1,4 +1,4 @@
-<ion-view hide-back-button="false">
+<ion-view hide-back-button="false" cache-view="false">
   <ion-nav-title>รายละเอียดการเพาะปลูก </ion-nav-title>
 
   <ion-content>
@@ -49,14 +49,14 @@
           justify-content: space-between;
         "
       >
-        <div>รายการต้น</div>
-        <div style="color: #387ef5" ng-click="vm.add()">เพิ่ม</div>
+        <div>รายการต้น ( {{items.length}} )</div>
+        <div style="color: #387ef5" ng-click="vm.add()">เพิ่มต้น</div>
       </div>
     </div>
 
     <div class="list">
-      <a class="item" ng-repeat="x in treeAdd track by $index">
-        <div>{{x.pt_desc1}} {{x.pt_um}} {{x.ld_rmks}}</div>
+      <a class="item" ng-repeat="x in items track by $index">
+        <div style="display: flex;flex-direction: row;justify-content: space-between;"><div>{{x.pt_desc1}}</div> <div>{{x.pt_um}} {{x.ld_rmks}}</div></div>
         <p>{{x.ld_lot}}</p>
       </a>
     </div>
