@@ -80,24 +80,24 @@ angular
               numrow2 += 10;
             } else {
               vm.list = response.data.result;
-              $mdDialog
-                .show(
-                  $mdDialog
-                    .alert()
-                    .parent(
-                      angular.element(document.querySelector("#popupContainer"))
-                    )
-                    .clickOutsideToClose(true)
-                    .title("แจ้งเตือน")
-                    .textContent("ไม่พบรายการเพาะปลูก")
-                    .ariaLabel("Alert Dialog Demo")
-                    .ok("OK")
-                    .targetEvent()
-                )
-                .then(
-                  function (answer) {},
-                  function () {}
-                );
+              // $mdDialog
+              //   .show(
+              //     $mdDialog
+              //       .alert()
+              //       .parent(
+              //         angular.element(document.querySelector("#popupContainer"))
+              //       )
+              //       .clickOutsideToClose(true)
+              //       .title("แจ้งเตือน")
+              //       .textContent("ไม่พบรายการเพาะปลูก")
+              //       .ariaLabel("Alert Dialog Demo")
+              //       .ok("OK")
+              //       .targetEvent()
+              //   )
+              //   .then(
+              //     function (answer) {},
+              //     function () {}
+              //   );
             }
           },
           function err(err) {
@@ -135,24 +135,24 @@ angular
               //console.log(vm.list);
               $ionicScrollDelegate.resize();
             } else {
-              $mdDialog
-                .show(
-                  $mdDialog
-                    .alert()
-                    .parent(
-                      angular.element(document.querySelector("#popupContainer"))
-                    )
-                    .clickOutsideToClose(true)
-                    .title("แจ้งเตือน")
-                    .textContent("ไม่พบรายการเพาะปลูก")
-                    .ariaLabel("Alert Dialog Demo")
-                    .ok("OK")
-                    .targetEvent()
-                )
-                .then(
-                  function (answer) {},
-                  function () {}
-                );
+              // $mdDialog
+              //   .show(
+              //     $mdDialog
+              //       .alert()
+              //       .parent(
+              //         angular.element(document.querySelector("#popupContainer"))
+              //       )
+              //       .clickOutsideToClose(true)
+              //       .title("แจ้งเตือน")
+              //       .textContent("ไม่พบรายการเพาะปลูก")
+              //       .ariaLabel("Alert Dialog Demo")
+              //       .ok("OK")
+              //       .targetEvent()
+              //   )
+              //   .then(
+              //     function (answer) {},
+              //     function () {}
+              //   );
             }
           },
           function err(err) {
@@ -328,24 +328,24 @@ angular
               numrow2 += 10;
             } else {
               vm.list = response.data.result;
-              $mdDialog
-                .show(
-                  $mdDialog
-                    .alert()
-                    .parent(
-                      angular.element(document.querySelector("#popupContainer"))
-                    )
-                    .clickOutsideToClose(true)
-                    .title("แจ้งเตือน")
-                    .textContent("ไม่พบรายการเพาะปลูก")
-                    .ariaLabel("Alert Dialog Demo")
-                    .ok("OK")
-                    .targetEvent()
-                )
-                .then(
-                  function (answer) {},
-                  function () {}
-                );
+              // $mdDialog
+              //   .show(
+              //     $mdDialog
+              //       .alert()
+              //       .parent(
+              //         angular.element(document.querySelector("#popupContainer"))
+              //       )
+              //       .clickOutsideToClose(true)
+              //       .title("แจ้งเตือน")
+              //       .textContent("ไม่พบรายการเพาะปลูก")
+              //       .ariaLabel("Alert Dialog Demo")
+              //       .ok("OK")
+              //       .targetEvent()
+              //   )
+              //   .then(
+              //     function (answer) {},
+              //     function () {}
+              //   );
             }
           },
           function err(err) {
@@ -382,24 +382,24 @@ angular
               //console.log(vm.list);
               $ionicScrollDelegate.resize();
             } else {
-              $mdDialog
-                .show(
-                  $mdDialog
-                    .alert()
-                    .parent(
-                      angular.element(document.querySelector("#popupContainer"))
-                    )
-                    .clickOutsideToClose(true)
-                    .title("แจ้งเตือน")
-                    .textContent("ไม่พบรายการเพาะปลูก")
-                    .ariaLabel("Alert Dialog Demo")
-                    .ok("OK")
-                    .targetEvent()
-                )
-                .then(
-                  function (answer) {},
-                  function () {}
-                );
+              // $mdDialog
+              //   .show(
+              //     $mdDialog
+              //       .alert()
+              //       .parent(
+              //         angular.element(document.querySelector("#popupContainer"))
+              //       )
+              //       .clickOutsideToClose(true)
+              //       .title("แจ้งเตือน")
+              //       .textContent("ไม่พบรายการเพาะปลูก")
+              //       .ariaLabel("Alert Dialog Demo")
+              //       .ok("OK")
+              //       .targetEvent()
+              //   )
+              //   .then(
+              //     function (answer) {},
+              //     function () {}
+              //   );
             }
           },
           function err(err) {
@@ -731,24 +731,24 @@ angular
               $ionicScrollDelegate.resize();
             } else {
               vm.data = response.data.result;
-              $mdDialog
-                .show(
-                  $mdDialog
-                    .alert()
-                    .parent(
-                      angular.element(document.querySelector("#popupContainer"))
-                    )
-                    .clickOutsideToClose(true)
-                    .title("แจ้งเตือน")
-                    .textContent("ไม่พบรายการ QR CODE นี้อยู่")
-                    .ariaLabel("Alert Dialog Demo")
-                    .ok("OK")
-                    .targetEvent()
-                )
-                .then(
-                  function (answer) {},
-                  function () {}
-                );
+              // $mdDialog
+              //   .show(
+              //     $mdDialog
+              //       .alert()
+              //       .parent(
+              //         angular.element(document.querySelector("#popupContainer"))
+              //       )
+              //       .clickOutsideToClose(true)
+              //       .title("แจ้งเตือน")
+              //       .textContent("ไม่พบรายการ QR CODE นี้อยู่")
+              //       .ariaLabel("Alert Dialog Demo")
+              //       .ok("OK")
+              //       .targetEvent()
+              //   )
+              //   .then(
+              //     function (answer) {},
+              //     function () {}
+              //   );
             }
           },
           function err(err) {
