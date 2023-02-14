@@ -146,7 +146,7 @@ angular
       };
     }
   )
-  .controller("multiReceiveCtrl", function ($scope, fachttp) {
+  .controller("multiReceiveCtrl", function ($scope, fachttp,$state) {
     let vm = this;
 
     function onStartwoMstr() {
@@ -175,6 +175,12 @@ angular
     
 
     $scope.selectId = function (e) {
+      $state.go('app.multiReceive2',{wo:JSON.stringify(e)})
       console.log(e);
     };
+  })
+  .controller("multiReceive2Ctrl", function ($scope, fachttp,$stateParams) {
+    let vm = this;
+
+  console.log($stateParams)
   });

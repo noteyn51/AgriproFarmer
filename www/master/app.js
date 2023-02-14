@@ -780,6 +780,15 @@ angular
           },
         },
       })
+      .state("app.multiReceive2", {
+        url: "/multiReceive2/:wo",
+        views: {
+          "tab-menu": {
+            templateUrl: "templates/farmer/receivelot/multiReceive2.html",
+            controller: "multiReceive2Ctrl as vm",
+          },
+        },
+      })
 
       .state("app.recordPlant", {
         url: "/recordPlant",
