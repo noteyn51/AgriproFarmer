@@ -2,7 +2,16 @@ angular
   .module("app")
   .controller(
     "singleReceiveCtrl",
-    function ($scope, fachttp, $ionicModal, $ionicLoading, Service, $mdDialog,$state,$ionicHistory) {
+    function (
+      $scope,
+      fachttp,
+      $ionicModal,
+      $ionicLoading,
+      Service,
+      $mdDialog,
+      $state,
+      $ionicHistory
+    ) {
       let vm = this;
 
       $scope.model = { itemSelect: null, lotGenCount: null };
@@ -107,14 +116,14 @@ angular
         $ionicLoading.show();
         let req = {
           mode: "singleGenerate",
-          data:$scope.model
+          data: $scope.model,
         };
 
         fachttp.model("controller/receiveLot.php", req).then(
           function (response) {
             try {
-              if(response.data.status){
-              $ionicHistory.goBack();
+              if (response.data.status) {
+                $ionicHistory.goBack();
 
                 $mdDialog.show(
                   $mdDialog
@@ -129,12 +138,9 @@ angular
                     .ok("OK")
                     .targetEvent()
                 );
-
-              }else{
-
+              } else {
               }
-            } catch (error) {
-            }
+            } catch (error) {}
 
             $ionicLoading.hide();
           },
@@ -146,7 +152,7 @@ angular
       };
     }
   )
-  .controller("multiReceiveCtrl", function ($scope, fachttp,$state) {
+  .controller("multiReceiveCtrl", function ($scope, fachttp, $state) {
     let vm = this;
 
     function onStartwoMstr() {
@@ -172,15 +178,169 @@ angular
     }
 
     onStartwoMstr();
-    
 
     $scope.selectId = function (e) {
-      $state.go('app.multiReceive2',{wo:JSON.stringify(e)})
+      $state.go("app.multiReceive2", { wo: JSON.stringify(e) });
       console.log(e);
     };
   })
-  .controller("multiReceive2Ctrl", function ($scope, fachttp,$stateParams) {
-    let vm = this;
+  .controller(
+    "multiReceive2Ctrl",
+    function (
+      $ionicScrollDelegate,
+      $ionicModal,
+      $scope,
+      fachttp,
+      $stateParams,
+      $ionicLoading,
+      Service
+    ) {
+      let vm = this;
+      $scope.model = {
+        gradeSelect: null,
+        item: null,
+        moisture: null,
+        price: null,
+        qty: null,
+      };
 
-  console.log($stateParams)
-  });
+      $scope.isSelect = { status: false, index: null };
+
+      $scope.model = {
+        gradeSelect: "B",
+        item: {
+          pt_part: "300100200001276",
+          pt_desc1: "ทุเรียนพันธุ์หมอนข้าง",
+          pt_site: "TH10001",
+          pt_um: "KG",
+          pt_prod_line: "3",
+          $$hashKey: "object:2499",
+        },
+        moisture: "30",
+        price: "20",
+        qty: "3000",
+      };
+
+      $scope.gradeList = ["A", "B", "C", "D", "E", "F"];
+      $scope.receiveLotList = [];
+
+      {
+        $scope.modelItem;
+        $ionicModal
+          .fromTemplateUrl("item-list.html", {
+            scope: $scope,
+            animation: "slide-in-up",
+          })
+          .then(function (modal) {
+            $scope.modelItem = modal;
+          });
+
+        $scope.showModalItem = function () {
+          $ionicLoading.show();
+          let req = {
+            mode: "getReceiveItemLine3",
+          };
+
+          fachttp.model("controller/receiveLot.php", req).then(
+            function (response) {
+              try {
+                $scope.item = response.data.result;
+              } catch (error) {
+                $scope.item = [];
+              }
+
+              $ionicLoading.hide();
+              $scope.modelItem.show();
+            },
+            function err(err) {
+              Service.timeout();
+              $ionicLoading.hide();
+            }
+          );
+        };
+
+        $scope.enterSelect = function (e) {
+          $scope.model.item = e;
+          $scope.hideModalItem();
+        };
+
+        $scope.hideModalItem = function () {
+          $scope.modelItem.hide();
+        };
+
+        // Cleanup the modal when we're done with it!
+        $scope.$on("$destroy", function () {
+          if ($scope.modelItem) {
+            $scope.modelItem.remove();
+          } else {
+          }
+        });
+      }
+
+      function getItem() {
+        let req = {
+          mode: "getReceiveItem",
+        };
+
+        fachttp.model("controller/receiveLot.php", req).then(
+          function (response) {
+            try {
+              $scope.item = response.data.result;
+            } catch (error) {
+              $scope.item = [];
+            }
+
+            $ionicLoading.hide();
+          },
+          function err(err) {
+            Service.timeout();
+            $ionicLoading.hide();
+          }
+        );
+      }
+
+      $scope.add = function () {
+        console.log($scope.model);
+        let cheking = [];
+        Object.keys($scope.model).forEach((key) => {
+          if ($scope.model[key] != null) {
+            cheking.push(true);
+          } else {
+            cheking.push(false);
+          }
+        });
+
+        // true == edit
+        if (!cheking.includes(false)) {
+          if ($scope.isSelect.status) {
+            $scope.receiveLotList[$scope.isSelect.index] = angular.copy(
+              $scope.model
+            );
+
+            $scope.isSelect.status = false;
+            $scope.isSelect.index = null;
+          } else {
+            // false == add
+
+            $scope.receiveLotList.push(angular.copy($scope.model));
+          }
+          $scope.model.qty = null;
+        } else {
+          alert("โปรดป้อนข้อมูลให้ครบถ้วน");
+        }
+
+        $ionicScrollDelegate.resize();
+      };
+
+      $scope.selectEdit = function (item, index) {
+        $scope.isSelect.status = true;
+        $scope.isSelect.index = index;
+
+        $scope.model = angular.copy(item);
+      };
+
+      getItem();
+
+      console.log($stateParams);
+    }
+  );
