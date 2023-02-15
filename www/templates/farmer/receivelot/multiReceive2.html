@@ -1,0 +1,159 @@
+<ion-view hide-back-button="false">
+  <ion-nav-title
+    ><b style="font-size: 18px">เลือกรายการที่ต้องการรับเข้า LOT</b>
+  </ion-nav-title>
+  <ion-nav-buttons side="right"> </ion-nav-buttons>
+  <style>
+    .text-align-input {
+      text-align: right;
+    }
+    .select-display {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-left: 15px;
+      padding-right: 10px;
+    }
+  </style>
+  <ion-content>
+    <div class="select-display">
+      <div>เกรดสินค้า</div>
+      <md-select
+        ng-model="model.gradeSelect"
+        placeholder="เลือกเกรดสินค้า"
+        class="md-no-underline"
+        style="margin: 10px"
+      >
+        <md-option value="{{x}}" ng-repeat="x in gradeList">{{x}}</md-option>
+      </md-select>
+    </div>
+    <md-divider></md-divider>
+    <div class="select-display" style="padding: 15px 15px 15px 15px">
+      <div>สินค้า</div>
+      <div href="#" ng-click="showModalItem()">
+        <div ng-if="!model.item" style="color: gray">
+          เลือกสินค้า
+          <i class="icon ion-arrow-down-b" style="margin-left: 10px"> </i>
+        </div>
+
+        <div ng-if="model.item" style="color: black">
+          {{model.item.pt_desc1}}<i
+            class="icon ion-arrow-down-b"
+            style="margin-left: 10px"
+          >
+          </i>
+        </div>
+      </div>
+    </div>
+    <label class="item item-input">
+      <span class="input-label">ความชื้น</span>
+      <input
+        type="text"
+        oninput="this.value = this.value.replace(/[^0+0-9.]/g, '').replace(/^(?!0$)0+/, '')"
+        ng-model="model.moisture"
+        placeholder="ระบุความชื้น"
+        class="text-align-input"
+      />
+    </label>
+    <label class="item item-input">
+      <span class="input-label">ราคา</span>
+      <input
+        type="text"
+        oninput="this.value = this.value.replace(/[^0+0-9.]/g, '').replace(/^(?!0$)0+/, '')"
+        class="text-align-input"
+        ng-model="model.price"
+        placeholder="ระบุราคา"
+      />
+    </label>
+    <label class="item item-input">
+      <span class="input-label">จำนวนรับเขา</span>
+      <input
+        type="text"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" 
+        class="text-align-input"
+        ng-model="model.qty"
+        placeholder="ระบุจำนวนรับเข้า (กิโลกรัม)"
+      />
+    </label>
+
+    <div style="text-align: center; margin: 10px 0px 10px 0px">
+      <butotn
+        class="button button-balanced"
+        ng-click="add()"
+        >
+        {{!isSelect.status ? 'สะสม' : 'ยืนยัน'}}
+        </butotn
+      >
+    </div>
+
+    <div class="list">
+      <div
+        ng-repeat="x in receiveLotList track by $index"
+        ng-click="selectEdit(x,$index)"
+        class="item"
+        style="
+          flex-direction: row;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <div>
+          <div>{{x.item.pt_desc1}} ( {{x.gradeSelect}} )</div>
+          <div>ตระกร้าที่ {{ $index+1}}</div>
+        </div>
+        <div
+          style="
+            color: royalblue;
+            background-color: lightgray;
+            padding: 7px;
+            border-radius: 15px;
+          "
+        >
+          Weight : {{x.qty}}
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <script id="item-list.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar>
+          <button type="button" class="button button-assertive button-clear" ng-click="hideModalItem()">ปิด</button>
+        <h1 class="title" style="text-align:center">เลือกประเภทต้นที่ต้องการรับ</h1>
+
+
+      </ion-header-bar>
+      <ion-content >
+        <div >
+          <div>
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" placeholder="ค้นหา" ng-model="searchText" />
+            </label>
+          </div>
+
+          <div class="list" >
+            <div
+              class="item item-icon-right"
+              ng-repeat="x in item | filter:searchText |  limitTo:300"
+              ng-click="enterSelect(x)"
+            >
+              <div>
+                <div>{{x.pt_desc1}} ({{x.pt_um}})</div>
+                <div style="color: grey">
+                  <a> {{x.pt_part}}</a>
+                </div>
+              </div>
+              <i class="icon ion-ios-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+
+
+
+      </ion-content>
+    </ion-modal-view>
+  </script>
+</ion-view>
