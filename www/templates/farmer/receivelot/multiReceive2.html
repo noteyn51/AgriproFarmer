@@ -79,7 +79,7 @@
 
     <div style="text-align: center; margin: 10px 0px 10px 0px">
       <butotn
-        class="button button-balanced"
+        class="button button-positive"
         ng-click="add()"
         >
         {{!isSelect.status ? 'สะสม' : 'ยืนยัน'}}
@@ -87,7 +87,12 @@
       >
     </div>
 
+
     <div class="list">
+
+  <div class="item item-divider">
+   รายการรับเข้า
+  </div>
       <div
         ng-repeat="x in receiveLotList track by $index"
         ng-click="selectEdit(x,$index)"
@@ -115,6 +120,11 @@
         </div>
       </div>
     </div>
+
+    <div style="padding:10px">
+      <button class="button button-block button-balanced" ng-click="save()">บันทึก</button>
+    </div>
+
   </ion-content>
 
   <script id="item-list.html" type="text/ng-template">

@@ -341,6 +341,26 @@ angular
 
       getItem();
 
+      $scope.save = function(){
+        $ionicLoading.show();
+        let req = {
+          mode: "multiGenerate",
+          model:$scope.model
+        };
+
+        fachttp.model("controller/receiveLot.php", req).then(
+          function (response) {
+            
+
+            $ionicLoading.hide();
+          },
+          function err(err) {
+            Service.timeout();
+            $ionicLoading.hide();
+          }
+        );
+      }
+
       console.log($stateParams);
     }
   );
