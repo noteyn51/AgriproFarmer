@@ -67,13 +67,24 @@
       />
     </label>
     <label class="item item-input">
-      <span class="input-label">จำนวนรับเขา</span>
+      <span class="input-label">จำนวนรับเข้า</span>
       <input
         type="text"
         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" 
         class="text-align-input"
         ng-model="model.qty"
         placeholder="ระบุจำนวนรับเข้า (กิโลกรัม)"
+      />
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">จำนวนสติ๊กเกอร์</span>
+      <input
+        type="text"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" 
+        class="text-align-input"
+        ng-model="model.print"
+        placeholder="ระบุจำนวนสติ๊กเกอร์"
       />
     </label>
 

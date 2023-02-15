@@ -193,36 +193,68 @@ angular
       fachttp,
       $stateParams,
       $ionicLoading,
-      Service
+      Service,
+      $ionicHistory
     ) {
       let vm = this;
+      $scope.wo = JSON.parse($stateParams.wo);
+      console.log($scope.wo)
       $scope.model = {
         gradeSelect: null,
         item: null,
         moisture: null,
         price: null,
         qty: null,
+        print:null
       };
 
       $scope.isSelect = { status: false, index: null };
 
-      $scope.model = {
-        gradeSelect: "B",
-        item: {
-          pt_part: "300100200001276",
-          pt_desc1: "ทุเรียนพันธุ์หมอนข้าง",
-          pt_site: "TH10001",
-          pt_um: "KG",
-          pt_prod_line: "3",
-          $$hashKey: "object:2499",
-        },
-        moisture: "30",
-        price: "20",
-        qty: "3000",
-      };
+      // $scope.model = {
+      //   gradeSelect: "B",
+      //   item: {
+      //     pt_part: "300100200001276",
+      //     pt_desc1: "ทุเรียนพันธุ์หมอนข้าง",
+      //     pt_site: "TH10001",
+      //     pt_um: "KG",
+      //     pt_prod_line: "3",
+      //     $$hashKey: "object:2499",
+      //   },
+      //   moisture: "30",
+      //   price: "20",
+      //   qty: "3000",
+      // };
 
       $scope.gradeList = ["A", "B", "C", "D", "E", "F"];
       $scope.receiveLotList = [];
+    //   $scope.receiveLotList = [
+    //     {
+    //         "gradeSelect": "B",
+    //         "item": {
+    //             "pt_part": "300100200001276",
+    //             "pt_desc1": "ทุเรียนพันธุ์หมอนข้าง",
+    //             "pt_site": "TH10001",
+    //             "pt_um": "KG",
+    //             "pt_prod_line": "3"
+    //         },
+    //         "moisture": "30",
+    //         "price": "20",
+    //         "qty": "3000"
+    //     },
+    //     {
+    //         "gradeSelect": "A",
+    //         "item": {
+    //             "pt_part": "300100200001276",
+    //             "pt_desc1": "ทุเรียนพันธุ์หมอนข้าง",
+    //             "pt_site": "TH10001",
+    //             "pt_um": "KG",
+    //             "pt_prod_line": "3"
+    //         },
+    //         "moisture": "30",
+    //         "price": "20",
+    //         "qty": "100"
+    //     }
+    // ];
 
       {
         $scope.modelItem;
@@ -342,23 +374,33 @@ angular
       getItem();
 
       $scope.save = function(){
-        $ionicLoading.show();
-        let req = {
-          mode: "multiGenerate",
-          model:$scope.model
-        };
+       
+        if($scope.receiveLotList.length >0){
+          $ionicLoading.show();
+          let req = {
+            mode: "multiGenerate",
+            receivelot:$scope.receiveLotList,
+            wo:$scope.wo
+          };
+  
+          fachttp.model("controller/receiveLot.php", req).then(
+            function (response) {
+              mobiscroll.toast({
+                message: "สร้าง Lot เรียนร้อยแล้ว",
+                color: "success",
+              });
+              $ionicHistory.goBack();
+              $ionicLoading.hide();
+            },
+            function err(err) {
+              Service.timeout();
+              $ionicLoading.hide();
+            }
+          );
+        }else{
 
-        fachttp.model("controller/receiveLot.php", req).then(
-          function (response) {
-            
-
-            $ionicLoading.hide();
-          },
-          function err(err) {
-            Service.timeout();
-            $ionicLoading.hide();
-          }
-        );
+        }
+  
       }
 
       console.log($stateParams);
