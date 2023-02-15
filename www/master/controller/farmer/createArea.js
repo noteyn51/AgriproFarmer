@@ -12,16 +12,17 @@ angular
     Service,
     $ionicPopup,
     $ionicLoading,
-    $ionicModal
+    $ionicModal,
+    fachttp
   ) {
     let vm = this;
 
     function province() {
       $ionicLoading.show();
-      let url = $rootScope.ip + "createArea.php";
-      let req = { mode: "province" ,global:$rootScope.global};
+      // let url = $rootScope.ip + "createArea.php";
+      let req = { mode: "province" };
 
-      $http.post(url, req).then(
+      fachttp.model('createArea.php',req).then(
         function(response) {
           //console.log(response.data);
           if (response.data.status == true) {
@@ -48,10 +49,9 @@ angular
 
     vm.provinceChange = function(e) {
       $ionicLoading.show();
-      let url = $rootScope.ip + "createArea.php";
-      let req = { mode: "AUMPHUR", data: e ,global:$rootScope.global};
+      let req = { mode: "AUMPHUR", data: e };
 
-      $http.post(url, req).then(
+      fachttp.model('createArea.php',req).then(
         function(response) {
           //console.log(response.data);
           if (response.data.status == true) {
@@ -73,10 +73,9 @@ angular
 
     vm.aumphurChange = function(e) {
       $ionicLoading.show();
-      let url = $rootScope.ip + "createArea.php";
-      let req = { mode: "tumbol", data: e,global:$rootScope.global };
+      let req = { mode: "tumbol", data: e };
 
-      $http.post(url, req).then(
+      fachttp.model('createArea.php',req).then(
         function(response) {
           //console.log(response.data);
           if (response.data.status == true) {
@@ -233,9 +232,7 @@ angular
                 aumphur: vm.aumphurSelect,
                 tumbol: vm.tumbolSelect
               };
-              let url = $rootScope.ip + "createArea.php";
               let req = {
-                global:$rootScope.global,
                 mode: "createFarm",
                 area: $rootScope.area.area,
                 position: resposition,
@@ -245,7 +242,7 @@ angular
                 standard:$scope.guarantee
               };
               //console.log(pro);
-              $http.post(url, req).then(
+              fachttp.model('createArea.php',req).then(
                 function suscess(response) {
                   //console.log(response);
                   if (response.data.status == true) {
