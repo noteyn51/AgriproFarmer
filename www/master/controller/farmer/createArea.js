@@ -222,11 +222,7 @@ angular
                 lng: lng.substring(0, lng.length - 1)
               };
 
-              //ตอนเอาค่ากลับ
-              // let resposition = {
-              //   lat: sublat.split(","),
-              //   lng: sublng.split(",")
-              // };
+          
               let pro = {
                 province: vm.provinceSelect,
                 aumphur: vm.aumphurSelect,
@@ -241,10 +237,8 @@ angular
                 pro: pro,
                 standard:$scope.guarantee
               };
-              //console.log(pro);
               fachttp.model('createArea.php',req).then(
                 function suscess(response) {
-                  //console.log(response);
                   if (response.data.status == true) {
                     $ionicLoading.hide();
                     $ionicHistory.nextViewOptions({
