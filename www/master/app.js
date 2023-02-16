@@ -1436,8 +1436,8 @@ angular
         angular.merge(req, e);
         return $http.post(
           // "http://localhost/agri_ociv2/model/"+file,
-          // "http://192.168.9.51/agri_ociv3/model/" + file,
-          "https://digimove.365supplychain.com/agripro/agri_ociv4/model/" +file,
+          "http://192.168.9.51/agri_ociv4/model/" + file,
+          // "https://digimove.365supplychain.com/agripro/agri_ociv4/model/" +file,
           req,
           pms
         );
