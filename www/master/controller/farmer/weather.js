@@ -25,14 +25,17 @@ angular
 
       $scope.selectFarm = function (e) {
         $scope.farmSelected = e;
-        $scope.closeModal();
+        console.log(e.lat);
+        console.log(e.lng);
 
+        callPosition(e.lat, e.lng);
+        $scope.closeModal();
       };
 
-      $scope.selectCurrentPosition = function(){
+      $scope.selectCurrentPosition = function () {
+        onStart();
         $scope.closeModal();
-        
-      }
+      };
 
       function getFarm() {
         let req = {
@@ -44,12 +47,26 @@ angular
           function (response) {
             $scope.status = true;
             if (response.data.status == true) {
+
+              response.data.result.forEach(element => {
+                let k = {
+                  lat: element.farm_lat.split(","),
+                  lng: element.farm_lng.split(","),
+                };
+
+                element.lat = k.lat[0];
+                element.lng = k.lng[0];
+
+              });
+              // console.log(response.data.result)
+
+              // response.data.result
               $scope.data = response.data;
               $scope.selectFarm($scope.data.result[0]);
             } else {
+              onStart();
               $scope.data = response.data;
             }
-            console.log($scope.data);
           },
           function err(err) {
             $scope.data = [];
@@ -75,84 +92,68 @@ angular
       weekday[6] = "วันเสาร์";
       vm.day = weekday[now.getDay()];
 
-      $scope.position = "540000";
+      // var geocoder = new google.maps.Geocoder();
 
-      var geocoder = new google.maps.Geocoder();
-
-      function geocodeLatLng(position) {
-        var input = position;
-        var latlngStr = input.split(",", 2);
-        // //console.log(latlngStr)
-        var latlng = {
-          lat: parseFloat(latlngStr[0]),
-          lng: parseFloat(latlngStr[1]),
-        };
-        geocoder.geocode({ location: latlng }, function (results, status) {
-          if (status === "OK") {
-            let k = results[0].formatted_address;
-            vm.landmark = k;
-          } else {
-            vm.landmark = "ไม่สามารถค้นหาพื้นที่ได้";
-          }
-        });
-      }
+      // function geocodeLatLng(position) {
+      //   var input = position;
+      //   var latlngStr = input.split(",", 2);
+      //   // //console.log(latlngStr)
+      //   var latlng = {
+      //     lat: parseFloat(latlngStr[0]),
+      //     lng: parseFloat(latlngStr[1]),
+      //   };
+      //   geocoder.geocode({ location: latlng }, function (results, status) {
+      //     if (status === "OK") {
+      //       let k = results[0].formatted_address;
+      //       vm.landmark = k;
+      //     } else {
+      //       vm.landmark = "ไม่สามารถค้นหาพื้นที่ได้";
+      //     }
+      //   });
+      // }
 
       function daliy() {
         //console.log('daliy')
         let req = { value: 1 };
         $http.post($rootScope.ip + "warn.php", req).then(function (e) {
           vm.Warning = e.data;
-          //console.log(vm.Warning.WarningNews.DescriptionThai);
         });
-
-        // req = { value: 2 };
-        // $http.post($rootScope.ip + "warn.php", req).then(function(e) {
-        //   vm.WeatherToday = e.data;
-        //   //console.log(vm.WeatherToday);
-        // });
 
         req = { value: 3 };
         $http.post($rootScope.ip + "warn.php", req).then(function (e) {
           vm.DailyForecast = e.data;
-          //console.log(vm.DailyForecast);
         });
       }
 
       daliy();
 
-      function callPosition() {
-        //console.log('here')
+      async function callPosition(lati, lngti) {
+        let lat;
+        let lng;
+        if (!lati || lati == "") {
+          var posOptions = { timeout: 10000, enableHighAccuracy: true };
+          let position = await $cordovaGeolocation.getCurrentPosition(
+            posOptions
+          );
+          console.log(position);
+          lat = position.coords.latitude;
+          lng = position.coords.longitude;
+        } else {
+          lat = lati;
+          lng = lngti;
+        }
 
-        var posOptions = { timeout: 10000, enableHighAccuracy: true };
-        $cordovaGeolocation.getCurrentPosition(posOptions).then(
-          function (position) {
-            vm.position = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-            let latlng =
-              "" +
-              position.coords.latitude +
-              "," +
-              position.coords.longitude +
-              "";
+        // geocodeLatLng(latlng);
+        let req = {
+          lat: lat,
+          lng: lng,
+          nextday: vm.nextdatedetail,
+        };
 
-            geocodeLatLng(latlng);
-            let req = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-              nextday: vm.nextdatedetail,
-            };
-
-            $http
-              .post($rootScope.ip + "weathertest.php", req)
-              .then(function (e) {
-                vm.temp = e.data.current;
-                vm.forcase = e.data.days;
-              });
-          },
-          function (err) {}
-        );
+        $http.post($rootScope.ip + "weathertest.php", req).then(function (e) {
+          vm.temp = e.data.current;
+          vm.forcase = e.data.days;
+        });
       }
 
       function onStart() {
@@ -198,8 +199,6 @@ angular
           main();
         }
       }
-
-      onStart();
 
       vm.DailyForecastgo = function (e, b) {
         // //console.log(e)

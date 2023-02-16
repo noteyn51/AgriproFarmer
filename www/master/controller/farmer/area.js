@@ -727,44 +727,7 @@ angular
         }
       };
 
-      vm.updateCrop = function () {
-        //console.log('12345')
-        $ionicLoading.show();
-        let url = $rootScope.ip + "createArea.php";
-        let req = {
-          mode: "editCrop",
-          data: $scope.editdata,
-          icon: $scope.image,
-          img: $scope.imagefarm,
-          imgDel: $scope.imaeDel,
-        };
-        //console.log(req);
-        fachttp.model("createArea.php", req).then(
-          function (response) {
-            //console.log(response);
-            if (response.data.status == true) {
-              $ionicLoading.hide();
-              $timeout(function () {
-                delete $scope.data;
-                $scope.modaledit.hide();
-                mobiscroll.toast({
-                  message: "แก้ไขข้อมูลเรียบร้อย",
-                  color: "success",
-                });
-                onStart();
-              }, 200);
-            } else {
-              $ionicLoading.hide();
-              Service.timeout();
-            }
-          },
-          function err(err) {
-            $ionicLoading.hide();
-
-            Service.timeout();
-          }
-        );
-      };
+     
 
       $scope.doRefresh = function () {
         // here refresh data code
@@ -2180,9 +2143,8 @@ angular
       };
 
       vm.updateCrop = function () {
-        //console.log('12345')
+        console.log('usethis')
         $ionicLoading.show();
-        let url = $rootScope.ip + "createArea.php";
         let req = {
           mode: "editCrop",
           data: $scope.editdata,
