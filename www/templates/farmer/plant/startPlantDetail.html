@@ -32,7 +32,7 @@
 
       <div style="text-align: center; margin-top: 10px">
         <button
-          class="button button-balanced button-block"
+          class="button button-assertive button-block"
           ng-click="vm.endCrop()"
         >
           สิ้นสุดการเพาะปลูก
@@ -49,8 +49,8 @@
           justify-content: space-between;
         "
       >
-        <div>รายการต้น ( {{items.length}} )</div>
-        <div style="color: #387ef5" ng-click="vm.add()">เพิ่มต้น</div>
+        <div>รายการที่ลงปลูก ( {{items.length}} )</div>
+        <div style="color: #387ef5" ng-click="vm.add()">เพิ่ม</div>
       </div>
     </div>
 
@@ -60,5 +60,7 @@
         <p>{{x.ld_lot}}</p>
       </a>
     </div>
+
+    <div style="color:gray;text-align: center;padding: 50px;" ng-if="items.length == 0 ">ยังไม่มีรายการที่ลงปลูก โปรดเลือกรายการเพื่อลงปลูกในรายการนี้</div>
   </ion-content>
 </ion-view>
