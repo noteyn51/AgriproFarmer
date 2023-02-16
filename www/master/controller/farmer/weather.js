@@ -202,7 +202,7 @@ angular
       // };
 
       $ionicModal
-        .fromTemplateUrl("farm_list.html", {
+        .fromTemplateUrl("my-farm.html", {
           scope: $scope,
           animation: "slide-in-up",
         })
