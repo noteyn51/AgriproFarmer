@@ -29,6 +29,11 @@ angular
 
       };
 
+      $scope.selectCurrentPosition = function(){
+        $scope.closeModal();
+        
+      }
+
       function getFarm() {
         let req = {
           mode: "selectFarm",

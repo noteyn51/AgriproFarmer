@@ -221,6 +221,16 @@
 
         </ion-header-bar>
         <ion-content>
+          <div class="item "  ng-click="selectCurrentPosition()">
+            <div >
+              <i class="icon ion-location"></i>
+                <a style="font-weight: bold;
+                font-size: large;">
+                 ใช้ตำแหน่งปัจจุบัน
+
+                </a>
+              </div>
+          </div>
           <div class="item item-avatar" ng-repeat="x in data.result" ng-if="status == true"      ng-click="selectFarm(x)">
             <img ng-if="x.imgpath" ng-src="{{x.imgpath}}" style="object-fit: contain;">
             <img ng-if="!x.imgpath" src="img/noimage1.jpg">
