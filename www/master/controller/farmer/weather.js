@@ -46,9 +46,9 @@ angular
         fachttp.model("area.php", req).then(
           function (response) {
             $scope.status = true;
+            response.data.status = false;
             if (response.data.status == true) {
-
-              response.data.result.forEach(element => {
+              response.data.result.forEach((element) => {
                 let k = {
                   lat: element.farm_lat.split(","),
                   lng: element.farm_lng.split(","),
@@ -56,19 +56,16 @@ angular
 
                 element.lat = k.lat[0];
                 element.lng = k.lng[0];
-
               });
-              // console.log(response.data.result)
 
-              // response.data.result
               $scope.data = response.data;
               $scope.selectFarm($scope.data.result[0]);
             } else {
-              onStart();
-              $scope.data = response.data;
+              $scope.selectFarm({ farm_name: "ตำแหน่งปัจจุบัน" });
             }
           },
           function err(err) {
+            
             $scope.data = [];
             $scope.status = false;
           }
@@ -128,10 +125,11 @@ angular
       daliy();
 
       async function callPosition(lati, lngti) {
+        $ionicLoading.show();
         let lat;
         let lng;
         if (!lati || lati == "") {
-          var posOptions = { timeout: 10000, enableHighAccuracy: true };
+          var posOptions = { timeout: 6000, enableHighAccuracy: true };
           let position = await $cordovaGeolocation.getCurrentPosition(
             posOptions
           );
@@ -153,6 +151,7 @@ angular
         $http.post($rootScope.ip + "weathertest.php", req).then(function (e) {
           vm.temp = e.data.current;
           vm.forcase = e.data.days;
+          $ionicLoading.hide();
         });
       }
 
