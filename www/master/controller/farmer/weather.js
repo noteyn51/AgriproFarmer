@@ -21,6 +21,7 @@ angular
       $ionicModal
     ) {
       let vm = this;
+      $scope.isLoading = false;
       $scope.farmSelected = {};
 
       $scope.selectFarm = function (e) {
@@ -46,7 +47,6 @@ angular
         fachttp.model("area.php", req).then(
           function (response) {
             $scope.status = true;
-            response.data.status = false;
             if (response.data.status == true) {
               response.data.result.forEach((element) => {
                 let k = {
@@ -65,7 +65,6 @@ angular
             }
           },
           function err(err) {
-            
             $scope.data = [];
             $scope.status = false;
           }
@@ -125,7 +124,7 @@ angular
       daliy();
 
       async function callPosition(lati, lngti) {
-        $ionicLoading.show();
+        $scope.isLoading = true;
         let lat;
         let lng;
         if (!lati || lati == "") {
@@ -151,7 +150,7 @@ angular
         $http.post($rootScope.ip + "weathertest.php", req).then(function (e) {
           vm.temp = e.data.current;
           vm.forcase = e.data.days;
-          $ionicLoading.hide();
+          $scope.isLoading = false;
         });
       }
 

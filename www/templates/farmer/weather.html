@@ -70,6 +70,10 @@
       </div>
     </div>
 
+    <div ng-if="isLoading" style="text-align: center">
+      <ion-spinner class="spinner-positive"></ion-spinner>
+    </div>
+
     <div ng-if="vm.temp">
       <div
         class="card"
@@ -209,8 +213,6 @@
     </div>
 
     <br />
-
-
   </ion-content>
 
   <script id="my-farm.html" type="text/ng-template">
