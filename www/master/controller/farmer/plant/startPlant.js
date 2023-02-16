@@ -471,7 +471,9 @@ angular
           .cancel("ยกเลิก");
 
         $mdDialog.show(confirm).then(
-          function () {},
+          function () {
+            console.log('End Wo ')
+          },
           function () {
             //console.log("2");
           }
