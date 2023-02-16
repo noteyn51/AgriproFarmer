@@ -22,6 +22,10 @@ angular
       let vm = this;
       $scope.farmSelected = {};
 
+      $scope.showFarmList = function(){
+        console.log('asd')
+      }
+
       $scope.selectFarm = function(e){
         $scope.farmSelected  = e;
       }
