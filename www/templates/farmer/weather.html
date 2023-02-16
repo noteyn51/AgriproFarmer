@@ -248,11 +248,6 @@
                   {{x.farm_name}}
 
                 </a>
-
-                <a ng-if="x.farm_status == 'APPROVE'" style="color:green"><i class="icon ion-checkmark-circled"></i> อนุมัติ</a>
-                <a ng-if="x.farm_status == 'REJECT'" style="color:red"><i class="icon ion-close-circled"></i> ไม่อนุมัติ</a>
-                <a ng-if="x.farm_status == 'INACTIVE'" style="color:red">ยกเลิกใช้งาน</a>
-                <a ng-if="!x.farm_status" > รออนุมัติ</a>
               </div>
             <p style="white-space: break-spaces;">{{x.address}}</p>
 

@@ -79,11 +79,10 @@ angular
             function () {},
             function () {}
           );
-  
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
-     
+
         FirebasePlugin.getToken(
           function (fcmToken) {
             console.log(fcmToken);
@@ -691,7 +690,6 @@ angular
         },
       })
 
-      
       .state("app.recordEtc1", {
         url: "/recordEtc1/:data",
         views: {
@@ -770,8 +768,6 @@ angular
           },
         },
       })
-
-  
 
       .state("app.recordResult", {
         url: "/recordResult/:list",
@@ -1379,8 +1375,8 @@ angular
         angular.merge(req, e);
         return $http.post(
           // "http://localhost/agri_ociv2/model/"+file,
-          // "http://192.168.9.51/agri_ociv4/model/" + file,
-          "https://digimove.365supplychain.com/agripro/agri_ociv4/model/" +file,
+          "http://192.168.9.51/agri_ociv4/model/" + file,
+          // "https://digimove.365supplychain.com/agripro/agri_ociv4/model/" +file,
           req,
           pms
         );

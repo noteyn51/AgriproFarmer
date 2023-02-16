@@ -34,7 +34,8 @@ angular
       };
 
       $scope.selectCurrentPosition = function () {
-        onStart();
+        $scope.selectFarm({ farm_name: "ตำแหน่งปัจจุบัน" });
+
         $scope.closeModal();
       };
 
