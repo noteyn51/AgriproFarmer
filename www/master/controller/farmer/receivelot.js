@@ -25,7 +25,7 @@ angular
       {
         $scope.modelItem;
         $ionicModal
-          .fromTemplateUrl("item.html", {
+          .fromTemplateUrl("item-list.html", {
             scope: $scope,
             animation: "slide-in-up",
           })
@@ -416,7 +416,6 @@ angular
             }
           );
         } else {
-
           $mdDialog.show(
             $mdDialog
               .alert()
@@ -430,7 +429,6 @@ angular
               .ok("OK")
               .targetEvent()
           );
-
         }
       };
 

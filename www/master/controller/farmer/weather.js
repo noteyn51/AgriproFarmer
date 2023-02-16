@@ -26,8 +26,7 @@ angular
 
       $scope.selectFarm = function (e) {
         $scope.farmSelected = e;
-        console.log(e.lat);
-        console.log(e.lng);
+
 
         callPosition(e.lat, e.lng);
         $scope.closeModal();
@@ -35,7 +34,6 @@ angular
 
       $scope.selectCurrentPosition = function () {
         $scope.selectFarm({ farm_name: "ตำแหน่งปัจจุบัน" });
-
         $scope.closeModal();
       };
 
