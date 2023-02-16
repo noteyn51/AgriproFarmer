@@ -691,46 +691,7 @@ angular
         },
       })
 
-      // .state("app.startPlantDetail", {
-      //   url: "/farmerMenu/startPlantDetail/:wo",
-      //   views: {
-      //     "tab-menu": {
-      //       templateUrl: "templates/farmer/plant/startPlantDetail.html",
-      //       controller: "startPlantDetailCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.startPlant1", {
-      //   url: "/farmerMenu/startPlant1/:crop",
-      //   views: {
-      //     "tab-menu": {
-      //       templateUrl: "templates/farmer/plant/startPlant1.html",
-      //       controller: "startPlant1Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.startPlant2", {
-      //   url: "/farmerMenu/startPlant2/:crop/:type",
-      //   views: {
-      //     "tab-menu": {
-      //       templateUrl: "templates/farmer/plant/startPlant2.html",
-      //       controller: "startPlant2Ctrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.startPlant3", {
-      //   url: "/farmerMenu/startPlant3/:crop/:type/:sub",
-      //   views: {
-      //     "tab-menu": {
-      //       templateUrl: "templates/farmer/plant/startPlant3.html",
-      //       controller: "startPlant3Ctrl as vm",
-      //     },
-      //   },
-      // })
-
+      
       .state("app.recordEtc1", {
         url: "/recordEtc1/:data",
         views: {
@@ -810,25 +771,7 @@ angular
         },
       })
 
-      // .state("app.predictPlant", {
-      //   url: "/predictPlant",
-      //   views: {
-      //     "tab-menu": {
-      //       templateUrl: "templates/farmer/plant/predictPlant.html",
-      //       controller: "predictPlantCtrl as vm",
-      //     },
-      //   },
-      // })
-
-      // .state("app.predictPlant2", {
-      //   url: "/predictPlant2/:list",
-      //   views: {
-      //     "tab-menu": {
-      //       templateUrl: "templates/farmer/plant/predictPlant2.html",
-      //       controller: "predictPlant2Ctrl as vm",
-      //     },
-      //   },
-      // })
+  
 
       .state("app.recordResult", {
         url: "/recordResult/:list",
@@ -911,7 +854,7 @@ angular
       })
 
       .state("app.weather", {
-        url: "/weather",
+        url: "/farmerMenu/weather",
         views: {
           "tab-menu": {
             templateUrl: "templates/farmer/weather.html",
