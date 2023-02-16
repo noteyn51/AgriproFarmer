@@ -1,4 +1,4 @@
-<ion-view hide-back-button="false" hide-nav-bar="false">
+<ion-view hide-back-button="false" hide-nav-bar="true">
   <ion-nav-title><b style="font-size: 18px;"> Agripro</b> </ion-nav-title>
   <ion-nav-buttons side="right">
     <!-- <button class="button ion-power btn-home" style="font-size: 20px;
@@ -26,10 +26,38 @@
       background-size: cover;
     }
 
+    .header-block{
+      display:flex;flex-direction:row;justify-content:space-between;padding:20px;align-items: center;
+    }
+    .header-block-left{
+      width:40px;height:40px;background-color: white;border-radius: 50%;display:flex;flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .header-block-right{
+      padding:10px;border-radius: 20px;display: flex;
+        flex-direction: initial;
+    }
+
+
   </style>
   <div class="bg-image"></div>
 
   <ion-content style="height: 100%;">
+    <div class="header-block">
+      <div>
+        <div class="header-block-left" ng-click="goBack()">
+        <i class="ico ion-chevron-left"></i>
+        </div>
+      </div>
+      <div>
+        <div class="card header-block-right" >
+          <i class="icon ion-pin"style="margin-right:10px"></i>พื้นที่ : {{farmSelected.farm_name}}
+        </div>
+      </div>
+
+    </div>
+
     <div ng-if="vm.temp">
       <!-- <div class="card" style="
           border: none;
