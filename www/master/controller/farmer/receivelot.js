@@ -194,18 +194,19 @@ angular
       $stateParams,
       $ionicLoading,
       Service,
-      $ionicHistory
+      $ionicHistory,
+      $mdDialog
     ) {
       let vm = this;
       $scope.wo = JSON.parse($stateParams.wo);
-      console.log($scope.wo)
+      console.log($scope.wo);
       $scope.model = {
         gradeSelect: null,
         item: null,
         moisture: null,
         price: null,
         qty: null,
-        print:null
+        print: null,
       };
 
       $scope.isSelect = { status: false, index: null };
@@ -227,34 +228,34 @@ angular
 
       $scope.gradeList = ["A", "B", "C", "D", "E", "F"];
       $scope.receiveLotList = [];
-    //   $scope.receiveLotList = [
-    //     {
-    //         "gradeSelect": "B",
-    //         "item": {
-    //             "pt_part": "300100200001276",
-    //             "pt_desc1": "ทุเรียนพันธุ์หมอนข้าง",
-    //             "pt_site": "TH10001",
-    //             "pt_um": "KG",
-    //             "pt_prod_line": "3"
-    //         },
-    //         "moisture": "30",
-    //         "price": "20",
-    //         "qty": "3000"
-    //     },
-    //     {
-    //         "gradeSelect": "A",
-    //         "item": {
-    //             "pt_part": "300100200001276",
-    //             "pt_desc1": "ทุเรียนพันธุ์หมอนข้าง",
-    //             "pt_site": "TH10001",
-    //             "pt_um": "KG",
-    //             "pt_prod_line": "3"
-    //         },
-    //         "moisture": "30",
-    //         "price": "20",
-    //         "qty": "100"
-    //     }
-    // ];
+      //   $scope.receiveLotList = [
+      //     {
+      //         "gradeSelect": "B",
+      //         "item": {
+      //             "pt_part": "300100200001276",
+      //             "pt_desc1": "ทุเรียนพันธุ์หมอนข้าง",
+      //             "pt_site": "TH10001",
+      //             "pt_um": "KG",
+      //             "pt_prod_line": "3"
+      //         },
+      //         "moisture": "30",
+      //         "price": "20",
+      //         "qty": "3000"
+      //     },
+      //     {
+      //         "gradeSelect": "A",
+      //         "item": {
+      //             "pt_part": "300100200001276",
+      //             "pt_desc1": "ทุเรียนพันธุ์หมอนข้าง",
+      //             "pt_site": "TH10001",
+      //             "pt_um": "KG",
+      //             "pt_prod_line": "3"
+      //         },
+      //         "moisture": "30",
+      //         "price": "20",
+      //         "qty": "100"
+      //     }
+      // ];
 
       {
         $scope.modelItem;
@@ -358,7 +359,19 @@ angular
           }
           $scope.model.qty = null;
         } else {
-          alert("โปรดป้อนข้อมูลให้ครบถ้วน");
+          $mdDialog.show(
+            $mdDialog
+              .alert()
+              .parent(
+                angular.element(document.querySelector("#popupContainer"))
+              )
+              .clickOutsideToClose(false)
+              .title("แจ้งเตือน")
+              .textContent("ไม่สามารถเพิ่มรายการได้ โปรดตรวจสอบข้อมูลอีกครั้ง")
+              .ariaLabel("Alert Dialog Demo")
+              .ok("OK")
+              .targetEvent()
+          );
         }
 
         $ionicScrollDelegate.resize();
@@ -373,16 +386,21 @@ angular
 
       getItem();
 
-      $scope.save = function(){
-       
-        if($scope.receiveLotList.length >0){
+      $scope.moistureChange = function () {
+        if ($scope.model.moisture > 100) {
+          $scope.model.moisture = 100;
+        }
+      };
+
+      $scope.save = function () {
+        if ($scope.receiveLotList.length > 0) {
           $ionicLoading.show();
           let req = {
             mode: "multiGenerate",
-            receivelot:$scope.receiveLotList,
-            wo:$scope.wo
+            receivelot: $scope.receiveLotList,
+            wo: $scope.wo,
           };
-  
+
           fachttp.model("controller/receiveLot.php", req).then(
             function (response) {
               mobiscroll.toast({
@@ -397,11 +415,24 @@ angular
               $ionicLoading.hide();
             }
           );
-        }else{
+        } else {
+
+          $mdDialog.show(
+            $mdDialog
+              .alert()
+              .parent(
+                angular.element(document.querySelector("#popupContainer"))
+              )
+              .clickOutsideToClose(false)
+              .title("แจ้งเตือน")
+              .textContent("ไม่สามารถบันทึกได้โปรต้องมีรายการมากกว่า 1 รายการ")
+              .ariaLabel("Alert Dialog Demo")
+              .ok("OK")
+              .targetEvent()
+          );
 
         }
-  
-      }
+      };
 
       console.log($stateParams);
     }

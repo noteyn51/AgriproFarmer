@@ -53,6 +53,7 @@
         oninput="this.value = this.value.replace(/[^0+0-9.]/g, '').replace(/^(?!0$)0+/, '')"
         ng-model="model.moisture"
         placeholder="ระบุความชื้น"
+        ng-change="moistureChange()"
         class="text-align-input"
       />
     </label>
@@ -70,7 +71,7 @@
       <span class="input-label">จำนวนรับเข้า</span>
       <input
         type="text"
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" 
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
         class="text-align-input"
         ng-model="model.qty"
         placeholder="ระบุจำนวนรับเข้า (กิโลกรัม)"
@@ -81,7 +82,7 @@
       <span class="input-label">จำนวนสติ๊กเกอร์</span>
       <input
         type="text"
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" 
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
         class="text-align-input"
         ng-model="model.print"
         placeholder="ระบุจำนวนสติ๊กเกอร์"
@@ -90,20 +91,24 @@
 
     <div style="text-align: center; margin: 10px 0px 10px 0px">
       <butotn
+        ng-if="!isSelect.status"
         class="button button-positive"
         ng-click="add()"
-        >
-        {{!isSelect.status ? 'สะสม' : 'ยืนยัน'}}
-        </butotn
       >
+        สะสม
+      </butotn>
+
+      <butotn
+        ng-if="isSelect.status"
+        class="button button-energized"
+        ng-click="add()"
+      >
+        ยืนยัน
+      </butotn>
     </div>
 
-
     <div class="list">
-
-  <div class="item item-divider">
-   รายการรับเข้า
-  </div>
+      <div class="item item-divider">รายการรับเข้า</div>
       <div
         ng-repeat="x in receiveLotList track by $index"
         ng-click="selectEdit(x,$index)"
@@ -132,10 +137,11 @@
       </div>
     </div>
 
-    <div style="padding:10px">
-      <button class="button button-block button-balanced" ng-click="save()">บันทึก</button>
+    <div style="padding: 10px">
+      <button class="button button-block button-balanced" ng-click="save()">
+        สร้าง LOT
+      </button>
     </div>
-
   </ion-content>
 
   <script id="item-list.html" type="text/ng-template">
