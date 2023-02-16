@@ -25,7 +25,7 @@ angular
       {
         $scope.modelItem;
         $ionicModal
-          .fromTemplateUrl("item-list.html", {
+          .fromTemplateUrl("item.html", {
             scope: $scope,
             animation: "slide-in-up",
           })

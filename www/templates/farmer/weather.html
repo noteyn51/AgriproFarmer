@@ -1,4 +1,4 @@
-<ion-view hide-back-button="false" hide-nav-bar="true">
+<ion-view hide-back-button="false" hide-nav-bar="false">
   <ion-nav-title><b style="font-size: 18px;"> Agripro</b> </ion-nav-title>
   <ion-nav-buttons side="right">
     <!-- <button class="button ion-power btn-home" style="font-size: 20px;
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div>
-        <div class="card header-block-right" ng-click="showFarmList()">
+        <div class="card header-block-right" ng-click="openModalCm()">
           <i class="icon ion-pin"style="margin-right:10px"></i>พื้นที่ : {{farmSelected.farm_name}}
         </div>
       </div>
@@ -59,14 +59,7 @@
     </div>
 
     <div ng-if="vm.temp">
-      <!-- <div class="card" style="
-          border: none;
-          padding: 20px;
-          /* height: 250px; */
-          margin: 5%;
-          border-radius: 25px;
-          background-color: rgba(255, 255, 255, 0.4);
-        "> -->
+  
         <div class="card" style="background: transparent;border:none;box-shadow: none;color: white;">
 
         <div style="color: white;  position: relative;text-align: center;">
@@ -86,67 +79,13 @@
           </label>
         </div>
 
-        <!-- <div style="display: contents;" ng-if="vm.temp">
-          <div style="display: flex; flex-direction: column; align-items: center;">
-            <img ng-src="http://openweathermap.org/img/w/{{vm.temp.weather[0].icon}}.png"
-              style="height: 50px; width: 50px;" />
-            <label style="text-align: center;font-size: small;">{{vm.temp.weather[0].description}}</label>
-          </div>
-        </div> -->
-
-        <!-- <div style="
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-          " ng-if="vm.temp">
-          <div class="card" style="
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              border: none;
-              box-shadow: none;
-              background: transparent;
-            ">
-            <label style="text-align: center; margin-bottom: 5px;">ความเร็วลม</label>
-            <img src="img/wind.png" style="height: 50px; width: 50px;" />
-            <label style="text-align: center; margin-top: 10px;">{{vm.temp.wind.speed}} m/s</label>
-          </div>
-
-          <div class="card" style="
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              border: none;
-              box-shadow: none;
-              background: transparent;
-            ">
-            <label style="text-align: center; margin-bottom: 5px;">ความชื้น</label>
-            <img src="img/humidityss.png" style="height: 50px; width: 50px;" />
-            <label style="text-align: center; margin-top: 10px;">{{vm.temp.main.humidity}} %</label>
-          </div>
-
-          <div class="card" style="
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              border: none;
-              box-shadow: none;
-              background: transparent;
-            ">
-            <label style="text-align: center; margin-bottom: 5px;">ความดัน</label>
-            <img src="img/pressure.png" style="height: 50px; width: 50px;" />
-            <label style="text-align: center; margin-top: 10px;">{{vm.temp.main.pressure | number}} hpa</label>
-          </div>
-        </div> -->
 
       </div>
 
 
     <div style="font-size: large;
     margin: 25px;color: white;">{{vm.day}}</div>
-      <!-- <div style="padding: 10px 20px 10px 20px;">
-        <labe style="font-size: large;font-weight: bold;">พยากรอากาศ</label>
-      </div> -->
+ 
 
       <ion-scroll direction="x" style="width: 100%;">
         <style>
@@ -259,4 +198,18 @@
 
 
   </ion-content>
+
+  <script id="farm_list.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <button type="button" class="button button-assertive button-clear" ng-click="closeModal()">ปิด</button>
+          <h1 class="title" style="text-align:center">เลือกพื้นที่</h1>
+
+        </ion-header-bar>
+        <ion-content>
+          
+         
+        </ion-content>
+      </ion-modal-view>
+    </script>
 </ion-view>
