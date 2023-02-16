@@ -25,6 +25,8 @@ angular
 
       $scope.selectFarm = function (e) {
         $scope.farmSelected = e;
+        $scope.closeModal();
+
       };
 
       function getFarm() {
