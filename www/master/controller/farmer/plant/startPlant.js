@@ -419,7 +419,8 @@ angular
       $stateParams,
       $mdDialog,
       $rootScope,
-      fachttp
+      fachttp,
+      $ionicModal
     ) {
       let vm = this;
       try {
@@ -428,7 +429,28 @@ angular
         console.log(error);
       }
 
-      console.log($scope.wo);
+
+      
+
+      $ionicModal
+      .fromTemplateUrl("end-wo.html", {
+        scope: $scope,
+        animation: "slide-in-up",
+      })
+      .then(function (modal) {
+        $scope.modal = modal;
+      });
+
+    $scope.showModal = function () {
+      $scope.modal.show();
+    };
+    $scope.hideModal = function () {
+      $scope.modal.hide();
+    };
+    // Cleanup the modal when we're done with it!
+    $scope.$on("$destroy", function () {
+      $scope.modal.remove();
+    });
 
       async function init() {
         console.log("inits");
@@ -461,35 +483,36 @@ angular
       $rootScope.treeAdd = [];
 
       vm.endCrop = function () {
-        var confirm = $mdDialog
-          .confirm()
-          .title("แจ้งเตือน")
-          .textContent("ต้องการปิดการเพาะปลูกนี้หรือไม่ ?")
-          .ariaLabel("Lucky day")
-          .targetEvent()
-          .ok("ยืนยัน")
-          .cancel("ยกเลิก");
+        $scope.showModal();
+        // var confirm = $mdDialog
+        //   .confirm()
+        //   .title("แจ้งเตือน")
+        //   .textContent("ต้องการปิดการเพาะปลูกนี้หรือไม่ ? หากปิดการเพาะปลูกนี้แล้วจะไม่สามารถ")
+        //   .ariaLabel("Lucky day")
+        //   .targetEvent()
+        //   .ok("ยืนยัน")
+        //   .cancel("ยกเลิก");
 
-        $mdDialog.show(confirm).then(
-          function () {
-            let req = {
-              mode: "endWo",
-            };
+        // $mdDialog.show(confirm).then(
+        //   function () {
+        //     let req = {
+        //       mode: "endWo",
+        //     };
     
-            fachttp.model("startPlant.php", req).then(
-              function (response) {
-                $ionicHistory.goBack();
-                console.log(response);
+        //     fachttp.model("startPlant.php", req).then(
+        //       function (response) {
+        //         $ionicHistory.goBack();
+        //         console.log(response);
              
-              },
-              function err(err) {
-              }
-            );
-          },
-          function () {
-            //console.log("2");
-          }
-        );
+        //       },
+        //       function err(err) {
+        //       }
+        //     );
+        //   },
+        //   function () {
+        //     //console.log("2");
+        //   }
+        // );
       };
 
       vm.add = function () {

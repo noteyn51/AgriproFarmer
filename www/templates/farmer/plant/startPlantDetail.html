@@ -30,15 +30,6 @@
         <div style="margin-left: 5px">{{wo.wo_qty_ord}} {{wo.pt_um}}</div>
       </div>
 
-      <div style="text-align: center; margin-top: 10px">
-        <button
-          class="button button-assertive button-block"
-          ng-click="vm.endCrop()"
-        >
-          สิ้นสุดการเพาะปลูก
-        </button>
-      </div>
-
       <div
         style="
           margin-top: 20px;
@@ -55,12 +46,74 @@
     </div>
 
     <div class="list">
-      <a class="item" ng-repeat="x in items track by $index" ng-click="vm.clickList(x)">
-        <div style="display: flex;flex-direction: row;justify-content: space-between;"><div>{{x.pt_desc1}}</div> <div>{{x.pt_um}} {{x.ld_rmks}}</div></div>
+      <a
+        class="item"
+        ng-repeat="x in items track by $index"
+        ng-click="vm.clickList(x)"
+      >
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          "
+        >
+          <div>{{x.pt_desc1}}</div>
+          <div>{{x.pt_um}} {{x.ld_rmks}}</div>
+        </div>
         <p>{{x.ld_lot}}</p>
       </a>
     </div>
 
-    <div style="color:gray;text-align: center;padding: 50px;" ng-if="items.length == 0 ">ยังไม่มีรายการที่ลงปลูก โปรดเลือกรายการเพื่อลงปลูกในรายการนี้</div>
+    <div
+      style="color: gray; text-align: center; padding: 50px"
+      ng-if="items.length == 0 "
+    >
+      ยังไม่มีรายการที่ลงปลูก โปรดเลือกรายการเพื่อลงปลูกในรายการนี้
+    </div>
+
+    <div style="height: 100px"></div>
   </ion-content>
+  <div
+    style="
+      text-align: center;
+      margin-top: 10px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 0px 10px 0px 10px;
+      background-color: white;
+    "
+  >
+    <button
+      class="button button-assertive button-block"
+      ng-click="vm.endCrop()"
+    >
+      ย้ายไปรอบใหม่
+    </button>
+  </div>
+
+  <script id="end-wo.html" type="text/ng-template">
+    <ion-modal-view>
+      <style>
+        .container-flex{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding:0px 30px 0px 30px
+        }
+      </style>
+
+      <ion-content class="container-flex" >
+
+      <!-- <div style="display:flex">
+        <button class="button button-assertive button-block" ng-click="hideModal()" style="margin: 5px;">ยกเลิก</button>
+        <button class="button button-balanced button-block" ng-click="hideModal()" style="margin: 5px;">ยืนยัน</button>
+      </div> -->
+
+
+
+      </ion-content>
+    </ion-modal-view>
+  </script>
 </ion-view>
