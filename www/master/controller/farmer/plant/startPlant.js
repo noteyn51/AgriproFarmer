@@ -429,28 +429,35 @@ angular
         console.log(error);
       }
 
-
-      
-
       $ionicModal
-      .fromTemplateUrl("end-wo.html", {
-        scope: $scope,
-        animation: "slide-in-up",
-      })
-      .then(function (modal) {
-        $scope.modal = modal;
-      });
+        .fromTemplateUrl("end-wo.html", {
+          scope: $scope,
+          animation: "slide-in-up",
+        })
+        .then(function (modal) {
+          $scope.modal = modal;
+        });
 
-    $scope.showModal = function () {
-      $scope.modal.show();
-    };
-    $scope.hideModal = function () {
-      $scope.modal.hide();
-    };
-    // Cleanup the modal when we're done with it!
-    $scope.$on("$destroy", function () {
-      $scope.modal.remove();
-    });
+      $scope.showModal = function () {
+        let req = {
+          mode: "getNewWo",
+        };
+
+        fachttp.model("startPlant.php", req).then(
+          function (response) {
+            console.log(response);
+            $scope.modal.show();
+          },
+          function err(err) {}
+        );
+      };
+      $scope.hideModal = function () {
+        $scope.modal.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on("$destroy", function () {
+        $scope.modal.remove();
+      });
 
       async function init() {
         console.log("inits");
@@ -460,7 +467,7 @@ angular
       async function getData() {
         let req = {
           mode: "getwotree",
-          wo_lot:$scope.wo.wo_lot
+          wo_lot: $scope.wo.wo_lot,
         };
 
         fachttp.model("startPlant.php", req).then(
@@ -498,12 +505,12 @@ angular
         //     let req = {
         //       mode: "endWo",
         //     };
-    
+
         //     fachttp.model("startPlant.php", req).then(
         //       function (response) {
         //         $ionicHistory.goBack();
         //         console.log(response);
-             
+
         //       },
         //       function err(err) {
         //       }
@@ -516,10 +523,11 @@ angular
       };
 
       vm.add = function () {
-        $state.go("app.startPlantSelectItem",{wo:JSON.stringify($scope.wo)});
+        $state.go("app.startPlantSelectItem", {
+          wo: JSON.stringify($scope.wo),
+        });
       };
 
-      
       vm.clickList = function (e) {
         $state.go("app.recordEtc1", { data: e.ld_lot });
       };
@@ -556,7 +564,7 @@ angular
     ) {
       let vm = this;
       // console.log($stateParams.wo)
-      $scope.wo = JSON.parse($stateParams.wo)
+      $scope.wo = JSON.parse($stateParams.wo);
 
       $scope.items = [];
       $scope.selected = [];
@@ -598,7 +606,7 @@ angular
           let req = {
             mode: "addTreeToWo",
             selected: $scope.selected,
-            wo:$scope.wo
+            wo: $scope.wo,
           };
           $ionicLoading.show();
 

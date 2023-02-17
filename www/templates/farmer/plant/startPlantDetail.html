@@ -103,8 +103,13 @@
           padding:0px 30px 0px 30px
         }
       </style>
+      <ion-header-bar style="text-align:center;">
+        <h1 class="title" >เลือกรายการใหม่ที่ต้องการย้าย</h1>
+        <button type="button" class="button button-assertive button-clear " ng-click="hideModal()">ปิด</button>
+      </ion-header-bar>
 
-      <ion-content class="container-flex" >
+      <ion-content >
+        <div style="color: red;text-align:center;font-weight:bold;padding:20px">หมายเหตุ : การย้ายไปยังรอบใหม่จะปิดรอบการเพาะปลูกในปัจจุบัน และทำการย้ายรายการที่ลงปลูกไปยังรอบใหม่ ผู้ใช้จะไม่สามารถบันทึกกิจกรรมของรอบเก่าได้ </div>
 
       <!-- <div style="display:flex">
         <button class="button button-assertive button-block" ng-click="hideModal()" style="margin: 5px;">ยกเลิก</button>
