@@ -440,16 +440,19 @@ angular
 
       $scope.showModal = function () {
         let req = {
-          mode: "getNewWo",
+          mode: "getnewwo",
+          ignorewo:$scope.wo.wo_lot
         };
 
         fachttp.model("startPlant.php", req).then(
           function (response) {
+            vm.list = response.data;
             console.log(response);
             $scope.modal.show();
           },
           function err(err) {}
         );
+
       };
       $scope.hideModal = function () {
         $scope.modal.hide();
@@ -462,6 +465,11 @@ angular
       async function init() {
         console.log("inits");
         let a = await getData();
+      }
+
+
+      $scope.selectWo = function(e){
+        console.log(e);
       }
 
       async function getData() {

@@ -111,11 +111,41 @@
       <ion-content >
         <div style="color: red;text-align:center;font-weight:bold;padding:20px">หมายเหตุ : การย้ายไปยังรอบใหม่จะปิดรอบการเพาะปลูกในปัจจุบัน และทำการย้ายรายการที่ลงปลูกไปยังรอบใหม่ ผู้ใช้จะไม่สามารถบันทึกกิจกรรมของรอบเก่าได้ </div>
 
-      <!-- <div style="display:flex">
-        <button class="button button-assertive button-block" ng-click="hideModal()" style="margin: 5px;">ยกเลิก</button>
-        <button class="button button-balanced button-block" ng-click="hideModal()" style="margin: 5px;">ยืนยัน</button>
-      </div> -->
-
+        <div class="list">
+          <div
+            class="item"
+            style="margin-bottom: 10px; white-space: initial"
+            ng-click="selectWo(x)"
+            ng-repeat="x in vm.list.result track by $index"
+          >
+            <div style="display: flex; justify-content: space-between">
+              <div style="display: flex; justify-content: flex-start">
+                <div style="font-weight: bold">รายการปลูก</div>
+                :
+                <div style="margin-left: 5px">{{x.pt_desc1}}</div>
+              </div>
+    
+              <div style="font-weight: bold">ID : {{x.wo_lot}}</div>
+            </div>
+    
+            <div style="display: flex; justify-content: flex-start">
+              <div style="font-weight: bold">พื้นที่</div>
+              :
+              <div style="margin-left: 5px">{{x.farm_name}}</div>
+            </div>
+    
+            <div style="display: flex; justify-content: flex-start">
+              <div style="font-weight: bold">วันที่เริ่ม</div>
+              :
+              <div style="margin-left: 5px">{{x.rel_date}} - {{x.due_date}}</div>
+            </div>
+            <div style="display: flex; justify-content: flex-start">
+              <div style="font-weight: bold">จำนวน</div>
+              :
+              <div style="margin-left: 5px">{{x.wo_qty_ord}} {{x.pt_um}}</div>
+            </div>
+          </div>
+        </div>
 
 
       </ion-content>
