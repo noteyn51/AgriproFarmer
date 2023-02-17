@@ -472,7 +472,19 @@ angular
 
         $mdDialog.show(confirm).then(
           function () {
-            console.log('End Wo ')
+            let req = {
+              mode: "endWo",
+            };
+    
+            fachttp.model("startPlant.php", req).then(
+              function (response) {
+                $ionicHistory.goBack();
+                console.log(response);
+             
+              },
+              function err(err) {
+              }
+            );
           },
           function () {
             //console.log("2");
