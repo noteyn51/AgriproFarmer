@@ -430,6 +430,7 @@ angular
         console.log(error);
       }
       $rootScope.treeAdd = [];
+      $scope.items = [];
 
       {
         $ionicModal
@@ -470,7 +471,30 @@ angular
       init();
 
       $scope.selectWo = function (e) {
-        console.log(e);
+        if ($scope.items.length == 0) {
+          var confirm = $mdDialog
+            .confirm()
+            .title("แจ้งเตือน !!!")
+            .textContent(
+              "ไม่มีรายการที่เพิ่มในรายการปัจจุบัน คุณต้องการย้ายรอบเพาะปลูกอยู่หรือไม่ ?"
+            )
+            .ariaLabel("Lucky day")
+            .targetEvent()
+            .ok("ยืนยัน")
+            .cancel("ยกเลิก");
+
+          $mdDialog.show(confirm).then(
+            function () {
+              $scope.confirmTransfer(e);
+            },
+            function () {}
+          );
+          return;
+        }
+
+        $scope.confirmTransfer(e);
+      };
+      $scope.confirmTransfer = function (e) {
         var confirm = $mdDialog
           .confirm()
           .title("แจ้งเตือน !!!")
@@ -485,7 +509,12 @@ angular
         $mdDialog.show(confirm).then(
           function () {
             $ionicLoading.show();
-            let req = { mode: "transferWo",formwo:$scope.wo,formwoList:$scope.items,newwo:e,};
+            let req = {
+              mode: "transferWo",
+              wo: $scope.wo,
+              formwoList: $scope.items,
+              newwo: e,
+            };
             console.log(req);
             fachttp.model("startPlant.php", req).then(
               function (response) {
