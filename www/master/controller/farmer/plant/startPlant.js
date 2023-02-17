@@ -420,7 +420,8 @@ angular
       $mdDialog,
       $rootScope,
       fachttp,
-      $ionicModal
+      $ionicModal,
+      $ionicLoading
     ) {
       let vm = this;
       try {
@@ -428,49 +429,78 @@ angular
       } catch (error) {
         console.log(error);
       }
+      $rootScope.treeAdd = [];
 
-      $ionicModal
-        .fromTemplateUrl("end-wo.html", {
-          scope: $scope,
-          animation: "slide-in-up",
-        })
-        .then(function (modal) {
-          $scope.modal = modal;
-        });
+      {
+        $ionicModal
+          .fromTemplateUrl("end-wo.html", {
+            scope: $scope,
+            animation: "slide-in-up",
+          })
+          .then(function (modal) {
+            $scope.modal = modal;
+          });
 
-      $scope.showModal = function () {
-        let req = {
-          mode: "getnewwo",
-          ignorewo:$scope.wo.wo_lot
+        $scope.showModal = function () {
+          let req = {
+            mode: "getnewwo",
+            ignorewo: $scope.wo.wo_lot,
+          };
+
+          fachttp.model("startPlant.php", req).then(
+            function (response) {
+              vm.list = response.data;
+              console.log(response);
+              $scope.modal.show();
+            },
+            function err(err) {}
+          );
         };
-
-        fachttp.model("startPlant.php", req).then(
-          function (response) {
-            vm.list = response.data;
-            console.log(response);
-            $scope.modal.show();
-          },
-          function err(err) {}
-        );
-
-      };
-      $scope.hideModal = function () {
-        $scope.modal.hide();
-      };
-      // Cleanup the modal when we're done with it!
-      $scope.$on("$destroy", function () {
-        $scope.modal.remove();
-      });
-
+        $scope.hideModal = function () {
+          $scope.modal.hide();
+        };
+        // Cleanup the modal when we're done with it!
+        $scope.$on("$destroy", function () {
+          $scope.modal.remove();
+        });
+      }
       async function init() {
-        console.log("inits");
         let a = await getData();
       }
+      init();
 
-
-      $scope.selectWo = function(e){
+      $scope.selectWo = function (e) {
         console.log(e);
-      }
+        var confirm = $mdDialog
+          .confirm()
+          .title("แจ้งเตือน !!!")
+          .textContent(
+            "ต้องการย้ายการเพาะปลูกไปยัง ID : " + e.wo_lot + " หรือไม่ ?"
+          )
+          .ariaLabel("Lucky day")
+          .targetEvent()
+          .ok("ยืนยัน")
+          .cancel("ยกเลิก");
+
+        $mdDialog.show(confirm).then(
+          function () {
+            $ionicLoading.show();
+            let req = { mode: "transferWo",formwo:$scope.wo,formwoList:$scope.items,newwo:e,};
+            console.log(req);
+            fachttp.model("startPlant.php", req).then(
+              function (response) {
+                $ionicLoading.hide();
+                $scope.hideModal();
+                $ionicHistory.goBack();
+              },
+              function err(err) {
+                $ionicLoading.hide();
+              }
+            );
+          },
+          function () {}
+        );
+      };
 
       async function getData() {
         let req = {
@@ -493,41 +523,8 @@ angular
         );
       }
 
-      init();
-
-      $rootScope.treeAdd = [];
-
       vm.endCrop = function () {
         $scope.showModal();
-        // var confirm = $mdDialog
-        //   .confirm()
-        //   .title("แจ้งเตือน")
-        //   .textContent("ต้องการปิดการเพาะปลูกนี้หรือไม่ ? หากปิดการเพาะปลูกนี้แล้วจะไม่สามารถ")
-        //   .ariaLabel("Lucky day")
-        //   .targetEvent()
-        //   .ok("ยืนยัน")
-        //   .cancel("ยกเลิก");
-
-        // $mdDialog.show(confirm).then(
-        //   function () {
-        //     let req = {
-        //       mode: "endWo",
-        //     };
-
-        //     fachttp.model("startPlant.php", req).then(
-        //       function (response) {
-        //         $ionicHistory.goBack();
-        //         console.log(response);
-
-        //       },
-        //       function err(err) {
-        //       }
-        //     );
-        //   },
-        //   function () {
-        //     //console.log("2");
-        //   }
-        // );
       };
 
       vm.add = function () {
@@ -539,13 +536,6 @@ angular
       vm.clickList = function (e) {
         $state.go("app.recordEtc1", { data: e.ld_lot });
       };
-
-      // $scope.$watch("treeAdd", function (a, b) {
-      //   console.log("new");
-      //   console.log(a);
-      //   console.log("old");
-      //   console.log(b);
-      // });
     }
   )
 
