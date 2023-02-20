@@ -68,6 +68,11 @@
     },
     "wifiwizard2": {
       "PACKAGE_NAME": "com.doublem.agriproiot"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
+      "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
+      "PACKAGE_NAME": "com.doublem.agripro"
     }
   },
   "dependent_plugins": {
