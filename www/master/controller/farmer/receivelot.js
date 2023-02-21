@@ -434,4 +434,34 @@ angular
 
       console.log($stateParams);
     }
-  );
+  )
+  .controller("viewMultiReceiveCtrl", function ($scope, fachttp, $state) {
+    let vm = this;
+    console.log('viewmulti')
+
+    function onStartwoMstr() {
+      let req = {
+        mode: "womstr",
+      };
+
+      fachttp.model("detail.php", req).then(
+        function (response) {
+          $scope.status = true;
+          if (response.data.status == true) {
+            vm.list = response.data;
+          } else {
+            vm.list = response.data;
+          }
+          console.log(vm.list);
+        },
+        function err(err) {
+          vm.list = [];
+          $scope.status = false;
+        }
+      );
+    }
+
+    // onStartwoMstr();
+
+  
+  });

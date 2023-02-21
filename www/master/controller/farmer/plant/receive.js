@@ -27,6 +27,10 @@ angular
         $state.go("app.multiReceive");
       };
 
+      vm.viewMultiReceive = function () {
+        $state.go("app.viewMultiReceive");
+      };
+
       vm.singleReceive = function () {
         $state.go("app.singleReceive");
       };

@@ -749,6 +749,17 @@ angular
         },
       })
 
+
+      .state("app.viewMultiReceive", {
+        url: "/multiReceive",
+        views: {
+          "tab-menu": {
+            templateUrl: "templates/farmer/receivelot/viewMultiReceive.html",
+            controller: "viewMultiReceiveCtrl as vm",
+          },
+        },
+      })
+
       .state("app.recordPlant", {
         url: "/recordPlant",
         views: {
@@ -1376,7 +1387,7 @@ angular
         return $http.post(
           // "http://localhost/agri_ociv2/model/"+file,
           // "http://192.168.9.51/agri_ociv4/model/" + file,
-          "https://digimove.365supplychain.com/agripro/agri_ociv4/model/" +file,
+          "https://digimove.365supplychain.com/agripro/agri_ociv3/model/" +file,
           req,
           pms
         );

@@ -1,11 +1,7 @@
 <ion-view hide-back-button="false" cache-view="true">
-  <ion-nav-buttons side="left">
-    <!-- <button  class="button button-clear ion-chevron-left" ng-click="vm.goBack()" style="font-weight: 400;"> Back</button> -->
-  </ion-nav-buttons>
+  <ion-nav-buttons side="left"> </ion-nav-buttons>
   <ion-nav-title> รับผลผลิต </ion-nav-title>
-  <ion-nav-buttons side="right">
-    <!-- <button class="button button-positive" ng-click="vm.button()">Scan</button> -->
-  </ion-nav-buttons>
+  <ion-nav-buttons side="right"> </ion-nav-buttons>
   <ion-content>
     <div class="list">
       <div class="item item-divider">
@@ -28,10 +24,20 @@
       <div class="item item-divider">รับเข้าแบบรวม สำหรับรับรวมกอง</div>
 
       <div class="item item-avatar" ng-click="vm.multiReceive()">
-        <img src="img/farming/allfruit.png" />
+        <img src="img/farming/allfruit.png" style="border-radius: 0px" />
         <div style="font-weight: bold">รับเข้าแบบเป็นกอง</div>
 
         <p>รับผลผลิตแบบรวมแยกเกรด A-F</p>
+      </div>
+
+      <div class="item item-avatar" ng-click="vm.viewMultiReceive()">
+        <img
+          src="https://static.thenounproject.com/png/1678687-200.png"
+          style="border-radius: 0px"
+        />
+        <div style="font-weight: bold">ดูรายการแบบกอง</div>
+
+        <p>ดูรายการ LOT ที่รับเข้าแบบกองA-F</p>
       </div>
     </div>
 
