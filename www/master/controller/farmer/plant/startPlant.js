@@ -595,6 +595,10 @@ angular
 
       $scope.items = [];
       $scope.selected = [];
+      
+      $scope.addLot = function(){
+        $state.go('app.singleReceive')
+      }
 
       async function init() {
         let a = await getData();
