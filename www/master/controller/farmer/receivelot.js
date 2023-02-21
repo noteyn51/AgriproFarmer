@@ -437,18 +437,18 @@ angular
   )
   .controller("viewMultiReceiveCtrl", function ($scope, fachttp, $state) {
     let vm = this;
-    console.log('viewmulti')
+    console.log("viewmulti");
 
-    function onStartwoMstr() {
+    function onStart() {
       let req = {
-        mode: "womstr",
+        mode: "getMultiLot",
       };
 
-      fachttp.model("detail.php", req).then(
+      fachttp.model("controller/receiveLot.php", req).then(
         function (response) {
           $scope.status = true;
           if (response.data.status == true) {
-            vm.list = response.data;
+            vm.list = response.data.result;
           } else {
             vm.list = response.data;
           }
@@ -461,7 +461,5 @@ angular
       );
     }
 
-    // onStartwoMstr();
-
-  
+    onStart();
   });
