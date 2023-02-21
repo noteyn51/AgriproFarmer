@@ -530,6 +530,7 @@ angular
       vm.ld_lot = $stateParams.data;
 
       $scope.fullImage = function (e) {
+        console.log('full')
         document.addEventListener("deviceready", function () {
           var options = {
             share: true, // default is false
