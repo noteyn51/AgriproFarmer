@@ -1,97 +1,94 @@
 <ion-view hide-back-button="false">
-  <ion-nav-title>เริ่มต้นเพาะปลูก 
-  </ion-nav-title>
+  <ion-nav-title>เริ่มต้นเพาะปลูก </ion-nav-title>
   <ion-nav-buttons side="right">
     <!-- <button class="icon ion-levels " ng-click="toggleRight()" ng-hide="isOpenRight()"></button> -->
   </ion-nav-buttons>
-  <ion-content style="height: auto;">
-
+  <ion-content style="height: auto">
     <style>
       /* .scroll {
         height: 100%;
       } */
 
-
       .dp-flex {
         display: flex;
         justify-content: space-between;
       }
-
     </style>
 
-    <script>
-
-    </script>
-    <md-card>
-      <md-card-content style="padding-bottom: 0px;">
-        <h3>เลือกกรอบเพาะปลูก<span style="color:red">*</span></h3>
-        <md-select ng-model="vm.cropSelect" placeholder="เลือกรอบเพาะปลูก" ng-change="cropChange()">
-          <md-option ng-value="x" ng-repeat="x in crop.result">{{ x.crop_desc }}</md-option>
+    <script></script>
+    <div style="padding: 20px">
+      <md-card-content style="padding-bottom: 0px">
+        <h3>เลือกกรอบเพาะปลูก<span style="color: red">*</span></h3>
+        <md-select
+          ng-model="vm.cropSelect"
+          placeholder="เลือกรอบเพาะปลูก"
+          ng-change="cropChange()"
+        >
+          <md-option ng-value="x" ng-repeat="x in crop.result"
+            >{{ x.crop_desc }}</md-option
+          >
         </md-select>
       </md-card-content>
 
-      <hr />
-      <md-card-content style="padding-bottom: 0px;">
-
-        <h3>เลือกรายการเพาะปลูก <span style="color:red">*</span></h3>
-        <md-select ng-model="vm.pt_select" placeholder="เลือกรอบเพาะปลูก" ng-change="ptChange()">
-          <md-option ng-value="x" ng-repeat="x in pt_mstr.result">{{ x.pt_desc1 }}</md-option>
+      <md-card-content style="padding-bottom: 0px">
+        <h3>เลือกรายการเพาะปลูก <span style="color: red">*</span></h3>
+        <md-select
+          ng-model="vm.pt_select"
+          placeholder="เลือกรอบเพาะปลูก"
+          ng-change="ptChange()"
+        >
+          <md-option ng-value="x" ng-repeat="x in pt_mstr.result"
+            >{{ x.pt_desc1 }}</md-option
+          >
         </md-select>
       </md-card-content>
-
 
       <div ng-if="vm.pt_select">
-
         <div class="item item-avatar item-icon-right">
-          <img src="img/calendar.png">
-          <h2 style="overflow:initial">วันที่เริ่ม<span style="color:red">*</span></h2>
+          <img src="img/calendar.png" />
+          <h2 style="overflow: initial">
+            วันที่เริ่ม<span style="color: red">*</span>
+          </h2>
           <p ng-if=" model.date">{{model.date}}</p>
           <p ng-if="!model.date">เลือกวันที่</p>
           <i class="icon ion-edit" ng-click="vm.pickdate()"></i>
-
         </div>
 
         <div class="item item-avatar item-icon-right">
-          <img src="img/calendar.png">
-          <h2 style="overflow:initial">วันที่สิ้นสุด</h2>
+          <img src="img/calendar.png" />
+          <h2 style="overflow: initial">วันที่สิ้นสุด</h2>
           <p ng-if="model.dateto">{{model.dateto}}</p>
           <p ng-if="!model.dateto">เลือกวันที่เริ่ม</p>
-
         </div>
       </div>
 
-
-
-
-
-
-      <md-card-content style="padding-bottom: 0px;">
-
-
+      <md-card-content style="padding-bottom: 0px; margin-top: 10px">
         <md-input-container class="md-block" flex-gt-sm>
-          <label>จำนวนพื้นที่ (ไร่)<span style="color:red"> *</span></label>
-          <input required ng-model="model.rai" type="tel" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
-
+          <label>จำนวนพื้นที่ (ไร่)<span style="color: red"> *</span></label>
+          <input
+            required
+            ng-model="model.rai"
+            type="tel"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+          />
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
-          <label>ผลผลิต (กิโลกรัม) <span style="color:red"> *</span></label>
-          <input required ng-model="model.um" type="tel" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
-
+          <label>ผลผลิต (กิโลกรัม) <span style="color: red"> *</span></label>
+          <input
+            required
+            ng-model="model.um"
+            type="tel"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+          />
         </md-input-container>
       </md-card-content>
 
-      <md-card-content style="margin-bottom:20px;">
-
-        <h3>
-          เลือกพื้นที่เพาะปลูก
-        </h3>
+      <md-card-content style="margin-bottom: 20px">
+        <h3>เลือกพื้นที่เพาะปลูก</h3>
 
         <div class="card" ng-click="openModalListmap()">
           <div class="list">
-
-
-
             <a class="item item-icon-left" href="">
               <i class="icon ion-map"></i>
               <div ng-if="!vm.farmSelect">
@@ -99,37 +96,25 @@
                 <span class="badge badge-assertive">ยังไม่ได้เลือกพื้นที่</span>
               </div>
 
-
-              <div ng-if="vm.farmSelect" style="font-weight: bold;">
+              <div ng-if="vm.farmSelect" style="font-weight: bold">
                 {{vm.farmSelect.farm_name}}
-                <span class="badge badge-positive">{{vm.farmSelect.farm_area_farm}} ไร่</span>
+                <span class="badge badge-positive"
+                  >{{vm.farmSelect.farm_area_farm}} ไร่</span
+                >
 
-                <p>
-                  {{vm.farmSelect.address}}
-                </p>
-
+                <p>{{vm.farmSelect.address}}</p>
               </div>
-
             </a>
-
           </div>
         </div>
       </md-card-content>
 
-      <div style="height: 50px;"></div>
-
-
-    </md-card>
-
-
-
-
-
-
+      <div style="height: 50px"></div>
+    </div>
   </ion-content>
 
-  <div style="position: absolute; bottom: 0px; width: 100%; background: white;">
-    <div style="text-align: center; padding-left: 10px; padding-right: 10px;">
+  <div style="position: absolute; bottom: 0px; width: 100%; background: white">
+    <div style="text-align: center; padding-left: 10px; padding-right: 10px">
       <button class="button button-block button-balanced" ng-click="vm.save()">
         เริ่มต้นกระบวนการ
       </button>
@@ -149,25 +134,25 @@
           <div class="item item-divider" >
             เลือกพื้นที่เพาะปลูก<span style="color:red"> *</span>
           </div>
-  
+
           <div class="item item-button-right"  ng-repeat="x in farmlist.result" ng-if="status == true">
             <div class="dp-flex"><a style="font-weight: bold;font-size: medium;">{{x.farm_name}}</a></div>
             <div class="dp-flex"><a>{{x.farm_area_farm |number}} ไร่ {{x.farm_area_work |number}} งาน {{x.farm_area_wah |number}} ตารางวา</a></div>
             <div class="dp-flex">
-  
+
             </div>
             <div>
               <span ng-if="x.farm_status == 'INACTIVE' " ng-show="x.farm_status == 'INACTIVE'" style="color:red;font-size: small;">พื้นที่นี้ยกเลิกการใช้งานแล้ว</span>
               <span ng-if="!x.farm_status" ng-show="!x.farm_status"  style="color:red;font-size: small;"> พื้นที่นี้ยังไม่ได้รับการอนุมัติกรุณาติดต่อ Promoter</span>
             </div>
-  
-            
+
+
             <button class="button button-positive" ng-disabled="x.farm_status != 'APPROVE'" ng-click="vm.go(x)">
               <i class="icon ion-ios-arrow-forward" ></i>
             </button>
           </div>
-   
-  
+
+
         </div>
 
       </ion-content>

@@ -111,6 +111,11 @@
             <a style="font-weight: bold">ผู้ดูแล</a> :
             <a> {{vm.data.result[0].vd_sort}} </a>
           </div>
+
+          <div style="width: 50%">
+            <a style="font-weight: bold">รอบปัจจุบัน</a> :
+            <a> {{vm.data.result[0].tr_lot}} </a>
+          </div>
         </div>
       </div>
 
@@ -177,7 +182,7 @@
                       background-color: rgba(100, 100, 79, 0.6);
                       border-radius: 20px;
                       padding: 4px;
-                      font-size: smaller;
+                      font-size: small;
                       margin-right: 5px;
                     "
                   >
@@ -190,7 +195,7 @@
                       background-color: rgba(255, 155, 79, 0.6);
                       border-radius: 20px;
                       padding: 4px;
-                      font-size: smaller;
+                      font-size: small;
                       margin-right: 5px;
                     "
                   >
@@ -202,7 +207,7 @@
                       background-color: rgba(255, 255, 100, 0.6);
                       border-radius: 20px;
                       padding: 4px;
-                      font-size: smaller;
+                      font-size: small;
                       margin-right: 5px;
                     "
                   >
@@ -217,13 +222,12 @@
                   width: 100%;
                   white-space: nowrap;
                   font-weight: bold;
-                  font-size: smaller;
+                  font-size: medium;
                   text-overflow: ellipsis;
                   overflow: hidden;
                 "
               >
-                {{x.pic_desc ? x.pic_desc : 'ไม่มีรายละเอียดการบันทึกข้อมูล
-                ไม่มีรายละเอียดการบันทึกข้อมูลไม่มีรายละเอียดการบันทึกข้อมูลไม่มีรายละเอียดการบันทึกข้อมูล'}}
+                {{x.pic_desc ? x.pic_desc : 'ไม่มีรายละเอียดการบันทึกข้อมูล'}}
               </div>
             </div>
 
