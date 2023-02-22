@@ -15,7 +15,7 @@
     <div class="list">
       <div
         class="item"
-        style="margin-bottom: 10px; white-space: initial"
+        style="white-space: initial"
         ng-click="vm.woDetail(x)"
         ng-repeat="x in vm.list.result track by $index"
       >
@@ -43,7 +43,7 @@
         <div style="display: flex; justify-content: flex-start">
           <div style="font-weight: bold">จำนวน</div>
           :
-          <div style="margin-left: 5px">{{x.wo_qty_ord}} {{x.pt_um}}</div>
+          <div style="margin-left: 5px">{{x.wo_qty_ord | number}} {{x.pt_um}}</div>
         </div>
       </div>
     </div>
