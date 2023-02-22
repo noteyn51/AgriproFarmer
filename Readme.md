@@ -1,6 +1,5 @@
 # Agripro Farmer
 
-
 asd
 
 Agricultural extension applications for ERP systems and equipment control
