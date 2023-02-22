@@ -420,7 +420,8 @@ angular
       $mdDialog,
       $rootScope,
       fachttp,
-      $ionicModal
+      $ionicModal,
+      $ionicLoading
     ) {
       let vm = this;
       try {
@@ -428,39 +429,112 @@ angular
       } catch (error) {
         console.log(error);
       }
+      $rootScope.treeAdd = [];
+      $scope.items = [];
 
+      {
+        $ionicModal
+          .fromTemplateUrl("end-wo.html", {
+            scope: $scope,
+            animation: "slide-in-up",
+          })
+          .then(function (modal) {
+            $scope.modal = modal;
+          });
 
-      
+        $scope.showModal = function () {
+          let req = {
+            mode: "getnewwo",
+            ignorewo: $scope.wo.wo_lot,
+          };
 
-      $ionicModal
-      .fromTemplateUrl("end-wo.html", {
-        scope: $scope,
-        animation: "slide-in-up",
-      })
-      .then(function (modal) {
-        $scope.modal = modal;
-      });
-
-    $scope.showModal = function () {
-      $scope.modal.show();
-    };
-    $scope.hideModal = function () {
-      $scope.modal.hide();
-    };
-    // Cleanup the modal when we're done with it!
-    $scope.$on("$destroy", function () {
-      $scope.modal.remove();
-    });
-
+          fachttp.model("startPlant.php", req).then(
+            function (response) {
+              vm.list = response.data;
+              console.log(response);
+              $scope.modal.show();
+            },
+            function err(err) {}
+          );
+        };
+        $scope.hideModal = function () {
+          $scope.modal.hide();
+        };
+        // Cleanup the modal when we're done with it!
+        $scope.$on("$destroy", function () {
+          $scope.modal.remove();
+        });
+      }
       async function init() {
-        console.log("inits");
         let a = await getData();
       }
+      init();
+
+      $scope.selectWo = function (e) {
+        if ($scope.items.length == 0) {
+          var confirm = $mdDialog
+            .confirm()
+            .title("แจ้งเตือน !!!")
+            .textContent(
+              "ไม่มีรายการที่เพิ่มในรายการปัจจุบัน คุณต้องการย้ายรอบเพาะปลูกอยู่หรือไม่ ?"
+            )
+            .ariaLabel("Lucky day")
+            .targetEvent()
+            .ok("ยืนยัน")
+            .cancel("ยกเลิก");
+
+          $mdDialog.show(confirm).then(
+            function () {
+              $scope.confirmTransfer(e);
+            },
+            function () {}
+          );
+          return;
+        }
+
+        $scope.confirmTransfer(e);
+      };
+      $scope.confirmTransfer = function (e) {
+        var confirm = $mdDialog
+          .confirm()
+          .title("แจ้งเตือน !!!")
+          .textContent(
+            "ต้องการย้ายการเพาะปลูกไปยัง ID : " + e.wo_lot + " หรือไม่ ?"
+          )
+          .ariaLabel("Lucky day")
+          .targetEvent()
+          .ok("ยืนยัน")
+          .cancel("ยกเลิก");
+
+        $mdDialog.show(confirm).then(
+          function () {
+            $ionicLoading.show();
+            let req = {
+              mode: "transferWo",
+              wo: $scope.wo,
+              formwoList: $scope.items,
+              newwo: e,
+            };
+            console.log(req);
+            fachttp.model("startPlant.php", req).then(
+              function (response) {
+                $ionicLoading.hide();
+                $scope.hideModal();
+                $ionicHistory.goBack();
+              },
+              function err(err) {
+                $ionicLoading.hide();
+              }
+            );
+          },
+          function () {}
+        );
+      };
 
       async function getData() {
         let req = {
           mode: "getwotree",
-          wo_lot:$scope.wo.wo_lot
+          wo_lot: $scope.wo.wo_lot,
         };
 
         fachttp.model("startPlant.php", req).then(
@@ -478,58 +552,19 @@ angular
         );
       }
 
-      init();
-
-      $rootScope.treeAdd = [];
-
       vm.endCrop = function () {
         $scope.showModal();
-        // var confirm = $mdDialog
-        //   .confirm()
-        //   .title("แจ้งเตือน")
-        //   .textContent("ต้องการปิดการเพาะปลูกนี้หรือไม่ ? หากปิดการเพาะปลูกนี้แล้วจะไม่สามารถ")
-        //   .ariaLabel("Lucky day")
-        //   .targetEvent()
-        //   .ok("ยืนยัน")
-        //   .cancel("ยกเลิก");
-
-        // $mdDialog.show(confirm).then(
-        //   function () {
-        //     let req = {
-        //       mode: "endWo",
-        //     };
-    
-        //     fachttp.model("startPlant.php", req).then(
-        //       function (response) {
-        //         $ionicHistory.goBack();
-        //         console.log(response);
-             
-        //       },
-        //       function err(err) {
-        //       }
-        //     );
-        //   },
-        //   function () {
-        //     //console.log("2");
-        //   }
-        // );
       };
 
       vm.add = function () {
-        $state.go("app.startPlantSelectItem",{wo:JSON.stringify($scope.wo)});
+        $state.go("app.startPlantSelectItem", {
+          wo: JSON.stringify($scope.wo),
+        });
       };
 
-      
       vm.clickList = function (e) {
         $state.go("app.recordEtc1", { data: e.ld_lot });
       };
-
-      // $scope.$watch("treeAdd", function (a, b) {
-      //   console.log("new");
-      //   console.log(a);
-      //   console.log("old");
-      //   console.log(b);
-      // });
     }
   )
 
@@ -556,10 +591,14 @@ angular
     ) {
       let vm = this;
       // console.log($stateParams.wo)
-      $scope.wo = JSON.parse($stateParams.wo)
+      $scope.wo = JSON.parse($stateParams.wo);
 
       $scope.items = [];
       $scope.selected = [];
+      
+      $scope.addLot = function(){
+        $state.go('app.singleReceive')
+      }
 
       async function init() {
         let a = await getData();
@@ -598,7 +637,7 @@ angular
           let req = {
             mode: "addTreeToWo",
             selected: $scope.selected,
-            wo:$scope.wo
+            wo: $scope.wo,
           };
           $ionicLoading.show();
 

@@ -529,8 +529,8 @@ angular
 
       vm.ld_lot = $stateParams.data;
 
-      $scope.fullImage = function(e){
-
+      $scope.fullImage = function (e) {
+        console.log('full')
         document.addEventListener("deviceready", function () {
           var options = {
             share: true, // default is false
@@ -542,8 +542,7 @@ angular
 
           PhotoViewer.show(e.path, "รูปภาพ", options);
         });
-      }
-
+      };
 
       httpScan(vm.ld_lot);
       //console.log(vm.ld_lot);
@@ -586,7 +585,8 @@ angular
       vm.marker;
 
       vm.share = function () {
-        let t1 = "ข้อมูลแสดงการเพาะปลูกของ " + vm.data.result[0].farm_name+' ';
+        let t1 =
+          "ข้อมูลแสดงการเพาะปลูกของ " + vm.data.result[0].farm_name + " ";
 
         let t2 = vm.data.result[0].pt_desc1;
         let t3 = vm.data.result[0].um1 + "ที่ " + vm.data.result[0].rmks1;
@@ -621,11 +621,13 @@ angular
           console.log("Sharing failed with message: " + msg);
         };
 
-        window.plugins.socialsharing.shareWithOptions(
-          options,
-          onSuccess,
-          onError
-        );
+        document.addEventListener("deviceready", function () {
+          window.plugins.socialsharing.shareWithOptions(
+            options,
+            onSuccess,
+            onError
+          );
+        });
       };
 
       vm.button = function () {
@@ -1366,10 +1368,6 @@ angular
           alert("Failed because: " + message);
         }
       }
-
-
-      
-  
 
       vm.pushPic = function (ev) {
         //console.log($scope.image);

@@ -87,25 +87,7 @@ angular
       weekday[6] = "วันเสาร์";
       vm.day = weekday[now.getDay()];
 
-      // var geocoder = new google.maps.Geocoder();
 
-      // function geocodeLatLng(position) {
-      //   var input = position;
-      //   var latlngStr = input.split(",", 2);
-      //   // //console.log(latlngStr)
-      //   var latlng = {
-      //     lat: parseFloat(latlngStr[0]),
-      //     lng: parseFloat(latlngStr[1]),
-      //   };
-      //   geocoder.geocode({ location: latlng }, function (results, status) {
-      //     if (status === "OK") {
-      //       let k = results[0].formatted_address;
-      //       vm.landmark = k;
-      //     } else {
-      //       vm.landmark = "ไม่สามารถค้นหาพื้นที่ได้";
-      //     }
-      //   });
-      // }
 
       function daliy() {
         //console.log('daliy')

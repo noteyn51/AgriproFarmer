@@ -14,6 +14,7 @@
         height: auto;
         overflow: hidden;
         text-align: center;
+        aspect-ratio: 1/1;
       }
       .slider-pager {
         position: absolute;
@@ -29,13 +30,6 @@
 
 
     <div class="list">
-
-      <!-- <label class="item item-input item-stacked-label">
-        <span class="input-label" style="    color: black;
-        font-weight: bold;">รายละเอียด</span>
-
-        <textarea rows="10" type="text" placeholder="รายละเอียด" maxlength="300" ng-model="model.desc"></textarea>
-      </label> -->
       <div class="item item-button-right">
         เลือกรูปภาพ
         <button class="button button-positive" ng-click="vm.addPic()">
@@ -52,22 +46,7 @@
 
     
 
-    <div class="card" ng-if="image.length > 0">
-
-      <!-- <ion-slide-box show-pager="true" active-slide="activeSlide"
-        style="text-align:center;height:100%;width:100%;margin-top:20px" ng-if="image">
-
-
-
-        <ion-slide>
-          <div class="img-resize">
-            <img ng-src="{{image}}">
-          </div>
-
-        </ion-slide>
-
-      </ion-slide-box> -->
-
+    <div  ng-if="image.length > 0">
       
       <ion-slide-box
         show-pager="true"
@@ -76,7 +55,7 @@
       
       >
         <ion-slide ng-repeat="x in image track by $index">
-          <div style="    text-align: right;
+          <div style="text-align: right;
           margin-right: 5%;
           position: absolute;
           right: 0px;">

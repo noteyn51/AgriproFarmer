@@ -27,7 +27,6 @@ angular
       $scope.shouldHide = function () {
         // //console.log($state.current.name);
         switch ($state.current.name) {
-        
           case "app.startPlantSelectItem":
             return true;
           case "app.startPlantDetail":
@@ -38,8 +37,10 @@ angular
             return true;
           case "app.multiReceive":
             return true;
-            case "app.multiReceive2":
-              return true;
+          case "app.multiReceive2":
+            return true;
+          case "app.viewMultiReceive":
+            return true;
           case "app.farming":
             return true;
           case "app.area":

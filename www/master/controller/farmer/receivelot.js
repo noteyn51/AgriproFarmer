@@ -434,4 +434,32 @@ angular
 
       console.log($stateParams);
     }
-  );
+  )
+  .controller("viewMultiReceiveCtrl", function ($scope, fachttp, $state) {
+    let vm = this;
+    console.log("viewmulti");
+
+    function onStart() {
+      let req = {
+        mode: "getMultiLot",
+      };
+
+      fachttp.model("controller/receiveLot.php", req).then(
+        function (response) {
+          $scope.status = true;
+          if (response.data.status == true) {
+            vm.list = response.data.result;
+          } else {
+            vm.list = response.data;
+          }
+          console.log(vm.list);
+        },
+        function err(err) {
+          vm.list = [];
+          $scope.status = false;
+        }
+      );
+    }
+
+    onStart();
+  });

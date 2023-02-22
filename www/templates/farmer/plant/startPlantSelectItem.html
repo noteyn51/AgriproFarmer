@@ -1,10 +1,10 @@
-<ion-view hide-back-button="false">
+<ion-view hide-back-button="false" cache-view="false">
   <ion-nav-title>เลือกรายการ </ion-nav-title>
   <ion-nav-buttons side="right">
     <button
       type="button"
       class="button button-clear"
-      ng-click="save()"
+      ng-click="addLot()"
       style="color: white; font-weight: bold"
     >
       เพิ่ม
@@ -12,21 +12,40 @@
   </ion-nav-buttons>
 
   <ion-content>
-    <ion-checkbox
-      aria-label="Select All"
-      ng-checked="isChecked()"
-      md-indeterminate="isIndeterminate()"
-      ng-click="toggleAll()"
-      >{{item}} เลือกทั้งหมด</ion-checkbox
-    >
-
-    <ion-list>
+    <!-- <div>รับเข้าต้น</div> -->
+    <div ng-if="items.length >0">
       <ion-checkbox
-        ng-repeat="item in items"
-        ng-click="toggle(item, selected)"
-        ng-checked="exists(item, selected)"
-        >{{item.pt_desc1}} {{item.ld_rmks}}
-      </ion-checkbox>
-    </ion-list>
+        aria-label="Select All"
+        ng-checked="isChecked()"
+        md-indeterminate="isIndeterminate()"
+        ng-click="toggleAll()"
+        >{{item}} เลือกทั้งหมด</ion-checkbox
+      >
+
+      <ion-list>
+        <ion-checkbox
+          ng-repeat="item in items"
+          ng-click="toggle(item, selected)"
+          ng-checked="exists(item, selected)"
+          >{{item.pt_desc1}} {{item.ld_rmks}}
+        </ion-checkbox>
+      </ion-list>
+    </div>
+    <div style="height: 100px"></div>
   </ion-content>
+  <div
+    style="
+      text-align: center;
+      margin-top: 10px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 0px 10px 0px 10px;
+      background-color: white;
+    "
+  >
+    <button class="button button-balanced button-block" ng-click="save()">
+      บันทึก
+    </button>
+  </div>
 </ion-view>

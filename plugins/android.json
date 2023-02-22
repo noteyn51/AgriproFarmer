@@ -77,6 +77,9 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.doublem.agriproiot"
     },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.doublem.agriproiot"
+    },
     "cordova.plugins.diagnostic": {
       "ANDROID_SUPPORT_VERSION": "28.+",
       "PACKAGE_NAME": "com.doublem.agriproiot"
