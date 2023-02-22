@@ -1,6 +1,5 @@
 # Agripro Farmer
 
-asd
 
 Agricultural extension applications for ERP systems and equipment control
 Smart Agriculture, smart agriculture that is ready to change the style of farming to be comfortable as well, which will have a difficult label here. What is more important is to create an ecosystem that will allow it to work together.

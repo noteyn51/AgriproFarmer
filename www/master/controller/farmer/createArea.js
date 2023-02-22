@@ -193,10 +193,9 @@ angular
     };
 
     vm.confirm = function() {
-      //console.log($scope.guarantee )
-      //console.log($scope.model);
 
-      if ($scope.model.name && vm.provinceSelect && vm.aumphurSelect && vm.tumbolSelect ) {
+
+      if ($scope.model.name && vm.provinceSelect && vm.aumphurSelect && vm.tumbolSelect && $scope.model.vd) {
         mobiscroll.confirm({
           title: "ยืนยันการสร้างพื้นที่เกษตรกร",
           message: "คุณต้องการสร้างพื้นที่ใช่หรือไม่ ?",
