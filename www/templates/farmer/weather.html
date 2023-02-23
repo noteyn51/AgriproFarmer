@@ -55,7 +55,13 @@
   </style>
   <div class="bg-image"></div>
 
-  <ion-content style="height: 100%">
+  <ion-content
+    style="
+      height: 100%;
+      padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px)
+        env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
+    "
+  >
     <div class="header-block">
       <div>
         <div class="header-block-left" ng-click="goBack()">
@@ -127,7 +133,9 @@
           }
         </style>
         <div>
-          <div style="display: flex;justify-content: space-between; color: white">
+          <div
+            style="display: flex; justify-content: space-between; color: white"
+          >
             <div
               ng-if="vm.forcase"
               ng-repeat="x in  vm.forcase.list | limitTo:10"
