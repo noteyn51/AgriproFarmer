@@ -116,7 +116,6 @@ angular
 
       $rootScope.pathUrl =
         "https://digimove.365supplychain.com/agripro/agri_ociv4/";
-      // $rootScope.versionUrl = "agri_ociv2/";
 
       $rootScope.ipregister = $rootScope.pathUrl;
       $rootScope.iplogin = $rootScope.pathUrl; //365
