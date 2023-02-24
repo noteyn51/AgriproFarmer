@@ -11,6 +11,7 @@ GoogleService-Info.plist
 google-services.json
 config.xml
 platforms/
+www/master/app.js
 
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
