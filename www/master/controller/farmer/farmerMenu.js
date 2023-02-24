@@ -73,7 +73,9 @@ angular
         );
       }
 
-      checkUserlogin();
+      setTimeout(() => {
+        checkUserlogin();
+      }, 1500);
 
       function logout() {
         document.addEventListener("deviceready", function () {
@@ -304,7 +306,6 @@ angular
           "config",
           $rootScope.global.mob_config
         );
-
       });
     }
   );

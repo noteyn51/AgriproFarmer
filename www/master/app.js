@@ -114,10 +114,12 @@ angular
         });
       });
 
-      $rootScope.ipregister =
-        "https://digimove.365supplychain.com/agripro/agri_ociv2/";
-      $rootScope.iplogin =
-        "https://digimove.365supplychain.com/agripro/agri_ociv2/"; //365
+      $rootScope.pathUrl =
+        "https://digimove.365supplychain.com/agripro/agri_ociv4/";
+      // $rootScope.versionUrl = "agri_ociv2/";
+
+      $rootScope.ipregister = $rootScope.pathUrl;
+      $rootScope.iplogin = $rootScope.pathUrl; //365
 
       let platform = ionic.Platform.platform();
       if (platform == "android") {
@@ -219,12 +221,7 @@ angular
       $mdDialog.cancel();
       if ($localStorage.globalAGRI) {
         $rootScope.global = $localStorage.globalAGRI;
-
-        $rootScope.ip =
-          "https://digimove.365supplychain.com/agripro/agri_ociv2/model/"; //365
-
-        // $rootScope.ip =
-        // "http://localhost/agri_oci/model/"; //365
+        $rootScope.ip = $rootScope.pathUrl + "model/";
       } else {
         $location.path("/farmerlogin");
       }
@@ -1374,7 +1371,8 @@ angular
         angular.merge(req, e);
         return $http.post(
           // "http://localhost/agri_oci/"+file,
-          "https://digimove.365supplychain.com/agripro/agri_ociv2/" + file,
+          $rootScope.pathUrl + file,
+          // "https://digimove.365supplychain.com/agripro/agri_ociv2/" + file,
           req
         );
       },
@@ -1386,8 +1384,7 @@ angular
         return $http.post(
           // "http://localhost/agri_ociv2/model/"+file,
           // "http://192.168.9.51/agri_ociv4/model/" + file,
-          "https://digimove.365supplychain.com/agripro/agri_ociv4/model/" +
-          file,
+          $rootScope.pathUrl + "model/" + file,
           req,
           pms
         );

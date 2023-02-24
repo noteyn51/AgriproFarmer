@@ -115,19 +115,10 @@ angular
             cancellerLoadpic.resolve("user cancelled");
           }, 8000);
 
-          // "https://digimove.365supplychain.com/agripro/agri_ociv2/model/plantimage.php"
-          // $http.post("https://digimove.365supplychain.com/agripro/agri_ociv2/model/plantimage.php")
-
-          // "https://localhost/agri_ociv2/model/plantimage.php",
-
           $http
-            .post(
-              "https://digimove.365supplychain.com/agripro/agri_ociv2/model/plantimage.php",
-              req,
-              {
-                timeout: cancellerLoadpic.promise,
-              }
-            )
+            .post($rootScope.pathUrl + "model/plantimage.php", req, {
+              timeout: cancellerLoadpic.promise,
+            })
             .then(
               function (response) {
                 $ionicLoading.hide();
@@ -193,7 +184,6 @@ angular
         );
 
         $ionicScrollDelegate.resize();
-
       };
 
       vm.deleteImg = function (i) {
@@ -202,12 +192,15 @@ angular
       };
 
       vm.takePicture = function () {
-        let platform = ionic.Platform.platform();
-        if (platform == "android" || platform == "ios") {
-          camera();
-        } else {
-          vm.addimage();
-        }
+        // console.log('sa')
+        vm.addimage();
+
+        // let platform = ionic.Platform.platform();
+        // if (platform == "android" || platform == "ios") {
+        //   camera();
+        // } else {
+        //   vm.addimage();
+        // }
       };
 
       vm.selectPicture = function () {
@@ -236,7 +229,6 @@ angular
           let img = "data:image/jpeg;base64," + imageData;
           vm.image.push(img);
           $ionicScrollDelegate.resize();
-
         }
 
         function onFail(message) {
@@ -262,7 +254,6 @@ angular
 
           vm.image.push(img);
           $ionicScrollDelegate.resize();
-
         }
 
         function onFail(message) {
