@@ -31,6 +31,8 @@
         </ion-checkbox>
       </ion-list>
     </div>
+
+    <div ng-if="items.length == 0" style="text-align: center;margin-top: 30px;"> ไม่มีรายการต้นโปรดเพิ่มรายการ</div>
     <div style="height: 100px"></div>
   </ion-content>
   <div
@@ -44,7 +46,7 @@
       background-color: white;
     "
   >
-    <button class="button button-balanced button-block" ng-click="save()">
+    <button class="button button-balanced button-block" ng-click="save()" ng-disabled="items.length == 0">
       บันทึก
     </button>
   </div>
